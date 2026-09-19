@@ -70,6 +70,7 @@
     <li>「交差する」は<code>collections.parquet</code>の<code>bbox</code>（矩形）との重なり判定。footprintは矩形として記録されているため、bbox比較で正確（<code>docs-internal/findings.md</code>参照）。空間拡張機能（spatial extension）は使っていない。</li>
     <li>yuiseki GeoParquet indexは2026-09-18時点のsnapshot。正本（FERSPAS STAC API）そのものではなくミラー。更新頻度は未確認（<code>docs-internal/findings.md</code>）。</li>
     <li>「全球カバー」の判定は、bboxがほぼ全球（経度180度、緯度90度近く）かどうかの簡易判定。境界付近の小さな誤差は許容している。</li>
+    <li>「item詳細を見る」は<code>items.parquet</code>（64万行）を<code>catalog</code>/<code>short_id</code>で絞り込み、年別item数とdims（season/crop/depth等）のvariant数を集計する。実測（2026-09-19、<code>docs-internal/findings.md</code>）では、この379件のcollectionはitem単位で見ても「全item がAOIに交差するか、1件も交差しないか」の二値であり、item単位の空間フィルタが追加の絞り込み効果を持つケースは無かった。したがって、ここでのitem深掘りは空間的な絞り込みではなく、時間的密度・variant構造の確認を目的としている。</li>
     <li>このページは発見（discovery）のみを行う。実際の値を読む・集計するには、各Collectionごとに<a href="https://github.com/dwg7/ferspas-html-demo/blob/main/docs-internal/decisions.md">local foundationパターン</a>でのチェックアウトが別途必要。</li>
     <li>ライセンスはコレクションごとに異なる（一覧の列を参照）。個別に確認せず再配布しないこと。</li>
   </ul>
@@ -89,8 +90,11 @@ const tableEl = document.getElementById('table-body');
 const filterInput = document.getElementById('filter-input');
 
 const COLLECTIONS = "https://stac.yuiseki.net/fao-ferspas/collections.parquet";
+const ITEMS = "https://stac.yuiseki.net/fao-ferspas/items.parquet";
 // same AOI as docs/Case2-GHG-4-14-5/: slippy-map tile z=4/x=14/y=5
 const AOI = { xmin: 135.0, ymin: 40.97989806962013, xmax: 157.5, ymax: 55.7765730186677 };
+
+let conn = null;
 
 function el(tag, attrs = {}, children = []) {
   const node = document.createElement(tag);
@@ -103,6 +107,8 @@ function el(tag, attrs = {}, children = []) {
 }
 
 const bigintSafe = (_k, v) => typeof v === 'bigint' ? Number(v) : v;
+const sqlLit = (s) => String(s).replace(/'/g, "''");
+const DIMS_COLS = ['season', 'lct', 'crop', 'depth', 'stats', 'clim', 'period', 'ssp', 'tech'];
 
 let allRows = [];
 let sortKey = 'catalog';
@@ -110,7 +116,6 @@ let sortDir = 1;
 
 async function main() {
   const tBoot0 = performance.now();
-  let conn;
   try {
     const bundle = await selectBundle(getJsDelivrBundles());
     const worker_url = URL.createObjectURL(
@@ -206,6 +211,80 @@ function renderStats({ bootMs, queryMs, total, hit, globalCount }) {
   }));
 }
 
+async function loadItemDetail(catalog, shortId, detailBody) {
+  detailBody.textContent = 'itemレベルのクエリを実行中...';
+  const cat = sqlLit(catalog), sid = sqlLit(shortId);
+  const aoiCond = `bbox.xmin <= ${AOI.xmax} AND bbox.xmax >= ${AOI.xmin} AND bbox.ymin <= ${AOI.ymax} AND bbox.ymax >= ${AOI.ymin}`;
+  const t0 = performance.now();
+  let summaryRes, yearsRes;
+  try {
+    summaryRes = await conn.query(`
+      SELECT
+        count(*) AS n,
+        count(*) FILTER (WHERE ${aoiCond}) AS n_aoi,
+        min(start_datetime) AS min_dt, max(start_datetime) AS max_dt,
+        ${DIMS_COLS.map(c => `count(DISTINCT ${c}) FILTER (WHERE ${c} IS NOT NULL) AS n_${c}`).join(',\n        ')}
+      FROM read_parquet('${ITEMS}')
+      WHERE catalog = '${cat}' AND short_id = '${sid}'
+    `);
+    yearsRes = await conn.query(`
+      SELECT year, count(*) AS n
+      FROM read_parquet('${ITEMS}')
+      WHERE catalog = '${cat}' AND short_id = '${sid}'
+      GROUP BY year
+      ORDER BY year
+    `);
+  } catch (e) {
+    detailBody.innerHTML = '';
+    detailBody.appendChild(el('p', { class: 'status-err', text: `itemクエリに失敗しました: ${e.message}` }));
+    return;
+  }
+  const t1 = performance.now();
+  const s = summaryRes.toArray()[0].toJSON();
+  const years = yearsRes.toArray().map(r => r.toJSON());
+
+  detailBody.innerHTML = '';
+  detailBody.appendChild(el('p', {
+    class: 'meta',
+    text: `item数: ${Number(s.n).toLocaleString()}（うちAOI(4-14-5)交差: ${Number(s.n_aoi).toLocaleString()}）。` +
+      `期間: ${fmtDate(s.min_dt)} 〜 ${fmtDate(s.max_dt)}。クエリ実行: ${(t1 - t0).toFixed(0)}ms。`
+  }));
+
+  const varietyParts = DIMS_COLS
+    .map(c => [c, Number(s[`n_${c}`] || 0)])
+    .filter(([, n]) => n > 0)
+    .map(([c, n]) => `${c}: ${n}種`);
+  detailBody.appendChild(el('p', {
+    class: 'meta',
+    text: varietyParts.length ? `variant次元: ${varietyParts.join(' / ')}` : 'variant次元: なし（dims軸を使わないcollection）'
+  }));
+
+  if (Number(s.n_aoi) < Number(s.n)) {
+    detailBody.appendChild(el('p', {
+      class: 'status-warn',
+      text: `注意: 全${s.n}件中${s.n_aoi}件のみAOIに交差（このcollectionはタイル/地域分割されている可能性がある）。`
+    }));
+  }
+
+  if (years.length) {
+    const maxN = Math.max(...years.map(y => Number(y.n)));
+    const histWrap = el('div');
+    for (const y of years) {
+      const n = Number(y.n);
+      const row = el('div', { style: 'display:flex; align-items:center; gap:0.5rem; font-size:0.78rem;' });
+      row.appendChild(el('span', { style: 'width:3.5rem; text-align:right;', text: y.year != null ? String(y.year) : '(不明)' }));
+      const barTrack = el('div', { style: 'flex:1; background:#8882; height:0.7rem;' });
+      const bar = el('div', { style: `width:${maxN ? (100 * n / maxN).toFixed(1) : 0}%; background:#2a2; height:100%;` });
+      barTrack.appendChild(bar);
+      row.appendChild(barTrack);
+      row.appendChild(el('span', { style: 'width:3rem;', text: String(n) }));
+      histWrap.appendChild(row);
+    }
+    detailBody.appendChild(el('p', { class: 'meta', text: '年別item数:' }));
+    detailBody.appendChild(histWrap);
+  }
+}
+
 function fmtDate(ts) {
   if (ts === null || ts === undefined) return '';
   const d = new Date(Number(ts));
@@ -235,11 +314,32 @@ function renderTable(rows) {
   ];
   const thead = el('thead', {}, el('tr', {}, cols.map(([key, label]) =>
     el('th', { 'data-key': key, text: label + (sortKey === key ? (sortDir > 0 ? ' ▲' : ' ▼') : '') })
-  )));
+  ).concat(el('th', { text: 'item詳細' }))));
   table.appendChild(thead);
   const tbody = el('tbody');
   for (const r of sorted) {
     const portalUrl = `https://data.apps.fao.org/remote-sensing-portal/collections/${encodeURIComponent(r.short_id)}`;
+    const detailRow = el('tr', { style: 'display:none;' });
+    const detailCell = el('td', { colspan: String(cols.length + 1) });
+    detailRow.appendChild(detailCell);
+
+    const toggleBtn = el('button', { text: 'item詳細を見る ▸', style: 'font-size:0.78rem;' });
+    let loaded = false;
+    toggleBtn.addEventListener('click', () => {
+      const showing = detailRow.style.display !== 'none';
+      if (showing) {
+        detailRow.style.display = 'none';
+        toggleBtn.textContent = 'item詳細を見る ▸';
+        return;
+      }
+      detailRow.style.display = '';
+      toggleBtn.textContent = 'item詳細を閉じる ▾';
+      if (!loaded) {
+        loaded = true;
+        loadItemDetail(r.catalog, r.short_id, detailCell);
+      }
+    });
+
     const tr = el('tr', {}, [
       el('td', { text: r.catalog || '' }),
       el('td', {}, el('a', { href: portalUrl, text: r.short_id || '' })),
@@ -248,8 +348,10 @@ function renderTable(rows) {
       el('td', { text: r.item_count != null ? Number(r.item_count).toLocaleString() : '' }),
       el('td', { text: r.license || '' }),
       el('td', { text: fmtDate(r.temporal_start) }),
+      el('td', {}, toggleBtn),
     ]);
     tbody.appendChild(tr);
+    tbody.appendChild(detailRow);
   }
   table.appendChild(tbody);
   tableEl.innerHTML = '';

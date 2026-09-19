@@ -315,3 +315,33 @@ hfu個人のグローバル指示にある「複数プロジェクトに横断�
 - Live STAC APIでこれと同じ「1921件のうちこのAOIに関係するのはどれか」を調べようとすると、collection一覧を取得した上で1921回の個別問い合わせが必要になり、実務上できない
 - 一方、単発の「Collection Xの最新Itemを1件」のような検索は、今回もLive APIの方が圧倒的に軽い（前回の実測: 295 bytes vs 6MB超のwasm起動）。この非対称性は前回の結論通りで、今回の実装でも覆らなかった
 - 結論: GeoParquet+DuckDBは、**個別の検索を代替する技術ではなく、Live APIには無い「横断発見」という新しい機能を追加する技術**として位置づけるのが正しい
+
+## 2026-09-19: `items.parquet`（64万行）へのitemレベル絞り込みを実測 — collectionレベルの発見を裏付けたが、空間的な追加絞り込み効果は無かった
+
+`duckdb` CLIをローカルにインストールし（`brew install duckdb`、v1.5.5）、`docs/Discover-4-14-5/`と同じAOI（tile 4-14-5）で`items.parquet`（639,947行）に対する実測を行った。
+
+### 素朴な全item bboxフィルタは実質無意味
+
+`items.parquet`全体（フィルタなし）に対しAOIとのbbox交差だけで絞ると541,674/639,947件（85%）がヒットする。ASI-D等の全球dekadalプロダクトはitem自体がほぼ全球（CLAUDE.md 7.4節既知）であるため、item全件に対する素朴な空間フィルタは「ほとんど全部当たる」だけで発見の役に立たない。
+
+### collectionレベルのbboxフィルタは、item実データと完全に一致していた（相互検証）
+
+`catalog, short_id`でGROUP BYし、「collectionの declared bbox がAOIと交差する」（=前述の379件）という判定を、「実際にそのcollectionのitemでAOIと交差するものが1件以上あるか」という実データと突き合わせた（全1921件横断、実行1.4秒）。
+
+- false positive（collection bboxは交差主張だが実item は0件交差）: **`GAEZ-V5:RES01-RFM-TS`の1件のみ**。ただしこれは`item_count=0`（そもそもitemが1件も無い空collection）が原因で、AOI判定自体の誤りではない
+- false negative（実itemはAOIと交差するのにcollection bboxが交差と言っていない）: **0件**
+- したがって、`collections.parquet`のbbox列は、実質的にitem bboxの正確な合併（union）になっている。379件という発見結果の信頼性はこれで裏付けられた
+
+### 379件のヒットcollectionは、item単位で見ても「全部当たるか全部外れるか」の二値だった
+
+379件それぞれについて「全item数」と「AOIに交差するitem数」を比較したところ、**一致しないケース（部分的にしか交差しない、＝タイル/地域分割されたcollection）は0件**だった。つまりこのAOI・このデータセットの範囲では、item単位のbboxフィルタは空間的な絞り込みとして追加の情報を持たない（collectionレベルの判定だけで十分だった）。GeoParquetの「item単位でも高速に絞り込める」という強み自体は実証されたが、この用途（空間的発見）には効かなかった、という否定的だが明確な結果。
+
+### item単位クエリの別の価値: 時間的密度とvariant構造の可視化
+
+空間的な絞り込みには効かなかった一方、collectionを1つ選んでitemを深掘りするクエリ（`catalog`/`short_id`で絞り込み、`year`別件数・`season`/`crop`/`depth`等dims列のdistinct数を集計）は実用的な速度で動く。
+
+- ASI-D（4,268 items）: ローカルduckdbで0.52秒、ブラウザduckdb-wasmで60ms（2回目以降のクエリ、パースキャッシュ済み）
+- 379件中、最大のitem数はC3S/AGERA5-RH18の17,197件。これでも数百ms〜1秒程度で収まる見込み
+- この深掘りにより、「そのcollectionが実際に何年分・どんな変種（dims軸）を持つか」という、collection一覧だけでは見えない問いに答えられる。例: SPAM2020-PHYSICAL-AREAは138 item全てが1970年（代表値）でcrop次元46種、ASI-Dは1984〜2026年まで年72件ずつ均等に存在、season/lct各2種
+
+`docs/Discover-4-14-5/`に、collection行をクリックすると上記の深掘りクエリを実行する機能を実装・動作確認した（2026-09-19）。
