@@ -1,0 +1,60 @@
+id: case2-ghg-4-14-5
+title: "Case 2: Drained cropland area time series (spatial ID 4-14-5)"
+status: implemented
+notebook:
+  source_repo: "https://github.com/un-fao/FERSPAS_demo"
+  source_file: "Case2-GHG-BDG.ipynb"
+  note: "No dedicated notebook exists for this AOI. This case reuses the Case2-GHG-BDG.ipynb methodology (same collection, same aggregation logic) applied to a different area, defined by dwg7 rather than by the reference notebook."
+stac:
+  api_root: "https://data.apps.fao.org/geospatial/search/stac"
+  collection: "fao-gismgr:FAOSTAT:raster:mapsets:DRAINED-AREA-CROP"
+  collection_notebook_value: "DRAINED-AREA-CROP"
+  collection_note: "Same short-id-vs-full-id issue as Case2-GHG-BDG: the live /search endpoint needs the full collection id, not the notebook's short form."
+  datetime_start: "1992-01-01T00:00:00Z"
+  datetime_end: "2022-12-31T23:59:59Z"
+  bbox:
+    - 135.0
+    - 40.97989806962013
+    - 157.5
+    - 55.7765730186677
+  item_id_like: null
+  limit: 100
+aoi:
+  identifier: "4-14-5"
+  identifier_scheme: "slippy-map tile z/x/y, expressed as a spatial ID horizontal index (z-x-y). No floor/altitude component (f) is used: this is a 2D surface clip, not a 3D volumetric query."
+  name: null
+  name_note: "Deliberately not given a place name. A named region (administrative or cultural, e.g. a country or 'the northern circumpolar region') is not guaranteed to be politically neutral or universally agreed. A tile boundary is a plain mathematical partition of the globe and carries no such claim."
+  boundary_source: "none -- the AOI is the tile's own rectangular bbox (EPSG:3857 tile z=4, x=14, y=5, reprojected to its EPSG:4326 bounds above). No external boundary dataset is used."
+  polar_limitation_note: "Web Mercator / slippy-map tiles are undefined above ~85.05 deg latitude. This tile (max lat ~55.78) is far from that limit and unaffected, but this identifier scheme cannot represent polar regions in general."
+asset:
+  preferred_keys:
+    - data
+    - visual
+    - rendered_preview
+raster:
+  crs: "EPSG:4326"
+  dtype: "Float32"
+  bands: 1
+  nodata: null
+  unit: "ha/y"
+  unit_source: "STAC item properties.cube:variables and asset band metadata (raster:scale=1.0, raster:offset=0.0). See docs-internal/findings.md (Case2-GHG-BDG entry, same collection)."
+  spatial_resolution_m: 927.6624166662957
+  value_range_observed:
+    min: 0.0
+    max: 56.179
+    checked_item: "FAOSTAT.DRAINED-AREA-CROP.2022.tif, cropped to this tile's bbox"
+aggregation:
+  method: "sum of valid pixels within the tile bbox (rectangular crop, no cutline mask needed since the AOI is the tile itself)"
+  status: "computed for all 31 years, published as docs/Case2-GHG-4-14-5/derived/timeseries-4-14-5.json"
+  known_caveats:
+    - "This bbox spans multiple countries/administrative areas (it was chosen as a grid tile, not to represent any of them). The sum has no defined national or administrative meaning."
+    - "Source raster has no NoData value defined; 0 is treated as a valid value (no drained cropland), not a mask sentinel."
+    - "spatial_resolution_m (927.66m) is a single global value, not per-latitude; whether per-pixel hectare values already account for latitude-dependent pixel area is unconfirmed."
+access:
+  cors_status: "blocked at source, bypassed via local checkout"
+  cors_note: "Same as Case2-GHG-BDG: fao-gismgr-faostat-data allows anonymous reads but has no CORS. This repository checks out, crops (bbox only, no reprojection, no mask), and republishes each year under docs/Case2-GHG-4-14-5/derived/."
+  local_foundation_note: "Second instance of the FAO / local-foundation / User Tier-A PoC (docs-internal/decisions.md, 2026-09-19), and the first to use a spatial-ID tile instead of an administrative boundary as the AOI definition."
+provenance_doc: "docs-internal/findings.md"
+decisions_doc: "docs-internal/decisions.md"
+derived_provenance: "docs/Case2-GHG-4-14-5/derived/provenance-4-14-5.json"
+checkout_script: "scripts/checkout-Case2-GHG-4-14-5.py"

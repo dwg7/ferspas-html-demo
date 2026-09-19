@@ -1,0 +1,346 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Case 2: Drained cropland area time series (spatial ID 4-14-5)</title>
+<style>
+  :root { color-scheme: light dark; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", sans-serif;
+    max-width: 860px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+    line-height: 1.6;
+  }
+  h1 { font-size: 1.4rem; }
+  h2 { font-size: 1.1rem; border-bottom: 1px solid #8884; padding-bottom: 0.3rem; margin-top: 2.5rem; }
+  section { margin-bottom: 1.5rem; }
+  table { border-collapse: collapse; width: 100%; font-size: 0.85rem; }
+  th, td { text-align: left; padding: 0.25rem 0.5rem; border-bottom: 1px solid #8882; }
+  code { font-size: 0.85em; background: #8882; padding: 0.1em 0.3em; border-radius: 3px; }
+  .status-ok { color: #2a2; }
+  .status-warn { color: #c90; }
+  .status-err { color: #c33; }
+  .meta { font-size: 0.85rem; opacity: 0.75; }
+  ul.limits li { margin-bottom: 0.4rem; }
+  footer { margin-top: 3rem; font-size: 0.8rem; opacity: 0.6; }
+</style>
+</head>
+<body>
+
+<header>
+  <p class="meta"><a href="../index.html">← FERSPAS static demos</a></p>
+  <h1>Case 2: Drained cropland area time series — 空間ID 4-14-5</h1>
+  <p>
+    参照方法論: <a href="https://github.com/un-fao/FERSPAS_demo/blob/main/Case2-GHG-BDG.ipynb">un-fao/FERSPAS_demo — Case2-GHG-BDG.ipynb</a>
+    と同じ処理を、<a href="https://github.com/dwg7/ferspas-html-demo/blob/main/docs/Case2-GHG-BDG/">Bangladesh版</a>とは別のAOIへ適用したもの
+    (Collection: <code>DRAINED-AREA-CROP</code>)
+  </p>
+  <p class="meta">
+    このCaseに元になったNotebookは無い。AOIは行政境界や地名ではなく、slippy-map tile
+    <code>z=4, x=14, y=5</code>（空間IDの水平方向インデックス、ハイフン区切りで<code>4-14-5</code>）という
+    座標上の区画そのもの。「北海道」のような地名も、それを含むより広い地域概念も使わない
+    ——地名・地域概念は普遍的な合意を保証しないが、タイル境界は単なる数学的な分割であり、
+    その種の主張を一切含まないため。
+  </p>
+  <p class="meta">Task定義: <a id="task-link" href="task.yaml">task.yaml</a></p>
+</header>
+
+<main>
+
+<section id="task-info">
+  <h2>このページが検索する条件</h2>
+  <div id="task-info-body">読み込み中...</div>
+</section>
+
+<section id="discovery">
+  <h2>1. STAC Item discovery（ブラウザから直接検索）</h2>
+  <div id="discovery-body">読み込み中...</div>
+</section>
+
+<section id="map">
+  <h2>2. 選択年のCOG地図表示</h2>
+  <p class="meta">
+    原資産（FAOのGCSバケット）はブラウザから直接読めない（CORS未対応、<a href="https://github.com/dwg7/ferspas-html-demo/blob/main/docs-internal/findings.md">findings.md</a>参照）ため、
+    このリポジトリが発行時にタイル境界（<code>4-14-5</code>）でクロップして再配布したコピー（<code>derived/4-14-5-&lt;year&gt;.tif</code>、投影変換なし）を表示する。
+    AOIがタイルの矩形そのものなので、境界ポリゴンによるマスクは行わず、単純な矩形クロップのみ
+    （Bangladesh版との違い）。地図描画ライブラリは使わず、<a href="https://github.com/geotiffjs/geotiff.js">geotiff.js</a>でピクセル値を直接読み、canvasへ塗る。
+  </p>
+  <p>
+    年:
+    <select id="year-select"></select>
+  </p>
+  <canvas id="map-canvas" style="max-width:100%; border:1px solid #8884; image-rendering: pixelated;"></canvas>
+  <div id="map-legend" class="meta"></div>
+  <div id="map-status" class="meta"></div>
+</section>
+
+<section id="timeseries">
+  <h2>3. 年別集計値の時系列表示</h2>
+  <p class="meta">
+    Section 2と同じ発行時チェックアウトから計算した値（<code>derived/timeseries-4-14-5.json</code>）。
+    集計方法・来歴は<code>derived/provenance-4-14-5.json</code>と<a href="https://github.com/dwg7/ferspas-html-demo/blob/main/scripts/checkout-Case2-GHG-4-14-5.py">scripts/checkout-Case2-GHG-4-14-5.py</a>を参照。
+    合計値はこのタイル矩形内の合計であり、特定の国・行政区画の値ではない。
+  </p>
+  <div id="timeseries-chart"></div>
+  <div id="timeseries-status" class="meta"></div>
+</section>
+
+<section id="provenance">
+  <h2>選択理由・出所・制約</h2>
+  <ul class="limits">
+    <li>Collection・日付範囲・集計方法は、Bangladesh版（<code>Case2-GHG-BDG</code>）と同じ参照Notebookの処理をそのまま流用した。AOIの決め方だけがdwg7独自の判断である。</li>
+    <li>AOIはslippy-map tile <code>z=4/x=14/y=5</code>（空間IDの水平インデックス）の矩形（東経135.0〜157.5°、北緯40.98〜55.78°）。行政境界・地名を使わない設計判断（<code>docs-internal/decisions.md</code>参照）。</li>
+    <li>このタイルは複数の国・地域にまたがる。合計値に国や行政区画としての意味は無い。</li>
+    <li>境界ポリゴンによるマスクを行わないため、Bangladesh版と異なりNoDataは発生しない（矩形内は全ピクセルが実データ）。</li>
+    <li>投影変換は行っていない（原資産と同じEPSG:4326）。矩形クロップのみで、値の補間は発生しない。</li>
+    <li>Web Mercator/slippy-map tileは緯度85.05°付近より極側を表現できない。このタイル（最大緯度約55.78°）は影響を受けないが、この識別方式全般の限界として記録する。</li>
+    <li>Collection <code>DRAINED-AREA-CROP</code> のライセンスは <code>CC-BY-4.0</code>（表示のみ条件、再配布・改変可）。派生元: FAO / FAOSTAT。</li>
+  </ul>
+</section>
+
+</main>
+
+<footer>
+  <p>Status: <code>implemented</code>。設計判断は<a href="https://github.com/dwg7/ferspas-html-demo/blob/main/CLAUDE.md">CLAUDE.md</a>を参照。</p>
+</footer>
+
+<script type="module">
+import { load } from "https://cdn.jsdelivr.net/npm/js-yaml@4.1.0/+esm";
+import { fromUrl } from "https://cdn.jsdelivr.net/npm/geotiff@2/+esm";
+
+const taskInfoEl = document.getElementById('task-info-body');
+const discoveryEl = document.getElementById('discovery-body');
+const yearSelectEl = document.getElementById('year-select');
+const mapCanvasEl = document.getElementById('map-canvas');
+const mapLegendEl = document.getElementById('map-legend');
+const mapStatusEl = document.getElementById('map-status');
+const timeseriesChartEl = document.getElementById('timeseries-chart');
+const timeseriesStatusEl = document.getElementById('timeseries-status');
+
+function el(tag, attrs = {}, children = []) {
+  const node = document.createElement(tag);
+  for (const [k, v] of Object.entries(attrs)) {
+    if (k === 'text') node.textContent = v;
+    else node.setAttribute(k, v);
+  }
+  for (const c of [].concat(children)) node.appendChild(c);
+  return node;
+}
+
+async function main() {
+  let task;
+  try {
+    const res = await fetch('task.yaml');
+    if (!res.ok) throw new Error(`task YAML fetch failed: HTTP ${res.status}`);
+    const text = await res.text();
+    task = load(text);
+  } catch (e) {
+    taskInfoEl.innerHTML = `<p class="status-err">task YAMLの取得に失敗しました: ${e.message}</p>`;
+    discoveryEl.innerHTML = `<p class="status-err">task YAMLが無いため検索できません。</p>`;
+    return;
+  }
+
+  renderTaskInfo(task);
+  await runDiscovery(task);
+  await setupMap();
+  await runTimeseries();
+}
+
+function renderTaskInfo(task) {
+  const s = task.stac;
+  taskInfoEl.innerHTML = '';
+  const dl = el('dl');
+  const rows = [
+    ['STAC API', s.api_root],
+    ['Collection', s.collection],
+    ['BBOX (WGS84)', s.bbox.join(', ') + `  — AOI: spatial ID ${task.aoi.identifier}（地名なし）`],
+    ['Datetime', `${s.datetime_start.slice(0,10)} 〜 ${s.datetime_end.slice(0,10)}`],
+  ];
+  for (const [k, v] of rows) {
+    const dt = el('dt', { style: 'font-weight:600; margin-top:0.4rem;' , text: k });
+    const dd = el('dd', { style: 'margin:0 0 0.2rem 0;', text: v });
+    dl.appendChild(dt);
+    dl.appendChild(dd);
+  }
+  taskInfoEl.appendChild(dl);
+  if (s.collection_notebook_value && s.collection_notebook_value !== s.collection) {
+    taskInfoEl.appendChild(el('p', {
+      class: 'status-warn',
+      text: `注記: 参照Notebookは短縮id「${s.collection_notebook_value}」を使うが、このAPIへの直接POSTでは0件になる（エラーにはならない）。実際には完全id「${s.collection}」が必要。`,
+    }));
+  }
+}
+
+async function runDiscovery(task) {
+  const s = task.stac;
+  const body = {
+    collections: [s.collection],
+    bbox: s.bbox,
+    datetime: `${s.datetime_start}/${s.datetime_end}`,
+    limit: s.limit,
+  };
+
+  const t0 = performance.now();
+  let json;
+  try {
+    const res = await fetch(`${s.api_root}/search`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(body),
+    });
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    json = await res.json();
+  } catch (e) {
+    discoveryEl.innerHTML = `<p class="status-err">STAC検索に失敗しました: ${e.message}</p>`;
+    return;
+  }
+  const t1 = performance.now();
+
+  const itemDatetime = (f) => f.properties.datetime || f.properties.start_datetime || '';
+  const features = (json.features || []).slice().sort((a, b) =>
+    itemDatetime(a).localeCompare(itemDatetime(b))
+  );
+
+  const expectedYears = 2022 - 1992 + 1; // 31
+  const statusClass = features.length === expectedYears ? 'status-ok' : 'status-warn';
+  const statusText = features.length === expectedYears
+    ? `期待通り${expectedYears}件（1992–2022年、1年1件）`
+    : `期待値${expectedYears}件と一致しません — 内容を確認してください`;
+
+  discoveryEl.innerHTML = '';
+  discoveryEl.appendChild(el('p', {
+    text: `検索結果: ${features.length}件（${(t1 - t0).toFixed(0)}ms）。`
+  }));
+  discoveryEl.appendChild(el('p', { class: statusClass, text: statusText }));
+
+  const table = el('table');
+  const thead = el('thead', {}, el('tr', {}, [
+    el('th', { text: 'Year' }),
+    el('th', { text: 'Item ID' }),
+    el('th', { text: 'datetime' }),
+    el('th', { text: 'data asset' }),
+  ]));
+  table.appendChild(thead);
+  const tbody = el('tbody');
+  for (const f of features) {
+    const dataAsset = f.assets && (f.assets.data || Object.values(f.assets)[0]);
+    const href = dataAsset ? dataAsset.href : '(no asset)';
+    const dt = itemDatetime(f);
+    const year = dt.slice(0, 4);
+    const tr = el('tr', {}, [
+      el('td', { text: year }),
+      el('td', { text: f.id }),
+      el('td', { text: dt }),
+      el('td', {}, el('a', { href, text: href.length > 60 ? href.slice(0, 57) + '...' : href })),
+    ]);
+    tbody.appendChild(tr);
+  }
+  table.appendChild(tbody);
+  discoveryEl.appendChild(table);
+}
+
+const FIRST_YEAR = 1992;
+const LAST_YEAR = 2022;
+const TILE_ID = "4-14-5";
+
+async function setupMap() {
+  for (let y = LAST_YEAR; y >= FIRST_YEAR; y--) {
+    yearSelectEl.appendChild(el('option', { value: String(y), text: String(y) }));
+  }
+  yearSelectEl.addEventListener('change', () => renderMapYear(yearSelectEl.value));
+  await renderMapYear(String(LAST_YEAR));
+}
+
+async function renderMapYear(year) {
+  mapStatusEl.textContent = `derived/${TILE_ID}-${year}.tif を読み込み中...`;
+  try {
+    const t0 = performance.now();
+    const tiff = await fromUrl(`derived/${TILE_ID}-${year}.tif`);
+    const image = await tiff.getImage();
+    const width = image.getWidth();
+    const height = image.getHeight();
+    const rasters = await image.readRasters();
+    const data = rasters[0];
+    const t1 = performance.now();
+
+    let min = Infinity, max = -Infinity;
+    for (let i = 0; i < data.length; i++) {
+      const v = data[i];
+      if (v < min) min = v;
+      if (v > max) max = v;
+    }
+    if (!isFinite(min)) { min = 0; max = 0; }
+
+    mapCanvasEl.width = width;
+    mapCanvasEl.height = height;
+    const ctx = mapCanvasEl.getContext('2d');
+    const imgData = ctx.createImageData(width, height);
+    for (let i = 0; i < data.length; i++) {
+      const v = data[i];
+      const o = i * 4;
+      const t = max > min ? (v - min) / (max - min) : 0;
+      // simple white -> dark green ramp
+      imgData.data[o] = Math.round(255 - t * 215);
+      imgData.data[o + 1] = Math.round(255 - t * 115);
+      imgData.data[o + 2] = Math.round(255 - t * 215);
+      imgData.data[o + 3] = 255;
+    }
+    ctx.putImageData(imgData, 0, 0);
+
+    mapLegendEl.textContent =
+      `凡例: 白 = 0 ha/pixel、濃い緑 = ${max.toFixed(2)} ha/pixel（この年の画像内の最大値。年ごとに動的スケール）。境界マスクなし（タイル全体が実データ）。`;
+    mapStatusEl.textContent =
+      `derived/${TILE_ID}-${year}.tif: ${width}×${height}px、${(t1 - t0).toFixed(0)}ms で読み込み。投影変換なし（EPSG:4326のまま）。`;
+  } catch (e) {
+    mapStatusEl.textContent = `読み込み失敗: ${e.message}`;
+  }
+}
+
+async function runTimeseries() {
+  let ts;
+  try {
+    const res = await fetch(`derived/timeseries-${TILE_ID}.json`);
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    ts = await res.json();
+  } catch (e) {
+    timeseriesStatusEl.textContent = `時系列データの取得に失敗しました: ${e.message}`;
+    return;
+  }
+
+  const series = ts.series;
+  const values = series.map(d => d.drained_area_crop_ha);
+  const vMin = Math.min(...values), vMax = Math.max(...values);
+  const W = 760, H = 220, padL = 60, padR = 10, padT = 10, padB = 24;
+  const x = i => padL + (i / (series.length - 1)) * (W - padL - padR);
+  const y = v => padT + (1 - (v - vMin) / (vMax - vMin || 1)) * (H - padT - padB);
+
+  const points = series.map((d, i) => `${x(i).toFixed(1)},${y(d.drained_area_crop_ha).toFixed(1)}`).join(' ');
+  const yTicks = [vMin, (vMin + vMax) / 2, vMax];
+
+  const svgParts = [];
+  svgParts.push(`<svg viewBox="0 0 ${W} ${H}" style="width:100%; max-width:${W}px; height:auto;">`);
+  for (const t of yTicks) {
+    svgParts.push(`<line x1="${padL}" y1="${y(t)}" x2="${W - padR}" y2="${y(t)}" stroke="#8882" />`);
+    svgParts.push(`<text x="${padL - 6}" y="${y(t) + 3}" font-size="9" text-anchor="end" fill="currentColor">${Math.round(t).toLocaleString()}</text>`);
+  }
+  for (let i = 0; i < series.length; i += 5) {
+    svgParts.push(`<text x="${x(i)}" y="${H - 6}" font-size="9" text-anchor="middle" fill="currentColor">${series[i].year}</text>`);
+  }
+  svgParts.push(`<polyline points="${points}" fill="none" stroke="#2a2" stroke-width="1.5" />`);
+  for (let i = 0; i < series.length; i++) {
+    svgParts.push(`<circle cx="${x(i)}" cy="${y(series[i].drained_area_crop_ha)}" r="2" fill="#2a2" />`);
+  }
+  svgParts.push(`</svg>`);
+  timeseriesChartEl.innerHTML = svgParts.join('');
+
+  timeseriesStatusEl.textContent =
+    `単位: ${ts.unit}。${series.length}年分（${series[0].year}〜${series[series.length - 1].year}）。値の範囲: ${vMin.toLocaleString()} 〜 ${vMax.toLocaleString()} ${ts.unit}。`;
+}
+
+main();
+</script>
+
+</body>
+</html>

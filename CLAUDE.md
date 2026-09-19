@@ -168,6 +168,20 @@ pre-harvested indexを使う場合も、4.7と同じ規律を適用する。
 - snapshot日付を記録する
 - ライセンスはコレクションごとに異なるため、indexの列だけで判断せず個別に確認する
 
+### 4.9 独自にAOIを定義する場合は、行政境界より空間ID/タイル区画を優先する
+
+参照元Notebookが既に特定のAOI（国境等）を使っている場合は、Functional fidelity（24章）のためそのまま踏襲する。しかし、**このリポジトリが独自にAOIを定義する場面**（参照元に対応が無い地域拡張等）では、行政境界や地域概念（「北海道」「北方圏」等）を第一候補にしない。
+
+理由は次の通り。
+
+- 行政境界は係争地域を含みうる政治的判断を伴う
+- 地域概念（「北方圏」等）で行政境界を避けたつもりでも、その概念自体の範囲・妥当性が普遍的に合意されるとは限らない
+- slippy-map tile（Web Mercatorのz/x/y）は単なる座標上の数学的分割であり、地名・行政・文化的な主張を一切含まない。日本の「空間ID」ガイドライン（経産省・国交省・国土地理院ほか）が水平方向の指標として採用しているものと同じ枠組みである
+
+したがって、独自AOIは`z-x-y`（ハイフン区切り、空間IDの水平インデックス）で識別する。実例は7章および`docs/Case2-GHG-4-14-5/`（`docs-internal/decisions.md`参照）。
+
+この方式の既知の制約: Web Mercator/slippy-map tileは緯度85.05°付近より極側を表現できない。AOIが極域にかかる場合はこの方式を使えない。
+
 ## 5. 成果物の初期構成
 
 公開用成果は`docs/`以下に置き、GitHub Pages等からそのまま公開できる構成にする。
@@ -183,7 +197,7 @@ pre-harvested indexを使う場合も、4.7と同じ規律を適用する。
 │   ├── Case1-ASIS-latest-Italy.yaml
 │   ├── Case1-ASIS-latest-Hokkaido.yaml
 │   ├── Case2-GHG-BDG.yaml
-│   └── Case2-GHG-Hokkaido.yaml
+│   └── Case2-GHG-4-14-5.yaml
 ├── docs/
 │   ├── index.html
 │   ├── Case1-ASIS-latest-Italy/
@@ -200,7 +214,7 @@ pre-harvested indexを使う場合も、4.7と同じ規律を適用する。
 │   │       ├── BGD-1992.tif
 │   │       ├── ...
 │   │       └── timeseries-BGD.json
-│   └── Case2-GHG-Hokkaido/
+│   └── Case2-GHG-4-14-5/
 │       ├── index.html
 │       ├── task.yaml
 │       └── derived/
@@ -472,18 +486,18 @@ D. 重い場合は発行時処理または限定processing serviceへ移す
 
 最初から31年分をブラウザでライブ集計しない。
 
-### 11.4 Hokkaido版
+### 11.4 第二のAOI版（実装済み: 空間ID `4-14-5`）
 
-`docs/Case2-GHG-Hokkaido/`
+`docs/Case2-GHG-4-14-5/`
 
-北海道版では、グローバルな各年Assetから北海道向けの派生成果を発行する構成を採る（2026-09-19確認: 原資産バケットにCORSがないため、これは有力候補ではなく前提。`docs-internal/decisions.md`参照）。
+当初「Hokkaido版」として計画していたが、4.9節の決定により行政境界・地域概念を使わず、slippy-map tile（空間ID水平インデックス）`z=4/x=14/y=5`をAOIとする（`docs-internal/decisions.md`、2026-09-19）。グローバルな各年Assetから、このタイル矩形の派生成果を発行する構成を採る（原資産バケットにCORSが無いため、これは有力候補ではなく前提。`docs-internal/decisions.md`参照）。
 
 ```text
 FAO global annual COGs
-    ↓ publication-time processing
-Hokkaido annual COGs
+    ↓ publication-time processing（矩形クロップ、マスクなし、投影変換なし）
+tile 4-14-5 annual COGs
     ↓
-Hokkaido time-series JSON
+tile 4-14-5 time-series JSON
     ↓
 static web application
 ```
@@ -492,9 +506,11 @@ static web application
 
 - 時系列JSONを取得する
 - 折れ線グラフを表示する
-- 選択年の北海道COGを表示する
-- Item、Asset、処理方法、境界、投影、NoData、集計規則を表示する
+- 選択年のtile COGを表示する
+- Item、Asset、処理方法、AOI（空間ID）、投影、NoData、集計規則を表示する
 - 必要ならCOGをダウンロードできるようにする
+
+実装・動作確認済み（`scripts/checkout-Case2-GHG-4-14-5.py`、`docs-internal/findings.md`）。
 
 ## 12. Case 2の集計意味論
 
@@ -787,13 +803,15 @@ just yuiseki-items
 6. Notebook値と比較
 7. 31年分の実行方式を判断
 
-### Phase 2: Case 2 Hokkaido
+### Phase 2: Case 2 spatial ID 4-14-5（実装済み）
 
-1. 北海道で製品利用が意味を持つか確認
-2. 年別北海道COGを発行
+1. ~~北海道で製品利用が意味を持つか確認~~ → 行政境界を使わず、slippy-map tile `4-14-5`をAOIとする方針に変更（4.9節）
+2. 年別tile COGを発行
 3. 年別集計JSONを発行
 4. static chart and map
 5. provenance and limitations
+
+すべて実装・動作確認済み（`docs/Case2-GHG-4-14-5/`、`docs-internal/findings.md`）。
 
 ### Phase 3: Case 1 Italy（FAO CSIとの相談待ち、保留）
 
@@ -936,13 +954,13 @@ task、Item、Asset、処理、tool version、結果、provenanceが記録され
 
 ## 26. 第一段階の成功条件
 
-最終的に次の4ページが`docs/`で公開される。ただし21章の通り、Case1系（Italy/Hokkaido）はASI-Dバケットのアクセス問題によりFAO CSIとの相談待ちで保留中のため、当面の第一段階はCase2系（Bangladesh/Hokkaido）2ページの公開をもって達成とする。
+最終的に次の4ページが`docs/`で公開される。ただし21章の通り、Case1系（Italy/Hokkaido）はASI-Dバケットのアクセス問題によりFAO CSIとの相談待ちで保留中のため、当面の第一段階はCase2系（Bangladesh／spatial ID 4-14-5）2ページの公開をもって達成とする。**この2ページは実装・公開済み**（GitHub Pages、`docs-internal/decisions.md`）。
 
 ```text
 Case1-ASIS-latest-Italy/        （保留、Phase 3）
 Case1-ASIS-latest-Hokkaido/     （保留、Phase 4）
-Case2-GHG-BDG/                  （Phase 1）
-Case2-GHG-Hokkaido/             （Phase 2）
+Case2-GHG-BDG/                  （Phase 1、実装済み）
+Case2-GHG-4-14-5/               （Phase 2、実装済み）
 ```
 
 各ページは、少なくとも次を満たす。

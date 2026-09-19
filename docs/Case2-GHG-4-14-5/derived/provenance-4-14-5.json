@@ -1,0 +1,1218 @@
+{
+  "generated_at": "2026-09-19T02:04:05.400179+00:00",
+  "generator": "scripts/checkout-Case2-GHG-4-14-5.py",
+  "stac_api": "https://data.apps.fao.org/geospatial/search/stac",
+  "collection": "fao-gismgr:FAOSTAT:raster:mapsets:DRAINED-AREA-CROP",
+  "notebook_reference": "https://github.com/un-fao/FERSPAS_demo/blob/main/Case2-GHG-BDG.ipynb (methodology reused; AOI is dwg7's own, not from the notebook)",
+  "entries": [
+    {
+      "year": "1992",
+      "source": {
+        "collection": "fao-gismgr:FAOSTAT:raster:mapsets:DRAINED-AREA-CROP",
+        "item_id": "fao-gismgr:FAOSTAT:raster:mapsets:DRAINED-AREA-CROP:items:FAOSTAT-DRAINED-AREA-CROP-1992",
+        "gismgr_item_id": "fao-gismgr/FAOSTAT/mapsets/DRAINED-AREA-CROP/FAOSTAT.DRAINED-AREA-CROP.1992",
+        "asset_href": "https://storage.googleapis.com/fao-gismgr-faostat-data/DATA/FAOSTAT/MAPSET/DRAINED-AREA-CROP/FAOSTAT.DRAINED-AREA-CROP.1992.tif",
+        "asset_gs_href": "gs://fao-gismgr-faostat-data/DATA/FAOSTAT/MAPSET/DRAINED-AREA-CROP/FAOSTAT.DRAINED-AREA-CROP.1992.tif",
+        "license": "CC-BY-4.0",
+        "source_generation": "1750848625881416",
+        "source_hash_md5_or_crc32c": "crc32c=jU2+Jw=="
+      },
+      "derivation": {
+        "aoi_identifier": "4-14-5",
+        "aoi_identifier_scheme": "slippy-map tile z-x-y (spatial ID horizontal index, no floor/altitude)",
+        "aoi_bbox_epsg4326": [
+          135.0,
+          40.97989806962013,
+          157.5,
+          55.7765730186677
+        ],
+        "source_crs": "EPSG:4326",
+        "output_crs": "EPSG:4326",
+        "operation": "rectangular window crop (no cutline, no reprojection, no resampling)",
+        "resampling": "none",
+        "nodata_output": null,
+        "nodata_source": null,
+        "tool": "GDAL 3.13.1 (gdal.Translate)",
+        "generated_at": "2026-09-19T01:55:22.382696+00:00"
+      },
+      "output": {
+        "path": "derived/4-14-5-1992.tif",
+        "width": 2700,
+        "height": 1777,
+        "pixel_count": 4797900,
+        "sum_ha": 130746.08306002617,
+        "sha256": "6e0703cd8b15550c58e66bcfbfa5d16db7b4052b660c898d69a7c908fdc99ee2"
+      }
+    },
+    {
+      "year": "1993",
+      "source": {
+        "collection": "fao-gismgr:FAOSTAT:raster:mapsets:DRAINED-AREA-CROP",
+        "item_id": "fao-gismgr:FAOSTAT:raster:mapsets:DRAINED-AREA-CROP:items:FAOSTAT-DRAINED-AREA-CROP-1993",
+        "gismgr_item_id": "fao-gismgr/FAOSTAT/mapsets/DRAINED-AREA-CROP/FAOSTAT.DRAINED-AREA-CROP.1993",
+        "asset_href": "https://storage.googleapis.com/fao-gismgr-faostat-data/DATA/FAOSTAT/MAPSET/DRAINED-AREA-CROP/FAOSTAT.DRAINED-AREA-CROP.1993.tif",
+        "asset_gs_href": "gs://fao-gismgr-faostat-data/DATA/FAOSTAT/MAPSET/DRAINED-AREA-CROP/FAOSTAT.DRAINED-AREA-CROP.1993.tif",
+        "license": "CC-BY-4.0",
+        "source_generation": "1750848627777141",
+        "source_hash_md5_or_crc32c": "crc32c=GHvNkQ=="
+      },
+      "derivation": {
+        "aoi_identifier": "4-14-5",
+        "aoi_identifier_scheme": "slippy-map tile z-x-y (spatial ID horizontal index, no floor/altitude)",
+        "aoi_bbox_epsg4326": [
+          135.0,
+          40.97989806962013,
+          157.5,
+          55.7765730186677
+        ],
+        "source_crs": "EPSG:4326",
+        "output_crs": "EPSG:4326",
+        "operation": "rectangular window crop (no cutline, no reprojection, no resampling)",
+        "resampling": "none",
+        "nodata_output": null,
+        "nodata_source": null,
+        "tool": "GDAL 3.13.1 (gdal.Translate)",
+        "generated_at": "2026-09-19T01:55:59.109378+00:00"
+      },
+      "output": {
+        "path": "derived/4-14-5-1993.tif",
+        "width": 2700,
+        "height": 1777,
+        "pixel_count": 4797900,
+        "sum_ha": 130594.38862347603,
+        "sha256": "bde9258fdb51988072e79363626b71d40f5f5dc22b39253092eee13d16d2195e"
+      }
+    },
+    {
+      "year": "1994",
+      "source": {
+        "collection": "fao-gismgr:FAOSTAT:raster:mapsets:DRAINED-AREA-CROP",
+        "item_id": "fao-gismgr:FAOSTAT:raster:mapsets:DRAINED-AREA-CROP:items:FAOSTAT-DRAINED-AREA-CROP-1994",
+        "gismgr_item_id": "fao-gismgr/FAOSTAT/mapsets/DRAINED-AREA-CROP/FAOSTAT.DRAINED-AREA-CROP.1994",
+        "asset_href": "https://storage.googleapis.com/fao-gismgr-faostat-data/DATA/FAOSTAT/MAPSET/DRAINED-AREA-CROP/FAOSTAT.DRAINED-AREA-CROP.1994.tif",
+        "asset_gs_href": "gs://fao-gismgr-faostat-data/DATA/FAOSTAT/MAPSET/DRAINED-AREA-CROP/FAOSTAT.DRAINED-AREA-CROP.1994.tif",
+        "license": "CC-BY-4.0",
+        "source_generation": "1750848626248609",
+        "source_hash_md5_or_crc32c": "crc32c=x7Cu1w=="
+      },
+      "derivation": {
+        "aoi_identifier": "4-14-5",
+        "aoi_identifier_scheme": "slippy-map tile z-x-y (spatial ID horizontal index, no floor/altitude)",
+        "aoi_bbox_epsg4326": [
+          135.0,
+          40.97989806962013,
+          157.5,
+          55.7765730186677
+        ],
+        "source_crs": "EPSG:4326",
+        "output_crs": "EPSG:4326",
+        "operation": "rectangular window crop (no cutline, no reprojection, no resampling)",
+        "resampling": "none",
+        "nodata_output": null,
+        "nodata_source": null,
+        "tool": "GDAL 3.13.1 (gdal.Translate)",
+        "generated_at": "2026-09-19T01:56:16.265633+00:00"
+      },
+      "output": {
+        "path": "derived/4-14-5-1994.tif",
+        "width": 2700,
+        "height": 1777,
+        "pixel_count": 4797900,
+        "sum_ha": 130423.91263711452,
+        "sha256": "8d9ac8ee4d6385ad51228b924b17c7b8678adc737b17c8f51e53921b19922c24"
+      }
+    },
+    {
+      "year": "1995",
+      "source": {
+        "collection": "fao-gismgr:FAOSTAT:raster:mapsets:DRAINED-AREA-CROP",
+        "item_id": "fao-gismgr:FAOSTAT:raster:mapsets:DRAINED-AREA-CROP:items:FAOSTAT-DRAINED-AREA-CROP-1995",
+        "gismgr_item_id": "fao-gismgr/FAOSTAT/mapsets/DRAINED-AREA-CROP/FAOSTAT.DRAINED-AREA-CROP.1995",
+        "asset_href": "https://storage.googleapis.com/fao-gismgr-faostat-data/DATA/FAOSTAT/MAPSET/DRAINED-AREA-CROP/FAOSTAT.DRAINED-AREA-CROP.1995.tif",
+        "asset_gs_href": "gs://fao-gismgr-faostat-data/DATA/FAOSTAT/MAPSET/DRAINED-AREA-CROP/FAOSTAT.DRAINED-AREA-CROP.1995.tif",
+        "license": "CC-BY-4.0",
+        "source_generation": "1750848625223999",
+        "source_hash_md5_or_crc32c": "crc32c=lPsBIg=="
+      },
+      "derivation": {
+        "aoi_identifier": "4-14-5",
+        "aoi_identifier_scheme": "slippy-map tile z-x-y (spatial ID horizontal index, no floor/altitude)",
+        "aoi_bbox_epsg4326": [
+          135.0,
+          40.97989806962013,
+          157.5,
+          55.7765730186677
+        ],
+        "source_crs": "EPSG:4326",
+        "output_crs": "EPSG:4326",
+        "operation": "rectangular window crop (no cutline, no reprojection, no resampling)",
+        "resampling": "none",
+        "nodata_output": null,
+        "nodata_source": null,
+        "tool": "GDAL 3.13.1 (gdal.Translate)",
+        "generated_at": "2026-09-19T01:56:33.048607+00:00"
+      },
+      "output": {
+        "path": "derived/4-14-5-1995.tif",
+        "width": 2700,
+        "height": 1777,
+        "pixel_count": 4797900,
+        "sum_ha": 130959.21537876129,
+        "sha256": "8431923bddda56c390e202c468973eb6685ce61594ab657862436a294d61682d"
+      }
+    },
+    {
+      "year": "1996",
+      "source": {
+        "collection": "fao-gismgr:FAOSTAT:raster:mapsets:DRAINED-AREA-CROP",
+        "item_id": "fao-gismgr:FAOSTAT:raster:mapsets:DRAINED-AREA-CROP:items:FAOSTAT-DRAINED-AREA-CROP-1996",
+        "gismgr_item_id": "fao-gismgr/FAOSTAT/mapsets/DRAINED-AREA-CROP/FAOSTAT.DRAINED-AREA-CROP.1996",
+        "asset_href": "https://storage.googleapis.com/fao-gismgr-faostat-data/DATA/FAOSTAT/MAPSET/DRAINED-AREA-CROP/FAOSTAT.DRAINED-AREA-CROP.1996.tif",
+        "asset_gs_href": "gs://fao-gismgr-faostat-data/DATA/FAOSTAT/MAPSET/DRAINED-AREA-CROP/FAOSTAT.DRAINED-AREA-CROP.1996.tif",
+        "license": "CC-BY-4.0",
+        "source_generation": "1750848627809232",
+        "source_hash_md5_or_crc32c": "crc32c=Xp5qtQ=="
+      },
+      "derivation": {
+        "aoi_identifier": "4-14-5",
+        "aoi_identifier_scheme": "slippy-map tile z-x-y (spatial ID horizontal index, no floor/altitude)",
+        "aoi_bbox_epsg4326": [
+          135.0,
+          40.97989806962013,
+          157.5,
+          55.7765730186677
+        ],
+        "source_crs": "EPSG:4326",
+        "output_crs": "EPSG:4326",
+        "operation": "rectangular window crop (no cutline, no reprojection, no resampling)",
+        "resampling": "none",
+        "nodata_output": null,
+        "nodata_source": null,
+        "tool": "GDAL 3.13.1 (gdal.Translate)",
+        "generated_at": "2026-09-19T01:56:49.696102+00:00"
+      },
+      "output": {
+        "path": "derived/4-14-5-1996.tif",
+        "width": 2700,
+        "height": 1777,
+        "pixel_count": 4797900,
+        "sum_ha": 130720.81678438187,
+        "sha256": "3508b9fb103c5d424c1a4dc2895658ee1aed66cb47a0ded4d6cde0cc16e142c8"
+      }
+    },
+    {
+      "year": "1997",
+      "source": {
+        "collection": "fao-gismgr:FAOSTAT:raster:mapsets:DRAINED-AREA-CROP",
+        "item_id": "fao-gismgr:FAOSTAT:raster:mapsets:DRAINED-AREA-CROP:items:FAOSTAT-DRAINED-AREA-CROP-1997",
+        "gismgr_item_id": "fao-gismgr/FAOSTAT/mapsets/DRAINED-AREA-CROP/FAOSTAT.DRAINED-AREA-CROP.1997",
+        "asset_href": "https://storage.googleapis.com/fao-gismgr-faostat-data/DATA/FAOSTAT/MAPSET/DRAINED-AREA-CROP/FAOSTAT.DRAINED-AREA-CROP.1997.tif",
+        "asset_gs_href": "gs://fao-gismgr-faostat-data/DATA/FAOSTAT/MAPSET/DRAINED-AREA-CROP/FAOSTAT.DRAINED-AREA-CROP.1997.tif",
+        "license": "CC-BY-4.0",
+        "source_generation": "1750848629550305",
+        "source_hash_md5_or_crc32c": "crc32c=UNUFWg=="
+      },
+      "derivation": {
+        "aoi_identifier": "4-14-5",
+        "aoi_identifier_scheme": "slippy-map tile z-x-y (spatial ID horizontal index, no floor/altitude)",
+        "aoi_bbox_epsg4326": [
+          135.0,
+          40.97989806962013,
+          157.5,
+          55.7765730186677
+        ],
+        "source_crs": "EPSG:4326",
+        "output_crs": "EPSG:4326",
+        "operation": "rectangular window crop (no cutline, no reprojection, no resampling)",
+        "resampling": "none",
+        "nodata_output": null,
+        "nodata_source": null,
+        "tool": "GDAL 3.13.1 (gdal.Translate)",
+        "generated_at": "2026-09-19T01:57:06.352713+00:00"
+      },
+      "output": {
+        "path": "derived/4-14-5-1997.tif",
+        "width": 2700,
+        "height": 1777,
+        "pixel_count": 4797900,
+        "sum_ha": 130687.11811506748,
+        "sha256": "5884801293284febe26f113f8f09e43183c37eafe71dbd6053efeef63c6cb66d"
+      }
+    },
+    {
+      "year": "1998",
+      "source": {
+        "collection": "fao-gismgr:FAOSTAT:raster:mapsets:DRAINED-AREA-CROP",
+        "item_id": "fao-gismgr:FAOSTAT:raster:mapsets:DRAINED-AREA-CROP:items:FAOSTAT-DRAINED-AREA-CROP-1998",
+        "gismgr_item_id": "fao-gismgr/FAOSTAT/mapsets/DRAINED-AREA-CROP/FAOSTAT.DRAINED-AREA-CROP.1998",
+        "asset_href": "https://storage.googleapis.com/fao-gismgr-faostat-data/DATA/FAOSTAT/MAPSET/DRAINED-AREA-CROP/FAOSTAT.DRAINED-AREA-CROP.1998.tif",
+        "asset_gs_href": "gs://fao-gismgr-faostat-data/DATA/FAOSTAT/MAPSET/DRAINED-AREA-CROP/FAOSTAT.DRAINED-AREA-CROP.1998.tif",
+        "license": "CC-BY-4.0",
+        "source_generation": "1750848631373272",
+        "source_hash_md5_or_crc32c": "crc32c=mzeRKQ=="
+      },
+      "derivation": {
+        "aoi_identifier": "4-14-5",
+        "aoi_identifier_scheme": "slippy-map tile z-x-y (spatial ID horizontal index, no floor/altitude)",
+        "aoi_bbox_epsg4326": [
+          135.0,
+          40.97989806962013,
+          157.5,
+          55.7765730186677
+        ],
+        "source_crs": "EPSG:4326",
+        "output_crs": "EPSG:4326",
+        "operation": "rectangular window crop (no cutline, no reprojection, no resampling)",
+        "resampling": "none",
+        "nodata_output": null,
+        "nodata_source": null,
+        "tool": "GDAL 3.13.1 (gdal.Translate)",
+        "generated_at": "2026-09-19T01:57:22.885249+00:00"
+      },
+      "output": {
+        "path": "derived/4-14-5-1998.tif",
+        "width": 2700,
+        "height": 1777,
+        "pixel_count": 4797900,
+        "sum_ha": 130515.27080905437,
+        "sha256": "1b1bd3a7cf1c30b477c027c683ab94cb693cefc9874e25861cd72962beaac8de"
+      }
+    },
+    {
+      "year": "1999",
+      "source": {
+        "collection": "fao-gismgr:FAOSTAT:raster:mapsets:DRAINED-AREA-CROP",
+        "item_id": "fao-gismgr:FAOSTAT:raster:mapsets:DRAINED-AREA-CROP:items:FAOSTAT-DRAINED-AREA-CROP-1999",
+        "gismgr_item_id": "fao-gismgr/FAOSTAT/mapsets/DRAINED-AREA-CROP/FAOSTAT.DRAINED-AREA-CROP.1999",
+        "asset_href": "https://storage.googleapis.com/fao-gismgr-faostat-data/DATA/FAOSTAT/MAPSET/DRAINED-AREA-CROP/FAOSTAT.DRAINED-AREA-CROP.1999.tif",
+        "asset_gs_href": "gs://fao-gismgr-faostat-data/DATA/FAOSTAT/MAPSET/DRAINED-AREA-CROP/FAOSTAT.DRAINED-AREA-CROP.1999.tif",
+        "license": "CC-BY-4.0",
+        "source_generation": "1750848634216693",
+        "source_hash_md5_or_crc32c": "crc32c=Ic++ug=="
+      },
+      "derivation": {
+        "aoi_identifier": "4-14-5",
+        "aoi_identifier_scheme": "slippy-map tile z-x-y (spatial ID horizontal index, no floor/altitude)",
+        "aoi_bbox_epsg4326": [
+          135.0,
+          40.97989806962013,
+          157.5,
+          55.7765730186677
+        ],
+        "source_crs": "EPSG:4326",
+        "output_crs": "EPSG:4326",
+        "operation": "rectangular window crop (no cutline, no reprojection, no resampling)",
+        "resampling": "none",
+        "nodata_output": null,
+        "nodata_source": null,
+        "tool": "GDAL 3.13.1 (gdal.Translate)",
+        "generated_at": "2026-09-19T01:57:39.347315+00:00"
+      },
+      "output": {
+        "path": "derived/4-14-5-1999.tif",
+        "width": 2700,
+        "height": 1777,
+        "pixel_count": 4797900,
+        "sum_ha": 131071.26986062527,
+        "sha256": "957669a7cc1f8aa134d7f6f8a350cba1f9cff5849a06ec6406f15deec4b64369"
+      }
+    },
+    {
+      "year": "2000",
+      "source": {
+        "collection": "fao-gismgr:FAOSTAT:raster:mapsets:DRAINED-AREA-CROP",
+        "item_id": "fao-gismgr:FAOSTAT:raster:mapsets:DRAINED-AREA-CROP:items:FAOSTAT-DRAINED-AREA-CROP-2000",
+        "gismgr_item_id": "fao-gismgr/FAOSTAT/mapsets/DRAINED-AREA-CROP/FAOSTAT.DRAINED-AREA-CROP.2000",
+        "asset_href": "https://storage.googleapis.com/fao-gismgr-faostat-data/DATA/FAOSTAT/MAPSET/DRAINED-AREA-CROP/FAOSTAT.DRAINED-AREA-CROP.2000.tif",
+        "asset_gs_href": "gs://fao-gismgr-faostat-data/DATA/FAOSTAT/MAPSET/DRAINED-AREA-CROP/FAOSTAT.DRAINED-AREA-CROP.2000.tif",
+        "license": "CC-BY-4.0",
+        "source_generation": "1750848632996039",
+        "source_hash_md5_or_crc32c": "crc32c=/zg1EQ=="
+      },
+      "derivation": {
+        "aoi_identifier": "4-14-5",
+        "aoi_identifier_scheme": "slippy-map tile z-x-y (spatial ID horizontal index, no floor/altitude)",
+        "aoi_bbox_epsg4326": [
+          135.0,
+          40.97989806962013,
+          157.5,
+          55.7765730186677
+        ],
+        "source_crs": "EPSG:4326",
+        "output_crs": "EPSG:4326",
+        "operation": "rectangular window crop (no cutline, no reprojection, no resampling)",
+        "resampling": "none",
+        "nodata_output": null,
+        "nodata_source": null,
+        "tool": "GDAL 3.13.1 (gdal.Translate)",
+        "generated_at": "2026-09-19T01:57:55.887848+00:00"
+      },
+      "output": {
+        "path": "derived/4-14-5-2000.tif",
+        "width": 2700,
+        "height": 1777,
+        "pixel_count": 4797900,
+        "sum_ha": 130608.56887042522,
+        "sha256": "190a017ee0b5bab3d54e486ae14b78a40e2a0e68e7e83dd8f5f9fda20849cb27"
+      }
+    },
+    {
+      "year": "2001",
+      "source": {
+        "collection": "fao-gismgr:FAOSTAT:raster:mapsets:DRAINED-AREA-CROP",
+        "item_id": "fao-gismgr:FAOSTAT:raster:mapsets:DRAINED-AREA-CROP:items:FAOSTAT-DRAINED-AREA-CROP-2001",
+        "gismgr_item_id": "fao-gismgr/FAOSTAT/mapsets/DRAINED-AREA-CROP/FAOSTAT.DRAINED-AREA-CROP.2001",
+        "asset_href": "https://storage.googleapis.com/fao-gismgr-faostat-data/DATA/FAOSTAT/MAPSET/DRAINED-AREA-CROP/FAOSTAT.DRAINED-AREA-CROP.2001.tif",
+        "asset_gs_href": "gs://fao-gismgr-faostat-data/DATA/FAOSTAT/MAPSET/DRAINED-AREA-CROP/FAOSTAT.DRAINED-AREA-CROP.2001.tif",
+        "license": "CC-BY-4.0",
+        "source_generation": "1750848640057673",
+        "source_hash_md5_or_crc32c": "crc32c=wfpFkw=="
+      },
+      "derivation": {
+        "aoi_identifier": "4-14-5",
+        "aoi_identifier_scheme": "slippy-map tile z-x-y (spatial ID horizontal index, no floor/altitude)",
+        "aoi_bbox_epsg4326": [
+          135.0,
+          40.97989806962013,
+          157.5,
+          55.7765730186677
+        ],
+        "source_crs": "EPSG:4326",
+        "output_crs": "EPSG:4326",
+        "operation": "rectangular window crop (no cutline, no reprojection, no resampling)",
+        "resampling": "none",
+        "nodata_output": null,
+        "nodata_source": null,
+        "tool": "GDAL 3.13.1 (gdal.Translate)",
+        "generated_at": "2026-09-19T01:58:13.193708+00:00"
+      },
+      "output": {
+        "path": "derived/4-14-5-2001.tif",
+        "width": 2700,
+        "height": 1777,
+        "pixel_count": 4797900,
+        "sum_ha": 128271.68659222126,
+        "sha256": "44cdc1d2d325c62069074635c996097de1ff50ef2cc6ec9cc650b1ada95b54f3"
+      }
+    },
+    {
+      "year": "2002",
+      "source": {
+        "collection": "fao-gismgr:FAOSTAT:raster:mapsets:DRAINED-AREA-CROP",
+        "item_id": "fao-gismgr:FAOSTAT:raster:mapsets:DRAINED-AREA-CROP:items:FAOSTAT-DRAINED-AREA-CROP-2002",
+        "gismgr_item_id": "fao-gismgr/FAOSTAT/mapsets/DRAINED-AREA-CROP/FAOSTAT.DRAINED-AREA-CROP.2002",
+        "asset_href": "https://storage.googleapis.com/fao-gismgr-faostat-data/DATA/FAOSTAT/MAPSET/DRAINED-AREA-CROP/FAOSTAT.DRAINED-AREA-CROP.2002.tif",
+        "asset_gs_href": "gs://fao-gismgr-faostat-data/DATA/FAOSTAT/MAPSET/DRAINED-AREA-CROP/FAOSTAT.DRAINED-AREA-CROP.2002.tif",
+        "license": "CC-BY-4.0",
+        "source_generation": "1750848638152265",
+        "source_hash_md5_or_crc32c": "crc32c=viBRig=="
+      },
+      "derivation": {
+        "aoi_identifier": "4-14-5",
+        "aoi_identifier_scheme": "slippy-map tile z-x-y (spatial ID horizontal index, no floor/altitude)",
+        "aoi_bbox_epsg4326": [
+          135.0,
+          40.97989806962013,
+          157.5,
+          55.7765730186677
+        ],
+        "source_crs": "EPSG:4326",
+        "output_crs": "EPSG:4326",
+        "operation": "rectangular window crop (no cutline, no reprojection, no resampling)",
+        "resampling": "none",
+        "nodata_output": null,
+        "nodata_source": null,
+        "tool": "GDAL 3.13.1 (gdal.Translate)",
+        "generated_at": "2026-09-19T01:58:30.233114+00:00"
+      },
+      "output": {
+        "path": "derived/4-14-5-2002.tif",
+        "width": 2700,
+        "height": 1777,
+        "pixel_count": 4797900,
+        "sum_ha": 127803.10770332813,
+        "sha256": "ec553a00a50ecb78048f4741af77dbfcda1846fbcdcc76ca6d7017e2ff6af4d5"
+      }
+    },
+    {
+      "year": "2003",
+      "source": {
+        "collection": "fao-gismgr:FAOSTAT:raster:mapsets:DRAINED-AREA-CROP",
+        "item_id": "fao-gismgr:FAOSTAT:raster:mapsets:DRAINED-AREA-CROP:items:FAOSTAT-DRAINED-AREA-CROP-2003",
+        "gismgr_item_id": "fao-gismgr/FAOSTAT/mapsets/DRAINED-AREA-CROP/FAOSTAT.DRAINED-AREA-CROP.2003",
+        "asset_href": "https://storage.googleapis.com/fao-gismgr-faostat-data/DATA/FAOSTAT/MAPSET/DRAINED-AREA-CROP/FAOSTAT.DRAINED-AREA-CROP.2003.tif",
+        "asset_gs_href": "gs://fao-gismgr-faostat-data/DATA/FAOSTAT/MAPSET/DRAINED-AREA-CROP/FAOSTAT.DRAINED-AREA-CROP.2003.tif",
+        "license": "CC-BY-4.0",
+        "source_generation": "1750848640681937",
+        "source_hash_md5_or_crc32c": "crc32c=3ff1gg=="
+      },
+      "derivation": {
+        "aoi_identifier": "4-14-5",
+        "aoi_identifier_scheme": "slippy-map tile z-x-y (spatial ID horizontal index, no floor/altitude)",
+        "aoi_bbox_epsg4326": [
+          135.0,
+          40.97989806962013,
+          157.5,
+          55.7765730186677
+        ],
+        "source_crs": "EPSG:4326",
+        "output_crs": "EPSG:4326",
+        "operation": "rectangular window crop (no cutline, no reprojection, no resampling)",
+        "resampling": "none",
+        "nodata_output": null,
+        "nodata_source": null,
+        "tool": "GDAL 3.13.1 (gdal.Translate)",
+        "generated_at": "2026-09-19T01:58:46.365654+00:00"
+      },
+      "output": {
+        "path": "derived/4-14-5-2003.tif",
+        "width": 2700,
+        "height": 1777,
+        "pixel_count": 4797900,
+        "sum_ha": 126720.24247634411,
+        "sha256": "2e70f9651ff48705314361071bb5c4ba802f0e1ece7469008ab855a70836c9a2"
+      }
+    },
+    {
+      "year": "2004",
+      "source": {
+        "collection": "fao-gismgr:FAOSTAT:raster:mapsets:DRAINED-AREA-CROP",
+        "item_id": "fao-gismgr:FAOSTAT:raster:mapsets:DRAINED-AREA-CROP:items:FAOSTAT-DRAINED-AREA-CROP-2004",
+        "gismgr_item_id": "fao-gismgr/FAOSTAT/mapsets/DRAINED-AREA-CROP/FAOSTAT.DRAINED-AREA-CROP.2004",
+        "asset_href": "https://storage.googleapis.com/fao-gismgr-faostat-data/DATA/FAOSTAT/MAPSET/DRAINED-AREA-CROP/FAOSTAT.DRAINED-AREA-CROP.2004.tif",
+        "asset_gs_href": "gs://fao-gismgr-faostat-data/DATA/FAOSTAT/MAPSET/DRAINED-AREA-CROP/FAOSTAT.DRAINED-AREA-CROP.2004.tif",
+        "license": "CC-BY-4.0",
+        "source_generation": "1750848631354760",
+        "source_hash_md5_or_crc32c": "crc32c=v7NG4A=="
+      },
+      "derivation": {
+        "aoi_identifier": "4-14-5",
+        "aoi_identifier_scheme": "slippy-map tile z-x-y (spatial ID horizontal index, no floor/altitude)",
+        "aoi_bbox_epsg4326": [
+          135.0,
+          40.97989806962013,
+          157.5,
+          55.7765730186677
+        ],
+        "source_crs": "EPSG:4326",
+        "output_crs": "EPSG:4326",
+        "operation": "rectangular window crop (no cutline, no reprojection, no resampling)",
+        "resampling": "none",
+        "nodata_output": null,
+        "nodata_source": null,
+        "tool": "GDAL 3.13.1 (gdal.Translate)",
+        "generated_at": "2026-09-19T01:59:03.154775+00:00"
+      },
+      "output": {
+        "path": "derived/4-14-5-2004.tif",
+        "width": 2700,
+        "height": 1777,
+        "pixel_count": 4797900,
+        "sum_ha": 125731.69116961956,
+        "sha256": "4acbdb76325d0bf030681715b9d8fd25e7aa649a9c5695a48757468376fe97f5"
+      }
+    },
+    {
+      "year": "2005",
+      "source": {
+        "collection": "fao-gismgr:FAOSTAT:raster:mapsets:DRAINED-AREA-CROP",
+        "item_id": "fao-gismgr:FAOSTAT:raster:mapsets:DRAINED-AREA-CROP:items:FAOSTAT-DRAINED-AREA-CROP-2005",
+        "gismgr_item_id": "fao-gismgr/FAOSTAT/mapsets/DRAINED-AREA-CROP/FAOSTAT.DRAINED-AREA-CROP.2005",
+        "asset_href": "https://storage.googleapis.com/fao-gismgr-faostat-data/DATA/FAOSTAT/MAPSET/DRAINED-AREA-CROP/FAOSTAT.DRAINED-AREA-CROP.2005.tif",
+        "asset_gs_href": "gs://fao-gismgr-faostat-data/DATA/FAOSTAT/MAPSET/DRAINED-AREA-CROP/FAOSTAT.DRAINED-AREA-CROP.2005.tif",
+        "license": "CC-BY-4.0",
+        "source_generation": "1750848634875844",
+        "source_hash_md5_or_crc32c": "crc32c=M8iurg=="
+      },
+      "derivation": {
+        "aoi_identifier": "4-14-5",
+        "aoi_identifier_scheme": "slippy-map tile z-x-y (spatial ID horizontal index, no floor/altitude)",
+        "aoi_bbox_epsg4326": [
+          135.0,
+          40.97989806962013,
+          157.5,
+          55.7765730186677
+        ],
+        "source_crs": "EPSG:4326",
+        "output_crs": "EPSG:4326",
+        "operation": "rectangular window crop (no cutline, no reprojection, no resampling)",
+        "resampling": "none",
+        "nodata_output": null,
+        "nodata_source": null,
+        "tool": "GDAL 3.13.1 (gdal.Translate)",
+        "generated_at": "2026-09-19T01:59:20.006578+00:00"
+      },
+      "output": {
+        "path": "derived/4-14-5-2005.tif",
+        "width": 2700,
+        "height": 1777,
+        "pixel_count": 4797900,
+        "sum_ha": 125109.92362856865,
+        "sha256": "946dad85481b4ecad2b79be3b48bdd8e0727645ebfb60f4cdede8bcaa791b8ba"
+      }
+    },
+    {
+      "year": "2006",
+      "source": {
+        "collection": "fao-gismgr:FAOSTAT:raster:mapsets:DRAINED-AREA-CROP",
+        "item_id": "fao-gismgr:FAOSTAT:raster:mapsets:DRAINED-AREA-CROP:items:FAOSTAT-DRAINED-AREA-CROP-2006",
+        "gismgr_item_id": "fao-gismgr/FAOSTAT/mapsets/DRAINED-AREA-CROP/FAOSTAT.DRAINED-AREA-CROP.2006",
+        "asset_href": "https://storage.googleapis.com/fao-gismgr-faostat-data/DATA/FAOSTAT/MAPSET/DRAINED-AREA-CROP/FAOSTAT.DRAINED-AREA-CROP.2006.tif",
+        "asset_gs_href": "gs://fao-gismgr-faostat-data/DATA/FAOSTAT/MAPSET/DRAINED-AREA-CROP/FAOSTAT.DRAINED-AREA-CROP.2006.tif",
+        "license": "CC-BY-4.0",
+        "source_generation": "1750848640814894",
+        "source_hash_md5_or_crc32c": "crc32c=CF5eGA=="
+      },
+      "derivation": {
+        "aoi_identifier": "4-14-5",
+        "aoi_identifier_scheme": "slippy-map tile z-x-y (spatial ID horizontal index, no floor/altitude)",
+        "aoi_bbox_epsg4326": [
+          135.0,
+          40.97989806962013,
+          157.5,
+          55.7765730186677
+        ],
+        "source_crs": "EPSG:4326",
+        "output_crs": "EPSG:4326",
+        "operation": "rectangular window crop (no cutline, no reprojection, no resampling)",
+        "resampling": "none",
+        "nodata_output": null,
+        "nodata_source": null,
+        "tool": "GDAL 3.13.1 (gdal.Translate)",
+        "generated_at": "2026-09-19T01:59:36.855610+00:00"
+      },
+      "output": {
+        "path": "derived/4-14-5-2006.tif",
+        "width": 2700,
+        "height": 1777,
+        "pixel_count": 4797900,
+        "sum_ha": 125050.73190140724,
+        "sha256": "33821e942cf22c4b996906266bd53f5c392241163814a0dbcaa583a9ec776121"
+      }
+    },
+    {
+      "year": "2007",
+      "source": {
+        "collection": "fao-gismgr:FAOSTAT:raster:mapsets:DRAINED-AREA-CROP",
+        "item_id": "fao-gismgr:FAOSTAT:raster:mapsets:DRAINED-AREA-CROP:items:FAOSTAT-DRAINED-AREA-CROP-2007",
+        "gismgr_item_id": "fao-gismgr/FAOSTAT/mapsets/DRAINED-AREA-CROP/FAOSTAT.DRAINED-AREA-CROP.2007",
+        "asset_href": "https://storage.googleapis.com/fao-gismgr-faostat-data/DATA/FAOSTAT/MAPSET/DRAINED-AREA-CROP/FAOSTAT.DRAINED-AREA-CROP.2007.tif",
+        "asset_gs_href": "gs://fao-gismgr-faostat-data/DATA/FAOSTAT/MAPSET/DRAINED-AREA-CROP/FAOSTAT.DRAINED-AREA-CROP.2007.tif",
+        "license": "CC-BY-4.0",
+        "source_generation": "1750848643679042",
+        "source_hash_md5_or_crc32c": "crc32c=f0YKCA=="
+      },
+      "derivation": {
+        "aoi_identifier": "4-14-5",
+        "aoi_identifier_scheme": "slippy-map tile z-x-y (spatial ID horizontal index, no floor/altitude)",
+        "aoi_bbox_epsg4326": [
+          135.0,
+          40.97989806962013,
+          157.5,
+          55.7765730186677
+        ],
+        "source_crs": "EPSG:4326",
+        "output_crs": "EPSG:4326",
+        "operation": "rectangular window crop (no cutline, no reprojection, no resampling)",
+        "resampling": "none",
+        "nodata_output": null,
+        "nodata_source": null,
+        "tool": "GDAL 3.13.1 (gdal.Translate)",
+        "generated_at": "2026-09-19T01:59:53.207806+00:00"
+      },
+      "output": {
+        "path": "derived/4-14-5-2007.tif",
+        "width": 2700,
+        "height": 1777,
+        "pixel_count": 4797900,
+        "sum_ha": 124916.10964608192,
+        "sha256": "0a0e96c3d86f26191a691e4ccfadd99534d7cf2d929c1b0d5433aee254630cfd"
+      }
+    },
+    {
+      "year": "2008",
+      "source": {
+        "collection": "fao-gismgr:FAOSTAT:raster:mapsets:DRAINED-AREA-CROP",
+        "item_id": "fao-gismgr:FAOSTAT:raster:mapsets:DRAINED-AREA-CROP:items:FAOSTAT-DRAINED-AREA-CROP-2008",
+        "gismgr_item_id": "fao-gismgr/FAOSTAT/mapsets/DRAINED-AREA-CROP/FAOSTAT.DRAINED-AREA-CROP.2008",
+        "asset_href": "https://storage.googleapis.com/fao-gismgr-faostat-data/DATA/FAOSTAT/MAPSET/DRAINED-AREA-CROP/FAOSTAT.DRAINED-AREA-CROP.2008.tif",
+        "asset_gs_href": "gs://fao-gismgr-faostat-data/DATA/FAOSTAT/MAPSET/DRAINED-AREA-CROP/FAOSTAT.DRAINED-AREA-CROP.2008.tif",
+        "license": "CC-BY-4.0",
+        "source_generation": "1750848647244283",
+        "source_hash_md5_or_crc32c": "crc32c=nfwM0g=="
+      },
+      "derivation": {
+        "aoi_identifier": "4-14-5",
+        "aoi_identifier_scheme": "slippy-map tile z-x-y (spatial ID horizontal index, no floor/altitude)",
+        "aoi_bbox_epsg4326": [
+          135.0,
+          40.97989806962013,
+          157.5,
+          55.7765730186677
+        ],
+        "source_crs": "EPSG:4326",
+        "output_crs": "EPSG:4326",
+        "operation": "rectangular window crop (no cutline, no reprojection, no resampling)",
+        "resampling": "none",
+        "nodata_output": null,
+        "nodata_source": null,
+        "tool": "GDAL 3.13.1 (gdal.Translate)",
+        "generated_at": "2026-09-19T02:00:09.887802+00:00"
+      },
+      "output": {
+        "path": "derived/4-14-5-2008.tif",
+        "width": 2700,
+        "height": 1777,
+        "pixel_count": 4797900,
+        "sum_ha": 124831.24202108383,
+        "sha256": "c0be16ecc41ace750fe0b93aa30c3aae9855cb21e7e2d5d22aeab4dc8e2b46e9"
+      }
+    },
+    {
+      "year": "2009",
+      "source": {
+        "collection": "fao-gismgr:FAOSTAT:raster:mapsets:DRAINED-AREA-CROP",
+        "item_id": "fao-gismgr:FAOSTAT:raster:mapsets:DRAINED-AREA-CROP:items:FAOSTAT-DRAINED-AREA-CROP-2009",
+        "gismgr_item_id": "fao-gismgr/FAOSTAT/mapsets/DRAINED-AREA-CROP/FAOSTAT.DRAINED-AREA-CROP.2009",
+        "asset_href": "https://storage.googleapis.com/fao-gismgr-faostat-data/DATA/FAOSTAT/MAPSET/DRAINED-AREA-CROP/FAOSTAT.DRAINED-AREA-CROP.2009.tif",
+        "asset_gs_href": "gs://fao-gismgr-faostat-data/DATA/FAOSTAT/MAPSET/DRAINED-AREA-CROP/FAOSTAT.DRAINED-AREA-CROP.2009.tif",
+        "license": "CC-BY-4.0",
+        "source_generation": "1750848648838209",
+        "source_hash_md5_or_crc32c": "crc32c=e9PdcQ=="
+      },
+      "derivation": {
+        "aoi_identifier": "4-14-5",
+        "aoi_identifier_scheme": "slippy-map tile z-x-y (spatial ID horizontal index, no floor/altitude)",
+        "aoi_bbox_epsg4326": [
+          135.0,
+          40.97989806962013,
+          157.5,
+          55.7765730186677
+        ],
+        "source_crs": "EPSG:4326",
+        "output_crs": "EPSG:4326",
+        "operation": "rectangular window crop (no cutline, no reprojection, no resampling)",
+        "resampling": "none",
+        "nodata_output": null,
+        "nodata_source": null,
+        "tool": "GDAL 3.13.1 (gdal.Translate)",
+        "generated_at": "2026-09-19T02:00:26.651738+00:00"
+      },
+      "output": {
+        "path": "derived/4-14-5-2009.tif",
+        "width": 2700,
+        "height": 1777,
+        "pixel_count": 4797900,
+        "sum_ha": 124661.70308220387,
+        "sha256": "f05cb5c4f7d7d2cd5d1dcf532f3afaf4a2b8fa6eaee4b4c87443f1a6ad62206c"
+      }
+    },
+    {
+      "year": "2010",
+      "source": {
+        "collection": "fao-gismgr:FAOSTAT:raster:mapsets:DRAINED-AREA-CROP",
+        "item_id": "fao-gismgr:FAOSTAT:raster:mapsets:DRAINED-AREA-CROP:items:FAOSTAT-DRAINED-AREA-CROP-2010",
+        "gismgr_item_id": "fao-gismgr/FAOSTAT/mapsets/DRAINED-AREA-CROP/FAOSTAT.DRAINED-AREA-CROP.2010",
+        "asset_href": "https://storage.googleapis.com/fao-gismgr-faostat-data/DATA/FAOSTAT/MAPSET/DRAINED-AREA-CROP/FAOSTAT.DRAINED-AREA-CROP.2010.tif",
+        "asset_gs_href": "gs://fao-gismgr-faostat-data/DATA/FAOSTAT/MAPSET/DRAINED-AREA-CROP/FAOSTAT.DRAINED-AREA-CROP.2010.tif",
+        "license": "CC-BY-4.0",
+        "source_generation": "1750848652783674",
+        "source_hash_md5_or_crc32c": "crc32c=EPafwA=="
+      },
+      "derivation": {
+        "aoi_identifier": "4-14-5",
+        "aoi_identifier_scheme": "slippy-map tile z-x-y (spatial ID horizontal index, no floor/altitude)",
+        "aoi_bbox_epsg4326": [
+          135.0,
+          40.97989806962013,
+          157.5,
+          55.7765730186677
+        ],
+        "source_crs": "EPSG:4326",
+        "output_crs": "EPSG:4326",
+        "operation": "rectangular window crop (no cutline, no reprojection, no resampling)",
+        "resampling": "none",
+        "nodata_output": null,
+        "nodata_source": null,
+        "tool": "GDAL 3.13.1 (gdal.Translate)",
+        "generated_at": "2026-09-19T02:00:43.497514+00:00"
+      },
+      "output": {
+        "path": "derived/4-14-5-2010.tif",
+        "width": 2700,
+        "height": 1777,
+        "pixel_count": 4797900,
+        "sum_ha": 124539.0461935997,
+        "sha256": "a2ab058631ce15041b163a542862e027f68958b9d9d4b1118de7f012a68d4592"
+      }
+    },
+    {
+      "year": "2011",
+      "source": {
+        "collection": "fao-gismgr:FAOSTAT:raster:mapsets:DRAINED-AREA-CROP",
+        "item_id": "fao-gismgr:FAOSTAT:raster:mapsets:DRAINED-AREA-CROP:items:FAOSTAT-DRAINED-AREA-CROP-2011",
+        "gismgr_item_id": "fao-gismgr/FAOSTAT/mapsets/DRAINED-AREA-CROP/FAOSTAT.DRAINED-AREA-CROP.2011",
+        "asset_href": "https://storage.googleapis.com/fao-gismgr-faostat-data/DATA/FAOSTAT/MAPSET/DRAINED-AREA-CROP/FAOSTAT.DRAINED-AREA-CROP.2011.tif",
+        "asset_gs_href": "gs://fao-gismgr-faostat-data/DATA/FAOSTAT/MAPSET/DRAINED-AREA-CROP/FAOSTAT.DRAINED-AREA-CROP.2011.tif",
+        "license": "CC-BY-4.0",
+        "source_generation": "1750848648511881",
+        "source_hash_md5_or_crc32c": "crc32c=HQ3B/w=="
+      },
+      "derivation": {
+        "aoi_identifier": "4-14-5",
+        "aoi_identifier_scheme": "slippy-map tile z-x-y (spatial ID horizontal index, no floor/altitude)",
+        "aoi_bbox_epsg4326": [
+          135.0,
+          40.97989806962013,
+          157.5,
+          55.7765730186677
+        ],
+        "source_crs": "EPSG:4326",
+        "output_crs": "EPSG:4326",
+        "operation": "rectangular window crop (no cutline, no reprojection, no resampling)",
+        "resampling": "none",
+        "nodata_output": null,
+        "nodata_source": null,
+        "tool": "GDAL 3.13.1 (gdal.Translate)",
+        "generated_at": "2026-09-19T02:01:00.154869+00:00"
+      },
+      "output": {
+        "path": "derived/4-14-5-2011.tif",
+        "width": 2700,
+        "height": 1777,
+        "pixel_count": 4797900,
+        "sum_ha": 124275.36898815632,
+        "sha256": "c3b4ead57eda8d27fafc01019038e27abbed34138a21de349db5e9908109c4ea"
+      }
+    },
+    {
+      "year": "2012",
+      "source": {
+        "collection": "fao-gismgr:FAOSTAT:raster:mapsets:DRAINED-AREA-CROP",
+        "item_id": "fao-gismgr:FAOSTAT:raster:mapsets:DRAINED-AREA-CROP:items:FAOSTAT-DRAINED-AREA-CROP-2012",
+        "gismgr_item_id": "fao-gismgr/FAOSTAT/mapsets/DRAINED-AREA-CROP/FAOSTAT.DRAINED-AREA-CROP.2012",
+        "asset_href": "https://storage.googleapis.com/fao-gismgr-faostat-data/DATA/FAOSTAT/MAPSET/DRAINED-AREA-CROP/FAOSTAT.DRAINED-AREA-CROP.2012.tif",
+        "asset_gs_href": "gs://fao-gismgr-faostat-data/DATA/FAOSTAT/MAPSET/DRAINED-AREA-CROP/FAOSTAT.DRAINED-AREA-CROP.2012.tif",
+        "license": "CC-BY-4.0",
+        "source_generation": "1750848629720280",
+        "source_hash_md5_or_crc32c": "crc32c=0JUj2w=="
+      },
+      "derivation": {
+        "aoi_identifier": "4-14-5",
+        "aoi_identifier_scheme": "slippy-map tile z-x-y (spatial ID horizontal index, no floor/altitude)",
+        "aoi_bbox_epsg4326": [
+          135.0,
+          40.97989806962013,
+          157.5,
+          55.7765730186677
+        ],
+        "source_crs": "EPSG:4326",
+        "output_crs": "EPSG:4326",
+        "operation": "rectangular window crop (no cutline, no reprojection, no resampling)",
+        "resampling": "none",
+        "nodata_output": null,
+        "nodata_source": null,
+        "tool": "GDAL 3.13.1 (gdal.Translate)",
+        "generated_at": "2026-09-19T02:01:17.225840+00:00"
+      },
+      "output": {
+        "path": "derived/4-14-5-2012.tif",
+        "width": 2700,
+        "height": 1777,
+        "pixel_count": 4797900,
+        "sum_ha": 124111.23111093044,
+        "sha256": "9d2301e4080bd692abb96ae4b3a0c9a14850c91eb40dc193dcbd7fb7eed2ee38"
+      }
+    },
+    {
+      "year": "2013",
+      "source": {
+        "collection": "fao-gismgr:FAOSTAT:raster:mapsets:DRAINED-AREA-CROP",
+        "item_id": "fao-gismgr:FAOSTAT:raster:mapsets:DRAINED-AREA-CROP:items:FAOSTAT-DRAINED-AREA-CROP-2013",
+        "gismgr_item_id": "fao-gismgr/FAOSTAT/mapsets/DRAINED-AREA-CROP/FAOSTAT.DRAINED-AREA-CROP.2013",
+        "asset_href": "https://storage.googleapis.com/fao-gismgr-faostat-data/DATA/FAOSTAT/MAPSET/DRAINED-AREA-CROP/FAOSTAT.DRAINED-AREA-CROP.2013.tif",
+        "asset_gs_href": "gs://fao-gismgr-faostat-data/DATA/FAOSTAT/MAPSET/DRAINED-AREA-CROP/FAOSTAT.DRAINED-AREA-CROP.2013.tif",
+        "license": "CC-BY-4.0",
+        "source_generation": "1750848654966600",
+        "source_hash_md5_or_crc32c": "crc32c=owerOQ=="
+      },
+      "derivation": {
+        "aoi_identifier": "4-14-5",
+        "aoi_identifier_scheme": "slippy-map tile z-x-y (spatial ID horizontal index, no floor/altitude)",
+        "aoi_bbox_epsg4326": [
+          135.0,
+          40.97989806962013,
+          157.5,
+          55.7765730186677
+        ],
+        "source_crs": "EPSG:4326",
+        "output_crs": "EPSG:4326",
+        "operation": "rectangular window crop (no cutline, no reprojection, no resampling)",
+        "resampling": "none",
+        "nodata_output": null,
+        "nodata_source": null,
+        "tool": "GDAL 3.13.1 (gdal.Translate)",
+        "generated_at": "2026-09-19T02:01:35.444986+00:00"
+      },
+      "output": {
+        "path": "derived/4-14-5-2013.tif",
+        "width": 2700,
+        "height": 1777,
+        "pixel_count": 4797900,
+        "sum_ha": 123982.04254639149,
+        "sha256": "03656da82d32acad581d8351dab820ef6723c0eb84369474951efaf5b0bfad31"
+      }
+    },
+    {
+      "year": "2014",
+      "source": {
+        "collection": "fao-gismgr:FAOSTAT:raster:mapsets:DRAINED-AREA-CROP",
+        "item_id": "fao-gismgr:FAOSTAT:raster:mapsets:DRAINED-AREA-CROP:items:FAOSTAT-DRAINED-AREA-CROP-2014",
+        "gismgr_item_id": "fao-gismgr/FAOSTAT/mapsets/DRAINED-AREA-CROP/FAOSTAT.DRAINED-AREA-CROP.2014",
+        "asset_href": "https://storage.googleapis.com/fao-gismgr-faostat-data/DATA/FAOSTAT/MAPSET/DRAINED-AREA-CROP/FAOSTAT.DRAINED-AREA-CROP.2014.tif",
+        "asset_gs_href": "gs://fao-gismgr-faostat-data/DATA/FAOSTAT/MAPSET/DRAINED-AREA-CROP/FAOSTAT.DRAINED-AREA-CROP.2014.tif",
+        "license": "CC-BY-4.0",
+        "source_generation": "1750848645617701",
+        "source_hash_md5_or_crc32c": "crc32c=umLy/w=="
+      },
+      "derivation": {
+        "aoi_identifier": "4-14-5",
+        "aoi_identifier_scheme": "slippy-map tile z-x-y (spatial ID horizontal index, no floor/altitude)",
+        "aoi_bbox_epsg4326": [
+          135.0,
+          40.97989806962013,
+          157.5,
+          55.7765730186677
+        ],
+        "source_crs": "EPSG:4326",
+        "output_crs": "EPSG:4326",
+        "operation": "rectangular window crop (no cutline, no reprojection, no resampling)",
+        "resampling": "none",
+        "nodata_output": null,
+        "nodata_source": null,
+        "tool": "GDAL 3.13.1 (gdal.Translate)",
+        "generated_at": "2026-09-19T02:01:53.569827+00:00"
+      },
+      "output": {
+        "path": "derived/4-14-5-2014.tif",
+        "width": 2700,
+        "height": 1777,
+        "pixel_count": 4797900,
+        "sum_ha": 123892.82341301441,
+        "sha256": "f3c9f490c5262c562325611091ef41ad0bb6aa8f79caaa4368eb9de936c0036d"
+      }
+    },
+    {
+      "year": "2015",
+      "source": {
+        "collection": "fao-gismgr:FAOSTAT:raster:mapsets:DRAINED-AREA-CROP",
+        "item_id": "fao-gismgr:FAOSTAT:raster:mapsets:DRAINED-AREA-CROP:items:FAOSTAT-DRAINED-AREA-CROP-2015",
+        "gismgr_item_id": "fao-gismgr/FAOSTAT/mapsets/DRAINED-AREA-CROP/FAOSTAT.DRAINED-AREA-CROP.2015",
+        "asset_href": "https://storage.googleapis.com/fao-gismgr-faostat-data/DATA/FAOSTAT/MAPSET/DRAINED-AREA-CROP/FAOSTAT.DRAINED-AREA-CROP.2015.tif",
+        "asset_gs_href": "gs://fao-gismgr-faostat-data/DATA/FAOSTAT/MAPSET/DRAINED-AREA-CROP/FAOSTAT.DRAINED-AREA-CROP.2015.tif",
+        "license": "CC-BY-4.0",
+        "source_generation": "1750848627148284",
+        "source_hash_md5_or_crc32c": "crc32c=e3N64g=="
+      },
+      "derivation": {
+        "aoi_identifier": "4-14-5",
+        "aoi_identifier_scheme": "slippy-map tile z-x-y (spatial ID horizontal index, no floor/altitude)",
+        "aoi_bbox_epsg4326": [
+          135.0,
+          40.97989806962013,
+          157.5,
+          55.7765730186677
+        ],
+        "source_crs": "EPSG:4326",
+        "output_crs": "EPSG:4326",
+        "operation": "rectangular window crop (no cutline, no reprojection, no resampling)",
+        "resampling": "none",
+        "nodata_output": null,
+        "nodata_source": null,
+        "tool": "GDAL 3.13.1 (gdal.Translate)",
+        "generated_at": "2026-09-19T02:02:10.841190+00:00"
+      },
+      "output": {
+        "path": "derived/4-14-5-2015.tif",
+        "width": 2700,
+        "height": 1777,
+        "pixel_count": 4797900,
+        "sum_ha": 123885.23326671124,
+        "sha256": "e8b898b71dc3b6e8092799a6defa82690e9a32874c4eae5b903da8de33151f8d"
+      }
+    },
+    {
+      "year": "2016",
+      "source": {
+        "collection": "fao-gismgr:FAOSTAT:raster:mapsets:DRAINED-AREA-CROP",
+        "item_id": "fao-gismgr:FAOSTAT:raster:mapsets:DRAINED-AREA-CROP:items:FAOSTAT-DRAINED-AREA-CROP-2016",
+        "gismgr_item_id": "fao-gismgr/FAOSTAT/mapsets/DRAINED-AREA-CROP/FAOSTAT.DRAINED-AREA-CROP.2016",
+        "asset_href": "https://storage.googleapis.com/fao-gismgr-faostat-data/DATA/FAOSTAT/MAPSET/DRAINED-AREA-CROP/FAOSTAT.DRAINED-AREA-CROP.2016.tif",
+        "asset_gs_href": "gs://fao-gismgr-faostat-data/DATA/FAOSTAT/MAPSET/DRAINED-AREA-CROP/FAOSTAT.DRAINED-AREA-CROP.2016.tif",
+        "license": "CC-BY-4.0",
+        "source_generation": "1750848653611089",
+        "source_hash_md5_or_crc32c": "crc32c=yFyznQ=="
+      },
+      "derivation": {
+        "aoi_identifier": "4-14-5",
+        "aoi_identifier_scheme": "slippy-map tile z-x-y (spatial ID horizontal index, no floor/altitude)",
+        "aoi_bbox_epsg4326": [
+          135.0,
+          40.97989806962013,
+          157.5,
+          55.7765730186677
+        ],
+        "source_crs": "EPSG:4326",
+        "output_crs": "EPSG:4326",
+        "operation": "rectangular window crop (no cutline, no reprojection, no resampling)",
+        "resampling": "none",
+        "nodata_output": null,
+        "nodata_source": null,
+        "tool": "GDAL 3.13.1 (gdal.Translate)",
+        "generated_at": "2026-09-19T02:02:28.296028+00:00"
+      },
+      "output": {
+        "path": "derived/4-14-5-2016.tif",
+        "width": 2700,
+        "height": 1777,
+        "pixel_count": 4797900,
+        "sum_ha": 123562.15058028698,
+        "sha256": "864eedaf11e85fac4783f504fb7b986b30b538dd60fe69cac40b90bd5507bed7"
+      }
+    },
+    {
+      "year": "2017",
+      "source": {
+        "collection": "fao-gismgr:FAOSTAT:raster:mapsets:DRAINED-AREA-CROP",
+        "item_id": "fao-gismgr:FAOSTAT:raster:mapsets:DRAINED-AREA-CROP:items:FAOSTAT-DRAINED-AREA-CROP-2017",
+        "gismgr_item_id": "fao-gismgr/FAOSTAT/mapsets/DRAINED-AREA-CROP/FAOSTAT.DRAINED-AREA-CROP.2017",
+        "asset_href": "https://storage.googleapis.com/fao-gismgr-faostat-data/DATA/FAOSTAT/MAPSET/DRAINED-AREA-CROP/FAOSTAT.DRAINED-AREA-CROP.2017.tif",
+        "asset_gs_href": "gs://fao-gismgr-faostat-data/DATA/FAOSTAT/MAPSET/DRAINED-AREA-CROP/FAOSTAT.DRAINED-AREA-CROP.2017.tif",
+        "license": "CC-BY-4.0",
+        "source_generation": "1750848632104882",
+        "source_hash_md5_or_crc32c": "crc32c=xFMd8Q=="
+      },
+      "derivation": {
+        "aoi_identifier": "4-14-5",
+        "aoi_identifier_scheme": "slippy-map tile z-x-y (spatial ID horizontal index, no floor/altitude)",
+        "aoi_bbox_epsg4326": [
+          135.0,
+          40.97989806962013,
+          157.5,
+          55.7765730186677
+        ],
+        "source_crs": "EPSG:4326",
+        "output_crs": "EPSG:4326",
+        "operation": "rectangular window crop (no cutline, no reprojection, no resampling)",
+        "resampling": "none",
+        "nodata_output": null,
+        "nodata_source": null,
+        "tool": "GDAL 3.13.1 (gdal.Translate)",
+        "generated_at": "2026-09-19T02:02:43.773991+00:00"
+      },
+      "output": {
+        "path": "derived/4-14-5-2017.tif",
+        "width": 2700,
+        "height": 1777,
+        "pixel_count": 4797900,
+        "sum_ha": 123588.48086571693,
+        "sha256": "dcb0b7ad5c5c62c3da6c9b15810b9a86b197604daa7caeacc9e398d562405318"
+      }
+    },
+    {
+      "year": "2018",
+      "source": {
+        "collection": "fao-gismgr:FAOSTAT:raster:mapsets:DRAINED-AREA-CROP",
+        "item_id": "fao-gismgr:FAOSTAT:raster:mapsets:DRAINED-AREA-CROP:items:FAOSTAT-DRAINED-AREA-CROP-2018",
+        "gismgr_item_id": "fao-gismgr/FAOSTAT/mapsets/DRAINED-AREA-CROP/FAOSTAT.DRAINED-AREA-CROP.2018",
+        "asset_href": "https://storage.googleapis.com/fao-gismgr-faostat-data/DATA/FAOSTAT/MAPSET/DRAINED-AREA-CROP/FAOSTAT.DRAINED-AREA-CROP.2018.tif",
+        "asset_gs_href": "gs://fao-gismgr-faostat-data/DATA/FAOSTAT/MAPSET/DRAINED-AREA-CROP/FAOSTAT.DRAINED-AREA-CROP.2018.tif",
+        "license": "CC-BY-4.0",
+        "source_generation": "1750848631624447",
+        "source_hash_md5_or_crc32c": "crc32c=q5DM3g=="
+      },
+      "derivation": {
+        "aoi_identifier": "4-14-5",
+        "aoi_identifier_scheme": "slippy-map tile z-x-y (spatial ID horizontal index, no floor/altitude)",
+        "aoi_bbox_epsg4326": [
+          135.0,
+          40.97989806962013,
+          157.5,
+          55.7765730186677
+        ],
+        "source_crs": "EPSG:4326",
+        "output_crs": "EPSG:4326",
+        "operation": "rectangular window crop (no cutline, no reprojection, no resampling)",
+        "resampling": "none",
+        "nodata_output": null,
+        "nodata_source": null,
+        "tool": "GDAL 3.13.1 (gdal.Translate)",
+        "generated_at": "2026-09-19T02:02:59.222657+00:00"
+      },
+      "output": {
+        "path": "derived/4-14-5-2018.tif",
+        "width": 2700,
+        "height": 1777,
+        "pixel_count": 4797900,
+        "sum_ha": 124044.97817444801,
+        "sha256": "7a4d63647e5315dd0c965e1f1fa46070a707a84c18c57f7918ddac5a7b243fab"
+      }
+    },
+    {
+      "year": "2019",
+      "source": {
+        "collection": "fao-gismgr:FAOSTAT:raster:mapsets:DRAINED-AREA-CROP",
+        "item_id": "fao-gismgr:FAOSTAT:raster:mapsets:DRAINED-AREA-CROP:items:FAOSTAT-DRAINED-AREA-CROP-2019",
+        "gismgr_item_id": "fao-gismgr/FAOSTAT/mapsets/DRAINED-AREA-CROP/FAOSTAT.DRAINED-AREA-CROP.2019",
+        "asset_href": "https://storage.googleapis.com/fao-gismgr-faostat-data/DATA/FAOSTAT/MAPSET/DRAINED-AREA-CROP/FAOSTAT.DRAINED-AREA-CROP.2019.tif",
+        "asset_gs_href": "gs://fao-gismgr-faostat-data/DATA/FAOSTAT/MAPSET/DRAINED-AREA-CROP/FAOSTAT.DRAINED-AREA-CROP.2019.tif",
+        "license": "CC-BY-4.0",
+        "source_generation": "1750848634236733",
+        "source_hash_md5_or_crc32c": "crc32c=yxCbNA=="
+      },
+      "derivation": {
+        "aoi_identifier": "4-14-5",
+        "aoi_identifier_scheme": "slippy-map tile z-x-y (spatial ID horizontal index, no floor/altitude)",
+        "aoi_bbox_epsg4326": [
+          135.0,
+          40.97989806962013,
+          157.5,
+          55.7765730186677
+        ],
+        "source_crs": "EPSG:4326",
+        "output_crs": "EPSG:4326",
+        "operation": "rectangular window crop (no cutline, no reprojection, no resampling)",
+        "resampling": "none",
+        "nodata_output": null,
+        "nodata_source": null,
+        "tool": "GDAL 3.13.1 (gdal.Translate)",
+        "generated_at": "2026-09-19T02:03:15.700366+00:00"
+      },
+      "output": {
+        "path": "derived/4-14-5-2019.tif",
+        "width": 2700,
+        "height": 1777,
+        "pixel_count": 4797900,
+        "sum_ha": 126474.96175086498,
+        "sha256": "2e5279a938bbc1bd5bb9cc9af35e507c5c978213cb18bd7403eeda580c95d260"
+      }
+    },
+    {
+      "year": "2020",
+      "source": {
+        "collection": "fao-gismgr:FAOSTAT:raster:mapsets:DRAINED-AREA-CROP",
+        "item_id": "fao-gismgr:FAOSTAT:raster:mapsets:DRAINED-AREA-CROP:items:FAOSTAT-DRAINED-AREA-CROP-2020",
+        "gismgr_item_id": "fao-gismgr/FAOSTAT/mapsets/DRAINED-AREA-CROP/FAOSTAT.DRAINED-AREA-CROP.2020",
+        "asset_href": "https://storage.googleapis.com/fao-gismgr-faostat-data/DATA/FAOSTAT/MAPSET/DRAINED-AREA-CROP/FAOSTAT.DRAINED-AREA-CROP.2020.tif",
+        "asset_gs_href": "gs://fao-gismgr-faostat-data/DATA/FAOSTAT/MAPSET/DRAINED-AREA-CROP/FAOSTAT.DRAINED-AREA-CROP.2020.tif",
+        "license": "CC-BY-4.0",
+        "source_generation": "1750848635832451",
+        "source_hash_md5_or_crc32c": "crc32c=Y6p7hg=="
+      },
+      "derivation": {
+        "aoi_identifier": "4-14-5",
+        "aoi_identifier_scheme": "slippy-map tile z-x-y (spatial ID horizontal index, no floor/altitude)",
+        "aoi_bbox_epsg4326": [
+          135.0,
+          40.97989806962013,
+          157.5,
+          55.7765730186677
+        ],
+        "source_crs": "EPSG:4326",
+        "output_crs": "EPSG:4326",
+        "operation": "rectangular window crop (no cutline, no reprojection, no resampling)",
+        "resampling": "none",
+        "nodata_output": null,
+        "nodata_source": null,
+        "tool": "GDAL 3.13.1 (gdal.Translate)",
+        "generated_at": "2026-09-19T02:03:32.989790+00:00"
+      },
+      "output": {
+        "path": "derived/4-14-5-2020.tif",
+        "width": 2700,
+        "height": 1777,
+        "pixel_count": 4797900,
+        "sum_ha": 126901.29371619225,
+        "sha256": "110a3bfb07aa9d24bce00eb1d70cd9a4fa447eaee93c77301a5b80f9c67be70c"
+      }
+    },
+    {
+      "year": "2021",
+      "source": {
+        "collection": "fao-gismgr:FAOSTAT:raster:mapsets:DRAINED-AREA-CROP",
+        "item_id": "fao-gismgr:FAOSTAT:raster:mapsets:DRAINED-AREA-CROP:items:FAOSTAT-DRAINED-AREA-CROP-2021",
+        "gismgr_item_id": "fao-gismgr/FAOSTAT/mapsets/DRAINED-AREA-CROP/FAOSTAT.DRAINED-AREA-CROP.2021",
+        "asset_href": "https://storage.googleapis.com/fao-gismgr-faostat-data/DATA/FAOSTAT/MAPSET/DRAINED-AREA-CROP/FAOSTAT.DRAINED-AREA-CROP.2021.tif",
+        "asset_gs_href": "gs://fao-gismgr-faostat-data/DATA/FAOSTAT/MAPSET/DRAINED-AREA-CROP/FAOSTAT.DRAINED-AREA-CROP.2021.tif",
+        "license": "CC-BY-4.0",
+        "source_generation": "1750848634311331",
+        "source_hash_md5_or_crc32c": "crc32c=c95wOg=="
+      },
+      "derivation": {
+        "aoi_identifier": "4-14-5",
+        "aoi_identifier_scheme": "slippy-map tile z-x-y (spatial ID horizontal index, no floor/altitude)",
+        "aoi_bbox_epsg4326": [
+          135.0,
+          40.97989806962013,
+          157.5,
+          55.7765730186677
+        ],
+        "source_crs": "EPSG:4326",
+        "output_crs": "EPSG:4326",
+        "operation": "rectangular window crop (no cutline, no reprojection, no resampling)",
+        "resampling": "none",
+        "nodata_output": null,
+        "nodata_source": null,
+        "tool": "GDAL 3.13.1 (gdal.Translate)",
+        "generated_at": "2026-09-19T02:03:49.497842+00:00"
+      },
+      "output": {
+        "path": "derived/4-14-5-2021.tif",
+        "width": 2700,
+        "height": 1777,
+        "pixel_count": 4797900,
+        "sum_ha": 127382.70537757874,
+        "sha256": "3583cc6e71f7c0c4b7a049de77acc7207238e79b61e4f5d2f71ae91ef40c3f7a"
+      }
+    },
+    {
+      "year": "2022",
+      "source": {
+        "collection": "fao-gismgr:FAOSTAT:raster:mapsets:DRAINED-AREA-CROP",
+        "item_id": "fao-gismgr:FAOSTAT:raster:mapsets:DRAINED-AREA-CROP:items:FAOSTAT-DRAINED-AREA-CROP-2022",
+        "gismgr_item_id": "fao-gismgr/FAOSTAT/mapsets/DRAINED-AREA-CROP/FAOSTAT.DRAINED-AREA-CROP.2022",
+        "asset_href": "https://storage.googleapis.com/fao-gismgr-faostat-data/DATA/FAOSTAT/MAPSET/DRAINED-AREA-CROP/FAOSTAT.DRAINED-AREA-CROP.2022.tif",
+        "asset_gs_href": "gs://fao-gismgr-faostat-data/DATA/FAOSTAT/MAPSET/DRAINED-AREA-CROP/FAOSTAT.DRAINED-AREA-CROP.2022.tif",
+        "license": "CC-BY-4.0",
+        "source_generation": "1750848637635473",
+        "source_hash_md5_or_crc32c": "crc32c=vFc1cA=="
+      },
+      "derivation": {
+        "aoi_identifier": "4-14-5",
+        "aoi_identifier_scheme": "slippy-map tile z-x-y (spatial ID horizontal index, no floor/altitude)",
+        "aoi_bbox_epsg4326": [
+          135.0,
+          40.97989806962013,
+          157.5,
+          55.7765730186677
+        ],
+        "source_crs": "EPSG:4326",
+        "output_crs": "EPSG:4326",
+        "operation": "rectangular window crop (no cutline, no reprojection, no resampling)",
+        "resampling": "none",
+        "nodata_output": null,
+        "nodata_source": null,
+        "tool": "GDAL 3.13.1 (gdal.Translate)",
+        "generated_at": "2026-09-19T02:04:05.397076+00:00"
+      },
+      "output": {
+        "path": "derived/4-14-5-2022.tif",
+        "width": 2700,
+        "height": 1777,
+        "pixel_count": 4797900,
+        "sum_ha": 127578.77585840225,
+        "sha256": "008856f12a7058cc411e81d5e52f5495afa5fca6fe2d2f6b70133ca703629434"
+      }
+    }
+  ]
+}
