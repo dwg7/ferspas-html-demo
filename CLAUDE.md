@@ -182,41 +182,50 @@ pre-harvested indexを使う場合も、4.7と同じ規律を適用する。
 ├── tasks/
 │   ├── Case1-ASIS-latest-Italy.yaml
 │   ├── Case1-ASIS-latest-Hokkaido.yaml
-│   ├── Case2-GHG-BGD.yaml
+│   ├── Case2-GHG-BDG.yaml
 │   └── Case2-GHG-Hokkaido.yaml
 ├── docs/
 │   ├── index.html
-│   ├── Case1-ASIS-latest-Italy.html
-│   ├── Case1-ASIS-latest-Hokkaido.html
-│   ├── Case2-GHG-BDG.html
-│   ├── Case2-GHG-Hokkaido.html
-│   ├── data/
-│   │   ├── italy.geojson
-│   │   ├── bangladesh.geojson
-│   │   └── hokkaido.geojson
-│   ├── assets/
-│   │   └── ...
-│   └── derived/
-│       ├── case1-hokkaido/
-│       └── case2-hokkaido/
+│   ├── Case1-ASIS-latest-Italy/
+│   │   ├── index.html
+│   │   └── task.yaml
+│   ├── Case1-ASIS-latest-Hokkaido/
+│   │   ├── index.html
+│   │   ├── task.yaml
+│   │   └── derived/
+│   ├── Case2-GHG-BDG/
+│   │   ├── index.html
+│   │   ├── task.yaml
+│   │   └── derived/
+│   │       ├── BGD-1992.tif
+│   │       ├── ...
+│   │       └── timeseries-BGD.json
+│   └── Case2-GHG-Hokkaido/
+│       ├── index.html
+│       ├── task.yaml
+│       └── derived/
 └── docs-internal/
     ├── decisions.md
     ├── findings.md
     └── provenance-design.md
 ```
 
+各Caseは`docs/<Case名>/`というディレクトリにまとめる（2026-09-19、URL設計の決定。`docs-internal/decisions.md`参照）。ページ本体(`index.html`)・task定義の公開コピー(`task.yaml`)・チェックアウトした派生データ(`derived/`)を同じ場所に置き、Caseが増えても`docs/`直下が散らからないようにする。ディレクトリ名は参照元Notebookのファイル名に対応させ（6章）、中のデータファイル名は正しい国コード等を使う。
+
+AOI境界（GeoJSON等）は、まず対象Caseのディレクトリ内に置く。複数のCaseで同じ境界を再利用する段階になったら、共有ディレクトリへ昇格することを検討する。
+
 ディレクトリは必要になった段階で作る。空の構造を形式的に量産しない。
 
 ## 6. 命名上の注意
 
-参照元Notebook名は`Case2-GHG-BDG.ipynb`であるため、対応するHTMLは当面`Case2-GHG-BDG.html`とする。
+参照元Notebook名は`Case2-GHG-BDG.ipynb`であるため、対応する公開ディレクトリは当面`docs/Case2-GHG-BDG/`とする。
 
 ただし、BangladeshのISO 3166-1 alpha-3 codeは通常`BGD`であり、参照元コード内でも境界選択には`BGD`が使われている。`BDG`は参照元ファイル名および一部出力名に残る転置とみられる。
 
 したがって、次を分離する。
 
-- 参照元との対応を示すファイル名: `Case2-GHG-BDG.html`
-- データ、task、UI、metadataで使用する国コード: `BGD`
+- 参照元との対応を示すディレクトリ名: `docs/Case2-GHG-BDG/`
+- データ、task、UI、metadataで使用する国コード: `BGD`（`derived/`内のファイル名等）
 - UI上の名称: `Bangladesh`
 
 将来、参照元側の命名が修正された場合は、互換URLまたはredirectを残した上で`BGD`へ統一することを検討する。
@@ -358,7 +367,7 @@ YAMLは単純な構造に限定する。
 - 複雑なmergeを使わない
 - 文字列、数値、真偽値、配列、単純なobjectのみ
 
-HTMLから`../tasks/...`を取得するとGitHub Pagesの配置や別ホストへのコピーで壊れやすい場合、公開用task YAMLを`docs/tasks/`へコピーまたは生成してよい。正本と公開物の関係をREADMEに記録する。
+HTMLから`../tasks/...`を取得するとGitHub Pagesの配置や別ホストへのコピーで壊れやすいため、公開用task YAMLは各Caseのディレクトリ（`docs/<Case名>/task.yaml`、5章参照）へコピーし、ページは同じディレクトリ内の相対パス（`task.yaml`）でfetchする。正本（`tasks/*.yaml`）と公開物の関係はREADMEに記録する。
 
 ## 10. Case 1: ASIS latest
 
@@ -383,7 +392,7 @@ GeoTIFF / COG Assetを選択
 
 ### 10.3 Italy版
 
-`docs/Case1-ASIS-latest-Italy.html`
+`docs/Case1-ASIS-latest-Italy/`
 
 第一試作として扱う。
 
@@ -401,7 +410,7 @@ GeoTIFF / COG Assetを選択
 
 ### 10.4 Hokkaido版
 
-`docs/Case1-ASIS-latest-Hokkaido.html`
+`docs/Case1-ASIS-latest-Hokkaido/`
 
 Italy版のユーザーストーリーを北海道へ移す。
 
@@ -444,7 +453,7 @@ Italy版とHokkaido版でHTMLロジックを複製しない。可能な限りtas
 
 ### 11.3 Bangladesh版
 
-`docs/Case2-GHG-BDG.html`
+`docs/Case2-GHG-BDG/`
 
 初期段階では次の三層を区別する。
 
@@ -465,7 +474,7 @@ D. 重い場合は発行時処理または限定processing serviceへ移す
 
 ### 11.4 Hokkaido版
 
-`docs/Case2-GHG-Hokkaido.html`
+`docs/Case2-GHG-Hokkaido/`
 
 北海道版では、グローバルな各年Assetから北海道向けの派生成果を発行する構成を採る（2026-09-19確認: 原資産バケットにCORSがないため、これは有力候補ではなく前提。`docs-internal/decisions.md`参照）。
 
@@ -930,10 +939,10 @@ task、Item、Asset、処理、tool version、結果、provenanceが記録され
 最終的に次の4ページが`docs/`で公開される。ただし21章の通り、Case1系（Italy/Hokkaido）はASI-Dバケットのアクセス問題によりFAO CSIとの相談待ちで保留中のため、当面の第一段階はCase2系（Bangladesh/Hokkaido）2ページの公開をもって達成とする。
 
 ```text
-Case1-ASIS-latest-Italy.html        （保留、Phase 3）
-Case1-ASIS-latest-Hokkaido.html     （保留、Phase 4）
-Case2-GHG-BDG.html                  （Phase 1）
-Case2-GHG-Hokkaido.html             （Phase 2）
+Case1-ASIS-latest-Italy/        （保留、Phase 3）
+Case1-ASIS-latest-Hokkaido/     （保留、Phase 4）
+Case2-GHG-BDG/                  （Phase 1）
+Case2-GHG-Hokkaido/             （Phase 2）
 ```
 
 各ページは、少なくとも次を満たす。

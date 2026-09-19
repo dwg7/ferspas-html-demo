@@ -1,6 +1,6 @@
 id: case2-ghg-bdg
 title: "Case 2: Drained cropland area time series (Bangladesh)"
-status: partial
+status: implemented
 notebook:
   source_repo: "https://github.com/un-fao/FERSPAS_demo"
   source_file: "Case2-GHG-BDG.ipynb"
@@ -22,8 +22,8 @@ stac:
 aoi:
   name: "Bangladesh"
   iso3: "BGD"
-  boundary_source: "not yet published"
-  boundary_asset: "docs/data/bangladesh.geojson"
+  boundary_source: "Natural Earth 10m admin-0 countries (Public Domain), feature ISO_A3=BGD, retrieved 2026-09-19"
+  boundary_asset: "docs/Case2-GHG-BDG/aoi-BGD.geojson"
 asset:
   preferred_keys:
     - data
@@ -42,14 +42,18 @@ raster:
     max: 81.183
     checked_item: "FAOSTAT.DRAINED-AREA-CROP.2022.tif"
 aggregation:
-  method: "sum of valid pixels within AOI"
-  status: "not yet computed"
+  method: "sum of valid pixels within AOI, computed by scripts/checkout-Case2-GHG-BDG.py at publication time (not in-browser)"
+  status: "computed for all 31 years, published as docs/Case2-GHG-BDG/derived/timeseries-BGD.json"
   known_caveats:
     - "Source raster has no NoData value defined; 0 is treated as a valid value (no drained cropland), not a mask sentinel."
     - "spatial_resolution_m (927.66m) is stated as a single global value, not per-latitude; whether per-pixel hectare values already account for latitude-dependent pixel area is unconfirmed."
     - "Notebook's stated period (1992-2020 in its opening comment) differs from its actual search datetime range (1992-2022); this task uses the actual range."
+    - "1992-1994 produce an identical sum (338844.51 ha); this appears to be a source data characteristic (repeated/back-cast activity data), not a checkout bug -- unconfirmed with FAOSTAT."
 access:
-  cors_status: "blocked"
-  cors_note: "The source GCS bucket (fao-gismgr-faostat-data) allows anonymous reads but returns no Access-Control-Allow-Origin header, so browser fetch() cannot read it directly. See docs-internal/findings.md (2026-09-19)."
+  cors_status: "blocked at source, bypassed via local checkout"
+  cors_note: "The source GCS bucket (fao-gismgr-faostat-data) allows anonymous reads but returns no Access-Control-Allow-Origin header, so browser fetch() cannot read it directly. See docs-internal/findings.md (2026-09-19). This repository checks out, crops (no reprojection, cutline mask to the AOI polygon only), and republishes each year under docs/Case2-GHG-BDG/derived/ so the browser reads a same-origin, CORS-free copy instead."
+  local_foundation_note: "This case is the minimal concept PoC for the FAO / local-foundation / User three-tier model (docs-internal/decisions.md, 2026-09-19): DRAINED-AREA-CROP is a 'Tier A' source (anonymously readable, CORS missing) that this repository can check out unilaterally, without needing FAO's cooperation."
 provenance_doc: "docs-internal/findings.md"
 decisions_doc: "docs-internal/decisions.md"
+derived_provenance: "docs/Case2-GHG-BDG/derived/provenance-BGD.json"
+checkout_script: "scripts/checkout-Case2-GHG-BDG.py"

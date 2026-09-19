@@ -24,6 +24,14 @@
 - 緯度によるpixel実面積の違い（赤道と高緯度で異なる）が値に織り込み済みかどうかは、この確認だけでは分からない（CLAUDE.md 12章「latitudeによるpixel面積差は値へ織り込み済みか」は未解決のまま）
 - Bangladesh（BBOX `[87,20,93,27]`）の緯度帯（低緯度）は赤道に近く、上記の緯度差問題の影響は他地域より小さいと推定される（未検証の推定）
 
+## 2026-09-19: DRAINED-AREA-CROPのライセンスは`CC-BY-4.0`（再配布・派生物の作成が許される）
+
+`GET /collections/fao-gismgr:FAOSTAT:raster:mapsets:DRAINED-AREA-CROP`で確認。`license: "CC-BY-4.0"`。producerは"FAO-UN-FAOSTAT"（活動データの一次情報源はUNFCCCへの各国報告、FAO-UNFCCC間のMOUに基づき配布）。
+
+CC-BY-4.0は表示（attribution）を条件に再配布・改変・再配布を許すライセンスであり、NC（非商用限定）やSA（継承）のような追加制約が無い。したがって、このcollectionをクロップして再配布する（`docs/derived/`計画）ことは、ライセンス上問題ない。attributionは組織単位（FAO/FAOSTAT、CC-BY-4.0へのリンク）で行い、collection metadataに列挙された個人の連絡先までは転記しない。
+
+他のcollection（yuisekiのindexで確認済みの通り、CC-BY-SA-4.0・CC-BY-NC-SA-4.0等が混在）を再配布対象にする場合は、都度この確認をやり直すこと。
+
 ## 2026-09-19: `docs/Case2-GHG-BDG.html`実装中に発見した2件（Phase 1、STAC discovery実装）
 
 ### 短縮collection idはライブAPIで「エラーなく0件」になる
@@ -247,6 +255,19 @@ hfu個人のグローバル指示にある「複数プロジェクトに横断�
 - Italy版で使う実際のASI-D/DRAINED-AREA-CROPアセットのCORS/認証（Hokkaido相当の検証をItalyの座標・Item IDでも行う）
 - 他の主要バケット（`fao-gismgr-gaez-v5-data`、`fao-gismgr-c3s-data`等、item数の多い順）の匿名読み取り可否とCORS設定。全バケット共通のポリシーか、バケットごとに異なるのか
 - FAOに対して、匿名読み取り・CORS設定を依頼する余地があるか（本リポジトリの範囲外の可能性が高いが、選択肢として記録だけしておく）
-- **ASI-D/MVHI-Dバケット（`fao-gismgr-asis-data`）が、FAO内部アカウント限定なのか、Googleアカウールさえあれば読める（`allAuthenticatedUsers`）のかは未検証。**このサンドボックスには`gcloud`/`gsutil`が無く、hfuさん個人のGoogle認証も持っていないため、Claude自身では検証できない。hfuさん自身の端末で`gcloud auth login`済みの状態から読み取りを試す、またはhfuさん自身のブラウザ（ログイン済み）で`https://storage.cloud.google.com/fao-gismgr-asis-data/...`を開く、のいずれかで確認可能
+- **ASI-D/MVHI-Dバケット（`fao-gismgr-asis-data`）が、FAO内部アカウント限定なのか、Googleアカウントさえあれば読める（`allAuthenticatedUsers`）のかは未検証。**このサンドボックスには`gcloud`/`gsutil`が無く、hfuさん個人のGoogle認証も持っていないため、Claude自身では検証できない。hfuさん自身の端末で`gcloud auth login`済みの状態から読み取りを試す、またはhfuさん自身のブラウザ（ログイン済み）で`https://storage.cloud.google.com/fao-gismgr-asis-data/...`を開く、のいずれかで確認可能
 - `dwg7/ferspas57`とこのプロジェクトの関係
 - `/home/stars/data`への書き込み方法（gatekeeper経由PR／既存の信頼済みアクセスの有無）
+
+## 2026-09-19: Bangladesh 31年分のチェックアウトを実施（local foundationモデルの最小PoC完成）
+
+`scripts/checkout-Case2-GHG-BDG.py`で、STAC検索→実Bangladesh国境（Natural Earth 10m admin-0、Public Domain）でのcutlineクロップ（投影変換なし）→合計値計算、を31年分すべて実行した。
+
+- 出力: `docs/Case2-GHG-BDG/derived/BGD-<year>.tif`（COG、31ファイル合計約1.8MB）、`timeseries-BGD.json`、`provenance-BGD.json`
+- 合計値は323,520〜339,783 ha/年の範囲。1992〜1994年は完全に同一の値（338844.51 ha）——原資産側の特性とみられる（活動量データの後方補完等）が未確認
+- 各ファイルのvalid pixel数は174,739で全年一致（同一グリッド、CLAUDE.md 12章の懸念は解消）
+- ページ（`docs/Case2-GHG-BDG/index.html`）から`geotiff.js`でこの派生COGを直接読み、canvasへ着色表示、時系列はSVGで描画。実機で動作確認済み（Bangladeshの国土形状が正しく表示され、北西部に排水耕地が集中している様子が見える）
+
+### ローカル検証時の落とし穴: Python `http.server`は同時リクエストで取りこぼす
+
+`geotiff.js`はCOG読み取りのために複数のHTTPリクエストを発行する。Pythonの`python3 -m http.server`（シングルスレッド）でテストすると、年を切り替えるたびに`Request failed`が断続的に発生した。Node製の`http-server`（並行処理対応）に切り替えると同じ操作が安定して成功した。**これはローカル検証環境固有の問題であり、GitHub Pages等の本番CDNでは発生しないと考えられる**が、今後同種のページをローカルでテストする際は`python3 -m http.server`ではなく並行処理対応のサーバーを使うこと。

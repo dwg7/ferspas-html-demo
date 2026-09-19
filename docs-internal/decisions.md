@@ -127,3 +127,76 @@ hfuさんから「FAO内部の別事例が使っている`token="google_default"
 ### ステータス
 
 hfuさんの確認待ち（2026-09-19）。結果が出るまで、Case 1は「保留」のまま据え置く。
+
+## 2026-09-19: 派生成果は再投影しない。表示側の再投影機能に任せる
+
+### 背景
+
+DRAINED-AREA-CROPの原資産はEPSG:4326（地理座標系、投影なし）。派生成果を作る際、Web Mercatorへ投影してしまうか、WGS84のまま持つか、という選択があった。
+
+リモートセンシングの原則として「投影変換のたびに値が劣化する」がある。WGS84→Web Mercatorは経度方向（X）が線形写像で劣化が少ないが、緯度方向（Y）は非線形写像で実際に再サンプリングが発生する。またWeb Mercatorは緯度±85.05°までしか定義できないが、原資産は±89.0083°まで値を持つため、全球で変換すると極域データを失う。
+
+### 決定
+
+派生成果（`docs/<Case>/derived/`）は**投影しない**。原資産と同じCRS（EPSG:4326）のままAOIでクロップするだけにする（同一CRS内のクロップは幾何学的な切り出しであり、補間を伴わない）。表示時の再投影は、その場でWebGL等により行うビューア（CLAUDE.md 15章の候補、Source Cooperative系`cog-viewer`等）に任せる。これにより、保存データは常にソースと1ビットも変わらない値を保ち、「表示のための劣化」はレンダリング時に使い捨てで発生するだけで、成果物として保存されない。
+
+集計（`band.sum()`相当）は、この投影しないコピーに対して直接行う。
+
+### ステータス
+
+採用（2026-09-19）。
+
+## 2026-09-19: FAO / local foundation / User という3層モデルの検証
+
+### 背景
+
+hfuさんから、次のような概念モデルの提示があった（登場する固有の組織名はこの検討限りの理解用の例えであり、リポジトリには一般化した形でのみ残す）。
+
+```
+FAO（発行元） → local foundation（area of responsibilityごとにクラウドネイティブ形式でチェックアウトし、
+                CORSを含め完全にケアして再配布する主体） → User（ブラウザのみで消費）
+```
+
+local foundationはFAOを置き換えるものではなく、FAOが将来この機能を自ら吸収する自由を持つ、という前提つき。
+
+### 検証結果
+
+- FAO層のアセットアクセスは一様ではなく、**Tier A（匿名で読めるがCORSが無いだけ。例: DRAINED-AREA-CROP）**と**Tier B（匿名読み取り自体が拒否される。例: ASI-D/MVHI-D）**に分かれる。Tier Aはlocal foundationが単独でチェックアウトできるが、Tier BはFAOとの協力（資格情報の提供等）が無いと成立しない。このモデルは「FAOと無関係に成立する」わけではなく、Tier Bでは必ずFAOとの関係を要する
+- local foundation層の要件（クラウドネイティブなままチェックアウト、CORSの完全ケア、再投影しない、ライセンス遵守、更新検知）は、`docs/Case2-GHG-BDG/`で実際に組み立てているパターンと一致する。DRAINED-AREA-CROPは`CC-BY-4.0`で再配布可能なことも確認済み（`findings.md`）
+- YuisekiのGeoParquet技術は、モデルの成立要件ではなく、複雑・横断・大量クエリが必要になった場合の強化オプションという位置づけ
+- 「FAOが吸収する自由を持つ」という前提は、CLAUDE.md 25章のSustainability評価軸と整合する。local foundationは恒久的な代替ではなく、FAO自身の改善でいつでも不要になってよい、捨てられる前提の橋渡しとして設計する
+
+### 決定
+
+`docs/Case2-GHG-BDG/`（Tier Aの実例）を、このモデルの最小concept PoCと位置づけて完成させる。北海道／北方圏という実際のarea of responsibility、YuisekiのGeoParquet層、Tier B（ASI-D）問題の解決、複数Case/AOIへの一般化は、いずれもこのPoCの必須要件ではなく後回しにする。
+
+### ステータス
+
+採用（2026-09-19）。**PoC完成（2026-09-19）**: Bangladesh 31年分のチェックアウト・クロップ・集計・ページへの接続まで実装し、実機で動作確認済み（`findings.md`）。Tier Aについてはモデルが3層すべて実証された。次のarea of responsibility（北海道／北方圏、空間ID区画）への適用、Tier B（ASI-D）の扱いは、いずれも別トラックとして今後判断する。
+
+## 2026-09-19: 公開ページはCaseごとにディレクトリを切る（`docs/<Case名>/`）
+
+### 背景
+
+今後、複数のCase・複数の試行コンテンツを`docs/`へ追加していく。フラットに`docs/Case2-GHG-BDG.html`のようなファイルを並べると、派生データ（年別ファイル等）の置き場と合わせて散らかる懸念があった。
+
+### 決定
+
+各Caseを`docs/<Case名>/`というディレクトリにまとめる。
+
+```
+docs/Case2-GHG-BDG/
+  index.html   … ページ本体
+  task.yaml    … task定義の公開コピー（正本は tasks/Case2-GHG-BDG.yaml）
+  derived/     … チェックアウトした派生データ
+```
+
+- ディレクトリ名は参照元Notebookのファイル名に対応させる（6章の既存規則、traceability優先）。中のデータファイル名は正しい国コード等（`BGD`）を使う
+- GitHub Pagesは`docs/<Case名>/`への訪問を自動的に`index.html`へ解決するため、URLは`.../Case2-GHG-BDG/`という綺麗な形になる
+- AOI境界等の共有アセットは、まず対象Caseのディレクトリ内に置く。複数Caseで再利用する段階になったら共有ディレクトリへ昇格する
+
+実際に`docs/Case2-GHG-BDG.html`→`docs/Case2-GHG-BDG/index.html`、`docs/tasks/Case2-GHG-BDG.yaml`→`docs/Case2-GHG-BDG/task.yaml`への移行を行い、ローカルサーバーで動作確認済み（31件のSTAC discoveryが引き続き成功）。CLAUDE.md 5章・8章・6章の該当箇所も更新した。
+
+### ステータス
+
+採用・実施済み（2026-09-19）。

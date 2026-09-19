@@ -1,0 +1,131 @@
+{
+  "aoi": "BGD",
+  "unit": "ha",
+  "variable": "drained_area_crop",
+  "series": [
+    {
+      "year": 1992,
+      "drained_area_crop_ha": 338844.51
+    },
+    {
+      "year": 1993,
+      "drained_area_crop_ha": 338844.51
+    },
+    {
+      "year": 1994,
+      "drained_area_crop_ha": 338844.51
+    },
+    {
+      "year": 1995,
+      "drained_area_crop_ha": 339770.79
+    },
+    {
+      "year": 1996,
+      "drained_area_crop_ha": 339783.31
+    },
+    {
+      "year": 1997,
+      "drained_area_crop_ha": 339642.11
+    },
+    {
+      "year": 1998,
+      "drained_area_crop_ha": 338076.27
+    },
+    {
+      "year": 1999,
+      "drained_area_crop_ha": 335761.0
+    },
+    {
+      "year": 2000,
+      "drained_area_crop_ha": 333820.71
+    },
+    {
+      "year": 2001,
+      "drained_area_crop_ha": 332752.04
+    },
+    {
+      "year": 2002,
+      "drained_area_crop_ha": 331912.91
+    },
+    {
+      "year": 2003,
+      "drained_area_crop_ha": 331784.04
+    },
+    {
+      "year": 2004,
+      "drained_area_crop_ha": 330117.73
+    },
+    {
+      "year": 2005,
+      "drained_area_crop_ha": 330154.47
+    },
+    {
+      "year": 2006,
+      "drained_area_crop_ha": 330306.24
+    },
+    {
+      "year": 2007,
+      "drained_area_crop_ha": 331040.08
+    },
+    {
+      "year": 2008,
+      "drained_area_crop_ha": 330999.94
+    },
+    {
+      "year": 2009,
+      "drained_area_crop_ha": 331074.15
+    },
+    {
+      "year": 2010,
+      "drained_area_crop_ha": 331358.66
+    },
+    {
+      "year": 2011,
+      "drained_area_crop_ha": 329391.33
+    },
+    {
+      "year": 2012,
+      "drained_area_crop_ha": 329264.01
+    },
+    {
+      "year": 2013,
+      "drained_area_crop_ha": 328576.38
+    },
+    {
+      "year": 2014,
+      "drained_area_crop_ha": 327488.07
+    },
+    {
+      "year": 2015,
+      "drained_area_crop_ha": 327433.96
+    },
+    {
+      "year": 2016,
+      "drained_area_crop_ha": 327786.26
+    },
+    {
+      "year": 2017,
+      "drained_area_crop_ha": 327958.67
+    },
+    {
+      "year": 2018,
+      "drained_area_crop_ha": 327838.95
+    },
+    {
+      "year": 2019,
+      "drained_area_crop_ha": 329548.77
+    },
+    {
+      "year": 2020,
+      "drained_area_crop_ha": 329436.9
+    },
+    {
+      "year": 2021,
+      "drained_area_crop_ha": 328994.85
+    },
+    {
+      "year": 2022,
+      "drained_area_crop_ha": 323520.89
+    }
+  ]
+}

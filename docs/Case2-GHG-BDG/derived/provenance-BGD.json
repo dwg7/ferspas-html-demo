@@ -1,0 +1,1063 @@
+{
+  "generated_at": "2026-09-19T01:31:58.327609+00:00",
+  "generator": "scripts/checkout-Case2-GHG-BDG.py",
+  "stac_api": "https://data.apps.fao.org/geospatial/search/stac",
+  "collection": "fao-gismgr:FAOSTAT:raster:mapsets:DRAINED-AREA-CROP",
+  "notebook_reference": "https://github.com/un-fao/FERSPAS_demo/blob/main/Case2-GHG-BDG.ipynb",
+  "entries": [
+    {
+      "year": "1992",
+      "source": {
+        "collection": "fao-gismgr:FAOSTAT:raster:mapsets:DRAINED-AREA-CROP",
+        "item_id": "fao-gismgr:FAOSTAT:raster:mapsets:DRAINED-AREA-CROP:items:FAOSTAT-DRAINED-AREA-CROP-1992",
+        "gismgr_item_id": "fao-gismgr/FAOSTAT/mapsets/DRAINED-AREA-CROP/FAOSTAT.DRAINED-AREA-CROP.1992",
+        "asset_href": "https://storage.googleapis.com/fao-gismgr-faostat-data/DATA/FAOSTAT/MAPSET/DRAINED-AREA-CROP/FAOSTAT.DRAINED-AREA-CROP.1992.tif",
+        "asset_gs_href": "gs://fao-gismgr-faostat-data/DATA/FAOSTAT/MAPSET/DRAINED-AREA-CROP/FAOSTAT.DRAINED-AREA-CROP.1992.tif",
+        "license": "CC-BY-4.0",
+        "source_generation": "1750848625881416",
+        "source_hash_md5_or_crc32c": "crc32c=jU2+Jw=="
+      },
+      "derivation": {
+        "aoi_name": "Bangladesh",
+        "aoi_iso3": "BGD",
+        "aoi_geometry_source": "Natural Earth 10m admin-0 countries (public domain), ISO_A3=BGD",
+        "source_crs": "EPSG:4326",
+        "output_crs": "EPSG:4326",
+        "operation": "cutline-mask-and-crop (no reprojection, no resampling)",
+        "resampling": "none",
+        "nodata_output": -9999,
+        "nodata_source": null,
+        "tool": "GDAL 3.13.1 (gdal.Warp)",
+        "generated_at": "2026-09-19T01:23:38.325383+00:00"
+      },
+      "output": {
+        "path": "derived/BGD-1992.tif",
+        "width": 554,
+        "height": 705,
+        "valid_pixel_count": 174739,
+        "sum_ha": 338844.5148791075,
+        "sha256": "06e3ed811e257dff77e53126f8113af9c6b31ad5062bf89647797184077481ec"
+      }
+    },
+    {
+      "year": "1993",
+      "source": {
+        "collection": "fao-gismgr:FAOSTAT:raster:mapsets:DRAINED-AREA-CROP",
+        "item_id": "fao-gismgr:FAOSTAT:raster:mapsets:DRAINED-AREA-CROP:items:FAOSTAT-DRAINED-AREA-CROP-1993",
+        "gismgr_item_id": "fao-gismgr/FAOSTAT/mapsets/DRAINED-AREA-CROP/FAOSTAT.DRAINED-AREA-CROP.1993",
+        "asset_href": "https://storage.googleapis.com/fao-gismgr-faostat-data/DATA/FAOSTAT/MAPSET/DRAINED-AREA-CROP/FAOSTAT.DRAINED-AREA-CROP.1993.tif",
+        "asset_gs_href": "gs://fao-gismgr-faostat-data/DATA/FAOSTAT/MAPSET/DRAINED-AREA-CROP/FAOSTAT.DRAINED-AREA-CROP.1993.tif",
+        "license": "CC-BY-4.0",
+        "source_generation": "1750848627777141",
+        "source_hash_md5_or_crc32c": "crc32c=GHvNkQ=="
+      },
+      "derivation": {
+        "aoi_name": "Bangladesh",
+        "aoi_iso3": "BGD",
+        "aoi_geometry_source": "Natural Earth 10m admin-0 countries (public domain), ISO_A3=BGD",
+        "source_crs": "EPSG:4326",
+        "output_crs": "EPSG:4326",
+        "operation": "cutline-mask-and-crop (no reprojection, no resampling)",
+        "resampling": "none",
+        "nodata_output": -9999,
+        "nodata_source": null,
+        "tool": "GDAL 3.13.1 (gdal.Warp)",
+        "generated_at": "2026-09-19T01:24:14.365623+00:00"
+      },
+      "output": {
+        "path": "derived/BGD-1993.tif",
+        "width": 554,
+        "height": 705,
+        "valid_pixel_count": 174739,
+        "sum_ha": 338844.5148791075,
+        "sha256": "06e3ed811e257dff77e53126f8113af9c6b31ad5062bf89647797184077481ec"
+      }
+    },
+    {
+      "year": "1994",
+      "source": {
+        "collection": "fao-gismgr:FAOSTAT:raster:mapsets:DRAINED-AREA-CROP",
+        "item_id": "fao-gismgr:FAOSTAT:raster:mapsets:DRAINED-AREA-CROP:items:FAOSTAT-DRAINED-AREA-CROP-1994",
+        "gismgr_item_id": "fao-gismgr/FAOSTAT/mapsets/DRAINED-AREA-CROP/FAOSTAT.DRAINED-AREA-CROP.1994",
+        "asset_href": "https://storage.googleapis.com/fao-gismgr-faostat-data/DATA/FAOSTAT/MAPSET/DRAINED-AREA-CROP/FAOSTAT.DRAINED-AREA-CROP.1994.tif",
+        "asset_gs_href": "gs://fao-gismgr-faostat-data/DATA/FAOSTAT/MAPSET/DRAINED-AREA-CROP/FAOSTAT.DRAINED-AREA-CROP.1994.tif",
+        "license": "CC-BY-4.0",
+        "source_generation": "1750848626248609",
+        "source_hash_md5_or_crc32c": "crc32c=x7Cu1w=="
+      },
+      "derivation": {
+        "aoi_name": "Bangladesh",
+        "aoi_iso3": "BGD",
+        "aoi_geometry_source": "Natural Earth 10m admin-0 countries (public domain), ISO_A3=BGD",
+        "source_crs": "EPSG:4326",
+        "output_crs": "EPSG:4326",
+        "operation": "cutline-mask-and-crop (no reprojection, no resampling)",
+        "resampling": "none",
+        "nodata_output": -9999,
+        "nodata_source": null,
+        "tool": "GDAL 3.13.1 (gdal.Warp)",
+        "generated_at": "2026-09-19T01:24:30.645272+00:00"
+      },
+      "output": {
+        "path": "derived/BGD-1994.tif",
+        "width": 554,
+        "height": 705,
+        "valid_pixel_count": 174739,
+        "sum_ha": 338844.5148791075,
+        "sha256": "06e3ed811e257dff77e53126f8113af9c6b31ad5062bf89647797184077481ec"
+      }
+    },
+    {
+      "year": "1995",
+      "source": {
+        "collection": "fao-gismgr:FAOSTAT:raster:mapsets:DRAINED-AREA-CROP",
+        "item_id": "fao-gismgr:FAOSTAT:raster:mapsets:DRAINED-AREA-CROP:items:FAOSTAT-DRAINED-AREA-CROP-1995",
+        "gismgr_item_id": "fao-gismgr/FAOSTAT/mapsets/DRAINED-AREA-CROP/FAOSTAT.DRAINED-AREA-CROP.1995",
+        "asset_href": "https://storage.googleapis.com/fao-gismgr-faostat-data/DATA/FAOSTAT/MAPSET/DRAINED-AREA-CROP/FAOSTAT.DRAINED-AREA-CROP.1995.tif",
+        "asset_gs_href": "gs://fao-gismgr-faostat-data/DATA/FAOSTAT/MAPSET/DRAINED-AREA-CROP/FAOSTAT.DRAINED-AREA-CROP.1995.tif",
+        "license": "CC-BY-4.0",
+        "source_generation": "1750848625223999",
+        "source_hash_md5_or_crc32c": "crc32c=lPsBIg=="
+      },
+      "derivation": {
+        "aoi_name": "Bangladesh",
+        "aoi_iso3": "BGD",
+        "aoi_geometry_source": "Natural Earth 10m admin-0 countries (public domain), ISO_A3=BGD",
+        "source_crs": "EPSG:4326",
+        "output_crs": "EPSG:4326",
+        "operation": "cutline-mask-and-crop (no reprojection, no resampling)",
+        "resampling": "none",
+        "nodata_output": -9999,
+        "nodata_source": null,
+        "tool": "GDAL 3.13.1 (gdal.Warp)",
+        "generated_at": "2026-09-19T01:24:47.082066+00:00"
+      },
+      "output": {
+        "path": "derived/BGD-1995.tif",
+        "width": 554,
+        "height": 705,
+        "valid_pixel_count": 174739,
+        "sum_ha": 339770.78904390335,
+        "sha256": "410f87b848d4198f49f7efc27265e8687995c6d84d34af34177b5d522f1a7124"
+      }
+    },
+    {
+      "year": "1996",
+      "source": {
+        "collection": "fao-gismgr:FAOSTAT:raster:mapsets:DRAINED-AREA-CROP",
+        "item_id": "fao-gismgr:FAOSTAT:raster:mapsets:DRAINED-AREA-CROP:items:FAOSTAT-DRAINED-AREA-CROP-1996",
+        "gismgr_item_id": "fao-gismgr/FAOSTAT/mapsets/DRAINED-AREA-CROP/FAOSTAT.DRAINED-AREA-CROP.1996",
+        "asset_href": "https://storage.googleapis.com/fao-gismgr-faostat-data/DATA/FAOSTAT/MAPSET/DRAINED-AREA-CROP/FAOSTAT.DRAINED-AREA-CROP.1996.tif",
+        "asset_gs_href": "gs://fao-gismgr-faostat-data/DATA/FAOSTAT/MAPSET/DRAINED-AREA-CROP/FAOSTAT.DRAINED-AREA-CROP.1996.tif",
+        "license": "CC-BY-4.0",
+        "source_generation": "1750848627809232",
+        "source_hash_md5_or_crc32c": "crc32c=Xp5qtQ=="
+      },
+      "derivation": {
+        "aoi_name": "Bangladesh",
+        "aoi_iso3": "BGD",
+        "aoi_geometry_source": "Natural Earth 10m admin-0 countries (public domain), ISO_A3=BGD",
+        "source_crs": "EPSG:4326",
+        "output_crs": "EPSG:4326",
+        "operation": "cutline-mask-and-crop (no reprojection, no resampling)",
+        "resampling": "none",
+        "nodata_output": -9999,
+        "nodata_source": null,
+        "tool": "GDAL 3.13.1 (gdal.Warp)",
+        "generated_at": "2026-09-19T01:25:03.091193+00:00"
+      },
+      "output": {
+        "path": "derived/BGD-1996.tif",
+        "width": 554,
+        "height": 705,
+        "valid_pixel_count": 174739,
+        "sum_ha": 339783.3114349842,
+        "sha256": "1764753988415b7bddfd181d7cf0cacdbba762bde300624b1d9d15d6083f1103"
+      }
+    },
+    {
+      "year": "1997",
+      "source": {
+        "collection": "fao-gismgr:FAOSTAT:raster:mapsets:DRAINED-AREA-CROP",
+        "item_id": "fao-gismgr:FAOSTAT:raster:mapsets:DRAINED-AREA-CROP:items:FAOSTAT-DRAINED-AREA-CROP-1997",
+        "gismgr_item_id": "fao-gismgr/FAOSTAT/mapsets/DRAINED-AREA-CROP/FAOSTAT.DRAINED-AREA-CROP.1997",
+        "asset_href": "https://storage.googleapis.com/fao-gismgr-faostat-data/DATA/FAOSTAT/MAPSET/DRAINED-AREA-CROP/FAOSTAT.DRAINED-AREA-CROP.1997.tif",
+        "asset_gs_href": "gs://fao-gismgr-faostat-data/DATA/FAOSTAT/MAPSET/DRAINED-AREA-CROP/FAOSTAT.DRAINED-AREA-CROP.1997.tif",
+        "license": "CC-BY-4.0",
+        "source_generation": "1750848629550305",
+        "source_hash_md5_or_crc32c": "crc32c=UNUFWg=="
+      },
+      "derivation": {
+        "aoi_name": "Bangladesh",
+        "aoi_iso3": "BGD",
+        "aoi_geometry_source": "Natural Earth 10m admin-0 countries (public domain), ISO_A3=BGD",
+        "source_crs": "EPSG:4326",
+        "output_crs": "EPSG:4326",
+        "operation": "cutline-mask-and-crop (no reprojection, no resampling)",
+        "resampling": "none",
+        "nodata_output": -9999,
+        "nodata_source": null,
+        "tool": "GDAL 3.13.1 (gdal.Warp)",
+        "generated_at": "2026-09-19T01:25:19.440501+00:00"
+      },
+      "output": {
+        "path": "derived/BGD-1997.tif",
+        "width": 554,
+        "height": 705,
+        "valid_pixel_count": 174739,
+        "sum_ha": 339642.10893821716,
+        "sha256": "e42776eb0260155a7a03681e98f4657ad744ccdd2f1790d3d93c8215f63ae255"
+      }
+    },
+    {
+      "year": "1998",
+      "source": {
+        "collection": "fao-gismgr:FAOSTAT:raster:mapsets:DRAINED-AREA-CROP",
+        "item_id": "fao-gismgr:FAOSTAT:raster:mapsets:DRAINED-AREA-CROP:items:FAOSTAT-DRAINED-AREA-CROP-1998",
+        "gismgr_item_id": "fao-gismgr/FAOSTAT/mapsets/DRAINED-AREA-CROP/FAOSTAT.DRAINED-AREA-CROP.1998",
+        "asset_href": "https://storage.googleapis.com/fao-gismgr-faostat-data/DATA/FAOSTAT/MAPSET/DRAINED-AREA-CROP/FAOSTAT.DRAINED-AREA-CROP.1998.tif",
+        "asset_gs_href": "gs://fao-gismgr-faostat-data/DATA/FAOSTAT/MAPSET/DRAINED-AREA-CROP/FAOSTAT.DRAINED-AREA-CROP.1998.tif",
+        "license": "CC-BY-4.0",
+        "source_generation": "1750848631373272",
+        "source_hash_md5_or_crc32c": "crc32c=mzeRKQ=="
+      },
+      "derivation": {
+        "aoi_name": "Bangladesh",
+        "aoi_iso3": "BGD",
+        "aoi_geometry_source": "Natural Earth 10m admin-0 countries (public domain), ISO_A3=BGD",
+        "source_crs": "EPSG:4326",
+        "output_crs": "EPSG:4326",
+        "operation": "cutline-mask-and-crop (no reprojection, no resampling)",
+        "resampling": "none",
+        "nodata_output": -9999,
+        "nodata_source": null,
+        "tool": "GDAL 3.13.1 (gdal.Warp)",
+        "generated_at": "2026-09-19T01:25:35.151277+00:00"
+      },
+      "output": {
+        "path": "derived/BGD-1998.tif",
+        "width": 554,
+        "height": 705,
+        "valid_pixel_count": 174739,
+        "sum_ha": 338076.2748847008,
+        "sha256": "cfeafea612587b04ffdd7f6dbd78ba19ed7bdd61e9f98adc5a8b2aaefa1b4195"
+      }
+    },
+    {
+      "year": "1999",
+      "source": {
+        "collection": "fao-gismgr:FAOSTAT:raster:mapsets:DRAINED-AREA-CROP",
+        "item_id": "fao-gismgr:FAOSTAT:raster:mapsets:DRAINED-AREA-CROP:items:FAOSTAT-DRAINED-AREA-CROP-1999",
+        "gismgr_item_id": "fao-gismgr/FAOSTAT/mapsets/DRAINED-AREA-CROP/FAOSTAT.DRAINED-AREA-CROP.1999",
+        "asset_href": "https://storage.googleapis.com/fao-gismgr-faostat-data/DATA/FAOSTAT/MAPSET/DRAINED-AREA-CROP/FAOSTAT.DRAINED-AREA-CROP.1999.tif",
+        "asset_gs_href": "gs://fao-gismgr-faostat-data/DATA/FAOSTAT/MAPSET/DRAINED-AREA-CROP/FAOSTAT.DRAINED-AREA-CROP.1999.tif",
+        "license": "CC-BY-4.0",
+        "source_generation": "1750848634216693",
+        "source_hash_md5_or_crc32c": "crc32c=Ic++ug=="
+      },
+      "derivation": {
+        "aoi_name": "Bangladesh",
+        "aoi_iso3": "BGD",
+        "aoi_geometry_source": "Natural Earth 10m admin-0 countries (public domain), ISO_A3=BGD",
+        "source_crs": "EPSG:4326",
+        "output_crs": "EPSG:4326",
+        "operation": "cutline-mask-and-crop (no reprojection, no resampling)",
+        "resampling": "none",
+        "nodata_output": -9999,
+        "nodata_source": null,
+        "tool": "GDAL 3.13.1 (gdal.Warp)",
+        "generated_at": "2026-09-19T01:25:51.210141+00:00"
+      },
+      "output": {
+        "path": "derived/BGD-1999.tif",
+        "width": 554,
+        "height": 705,
+        "valid_pixel_count": 174739,
+        "sum_ha": 335760.9954254627,
+        "sha256": "e54d7078742f6e12280b3c4fb6365da7f810088bd081fa2036c3e1f4014d556d"
+      }
+    },
+    {
+      "year": "2000",
+      "source": {
+        "collection": "fao-gismgr:FAOSTAT:raster:mapsets:DRAINED-AREA-CROP",
+        "item_id": "fao-gismgr:FAOSTAT:raster:mapsets:DRAINED-AREA-CROP:items:FAOSTAT-DRAINED-AREA-CROP-2000",
+        "gismgr_item_id": "fao-gismgr/FAOSTAT/mapsets/DRAINED-AREA-CROP/FAOSTAT.DRAINED-AREA-CROP.2000",
+        "asset_href": "https://storage.googleapis.com/fao-gismgr-faostat-data/DATA/FAOSTAT/MAPSET/DRAINED-AREA-CROP/FAOSTAT.DRAINED-AREA-CROP.2000.tif",
+        "asset_gs_href": "gs://fao-gismgr-faostat-data/DATA/FAOSTAT/MAPSET/DRAINED-AREA-CROP/FAOSTAT.DRAINED-AREA-CROP.2000.tif",
+        "license": "CC-BY-4.0",
+        "source_generation": "1750848632996039",
+        "source_hash_md5_or_crc32c": "crc32c=/zg1EQ=="
+      },
+      "derivation": {
+        "aoi_name": "Bangladesh",
+        "aoi_iso3": "BGD",
+        "aoi_geometry_source": "Natural Earth 10m admin-0 countries (public domain), ISO_A3=BGD",
+        "source_crs": "EPSG:4326",
+        "output_crs": "EPSG:4326",
+        "operation": "cutline-mask-and-crop (no reprojection, no resampling)",
+        "resampling": "none",
+        "nodata_output": -9999,
+        "nodata_source": null,
+        "tool": "GDAL 3.13.1 (gdal.Warp)",
+        "generated_at": "2026-09-19T01:26:07.391730+00:00"
+      },
+      "output": {
+        "path": "derived/BGD-2000.tif",
+        "width": 554,
+        "height": 705,
+        "valid_pixel_count": 174739,
+        "sum_ha": 333820.712816,
+        "sha256": "4e2f439af1fd0e307ed20d0a8b9ddb3aa09df190995ab61cd049de018fed9cbe"
+      }
+    },
+    {
+      "year": "2001",
+      "source": {
+        "collection": "fao-gismgr:FAOSTAT:raster:mapsets:DRAINED-AREA-CROP",
+        "item_id": "fao-gismgr:FAOSTAT:raster:mapsets:DRAINED-AREA-CROP:items:FAOSTAT-DRAINED-AREA-CROP-2001",
+        "gismgr_item_id": "fao-gismgr/FAOSTAT/mapsets/DRAINED-AREA-CROP/FAOSTAT.DRAINED-AREA-CROP.2001",
+        "asset_href": "https://storage.googleapis.com/fao-gismgr-faostat-data/DATA/FAOSTAT/MAPSET/DRAINED-AREA-CROP/FAOSTAT.DRAINED-AREA-CROP.2001.tif",
+        "asset_gs_href": "gs://fao-gismgr-faostat-data/DATA/FAOSTAT/MAPSET/DRAINED-AREA-CROP/FAOSTAT.DRAINED-AREA-CROP.2001.tif",
+        "license": "CC-BY-4.0",
+        "source_generation": "1750848640057673",
+        "source_hash_md5_or_crc32c": "crc32c=wfpFkw=="
+      },
+      "derivation": {
+        "aoi_name": "Bangladesh",
+        "aoi_iso3": "BGD",
+        "aoi_geometry_source": "Natural Earth 10m admin-0 countries (public domain), ISO_A3=BGD",
+        "source_crs": "EPSG:4326",
+        "output_crs": "EPSG:4326",
+        "operation": "cutline-mask-and-crop (no reprojection, no resampling)",
+        "resampling": "none",
+        "nodata_output": -9999,
+        "nodata_source": null,
+        "tool": "GDAL 3.13.1 (gdal.Warp)",
+        "generated_at": "2026-09-19T01:26:23.612136+00:00"
+      },
+      "output": {
+        "path": "derived/BGD-2001.tif",
+        "width": 554,
+        "height": 705,
+        "valid_pixel_count": 174739,
+        "sum_ha": 332752.0418794155,
+        "sha256": "1f66e024137a06bfb6d7decc676ad652e9253a9bf2e69a417e064e31594ae837"
+      }
+    },
+    {
+      "year": "2002",
+      "source": {
+        "collection": "fao-gismgr:FAOSTAT:raster:mapsets:DRAINED-AREA-CROP",
+        "item_id": "fao-gismgr:FAOSTAT:raster:mapsets:DRAINED-AREA-CROP:items:FAOSTAT-DRAINED-AREA-CROP-2002",
+        "gismgr_item_id": "fao-gismgr/FAOSTAT/mapsets/DRAINED-AREA-CROP/FAOSTAT.DRAINED-AREA-CROP.2002",
+        "asset_href": "https://storage.googleapis.com/fao-gismgr-faostat-data/DATA/FAOSTAT/MAPSET/DRAINED-AREA-CROP/FAOSTAT.DRAINED-AREA-CROP.2002.tif",
+        "asset_gs_href": "gs://fao-gismgr-faostat-data/DATA/FAOSTAT/MAPSET/DRAINED-AREA-CROP/FAOSTAT.DRAINED-AREA-CROP.2002.tif",
+        "license": "CC-BY-4.0",
+        "source_generation": "1750848638152265",
+        "source_hash_md5_or_crc32c": "crc32c=viBRig=="
+      },
+      "derivation": {
+        "aoi_name": "Bangladesh",
+        "aoi_iso3": "BGD",
+        "aoi_geometry_source": "Natural Earth 10m admin-0 countries (public domain), ISO_A3=BGD",
+        "source_crs": "EPSG:4326",
+        "output_crs": "EPSG:4326",
+        "operation": "cutline-mask-and-crop (no reprojection, no resampling)",
+        "resampling": "none",
+        "nodata_output": -9999,
+        "nodata_source": null,
+        "tool": "GDAL 3.13.1 (gdal.Warp)",
+        "generated_at": "2026-09-19T01:26:39.190557+00:00"
+      },
+      "output": {
+        "path": "derived/BGD-2002.tif",
+        "width": 554,
+        "height": 705,
+        "valid_pixel_count": 174739,
+        "sum_ha": 331912.90920472145,
+        "sha256": "30950b675960180162c69d728bf09586c5840a06ae611d0ed8d038cb68080b15"
+      }
+    },
+    {
+      "year": "2003",
+      "source": {
+        "collection": "fao-gismgr:FAOSTAT:raster:mapsets:DRAINED-AREA-CROP",
+        "item_id": "fao-gismgr:FAOSTAT:raster:mapsets:DRAINED-AREA-CROP:items:FAOSTAT-DRAINED-AREA-CROP-2003",
+        "gismgr_item_id": "fao-gismgr/FAOSTAT/mapsets/DRAINED-AREA-CROP/FAOSTAT.DRAINED-AREA-CROP.2003",
+        "asset_href": "https://storage.googleapis.com/fao-gismgr-faostat-data/DATA/FAOSTAT/MAPSET/DRAINED-AREA-CROP/FAOSTAT.DRAINED-AREA-CROP.2003.tif",
+        "asset_gs_href": "gs://fao-gismgr-faostat-data/DATA/FAOSTAT/MAPSET/DRAINED-AREA-CROP/FAOSTAT.DRAINED-AREA-CROP.2003.tif",
+        "license": "CC-BY-4.0",
+        "source_generation": "1750848640681937",
+        "source_hash_md5_or_crc32c": "crc32c=3ff1gg=="
+      },
+      "derivation": {
+        "aoi_name": "Bangladesh",
+        "aoi_iso3": "BGD",
+        "aoi_geometry_source": "Natural Earth 10m admin-0 countries (public domain), ISO_A3=BGD",
+        "source_crs": "EPSG:4326",
+        "output_crs": "EPSG:4326",
+        "operation": "cutline-mask-and-crop (no reprojection, no resampling)",
+        "resampling": "none",
+        "nodata_output": -9999,
+        "nodata_source": null,
+        "tool": "GDAL 3.13.1 (gdal.Warp)",
+        "generated_at": "2026-09-19T01:26:54.783577+00:00"
+      },
+      "output": {
+        "path": "derived/BGD-2003.tif",
+        "width": 554,
+        "height": 705,
+        "valid_pixel_count": 174739,
+        "sum_ha": 331784.0368281603,
+        "sha256": "ff58aba9f6032745666f47809b68b6f2986b6e629a7ce199dcc6910ade78ae76"
+      }
+    },
+    {
+      "year": "2004",
+      "source": {
+        "collection": "fao-gismgr:FAOSTAT:raster:mapsets:DRAINED-AREA-CROP",
+        "item_id": "fao-gismgr:FAOSTAT:raster:mapsets:DRAINED-AREA-CROP:items:FAOSTAT-DRAINED-AREA-CROP-2004",
+        "gismgr_item_id": "fao-gismgr/FAOSTAT/mapsets/DRAINED-AREA-CROP/FAOSTAT.DRAINED-AREA-CROP.2004",
+        "asset_href": "https://storage.googleapis.com/fao-gismgr-faostat-data/DATA/FAOSTAT/MAPSET/DRAINED-AREA-CROP/FAOSTAT.DRAINED-AREA-CROP.2004.tif",
+        "asset_gs_href": "gs://fao-gismgr-faostat-data/DATA/FAOSTAT/MAPSET/DRAINED-AREA-CROP/FAOSTAT.DRAINED-AREA-CROP.2004.tif",
+        "license": "CC-BY-4.0",
+        "source_generation": "1750848631354760",
+        "source_hash_md5_or_crc32c": "crc32c=v7NG4A=="
+      },
+      "derivation": {
+        "aoi_name": "Bangladesh",
+        "aoi_iso3": "BGD",
+        "aoi_geometry_source": "Natural Earth 10m admin-0 countries (public domain), ISO_A3=BGD",
+        "source_crs": "EPSG:4326",
+        "output_crs": "EPSG:4326",
+        "operation": "cutline-mask-and-crop (no reprojection, no resampling)",
+        "resampling": "none",
+        "nodata_output": -9999,
+        "nodata_source": null,
+        "tool": "GDAL 3.13.1 (gdal.Warp)",
+        "generated_at": "2026-09-19T01:27:10.669752+00:00"
+      },
+      "output": {
+        "path": "derived/BGD-2004.tif",
+        "width": 554,
+        "height": 705,
+        "valid_pixel_count": 174739,
+        "sum_ha": 330117.7347064018,
+        "sha256": "54d1aed78725c599265617b0e1d2bf9f58852dec983a6c101cf90fca339a4e4e"
+      }
+    },
+    {
+      "year": "2005",
+      "source": {
+        "collection": "fao-gismgr:FAOSTAT:raster:mapsets:DRAINED-AREA-CROP",
+        "item_id": "fao-gismgr:FAOSTAT:raster:mapsets:DRAINED-AREA-CROP:items:FAOSTAT-DRAINED-AREA-CROP-2005",
+        "gismgr_item_id": "fao-gismgr/FAOSTAT/mapsets/DRAINED-AREA-CROP/FAOSTAT.DRAINED-AREA-CROP.2005",
+        "asset_href": "https://storage.googleapis.com/fao-gismgr-faostat-data/DATA/FAOSTAT/MAPSET/DRAINED-AREA-CROP/FAOSTAT.DRAINED-AREA-CROP.2005.tif",
+        "asset_gs_href": "gs://fao-gismgr-faostat-data/DATA/FAOSTAT/MAPSET/DRAINED-AREA-CROP/FAOSTAT.DRAINED-AREA-CROP.2005.tif",
+        "license": "CC-BY-4.0",
+        "source_generation": "1750848634875844",
+        "source_hash_md5_or_crc32c": "crc32c=M8iurg=="
+      },
+      "derivation": {
+        "aoi_name": "Bangladesh",
+        "aoi_iso3": "BGD",
+        "aoi_geometry_source": "Natural Earth 10m admin-0 countries (public domain), ISO_A3=BGD",
+        "source_crs": "EPSG:4326",
+        "output_crs": "EPSG:4326",
+        "operation": "cutline-mask-and-crop (no reprojection, no resampling)",
+        "resampling": "none",
+        "nodata_output": -9999,
+        "nodata_source": null,
+        "tool": "GDAL 3.13.1 (gdal.Warp)",
+        "generated_at": "2026-09-19T01:27:26.886224+00:00"
+      },
+      "output": {
+        "path": "derived/BGD-2005.tif",
+        "width": 554,
+        "height": 705,
+        "valid_pixel_count": 174739,
+        "sum_ha": 330154.4684715271,
+        "sha256": "63a10b9393b7d4e69e8c41078026ed682d64df354a85ec2861b6c631f742c4fe"
+      }
+    },
+    {
+      "year": "2006",
+      "source": {
+        "collection": "fao-gismgr:FAOSTAT:raster:mapsets:DRAINED-AREA-CROP",
+        "item_id": "fao-gismgr:FAOSTAT:raster:mapsets:DRAINED-AREA-CROP:items:FAOSTAT-DRAINED-AREA-CROP-2006",
+        "gismgr_item_id": "fao-gismgr/FAOSTAT/mapsets/DRAINED-AREA-CROP/FAOSTAT.DRAINED-AREA-CROP.2006",
+        "asset_href": "https://storage.googleapis.com/fao-gismgr-faostat-data/DATA/FAOSTAT/MAPSET/DRAINED-AREA-CROP/FAOSTAT.DRAINED-AREA-CROP.2006.tif",
+        "asset_gs_href": "gs://fao-gismgr-faostat-data/DATA/FAOSTAT/MAPSET/DRAINED-AREA-CROP/FAOSTAT.DRAINED-AREA-CROP.2006.tif",
+        "license": "CC-BY-4.0",
+        "source_generation": "1750848640814894",
+        "source_hash_md5_or_crc32c": "crc32c=CF5eGA=="
+      },
+      "derivation": {
+        "aoi_name": "Bangladesh",
+        "aoi_iso3": "BGD",
+        "aoi_geometry_source": "Natural Earth 10m admin-0 countries (public domain), ISO_A3=BGD",
+        "source_crs": "EPSG:4326",
+        "output_crs": "EPSG:4326",
+        "operation": "cutline-mask-and-crop (no reprojection, no resampling)",
+        "resampling": "none",
+        "nodata_output": -9999,
+        "nodata_source": null,
+        "tool": "GDAL 3.13.1 (gdal.Warp)",
+        "generated_at": "2026-09-19T01:27:42.885822+00:00"
+      },
+      "output": {
+        "path": "derived/BGD-2006.tif",
+        "width": 554,
+        "height": 705,
+        "valid_pixel_count": 174739,
+        "sum_ha": 330306.24471759796,
+        "sha256": "e5b487061fdae640d2071267ad800be908802db5ab8f014e04008dc65597a3ce"
+      }
+    },
+    {
+      "year": "2007",
+      "source": {
+        "collection": "fao-gismgr:FAOSTAT:raster:mapsets:DRAINED-AREA-CROP",
+        "item_id": "fao-gismgr:FAOSTAT:raster:mapsets:DRAINED-AREA-CROP:items:FAOSTAT-DRAINED-AREA-CROP-2007",
+        "gismgr_item_id": "fao-gismgr/FAOSTAT/mapsets/DRAINED-AREA-CROP/FAOSTAT.DRAINED-AREA-CROP.2007",
+        "asset_href": "https://storage.googleapis.com/fao-gismgr-faostat-data/DATA/FAOSTAT/MAPSET/DRAINED-AREA-CROP/FAOSTAT.DRAINED-AREA-CROP.2007.tif",
+        "asset_gs_href": "gs://fao-gismgr-faostat-data/DATA/FAOSTAT/MAPSET/DRAINED-AREA-CROP/FAOSTAT.DRAINED-AREA-CROP.2007.tif",
+        "license": "CC-BY-4.0",
+        "source_generation": "1750848643679042",
+        "source_hash_md5_or_crc32c": "crc32c=f0YKCA=="
+      },
+      "derivation": {
+        "aoi_name": "Bangladesh",
+        "aoi_iso3": "BGD",
+        "aoi_geometry_source": "Natural Earth 10m admin-0 countries (public domain), ISO_A3=BGD",
+        "source_crs": "EPSG:4326",
+        "output_crs": "EPSG:4326",
+        "operation": "cutline-mask-and-crop (no reprojection, no resampling)",
+        "resampling": "none",
+        "nodata_output": -9999,
+        "nodata_source": null,
+        "tool": "GDAL 3.13.1 (gdal.Warp)",
+        "generated_at": "2026-09-19T01:27:58.446305+00:00"
+      },
+      "output": {
+        "path": "derived/BGD-2007.tif",
+        "width": 554,
+        "height": 705,
+        "valid_pixel_count": 174739,
+        "sum_ha": 331040.0832591057,
+        "sha256": "a793dbdf8b6660ffe4fc7b9c4c3db3dc8162c873deb303c3ff08ac20a8cc3652"
+      }
+    },
+    {
+      "year": "2008",
+      "source": {
+        "collection": "fao-gismgr:FAOSTAT:raster:mapsets:DRAINED-AREA-CROP",
+        "item_id": "fao-gismgr:FAOSTAT:raster:mapsets:DRAINED-AREA-CROP:items:FAOSTAT-DRAINED-AREA-CROP-2008",
+        "gismgr_item_id": "fao-gismgr/FAOSTAT/mapsets/DRAINED-AREA-CROP/FAOSTAT.DRAINED-AREA-CROP.2008",
+        "asset_href": "https://storage.googleapis.com/fao-gismgr-faostat-data/DATA/FAOSTAT/MAPSET/DRAINED-AREA-CROP/FAOSTAT.DRAINED-AREA-CROP.2008.tif",
+        "asset_gs_href": "gs://fao-gismgr-faostat-data/DATA/FAOSTAT/MAPSET/DRAINED-AREA-CROP/FAOSTAT.DRAINED-AREA-CROP.2008.tif",
+        "license": "CC-BY-4.0",
+        "source_generation": "1750848647244283",
+        "source_hash_md5_or_crc32c": "crc32c=nfwM0g=="
+      },
+      "derivation": {
+        "aoi_name": "Bangladesh",
+        "aoi_iso3": "BGD",
+        "aoi_geometry_source": "Natural Earth 10m admin-0 countries (public domain), ISO_A3=BGD",
+        "source_crs": "EPSG:4326",
+        "output_crs": "EPSG:4326",
+        "operation": "cutline-mask-and-crop (no reprojection, no resampling)",
+        "resampling": "none",
+        "nodata_output": -9999,
+        "nodata_source": null,
+        "tool": "GDAL 3.13.1 (gdal.Warp)",
+        "generated_at": "2026-09-19T01:28:14.420404+00:00"
+      },
+      "output": {
+        "path": "derived/BGD-2008.tif",
+        "width": 554,
+        "height": 705,
+        "valid_pixel_count": 174739,
+        "sum_ha": 330999.9431515932,
+        "sha256": "c435215370b05ac4b8712faa4e942a43e9ea501d7f6cf78ef4142d0dd9b0d788"
+      }
+    },
+    {
+      "year": "2009",
+      "source": {
+        "collection": "fao-gismgr:FAOSTAT:raster:mapsets:DRAINED-AREA-CROP",
+        "item_id": "fao-gismgr:FAOSTAT:raster:mapsets:DRAINED-AREA-CROP:items:FAOSTAT-DRAINED-AREA-CROP-2009",
+        "gismgr_item_id": "fao-gismgr/FAOSTAT/mapsets/DRAINED-AREA-CROP/FAOSTAT.DRAINED-AREA-CROP.2009",
+        "asset_href": "https://storage.googleapis.com/fao-gismgr-faostat-data/DATA/FAOSTAT/MAPSET/DRAINED-AREA-CROP/FAOSTAT.DRAINED-AREA-CROP.2009.tif",
+        "asset_gs_href": "gs://fao-gismgr-faostat-data/DATA/FAOSTAT/MAPSET/DRAINED-AREA-CROP/FAOSTAT.DRAINED-AREA-CROP.2009.tif",
+        "license": "CC-BY-4.0",
+        "source_generation": "1750848648838209",
+        "source_hash_md5_or_crc32c": "crc32c=e9PdcQ=="
+      },
+      "derivation": {
+        "aoi_name": "Bangladesh",
+        "aoi_iso3": "BGD",
+        "aoi_geometry_source": "Natural Earth 10m admin-0 countries (public domain), ISO_A3=BGD",
+        "source_crs": "EPSG:4326",
+        "output_crs": "EPSG:4326",
+        "operation": "cutline-mask-and-crop (no reprojection, no resampling)",
+        "resampling": "none",
+        "nodata_output": -9999,
+        "nodata_source": null,
+        "tool": "GDAL 3.13.1 (gdal.Warp)",
+        "generated_at": "2026-09-19T01:28:30.397992+00:00"
+      },
+      "output": {
+        "path": "derived/BGD-2009.tif",
+        "width": 554,
+        "height": 705,
+        "valid_pixel_count": 174739,
+        "sum_ha": 331074.15483367443,
+        "sha256": "3b9d7c817fd266d88c0bc7c7c58ef4de48ebfa6b5909d1e0f79896e672728cef"
+      }
+    },
+    {
+      "year": "2010",
+      "source": {
+        "collection": "fao-gismgr:FAOSTAT:raster:mapsets:DRAINED-AREA-CROP",
+        "item_id": "fao-gismgr:FAOSTAT:raster:mapsets:DRAINED-AREA-CROP:items:FAOSTAT-DRAINED-AREA-CROP-2010",
+        "gismgr_item_id": "fao-gismgr/FAOSTAT/mapsets/DRAINED-AREA-CROP/FAOSTAT.DRAINED-AREA-CROP.2010",
+        "asset_href": "https://storage.googleapis.com/fao-gismgr-faostat-data/DATA/FAOSTAT/MAPSET/DRAINED-AREA-CROP/FAOSTAT.DRAINED-AREA-CROP.2010.tif",
+        "asset_gs_href": "gs://fao-gismgr-faostat-data/DATA/FAOSTAT/MAPSET/DRAINED-AREA-CROP/FAOSTAT.DRAINED-AREA-CROP.2010.tif",
+        "license": "CC-BY-4.0",
+        "source_generation": "1750848652783674",
+        "source_hash_md5_or_crc32c": "crc32c=EPafwA=="
+      },
+      "derivation": {
+        "aoi_name": "Bangladesh",
+        "aoi_iso3": "BGD",
+        "aoi_geometry_source": "Natural Earth 10m admin-0 countries (public domain), ISO_A3=BGD",
+        "source_crs": "EPSG:4326",
+        "output_crs": "EPSG:4326",
+        "operation": "cutline-mask-and-crop (no reprojection, no resampling)",
+        "resampling": "none",
+        "nodata_output": -9999,
+        "nodata_source": null,
+        "tool": "GDAL 3.13.1 (gdal.Warp)",
+        "generated_at": "2026-09-19T01:28:46.586654+00:00"
+      },
+      "output": {
+        "path": "derived/BGD-2010.tif",
+        "width": 554,
+        "height": 705,
+        "valid_pixel_count": 174739,
+        "sum_ha": 331358.66156232357,
+        "sha256": "dac79d6cfe08ad4cfdb6f7c5d663944f3c2855186beb42a3713705afdd941376"
+      }
+    },
+    {
+      "year": "2011",
+      "source": {
+        "collection": "fao-gismgr:FAOSTAT:raster:mapsets:DRAINED-AREA-CROP",
+        "item_id": "fao-gismgr:FAOSTAT:raster:mapsets:DRAINED-AREA-CROP:items:FAOSTAT-DRAINED-AREA-CROP-2011",
+        "gismgr_item_id": "fao-gismgr/FAOSTAT/mapsets/DRAINED-AREA-CROP/FAOSTAT.DRAINED-AREA-CROP.2011",
+        "asset_href": "https://storage.googleapis.com/fao-gismgr-faostat-data/DATA/FAOSTAT/MAPSET/DRAINED-AREA-CROP/FAOSTAT.DRAINED-AREA-CROP.2011.tif",
+        "asset_gs_href": "gs://fao-gismgr-faostat-data/DATA/FAOSTAT/MAPSET/DRAINED-AREA-CROP/FAOSTAT.DRAINED-AREA-CROP.2011.tif",
+        "license": "CC-BY-4.0",
+        "source_generation": "1750848648511881",
+        "source_hash_md5_or_crc32c": "crc32c=HQ3B/w=="
+      },
+      "derivation": {
+        "aoi_name": "Bangladesh",
+        "aoi_iso3": "BGD",
+        "aoi_geometry_source": "Natural Earth 10m admin-0 countries (public domain), ISO_A3=BGD",
+        "source_crs": "EPSG:4326",
+        "output_crs": "EPSG:4326",
+        "operation": "cutline-mask-and-crop (no reprojection, no resampling)",
+        "resampling": "none",
+        "nodata_output": -9999,
+        "nodata_source": null,
+        "tool": "GDAL 3.13.1 (gdal.Warp)",
+        "generated_at": "2026-09-19T01:29:02.349074+00:00"
+      },
+      "output": {
+        "path": "derived/BGD-2011.tif",
+        "width": 554,
+        "height": 705,
+        "valid_pixel_count": 174739,
+        "sum_ha": 329391.32691168785,
+        "sha256": "64d6495ae3b6fda4233cdeacd5261663afa711e1b71686be3b093d13365da7a0"
+      }
+    },
+    {
+      "year": "2012",
+      "source": {
+        "collection": "fao-gismgr:FAOSTAT:raster:mapsets:DRAINED-AREA-CROP",
+        "item_id": "fao-gismgr:FAOSTAT:raster:mapsets:DRAINED-AREA-CROP:items:FAOSTAT-DRAINED-AREA-CROP-2012",
+        "gismgr_item_id": "fao-gismgr/FAOSTAT/mapsets/DRAINED-AREA-CROP/FAOSTAT.DRAINED-AREA-CROP.2012",
+        "asset_href": "https://storage.googleapis.com/fao-gismgr-faostat-data/DATA/FAOSTAT/MAPSET/DRAINED-AREA-CROP/FAOSTAT.DRAINED-AREA-CROP.2012.tif",
+        "asset_gs_href": "gs://fao-gismgr-faostat-data/DATA/FAOSTAT/MAPSET/DRAINED-AREA-CROP/FAOSTAT.DRAINED-AREA-CROP.2012.tif",
+        "license": "CC-BY-4.0",
+        "source_generation": "1750848629720280",
+        "source_hash_md5_or_crc32c": "crc32c=0JUj2w=="
+      },
+      "derivation": {
+        "aoi_name": "Bangladesh",
+        "aoi_iso3": "BGD",
+        "aoi_geometry_source": "Natural Earth 10m admin-0 countries (public domain), ISO_A3=BGD",
+        "source_crs": "EPSG:4326",
+        "output_crs": "EPSG:4326",
+        "operation": "cutline-mask-and-crop (no reprojection, no resampling)",
+        "resampling": "none",
+        "nodata_output": -9999,
+        "nodata_source": null,
+        "tool": "GDAL 3.13.1 (gdal.Warp)",
+        "generated_at": "2026-09-19T01:29:18.597158+00:00"
+      },
+      "output": {
+        "path": "derived/BGD-2012.tif",
+        "width": 554,
+        "height": 705,
+        "valid_pixel_count": 174739,
+        "sum_ha": 329264.01194262505,
+        "sha256": "bf887c56df888b69f3cd1e9cf8c2a592ffc72ed716fa5e73d0aff22c24be9d14"
+      }
+    },
+    {
+      "year": "2013",
+      "source": {
+        "collection": "fao-gismgr:FAOSTAT:raster:mapsets:DRAINED-AREA-CROP",
+        "item_id": "fao-gismgr:FAOSTAT:raster:mapsets:DRAINED-AREA-CROP:items:FAOSTAT-DRAINED-AREA-CROP-2013",
+        "gismgr_item_id": "fao-gismgr/FAOSTAT/mapsets/DRAINED-AREA-CROP/FAOSTAT.DRAINED-AREA-CROP.2013",
+        "asset_href": "https://storage.googleapis.com/fao-gismgr-faostat-data/DATA/FAOSTAT/MAPSET/DRAINED-AREA-CROP/FAOSTAT.DRAINED-AREA-CROP.2013.tif",
+        "asset_gs_href": "gs://fao-gismgr-faostat-data/DATA/FAOSTAT/MAPSET/DRAINED-AREA-CROP/FAOSTAT.DRAINED-AREA-CROP.2013.tif",
+        "license": "CC-BY-4.0",
+        "source_generation": "1750848654966600",
+        "source_hash_md5_or_crc32c": "crc32c=owerOQ=="
+      },
+      "derivation": {
+        "aoi_name": "Bangladesh",
+        "aoi_iso3": "BGD",
+        "aoi_geometry_source": "Natural Earth 10m admin-0 countries (public domain), ISO_A3=BGD",
+        "source_crs": "EPSG:4326",
+        "output_crs": "EPSG:4326",
+        "operation": "cutline-mask-and-crop (no reprojection, no resampling)",
+        "resampling": "none",
+        "nodata_output": -9999,
+        "nodata_source": null,
+        "tool": "GDAL 3.13.1 (gdal.Warp)",
+        "generated_at": "2026-09-19T01:29:34.325839+00:00"
+      },
+      "output": {
+        "path": "derived/BGD-2013.tif",
+        "width": 554,
+        "height": 705,
+        "valid_pixel_count": 174739,
+        "sum_ha": 328576.3843148947,
+        "sha256": "0a5cc2fe9b218388739cbeab6e64301379004ab41e1a3ee41dc5c92655cfa707"
+      }
+    },
+    {
+      "year": "2014",
+      "source": {
+        "collection": "fao-gismgr:FAOSTAT:raster:mapsets:DRAINED-AREA-CROP",
+        "item_id": "fao-gismgr:FAOSTAT:raster:mapsets:DRAINED-AREA-CROP:items:FAOSTAT-DRAINED-AREA-CROP-2014",
+        "gismgr_item_id": "fao-gismgr/FAOSTAT/mapsets/DRAINED-AREA-CROP/FAOSTAT.DRAINED-AREA-CROP.2014",
+        "asset_href": "https://storage.googleapis.com/fao-gismgr-faostat-data/DATA/FAOSTAT/MAPSET/DRAINED-AREA-CROP/FAOSTAT.DRAINED-AREA-CROP.2014.tif",
+        "asset_gs_href": "gs://fao-gismgr-faostat-data/DATA/FAOSTAT/MAPSET/DRAINED-AREA-CROP/FAOSTAT.DRAINED-AREA-CROP.2014.tif",
+        "license": "CC-BY-4.0",
+        "source_generation": "1750848645617701",
+        "source_hash_md5_or_crc32c": "crc32c=umLy/w=="
+      },
+      "derivation": {
+        "aoi_name": "Bangladesh",
+        "aoi_iso3": "BGD",
+        "aoi_geometry_source": "Natural Earth 10m admin-0 countries (public domain), ISO_A3=BGD",
+        "source_crs": "EPSG:4326",
+        "output_crs": "EPSG:4326",
+        "operation": "cutline-mask-and-crop (no reprojection, no resampling)",
+        "resampling": "none",
+        "nodata_output": -9999,
+        "nodata_source": null,
+        "tool": "GDAL 3.13.1 (gdal.Warp)",
+        "generated_at": "2026-09-19T01:29:50.412011+00:00"
+      },
+      "output": {
+        "path": "derived/BGD-2014.tif",
+        "width": 554,
+        "height": 705,
+        "valid_pixel_count": 174739,
+        "sum_ha": 327488.0733413696,
+        "sha256": "38165fcad8d946accecd605d5aca329c892684d325ef6d17523eec3ee35b32c1"
+      }
+    },
+    {
+      "year": "2015",
+      "source": {
+        "collection": "fao-gismgr:FAOSTAT:raster:mapsets:DRAINED-AREA-CROP",
+        "item_id": "fao-gismgr:FAOSTAT:raster:mapsets:DRAINED-AREA-CROP:items:FAOSTAT-DRAINED-AREA-CROP-2015",
+        "gismgr_item_id": "fao-gismgr/FAOSTAT/mapsets/DRAINED-AREA-CROP/FAOSTAT.DRAINED-AREA-CROP.2015",
+        "asset_href": "https://storage.googleapis.com/fao-gismgr-faostat-data/DATA/FAOSTAT/MAPSET/DRAINED-AREA-CROP/FAOSTAT.DRAINED-AREA-CROP.2015.tif",
+        "asset_gs_href": "gs://fao-gismgr-faostat-data/DATA/FAOSTAT/MAPSET/DRAINED-AREA-CROP/FAOSTAT.DRAINED-AREA-CROP.2015.tif",
+        "license": "CC-BY-4.0",
+        "source_generation": "1750848627148284",
+        "source_hash_md5_or_crc32c": "crc32c=e3N64g=="
+      },
+      "derivation": {
+        "aoi_name": "Bangladesh",
+        "aoi_iso3": "BGD",
+        "aoi_geometry_source": "Natural Earth 10m admin-0 countries (public domain), ISO_A3=BGD",
+        "source_crs": "EPSG:4326",
+        "output_crs": "EPSG:4326",
+        "operation": "cutline-mask-and-crop (no reprojection, no resampling)",
+        "resampling": "none",
+        "nodata_output": -9999,
+        "nodata_source": null,
+        "tool": "GDAL 3.13.1 (gdal.Warp)",
+        "generated_at": "2026-09-19T01:30:05.241707+00:00"
+      },
+      "output": {
+        "path": "derived/BGD-2015.tif",
+        "width": 554,
+        "height": 705,
+        "valid_pixel_count": 174739,
+        "sum_ha": 327433.9571584463,
+        "sha256": "e71c6b820a119c5fff0fe352a1858aaf47b5118ecf004567c4970d636ea5c6d4"
+      }
+    },
+    {
+      "year": "2016",
+      "source": {
+        "collection": "fao-gismgr:FAOSTAT:raster:mapsets:DRAINED-AREA-CROP",
+        "item_id": "fao-gismgr:FAOSTAT:raster:mapsets:DRAINED-AREA-CROP:items:FAOSTAT-DRAINED-AREA-CROP-2016",
+        "gismgr_item_id": "fao-gismgr/FAOSTAT/mapsets/DRAINED-AREA-CROP/FAOSTAT.DRAINED-AREA-CROP.2016",
+        "asset_href": "https://storage.googleapis.com/fao-gismgr-faostat-data/DATA/FAOSTAT/MAPSET/DRAINED-AREA-CROP/FAOSTAT.DRAINED-AREA-CROP.2016.tif",
+        "asset_gs_href": "gs://fao-gismgr-faostat-data/DATA/FAOSTAT/MAPSET/DRAINED-AREA-CROP/FAOSTAT.DRAINED-AREA-CROP.2016.tif",
+        "license": "CC-BY-4.0",
+        "source_generation": "1750848653611089",
+        "source_hash_md5_or_crc32c": "crc32c=yFyznQ=="
+      },
+      "derivation": {
+        "aoi_name": "Bangladesh",
+        "aoi_iso3": "BGD",
+        "aoi_geometry_source": "Natural Earth 10m admin-0 countries (public domain), ISO_A3=BGD",
+        "source_crs": "EPSG:4326",
+        "output_crs": "EPSG:4326",
+        "operation": "cutline-mask-and-crop (no reprojection, no resampling)",
+        "resampling": "none",
+        "nodata_output": -9999,
+        "nodata_source": null,
+        "tool": "GDAL 3.13.1 (gdal.Warp)",
+        "generated_at": "2026-09-19T01:30:21.716852+00:00"
+      },
+      "output": {
+        "path": "derived/BGD-2016.tif",
+        "width": 554,
+        "height": 705,
+        "valid_pixel_count": 174739,
+        "sum_ha": 327786.26256120205,
+        "sha256": "0009779f29d4fb796c1f0faa35b22122428445d6438b9cc46e9c57f7ee1a8647"
+      }
+    },
+    {
+      "year": "2017",
+      "source": {
+        "collection": "fao-gismgr:FAOSTAT:raster:mapsets:DRAINED-AREA-CROP",
+        "item_id": "fao-gismgr:FAOSTAT:raster:mapsets:DRAINED-AREA-CROP:items:FAOSTAT-DRAINED-AREA-CROP-2017",
+        "gismgr_item_id": "fao-gismgr/FAOSTAT/mapsets/DRAINED-AREA-CROP/FAOSTAT.DRAINED-AREA-CROP.2017",
+        "asset_href": "https://storage.googleapis.com/fao-gismgr-faostat-data/DATA/FAOSTAT/MAPSET/DRAINED-AREA-CROP/FAOSTAT.DRAINED-AREA-CROP.2017.tif",
+        "asset_gs_href": "gs://fao-gismgr-faostat-data/DATA/FAOSTAT/MAPSET/DRAINED-AREA-CROP/FAOSTAT.DRAINED-AREA-CROP.2017.tif",
+        "license": "CC-BY-4.0",
+        "source_generation": "1750848632104882",
+        "source_hash_md5_or_crc32c": "crc32c=xFMd8Q=="
+      },
+      "derivation": {
+        "aoi_name": "Bangladesh",
+        "aoi_iso3": "BGD",
+        "aoi_geometry_source": "Natural Earth 10m admin-0 countries (public domain), ISO_A3=BGD",
+        "source_crs": "EPSG:4326",
+        "output_crs": "EPSG:4326",
+        "operation": "cutline-mask-and-crop (no reprojection, no resampling)",
+        "resampling": "none",
+        "nodata_output": -9999,
+        "nodata_source": null,
+        "tool": "GDAL 3.13.1 (gdal.Warp)",
+        "generated_at": "2026-09-19T01:30:37.781374+00:00"
+      },
+      "output": {
+        "path": "derived/BGD-2017.tif",
+        "width": 554,
+        "height": 705,
+        "valid_pixel_count": 174739,
+        "sum_ha": 327958.6729654074,
+        "sha256": "54c4e42e9276b8c30f1e5533d69a49972a06eaa23e2f441b364c95e5631b9ade"
+      }
+    },
+    {
+      "year": "2018",
+      "source": {
+        "collection": "fao-gismgr:FAOSTAT:raster:mapsets:DRAINED-AREA-CROP",
+        "item_id": "fao-gismgr:FAOSTAT:raster:mapsets:DRAINED-AREA-CROP:items:FAOSTAT-DRAINED-AREA-CROP-2018",
+        "gismgr_item_id": "fao-gismgr/FAOSTAT/mapsets/DRAINED-AREA-CROP/FAOSTAT.DRAINED-AREA-CROP.2018",
+        "asset_href": "https://storage.googleapis.com/fao-gismgr-faostat-data/DATA/FAOSTAT/MAPSET/DRAINED-AREA-CROP/FAOSTAT.DRAINED-AREA-CROP.2018.tif",
+        "asset_gs_href": "gs://fao-gismgr-faostat-data/DATA/FAOSTAT/MAPSET/DRAINED-AREA-CROP/FAOSTAT.DRAINED-AREA-CROP.2018.tif",
+        "license": "CC-BY-4.0",
+        "source_generation": "1750848631624447",
+        "source_hash_md5_or_crc32c": "crc32c=q5DM3g=="
+      },
+      "derivation": {
+        "aoi_name": "Bangladesh",
+        "aoi_iso3": "BGD",
+        "aoi_geometry_source": "Natural Earth 10m admin-0 countries (public domain), ISO_A3=BGD",
+        "source_crs": "EPSG:4326",
+        "output_crs": "EPSG:4326",
+        "operation": "cutline-mask-and-crop (no reprojection, no resampling)",
+        "resampling": "none",
+        "nodata_output": -9999,
+        "nodata_source": null,
+        "tool": "GDAL 3.13.1 (gdal.Warp)",
+        "generated_at": "2026-09-19T01:30:53.969131+00:00"
+      },
+      "output": {
+        "path": "derived/BGD-2018.tif",
+        "width": 554,
+        "height": 705,
+        "valid_pixel_count": 174739,
+        "sum_ha": 327838.9511140585,
+        "sha256": "2dada9f4984333e6bb924866f8e55a59fa853d9db366ddff338cc603338546d9"
+      }
+    },
+    {
+      "year": "2019",
+      "source": {
+        "collection": "fao-gismgr:FAOSTAT:raster:mapsets:DRAINED-AREA-CROP",
+        "item_id": "fao-gismgr:FAOSTAT:raster:mapsets:DRAINED-AREA-CROP:items:FAOSTAT-DRAINED-AREA-CROP-2019",
+        "gismgr_item_id": "fao-gismgr/FAOSTAT/mapsets/DRAINED-AREA-CROP/FAOSTAT.DRAINED-AREA-CROP.2019",
+        "asset_href": "https://storage.googleapis.com/fao-gismgr-faostat-data/DATA/FAOSTAT/MAPSET/DRAINED-AREA-CROP/FAOSTAT.DRAINED-AREA-CROP.2019.tif",
+        "asset_gs_href": "gs://fao-gismgr-faostat-data/DATA/FAOSTAT/MAPSET/DRAINED-AREA-CROP/FAOSTAT.DRAINED-AREA-CROP.2019.tif",
+        "license": "CC-BY-4.0",
+        "source_generation": "1750848634236733",
+        "source_hash_md5_or_crc32c": "crc32c=yxCbNA=="
+      },
+      "derivation": {
+        "aoi_name": "Bangladesh",
+        "aoi_iso3": "BGD",
+        "aoi_geometry_source": "Natural Earth 10m admin-0 countries (public domain), ISO_A3=BGD",
+        "source_crs": "EPSG:4326",
+        "output_crs": "EPSG:4326",
+        "operation": "cutline-mask-and-crop (no reprojection, no resampling)",
+        "resampling": "none",
+        "nodata_output": -9999,
+        "nodata_source": null,
+        "tool": "GDAL 3.13.1 (gdal.Warp)",
+        "generated_at": "2026-09-19T01:31:10.251928+00:00"
+      },
+      "output": {
+        "path": "derived/BGD-2019.tif",
+        "width": 554,
+        "height": 705,
+        "valid_pixel_count": 174739,
+        "sum_ha": 329548.77149271965,
+        "sha256": "e20c27d138a150e1773e12fadfa878ad012100244d86005595d8f1bdea795ac2"
+      }
+    },
+    {
+      "year": "2020",
+      "source": {
+        "collection": "fao-gismgr:FAOSTAT:raster:mapsets:DRAINED-AREA-CROP",
+        "item_id": "fao-gismgr:FAOSTAT:raster:mapsets:DRAINED-AREA-CROP:items:FAOSTAT-DRAINED-AREA-CROP-2020",
+        "gismgr_item_id": "fao-gismgr/FAOSTAT/mapsets/DRAINED-AREA-CROP/FAOSTAT.DRAINED-AREA-CROP.2020",
+        "asset_href": "https://storage.googleapis.com/fao-gismgr-faostat-data/DATA/FAOSTAT/MAPSET/DRAINED-AREA-CROP/FAOSTAT.DRAINED-AREA-CROP.2020.tif",
+        "asset_gs_href": "gs://fao-gismgr-faostat-data/DATA/FAOSTAT/MAPSET/DRAINED-AREA-CROP/FAOSTAT.DRAINED-AREA-CROP.2020.tif",
+        "license": "CC-BY-4.0",
+        "source_generation": "1750848635832451",
+        "source_hash_md5_or_crc32c": "crc32c=Y6p7hg=="
+      },
+      "derivation": {
+        "aoi_name": "Bangladesh",
+        "aoi_iso3": "BGD",
+        "aoi_geometry_source": "Natural Earth 10m admin-0 countries (public domain), ISO_A3=BGD",
+        "source_crs": "EPSG:4326",
+        "output_crs": "EPSG:4326",
+        "operation": "cutline-mask-and-crop (no reprojection, no resampling)",
+        "resampling": "none",
+        "nodata_output": -9999,
+        "nodata_source": null,
+        "tool": "GDAL 3.13.1 (gdal.Warp)",
+        "generated_at": "2026-09-19T01:31:26.211728+00:00"
+      },
+      "output": {
+        "path": "derived/BGD-2020.tif",
+        "width": 554,
+        "height": 705,
+        "valid_pixel_count": 174739,
+        "sum_ha": 329436.9047758579,
+        "sha256": "88d4e46611fb01abc68f515a85caa77d10e4a90e37315338afd1d5ef1a0dde64"
+      }
+    },
+    {
+      "year": "2021",
+      "source": {
+        "collection": "fao-gismgr:FAOSTAT:raster:mapsets:DRAINED-AREA-CROP",
+        "item_id": "fao-gismgr:FAOSTAT:raster:mapsets:DRAINED-AREA-CROP:items:FAOSTAT-DRAINED-AREA-CROP-2021",
+        "gismgr_item_id": "fao-gismgr/FAOSTAT/mapsets/DRAINED-AREA-CROP/FAOSTAT.DRAINED-AREA-CROP.2021",
+        "asset_href": "https://storage.googleapis.com/fao-gismgr-faostat-data/DATA/FAOSTAT/MAPSET/DRAINED-AREA-CROP/FAOSTAT.DRAINED-AREA-CROP.2021.tif",
+        "asset_gs_href": "gs://fao-gismgr-faostat-data/DATA/FAOSTAT/MAPSET/DRAINED-AREA-CROP/FAOSTAT.DRAINED-AREA-CROP.2021.tif",
+        "license": "CC-BY-4.0",
+        "source_generation": "1750848634311331",
+        "source_hash_md5_or_crc32c": "crc32c=c95wOg=="
+      },
+      "derivation": {
+        "aoi_name": "Bangladesh",
+        "aoi_iso3": "BGD",
+        "aoi_geometry_source": "Natural Earth 10m admin-0 countries (public domain), ISO_A3=BGD",
+        "source_crs": "EPSG:4326",
+        "output_crs": "EPSG:4326",
+        "operation": "cutline-mask-and-crop (no reprojection, no resampling)",
+        "resampling": "none",
+        "nodata_output": -9999,
+        "nodata_source": null,
+        "tool": "GDAL 3.13.1 (gdal.Warp)",
+        "generated_at": "2026-09-19T01:31:42.352033+00:00"
+      },
+      "output": {
+        "path": "derived/BGD-2021.tif",
+        "width": 554,
+        "height": 705,
+        "valid_pixel_count": 174739,
+        "sum_ha": 328994.85279512405,
+        "sha256": "e06e8447b83dab4f93446d028327b5628b5e4eaad2b7b08972101463910864b9"
+      }
+    },
+    {
+      "year": "2022",
+      "source": {
+        "collection": "fao-gismgr:FAOSTAT:raster:mapsets:DRAINED-AREA-CROP",
+        "item_id": "fao-gismgr:FAOSTAT:raster:mapsets:DRAINED-AREA-CROP:items:FAOSTAT-DRAINED-AREA-CROP-2022",
+        "gismgr_item_id": "fao-gismgr/FAOSTAT/mapsets/DRAINED-AREA-CROP/FAOSTAT.DRAINED-AREA-CROP.2022",
+        "asset_href": "https://storage.googleapis.com/fao-gismgr-faostat-data/DATA/FAOSTAT/MAPSET/DRAINED-AREA-CROP/FAOSTAT.DRAINED-AREA-CROP.2022.tif",
+        "asset_gs_href": "gs://fao-gismgr-faostat-data/DATA/FAOSTAT/MAPSET/DRAINED-AREA-CROP/FAOSTAT.DRAINED-AREA-CROP.2022.tif",
+        "license": "CC-BY-4.0",
+        "source_generation": "1750848637635473",
+        "source_hash_md5_or_crc32c": "crc32c=vFc1cA=="
+      },
+      "derivation": {
+        "aoi_name": "Bangladesh",
+        "aoi_iso3": "BGD",
+        "aoi_geometry_source": "Natural Earth 10m admin-0 countries (public domain), ISO_A3=BGD",
+        "source_crs": "EPSG:4326",
+        "output_crs": "EPSG:4326",
+        "operation": "cutline-mask-and-crop (no reprojection, no resampling)",
+        "resampling": "none",
+        "nodata_output": -9999,
+        "nodata_source": null,
+        "tool": "GDAL 3.13.1 (gdal.Warp)",
+        "generated_at": "2026-09-19T01:31:58.325010+00:00"
+      },
+      "output": {
+        "path": "derived/BGD-2022.tif",
+        "width": 554,
+        "height": 705,
+        "valid_pixel_count": 174739,
+        "sum_ha": 323520.8870809078,
+        "sha256": "9f0b62cecaf18b805cf3070a848f63ec3f936172efa3f4a340404227c3c159af"
+      }
+    }
+  ]
+}
