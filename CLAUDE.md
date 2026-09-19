@@ -813,20 +813,22 @@ just yuiseki-items
 
 すべて実装・動作確認済み（`docs/Case2-GHG-4-14-5/`、`docs-internal/findings.md`）。
 
-### Phase 3: Case 1 Italy（FAO CSIとの相談待ち、保留）
+### Phase 3: Case 1 Italy（着手可能）
 
-ASI-Dバケットの匿名アクセス問題が解決する、または回避策が決まるまで着手しない。
+2026-09-19、hfuさん個人のGoogle認証（Application Default Credentials）でASI-Dバケットが読めることを確認した（`docs-internal/findings.md`）。匿名アクセスは相変わらず拒否されるが、Case 2と同様「hfuさんの認証で発行時チェックアウトし、CORS対応で再配布する」パターンに乗せられるため、FAO CSIとの相談を待たずに着手できる。ただしチェックアウトの実行にはhfuさんの認証（ADC）が必要という制約が伴う。
 
 1. task YAML
 2. page shell
 3. browser STAC search
 4. Item selection
 5. Asset selection
-6. COG rendering
+6. COG rendering（発行時チェックアウトした派生成果を使う。9.3の「直接読み」前提は不成立と確定）
 7. Italy boundary
 8. provenance and limitations
 
-### Phase 4: Case 1 Hokkaido（Phase 3に同じく保留）
+### Phase 4: Case 1 第二のAOI版（着手可能、命名は4.9節に従う）
+
+Case 2と同様、「Hokkaido」ではなく空間ID/タイル区画で命名する（4.9節）。
 
 1. AOI差替え
 2. source COG direct rendering
@@ -954,11 +956,11 @@ task、Item、Asset、処理、tool version、結果、provenanceが記録され
 
 ## 26. 第一段階の成功条件
 
-最終的に次の4ページが`docs/`で公開される。ただし21章の通り、Case1系（Italy/Hokkaido）はASI-Dバケットのアクセス問題によりFAO CSIとの相談待ちで保留中のため、当面の第一段階はCase2系（Bangladesh／spatial ID 4-14-5）2ページの公開をもって達成とする。**この2ページは実装・公開済み**（GitHub Pages、`docs-internal/decisions.md`）。
+最終的に次の4ページが`docs/`で公開される。Case2系（Bangladesh／spatial ID 4-14-5）2ページは**実装・公開済み**（GitHub Pages、`docs-internal/decisions.md`）。Case1系（Italy／第二のAOI）は2026-09-19にASI-Dバケットの認証問題が解消し着手可能になったため（`docs-internal/findings.md`）、Phase 3/4として今後実装する。
 
 ```text
-Case1-ASIS-latest-Italy/        （保留、Phase 3）
-Case1-ASIS-latest-Hokkaido/     （保留、Phase 4）
+Case1-ASIS-latest-Italy/        （着手可能、Phase 3）
+Case1-ASIS-latest-第二のAOI/     （着手可能、Phase 4）
 Case2-GHG-BDG/                  （Phase 1、実装済み）
 Case2-GHG-4-14-5/               （Phase 2、実装済み）
 ```

@@ -255,7 +255,7 @@ hfu個人のグローバル指示にある「複数プロジェクトに横断�
 - Italy版で使う実際のASI-D/DRAINED-AREA-CROPアセットのCORS/認証（Hokkaido相当の検証をItalyの座標・Item IDでも行う）
 - 他の主要バケット（`fao-gismgr-gaez-v5-data`、`fao-gismgr-c3s-data`等、item数の多い順）の匿名読み取り可否とCORS設定。全バケット共通のポリシーか、バケットごとに異なるのか
 - FAOに対して、匿名読み取り・CORS設定を依頼する余地があるか（本リポジトリの範囲外の可能性が高いが、選択肢として記録だけしておく）
-- **ASI-D/MVHI-Dバケット（`fao-gismgr-asis-data`）が、FAO内部アカウント限定なのか、Googleアカウントさえあれば読める（`allAuthenticatedUsers`）のかは未検証。**このサンドボックスには`gcloud`/`gsutil`が無く、hfuさん個人のGoogle認証も持っていないため、Claude自身では検証できない。hfuさん自身の端末で`gcloud auth login`済みの状態から読み取りを試す、またはhfuさん自身のブラウザ（ログイン済み）で`https://storage.cloud.google.com/fao-gismgr-asis-data/...`を開く、のいずれかで確認可能
+- ~~ASI-D/MVHI-Dバケットが個人Googleアカウントで読めるか~~ → **解消済み（2026-09-19）**。hfuさん個人のアカウントで読めることを実測確認した（後述のエントリ参照）
 - `dwg7/ferspas57`とこのプロジェクトの関係
 - `/home/stars/data`への書き込み方法（gatekeeper経由PR／既存の信頼済みアクセスの有無）
 
@@ -280,3 +280,38 @@ hfu個人のグローバル指示にある「複数プロジェクトに横断�
 - 合計値は約123,562〜131,071 ha/年。Bangladesh版と異なり1992〜1994年は同一値にならず、2002年頃から2017年頃にかけて緩やかに減少した後、2018年以降に増加へ転じるという、より複雑な推移を示す
 - 境界マスクを行わないため、矩形内は全ピクセルが実データ（NoDataは一切発生しない）。地図はHokkaidoと樺太の輪郭が薄く視認でき、農地の集中箇所（Bangladesh版と同じ北海道北西部相当の位置）も確認できた
 - ページ（`docs/Case2-GHG-4-14-5/index.html`）を並行処理対応のローカルサーバー（`npx http-server`）で実機確認。STAC discovery（31件）・地図表示（963ms）・時系列表示すべて正常に動作
+
+## 2026-09-19: Case 1（ASI-D）のTier B問題、hfuさん個人のGoogle認証で解消を確認
+
+前回「未検証」としていたASI-D/MVHI-Dバケット（`fao-gismgr-asis-data`）の認証範囲を、hfuさん自身の個人Googleアカウントで実際に検証した。
+
+### 手順と結果
+
+1. `https://storage.cloud.google.com/fao-gismgr-asis-data/DATA/ASIS/MAPSET/ASI-D/ASIS.ASI-D.2026-08-D2.GS1.LC-C.tif`をhfuさんの個人Googleアカウントでログイン済みのブラウザで開いたところ、**ダウンロードが成功**。取得したファイルは42,741,842バイトで、STAC側のメタデータ（`file:size`）と完全一致。`gdalinfo`で有効なCOG（`LAYOUT=COG`、EPSG:4326、NoData=255、Float32、overview 7段）であることも確認した
+2. このセッションに`gcloud`（Google Cloud SDK）をインストールし、`gcloud auth application-default login`でApplication Default Credentials (ADC)を設定
+3. 初回・2回目の試行は`ERROR: ...cloud-platform scope is required but not consented`で失敗。原因はOAuth同意画面で権限（スコープ）のチェックボックスを選択していなかったことだった（hfuさん本人が確認）。3回目、同意画面で明示的に選択して成功
+4. `GOOGLE_APPLICATION_CREDENTIALS`環境変数でADCを指定し、GDALの`/vsigs/`（Google Cloud Storage仮想ファイルシステム）経由で`gdalinfo`を実行したところ、**ASI-Dの同じアセットを認証付きで正常に読めた**
+
+### 含意
+
+- Tier B（匿名読み取り拒否）は、FAO内部限定ではなく、**個人のGoogleアカウントでも読める**ことが実測で確認された（少なくともこのバケット・このアセットについて）。`allAuthenticatedUsers`相当の権限が付与されている可能性が高い
+- したがって、Case 1もCase 2と同じ「発行時にhfuさんの認証でチェックアウトし、CORS対応で再配布する」パターンに乗せられる。FAO CSIとの相談を待つ必要は、少なくとも技術的な意味では無くなった
+- ただし、チェックアウトスクリプトの実行には認証情報（ADC）が必要なため、Case 2のスクリプトと異なり、**hfuさんの認証済み環境（このセッションを含む、ADC設定済みの間）でしか動かない**。この制約は provenance に明記する
+
+## 2026-09-19: `docs/Discover-4-14-5/` — GeoParquetによる「AOI×全コレクション横断発見」を実装
+
+「一定のAOIについて、大量の組み合わせを分析して意味を引き出す」という方向性を、単一Collectionの発見方法をLive APIからGeoParquetへ置き換えるだけでなく、**Live APIでは実質不可能な横断発見**として実装した。
+
+### 実測結果（AOI: tile 4-14-5、`docs/Case2-GHG-4-14-5/`と同じ）
+
+- ブラウザ内DuckDB-Wasmで`collections.parquet`（1921件）を検索。起動2386ms、クエリ2768ms（初回、コールドスタート込み）
+- **379件がAOIに交差**。うち286件は純粋な全球カバー、**93件は全球ではないのにこのAOIに関係する**collection（地域限定プロダクトがこれだけ埋もれていたということ）
+- カタログ別内訳: GAEZ-V5が126件と突出。WAPOR-3（44）、C3S（23）、ASIS・FAOSTAT（各14）と続く
+- `bbox`列（`STRUCT(xmin,ymin,xmax,ymax)`）だけで矩形重なり判定ができ、**空間拡張機能（spatial extension）のインストールが不要**だった（footprintが矩形として記録されているため、bbox比較がST_Intersectsと等価）。前回の実装より若干シンプルになった
+- 実演: 検索ボックスに"stress"と打つと、ASI-A/ASI-D（お馴染みのASISファミリー）に加えて、**GDVIカタログの"ENV-LWS"（Level of water stress）という、これまで一度も触れていないcollection**が3件中に出てきた。これがまさに「問いが育つ観察」——単一Collectionの深掘りでは出会えない
+
+### 技術的な感触（比較）
+
+- Live STAC APIでこれと同じ「1921件のうちこのAOIに関係するのはどれか」を調べようとすると、collection一覧を取得した上で1921回の個別問い合わせが必要になり、実務上できない
+- 一方、単発の「Collection Xの最新Itemを1件」のような検索は、今回もLive APIの方が圧倒的に軽い（前回の実測: 295 bytes vs 6MB超のwasm起動）。この非対称性は前回の結論通りで、今回の実装でも覆らなかった
+- 結論: GeoParquet+DuckDBは、**個別の検索を代替する技術ではなく、Live APIには無い「横断発見」という新しい機能を追加する技術**として位置づけるのが正しい

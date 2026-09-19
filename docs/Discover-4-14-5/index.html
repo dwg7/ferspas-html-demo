@@ -1,0 +1,264 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Discover: 空間ID 4-14-5に関係する全コレクション</title>
+<style>
+  :root { color-scheme: light dark; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", sans-serif;
+    max-width: 960px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+    line-height: 1.6;
+  }
+  h1 { font-size: 1.4rem; }
+  h2 { font-size: 1.1rem; border-bottom: 1px solid #8884; padding-bottom: 0.3rem; margin-top: 2.5rem; }
+  section { margin-bottom: 1.5rem; }
+  table { border-collapse: collapse; width: 100%; font-size: 0.82rem; }
+  th, td { text-align: left; padding: 0.3rem 0.5rem; border-bottom: 1px solid #8882; vertical-align: top; }
+  th { cursor: pointer; user-select: none; position: sticky; top: 0; background: canvas; }
+  th:hover { color: #2a2; }
+  code { font-size: 0.85em; background: #8882; padding: 0.1em 0.3em; border-radius: 3px; }
+  .status-ok { color: #2a2; }
+  .status-warn { color: #c90; }
+  .status-err { color: #c33; }
+  .meta { font-size: 0.85rem; opacity: 0.75; }
+  .stat { display: inline-block; margin-right: 1.5rem; }
+  .stat .num { font-size: 1.6rem; font-weight: 700; display: block; }
+  .stat .label { font-size: 0.8rem; opacity: 0.7; }
+  ul.limits li { margin-bottom: 0.4rem; }
+  footer { margin-top: 3rem; font-size: 0.8rem; opacity: 0.6; }
+  input[type=search] { font-size: 0.9rem; padding: 0.3rem 0.5rem; width: 100%; max-width: 300px; }
+</style>
+</head>
+<body>
+
+<header>
+  <p class="meta"><a href="../index.html">← FERSPAS static demos</a></p>
+  <h1>Discover: 空間ID 4-14-5に関係する全コレクション</h1>
+  <p>
+    <a href="../Case2-GHG-4-14-5/">Case2-GHG-4-14-5</a>と同じAOI（slippy-map tile <code>z=4/x=14/y=5</code>、地名なし）を使い、
+    FERSPASの<strong>1921コレクションすべて</strong>のうちこのAOIに関係するものを横断的に発見する。
+    単一Collectionの時系列を追うCase 2とは別の問い方——「このAOIについて、他に何があるか」——を試す実験。
+  </p>
+  <p class="meta">
+    データ源: <a href="https://stac.yuiseki.net/fao-ferspas/README.md">yuiseki GeoParquet index</a>（<code>collections.parquet</code>）。
+    FERSPAS Live STAC APIでは1921件を1件ずつ問い合わせる必要があり実質的にできないクエリ。
+  </p>
+</header>
+
+<main>
+
+<section id="stats">
+  <h2>実行結果</h2>
+  <div id="stats-body">読み込み中...（DuckDB-Wasmを起動しています）</div>
+</section>
+
+<section id="table-section">
+  <h2>このAOIに交差するコレクション一覧</h2>
+  <p class="meta">
+    列見出しをクリックすると並び替え。<input type="search" id="filter-input" placeholder="catalog / title で絞り込み">
+  </p>
+  <div id="table-body">-</div>
+</section>
+
+<section id="provenance">
+  <h2>選択理由・出所・制約</h2>
+  <ul class="limits">
+    <li>「交差する」は<code>collections.parquet</code>の<code>bbox</code>（矩形）との重なり判定。footprintは矩形として記録されているため、bbox比較で正確（<code>docs-internal/findings.md</code>参照）。空間拡張機能（spatial extension）は使っていない。</li>
+    <li>yuiseki GeoParquet indexは2026-09-18時点のsnapshot。正本（FERSPAS STAC API）そのものではなくミラー。更新頻度は未確認（<code>docs-internal/findings.md</code>）。</li>
+    <li>「全球カバー」の判定は、bboxがほぼ全球（経度180度、緯度90度近く）かどうかの簡易判定。境界付近の小さな誤差は許容している。</li>
+    <li>このページは発見（discovery）のみを行う。実際の値を読む・集計するには、各Collectionごとに<a href="https://github.com/dwg7/ferspas-html-demo/blob/main/docs-internal/decisions.md">local foundationパターン</a>でのチェックアウトが別途必要。</li>
+    <li>ライセンスはコレクションごとに異なる（一覧の列を参照）。個別に確認せず再配布しないこと。</li>
+  </ul>
+</section>
+
+</main>
+
+<footer>
+  <p>設計判断は<a href="https://github.com/dwg7/ferspas-html-demo/blob/main/CLAUDE.md">CLAUDE.md</a>を参照。</p>
+</footer>
+
+<script type="module">
+import { getJsDelivrBundles, selectBundle, ConsoleLogger, AsyncDuckDB } from "https://cdn.jsdelivr.net/npm/@duckdb/duckdb-wasm@1.29.0/+esm";
+
+const statsEl = document.getElementById('stats-body');
+const tableEl = document.getElementById('table-body');
+const filterInput = document.getElementById('filter-input');
+
+const COLLECTIONS = "https://stac.yuiseki.net/fao-ferspas/collections.parquet";
+// same AOI as docs/Case2-GHG-4-14-5/: slippy-map tile z=4/x=14/y=5
+const AOI = { xmin: 135.0, ymin: 40.97989806962013, xmax: 157.5, ymax: 55.7765730186677 };
+
+function el(tag, attrs = {}, children = []) {
+  const node = document.createElement(tag);
+  for (const [k, v] of Object.entries(attrs)) {
+    if (k === 'text') node.textContent = v;
+    else node.setAttribute(k, v);
+  }
+  for (const c of [].concat(children)) node.appendChild(c);
+  return node;
+}
+
+const bigintSafe = (_k, v) => typeof v === 'bigint' ? Number(v) : v;
+
+let allRows = [];
+let sortKey = 'catalog';
+let sortDir = 1;
+
+async function main() {
+  const tBoot0 = performance.now();
+  let conn;
+  try {
+    const bundle = await selectBundle(getJsDelivrBundles());
+    const worker_url = URL.createObjectURL(
+      new Blob([`importScripts("${bundle.mainWorker}");`], { type: 'text/javascript' })
+    );
+    const worker = new Worker(worker_url);
+    const db = new AsyncDuckDB(new ConsoleLogger(), worker);
+    await db.instantiate(bundle.mainModule, bundle.pthreadWorker);
+    URL.revokeObjectURL(worker_url);
+    conn = await db.connect();
+  } catch (e) {
+    statsEl.innerHTML = `<p class="status-err">DuckDB-Wasmの起動に失敗しました: ${e.message}</p>`;
+    return;
+  }
+  const tBoot1 = performance.now();
+
+  const tQuery0 = performance.now();
+  let result;
+  try {
+    result = await conn.query(`
+      SELECT
+        catalog, short_id, title, license, unit, item_count,
+        temporal_start, temporal_end, dimensions,
+        bbox.xmin AS xmin, bbox.ymin AS ymin, bbox.xmax AS xmax, bbox.ymax AS ymax
+      FROM read_parquet('${COLLECTIONS}')
+      WHERE bbox.xmin <= ${AOI.xmax} AND bbox.xmax >= ${AOI.xmin}
+        AND bbox.ymin <= ${AOI.ymax} AND bbox.ymax >= ${AOI.ymin}
+      ORDER BY catalog, short_id
+    `);
+  } catch (e) {
+    statsEl.innerHTML = `<p class="status-err">クエリに失敗しました: ${e.message}</p>`;
+    return;
+  }
+  const tQuery1 = performance.now();
+
+  const totalResult = await conn.query(`SELECT count(*) AS n FROM read_parquet('${COLLECTIONS}')`);
+  const total = Number(totalResult.toArray()[0].n);
+
+  allRows = result.toArray().map(r => r.toJSON());
+  const globalCount = allRows.filter(r =>
+    r.xmin <= -179 && r.xmax >= 179 && r.ymin <= -89 && r.ymax >= 89
+  ).length;
+
+  renderStats({
+    bootMs: tBoot1 - tBoot0,
+    queryMs: tQuery1 - tQuery0,
+    total,
+    hit: allRows.length,
+    globalCount,
+  });
+  renderTable(allRows);
+
+  document.querySelectorAll('#table-body th[data-key]').forEach(th => {
+    th.addEventListener('click', () => {
+      const key = th.dataset.key;
+      sortDir = (sortKey === key) ? -sortDir : 1;
+      sortKey = key;
+      renderTable(filteredRows());
+    });
+  });
+  filterInput.addEventListener('input', () => renderTable(filteredRows()));
+}
+
+function filteredRows() {
+  const q = filterInput.value.trim().toLowerCase();
+  if (!q) return allRows;
+  return allRows.filter(r =>
+    (r.catalog || '').toLowerCase().includes(q) ||
+    (r.short_id || '').toLowerCase().includes(q) ||
+    (r.title || '').toLowerCase().includes(q)
+  );
+}
+
+function renderStats({ bootMs, queryMs, total, hit, globalCount }) {
+  statsEl.innerHTML = '';
+  const stats = [
+    [String(hit), `AOI(4-14-5)に交差`],
+    [String(total), `全コレクション数`],
+    [String(globalCount), `うち全球カバー`],
+    [String(hit - globalCount), `全球ではないが交差`],
+  ];
+  const row = el('div');
+  for (const [num, label] of stats) {
+    row.appendChild(el('span', { class: 'stat' }, [
+      el('span', { class: 'num', text: num }),
+      el('span', { class: 'label', text: label }),
+    ]));
+  }
+  statsEl.appendChild(row);
+  statsEl.appendChild(el('p', {
+    class: 'meta',
+    text: `DuckDB-Wasm起動: ${bootMs.toFixed(0)}ms。クエリ実行: ${queryMs.toFixed(0)}ms（1921件全体に対する横断検索）。`
+  }));
+}
+
+function fmtDate(ts) {
+  if (ts === null || ts === undefined) return '';
+  const d = new Date(Number(ts));
+  if (isNaN(d.getTime())) return '';
+  return d.toISOString().slice(0, 10);
+}
+
+function renderTable(rows) {
+  const sorted = rows.slice().sort((a, b) => {
+    const av = a[sortKey], bv = b[sortKey];
+    if (av === bv) return 0;
+    if (av === null || av === undefined) return 1;
+    if (bv === null || bv === undefined) return -1;
+    return (av > bv ? 1 : -1) * sortDir;
+  });
+
+  tableEl.innerHTML = '';
+  const table = el('table');
+  const cols = [
+    ['catalog', 'Catalog'],
+    ['short_id', 'short_id'],
+    ['title', 'Title'],
+    ['unit', 'Unit'],
+    ['item_count', 'Items'],
+    ['license', 'License'],
+    ['temporal_start', 'Since'],
+  ];
+  const thead = el('thead', {}, el('tr', {}, cols.map(([key, label]) =>
+    el('th', { 'data-key': key, text: label + (sortKey === key ? (sortDir > 0 ? ' ▲' : ' ▼') : '') })
+  )));
+  table.appendChild(thead);
+  const tbody = el('tbody');
+  for (const r of sorted) {
+    const portalUrl = `https://data.apps.fao.org/remote-sensing-portal/collections/${encodeURIComponent(r.short_id)}`;
+    const tr = el('tr', {}, [
+      el('td', { text: r.catalog || '' }),
+      el('td', {}, el('a', { href: portalUrl, text: r.short_id || '' })),
+      el('td', { text: r.title || '' }),
+      el('td', { text: r.unit || '' }),
+      el('td', { text: r.item_count != null ? Number(r.item_count).toLocaleString() : '' }),
+      el('td', { text: r.license || '' }),
+      el('td', { text: fmtDate(r.temporal_start) }),
+    ]);
+    tbody.appendChild(tr);
+  }
+  table.appendChild(tbody);
+  tableEl.innerHTML = '';
+  tableEl.appendChild(el('p', { class: 'meta', text: `${sorted.length}件表示` }));
+  tableEl.appendChild(table);
+}
+
+main();
+</script>
+
+</body>
+</html>
