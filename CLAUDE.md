@@ -158,6 +158,16 @@ FAOのグローバルデータを北海道について検証し、北海道だ�
 - 執務PCに計算環境がない
 - 静的配信によって保守負担を下げられる
 
+### 4.8 Pre-harvested metadata mirrors are welcome, but stay traceable
+
+STACメタデータそのものも、ラスターと同様に発行時収穫の対象になり得る。dwg7 colleagueのyuisekiによる`stac.yuiseki.net/fao-ferspas`（GeoParquetによるFERSPAS STAC索引）はその実例であり、詳細は7章に記録する。
+
+pre-harvested indexを使う場合も、4.7と同じ規律を適用する。
+
+- 正本（FERSPAS STAC API）ではなくミラーであることを明示する
+- snapshot日付を記録する
+- ライセンスはコレクションごとに異なるため、indexの列だけで判断せず個別に確認する
+
 ## 5. 成果物の初期構成
 
 公開用成果は`docs/`以下に置き、GitHub Pages等からそのまま公開できる構成にする。
@@ -211,14 +221,104 @@ FAOのグローバルデータを北海道について検証し、北海道だ�
 
 将来、参照元側の命名が修正された場合は、互換URLまたはredirectを残した上で`BGD`へ統一することを検討する。
 
-## 7. 共通アーキテクチャ
+## 7. Yuiseki GeoParquet index: 事前収穫された静的STACメタデータ
+
+### 7.1 これは何か
+
+dwg7 colleagueのyuisekiが、FERSPAS STAC API（`https://data.apps.fao.org/geospatial/search/stac`）の全メタデータを収穫し、2つのGeoParquetファイルとして公開している。
+
+- `https://stac.yuiseki.net/fao-ferspas/collections.parquet`（1,921コレクション）
+- `https://stac.yuiseki.net/fao-ferspas/items.parquet`（639,947アセット、2026-09-18時点のsnapshot）
+- ソース: https://github.com/yuiseki/study-un-fao-ferspas
+- README: https://stac.yuiseki.net/fao-ferspas/README.md
+
+保持するのはメタデータのみである。ラスター本体はFAOのサーバーに残り、テーブルはURLと宣言サイズを持つ（宣言サイズ合計は約21TB）。バルクダウンロードは発生しない。
+
+### 7.2 この設計原則との一致
+
+これは本リポジトリの4.3「Processing at publication time, not request time」および4.8と同型の実践である。相違点は対象のレイヤーだけである。本リポジトリはラスター（COG）を発行時に地域化するが、yuisekiの実践はSTACメタデータそのものを発行時に収穫し、クエリ可能な静的ファイルへ固める。
+
+```text
+FERSPAS STAC API（live、CORS未検証、POST /search必須）
+    ↓ harvest（yuiseki、発行時に一度）
+collections.parquet / items.parquet（静的、HTTPS配信）
+    ↓ query（DuckDB、HTTP range readで部分読取。ダウンロード不要）
+Item / Asset選択の材料
+```
+
+これは、バルクダウンロードや常駐サーバーを介さず、クラウドネイティブなフォーマット（COG、GeoParquet）をHTTP Range Requestで直接クエリするという、本リポジトリが目指す方向性と同じ発想の実例である。
+
+### 7.3 Item/Asset discoveryへの適用候補
+
+2026-09-19の実測で、FERSPAS Live STAC API自体もCORSが通ることを確認した（`docs-internal/findings.md`）。したがって「CORSが通らないからGeoParquetが必要」という理由づけは成立しない。優劣はクエリの性質に依存する。
+
+```text
+A. Live STAC API（POST /search）
+   - Notebookが行う方式そのもの
+   - CORS確認済み（2026-09-19）。実測295 bytesの1往復で完結
+   - 単発の的を絞った検索（例: 最新1件）に向く
+   - 常に最新
+   - 複数コレクション横断や大量列挙にはページングが要る
+
+B. yuiseki GeoParquet index（DuckDBでクエリ）
+   - CORS確認済み（2026-09-19）
+   - 複雑・横断・大量のクエリ（例: 1921コレクションのうちAOIと交差するものを一括抽出）に向く
+   - 更新はsnapshot日付に依存する。取得日時をprovenanceへ記録する
+```
+
+どちらか一方を教義にしない。詳細は`docs-internal/decisions.md`「GeoParquet/DuckDBの使いどころを、発行時とブラウザ内で分離する」を参照。要点だけ記すと次のとおり。
+
+- Case 1/2のような、答えが発行時に一度決まる固定的な問いは、`duckdb` CLIを診断/発行パイプラインで叩き、結果を静的JSONとして書き出す（4.3節）。**利用者のブラウザはduckdb-wasmをロードしない。**
+- 利用者が対話的にクエリを変える場面（21章 Phase 5）に限り、ブラウザ内duckdb-wasmを検討する。Phase 1–4では不要と判断している。
+
+### 7.4 スキーマの要点（参照用）
+
+`collections.parquet`
+
+- `id`はfull API id（`fao-gismgr:<CATALOG>:raster:<KIND>:<SHORT_ID>`）。`catalog`/`kind`/`short_id`は分解済み
+- `dimensions`/`dimension_values`: そのコレクションがフィルタできる次元と語彙
+- `item_count`: API集計エンドポイントの値と一致することが確認済み
+- `license`: コレクションごとのライセンス（CC-BY-4.0、CC-BY-SA-4.0、CC-BY-NC-SA-4.0、notspecified、other-at、other-openが混在。非商用ライセンスを含むため、地域派生成果を作る前に個別に確認する）
+
+`items.parquet`
+
+- `dims`: そのファイルが固定される各カテゴリカル次元の値。`season`/`lct`/`crop`/`depth`/`stats`/`clim`/`period`/`ssp`/`tech`は個別カラムとしても持つ
+- `data_href`（HTTPS）/`data_gs_href`（GCS）/`file_size`
+- `gismgr_item_id`: FAOの旧ドット区切り形式（例: `fao-gismgr/ASIS/mapsets/MVHI-D/ASIS.MVHI-D.1984-01-D1.GS1.LC-C`）。**Notebookのpystac-client経由の`item.id`はこの形式と一致する**（`id`列のコロン/ハイフン区切り形式ではない）。Notebookのregexをそのまま使う場合は`gismgr_item_id`を見ること（2026-09-19、MVHI-D多年平均を扱う別Notebook事例で確認）
+- `bbox`（`STRUCT(xmin, ymin, xmax, ymax)`）と`geometry`（`GEOMETRY`）を**item単位でも**持つ。ASISファミリー等のグローバルdekadalプロダクトはitem自体がほぼ全球（例: 実測でxmin=-180, ymin=-56.0, xmax=180.0, ymax=75.0）であるため、STAC検索時点でのAOI（北海道等）によるbbox絞り込みは実質無効。絞り込みは常に「対象範囲内の処理」の段階で行う（`docs-internal/findings.md`）
+- `start_datetime`/`end_datetime`は`TIMESTAMP`型（epoch msの`BIGINT`ではない）
+- 全アセットが`.tif`かつ`image/tiff; application=geotiff; profile=cloud-optimized`（COG）で統一されている。これは14章のCOG検証（Gate 5）の一部を既知の事実として引き継げることを意味するが、鵜呑みにせず個別アセットでの実地検証（Range Request、CRS、NoData）は省略しない
+
+### 7.5 診断とprovenanceへの反映
+
+- `diagnostics/Justfile`に、live API検索の代わりにyuisekiのGeoParquetをクエリする診断タスクを追加してよい（例: `just yuiseki-collections`、`just yuiseki-items`）。19章のtool listへ`duckdb`（spatial extension込み）を追加する
+- yuisekiのindexを経由してItem/Assetを選んだ場合、provenance（13章）へ次を明記する
+  - 収穫元: yuiseki GeoParquet index（URLとsnapshot日付）
+  - Live STAC APIとの整合性を確認したか、確認した日付
+  - このindexが正本（source of truth）ではなく、FERSPAS STAC APIの派生ミラーであること
+- 全行で同一の値（例: media type）は列として持たず既知の事実として記録するという、yuisekiの冗長排除の考え方は、本リポジトリの集計JSONやtask YAML設計でも参考にしてよい
+
+### 7.6 帰属
+
+このindexはyuiseki（https://github.com/yuiseki/study-un-fao-ferspas）の成果である。本リポジトリで参照・利用する場合は出典を明記する。yuisekiのindex自体もメタデータのみを再配布しラスター本体を再配布しないという性質を、参照・派生時も維持する。
+
+### 7.7 これは本筋ではなく、並行するトラックである
+
+「複雑・横断・大量」のクエリが存分にできること自体は、Case 1/2という**Notebookの移植**という直近の目標には必須ではない。その価値は、次の2つの目的のための内部ツールとしてある。
+
+- 私たち自身が「ナラティブの材料となるユースケース」「Userの問い」を発見するための探索手段
+- 将来、この探索レイヤーへ生成AIを組み込み、Userの次の問いを提案する仕組みへ発展させる可能性（18章「Staccato / AI」の候補）
+
+これは「Jupyter NotebookにおけるFERSPASの使用をブラウザへ移植する」という本筋とは別の、並行するトラックとして扱う。混同しない。詳細は`docs-internal/decisions.md`を参照。
+
+## 8. 共通アーキテクチャ
 
 ```text
 Task YAML
     ↓ fetch + parse
 Browser JavaScript
     ↓ fetch
-FERSPAS STAC API
+FERSPAS STAC API（live）または yuiseki GeoParquet index（7章）
     ↓
 Item / Asset selection
     ↓
@@ -245,7 +345,7 @@ Notebook cells          → visible stages, evidence, and explanations
 
 NotebookのPythonコードをJavaScriptへ逐語移植しない。Notebookが実践するユーザーストーリー、判断、処理、成果をWebの構造へ翻訳する。
 
-## 8. Task YAML
+## 9. Task YAML
 
 各HTMLのタスク定義は、原則として`tasks/`のYAMLへ分離する。
 
@@ -260,14 +360,14 @@ YAMLは単純な構造に限定する。
 
 HTMLから`../tasks/...`を取得するとGitHub Pagesの配置や別ホストへのコピーで壊れやすい場合、公開用task YAMLを`docs/tasks/`へコピーまたは生成してよい。正本と公開物の関係をREADMEに記録する。
 
-## 9. Case 1: ASIS latest
+## 10. Case 1: ASIS latest
 
-### 9.1 参照元
+### 10.1 参照元
 
 - `Case1-ASIS-latest-Italy.ipynb`
 - Collection: `ASI-D`
 
-### 9.2 起点となるタスク
+### 10.2 起点となるタスク
 
 ```text
 最近のASI-D Itemを検索
@@ -281,7 +381,7 @@ GeoTIFF / COG Assetを選択
 対象地域で表示
 ```
 
-### 9.3 Italy版
+### 10.3 Italy版
 
 `docs/Case1-ASIS-latest-Italy.html`
 
@@ -297,15 +397,15 @@ GeoTIFF / COG Assetを選択
 - Italy境界を表示できる
 - palette、NoData、CRS、provenance、制約を確認できる
 
-物理的なcropとダウンロード用GeoTIFF生成は必須ではない。
+物理的なcropとダウンロード用GeoTIFF生成は必須ではない**が、この前提はItaly版の実アセットで未検証**。北海道側の同種アセット（ASI-D、`fao-gismgr-asis-data`バケット）は匿名読み取りが拒否されることを2026-09-19に確認しており（`docs-internal/findings.md`、`docs-internal/decisions.md`）、Italy側でも同じ結果になる可能性がある。実装前にItalyの実際のItemで同じ検証を行うこと。
 
-### 9.4 Hokkaido版
+### 10.4 Hokkaido版
 
 `docs/Case1-ASIS-latest-Hokkaido.html`
 
 Italy版のユーザーストーリーを北海道へ移す。
 
-まずsource COGを直接表示できるか確認する。必要な場合は、発行時に次を生成する。
+2026-09-19時点、ASI-Dの実アセット（`fao-gismgr-asis-data`バケット）は匿名読み取りが拒否されることを確認済み（`docs-internal/decisions.md`）。したがって「まずsource COGを直接表示できるか確認する」は、確認した結果として**不可である前提**で進めてよい。発行時に次を生成する。
 
 - 北海道clip
 - 利用目的に適した再投影
@@ -316,9 +416,9 @@ Italy版のユーザーストーリーを北海道へ移す。
 
 Italy版とHokkaido版でHTMLロジックを複製しない。可能な限りtask YAMLとAOI資産の差として表現する。ただし、汎用化が第一試作を遅らせる場合は、Italy版の成立を優先する。
 
-## 10. Case 2: Drained cropland area time series
+## 11. Case 2: Drained cropland area time series
 
-### 10.1 参照元
+### 11.1 参照元
 
 - `Case2-GHG-BDG.ipynb`
 - Collection: `DRAINED-AREA-CROP`
@@ -326,7 +426,7 @@ Italy版とHokkaido版でHTMLロジックを複製しない。可能な限りtas
 
 参照元の冒頭コメントには2020年までとあるが、検索条件、Item一覧、集計結果は2022年まで含む。この差異を既知の事項として記録する。
 
-### 10.2 起点となるタスク
+### 11.2 起点となるタスク
 
 ```text
 1992–2022のItemを検索
@@ -342,14 +442,14 @@ Italy版とHokkaido版でHTMLロジックを複製しない。可能な限りtas
 グラフと選択年の地図を表示
 ```
 
-### 10.3 Bangladesh版
+### 11.3 Bangladesh版
 
 `docs/Case2-GHG-BDG.html`
 
 初期段階では次の三層を区別する。
 
 1. 31年分のSTAC ItemとAssetを発見する
-2. 選択年のCOGを地図表示する
+2. 選択年のCOGを地図表示する（2026-09-19確認: `fao-gismgr-faostat-data`バケットは匿名読み取り自体は通るが、CORSヘッダーがないためブラウザの`fetch()`では読めない。`docs-internal/findings.md`参照。ブラウザで直接表示するには、CORS対応の再ホストが要る）
 3. 年別集計値を時系列で表示する
 
 年別集計は、次の順で実装可能性を評価する。
@@ -363,11 +463,11 @@ D. 重い場合は発行時処理または限定processing serviceへ移す
 
 最初から31年分をブラウザでライブ集計しない。
 
-### 10.4 Hokkaido版
+### 11.4 Hokkaido版
 
 `docs/Case2-GHG-Hokkaido.html`
 
-北海道版では、グローバルな各年Assetから北海道向けの派生成果を発行する構成を有力候補とする。
+北海道版では、グローバルな各年Assetから北海道向けの派生成果を発行する構成を採る（2026-09-19確認: 原資産バケットにCORSがないため、これは有力候補ではなく前提。`docs-internal/decisions.md`参照）。
 
 ```text
 FAO global annual COGs
@@ -387,7 +487,7 @@ static web application
 - Item、Asset、処理方法、境界、投影、NoData、集計規則を表示する
 - 必要ならCOGをダウンロードできるようにする
 
-## 11. Case 2の集計意味論
+## 12. Case 2の集計意味論
 
 Notebookの`band.sum()`をそのまま正しいものと仮定しない。
 
@@ -418,10 +518,11 @@ Notebookの`band.sum()`をそのまま正しいものと仮定しない。
 
 集計は、Notebookと数値が一致するだけでなく、製品仕様上正しい必要がある。
 
-## 12. Regional materialization
+## 13. Regional materialization
 
 北海道向け派生成果には、最低限、次を残す。
 
+- metadata harvest route（live STAC API / 事前収穫index。7章）
 - source STAC API
 - source Collection
 - source Item ID
@@ -469,7 +570,7 @@ Notebookの`band.sum()`をそのまま正しいものと仮定しない。
 }
 ```
 
-## 13. COGとCORS
+## 14. COGとCORS
 
 ブラウザ直接利用するCOGは、次を満たす必要がある。
 
@@ -483,7 +584,7 @@ Notebookの`band.sum()`をそのまま正しいものと仮定しない。
 
 北海道向け派生COGは、これらを発行工程で保証する。
 
-## 14. 表示技術
+## 15. 表示技術
 
 第一候補として、Source Cooperative `cog-viewer`が使用するDevelopment Seed系のbrowser-native raster stackを評価する。
 
@@ -518,7 +619,9 @@ MapLibreを外す理由:
 
 MapLibreを目的化しない。Caseごとに最小の複雑さで成立する技術を選ぶ。
 
-## 15. チャート
+ここで扱うのはラスター表示層である。Item/Asset discovery（メタデータ検索）層でduckdb-wasmを使う場合は7章を参照する。両者は別の関心事として扱い、混同しない。
+
+## 16. チャート
 
 Case 2の時系列表示は、軽量で透明な実装を優先する。
 
@@ -543,7 +646,7 @@ Case 2の時系列表示は、軽量で透明な実装を優先する。
 
 年を選ぶと、対応するCOG、Item metadata、provenanceが同期する構成を目指す。
 
-## 16. Open MCT
+## 17. Open MCT
 
 第一段階ではOpen MCTを必須にしない。
 
@@ -559,7 +662,7 @@ Case 2の時系列表示は、軽量で透明な実装を優先する。
 
 Open MCTは成果を閉じ込める実行基盤ではなく、公開された静的資産やブラウザ処理結果を時間・状態に沿って編成する表示面として扱う。
 
-## 17. Staccato / AI
+## 18. Staccato / AI
 
 初期4ケースの成立前にStaccatoや対話AIを中心へ置かない。
 
@@ -576,7 +679,7 @@ Open MCTは成果を閉じ込める実行基盤ではなく、公開された静
 
 AIはデータ値の意味を根拠なく解釈しない。
 
-## 18. Diagnostics
+## 19. Diagnostics
 
 診断には原則として次を使用する。
 
@@ -585,6 +688,7 @@ curl
 jq
 modern GDAL CLI
 just
+duckdb（spatial extension、yuiseki GeoParquet indexのクエリ用。7章）
 ```
 
 Python、Rust、GoのSTAC clientを初期依存にしない。
@@ -600,11 +704,13 @@ just raster-info
 just verify-cog
 just compare-value
 just build-hokkaido
+just yuiseki-collections
+just yuiseki-items
 ```
 
 複雑なJSON処理は必要に応じて`.jq`ファイルへ分離する。
 
-## 19. Feasibility gates
+## 20. Feasibility gates
 
 各Caseは次を順に確認する。
 
@@ -620,6 +726,7 @@ just build-hokkaido
 - `/search`へPOSTできる
 - CORSが成立する
 - Item一覧を取得できる
+- （代替経路）yuiseki GeoParquet indexでCORSと必要なクエリが成立する（7章）
 
 ### Gate 3: Selection
 
@@ -657,9 +764,31 @@ just build-hokkaido
 - task、Item、Asset、処理、結果が記録される
 - Web画面がなくても元資産と派生成果を追跡できる
 
-## 20. 実装順序
+## 21. 実装順序
 
-### Phase 1: Case 1 Italy
+2026-09-19時点、Case 1（ASI-D、`fao-gismgr-asis-data`バケット）は匿名読み取りが拒否されることを確認済みで、FAO CSIへの相談が必要（`docs-internal/decisions.md`）。相談はlaunchが落ち着いてから行う方針のため、Case 2を先に進める。
+
+### Phase 1: Case 2 Bangladesh
+
+1. 1992–2022 Item discovery
+2. 年一覧
+3. 一年分のCOG表示
+4. Notebookの集計値を静的JSONで表示
+5. 一年分のbrowser-side集計を試す
+6. Notebook値と比較
+7. 31年分の実行方式を判断
+
+### Phase 2: Case 2 Hokkaido
+
+1. 北海道で製品利用が意味を持つか確認
+2. 年別北海道COGを発行
+3. 年別集計JSONを発行
+4. static chart and map
+5. provenance and limitations
+
+### Phase 3: Case 1 Italy（FAO CSIとの相談待ち、保留）
+
+ASI-Dバケットの匿名アクセス問題が解決する、または回避策が決まるまで着手しない。
 
 1. task YAML
 2. page shell
@@ -670,31 +799,13 @@ just build-hokkaido
 7. Italy boundary
 8. provenance and limitations
 
-### Phase 2: Case 1 Hokkaido
+### Phase 4: Case 1 Hokkaido（Phase 3に同じく保留）
 
 1. AOI差替え
 2. source COG direct rendering
 3. 必要なら北海道向けCOG生成
 4. CRSとpalette検証
 5. provenance
-
-### Phase 3: Case 2 Bangladesh
-
-1. 1992–2022 Item discovery
-2. 年一覧
-3. 一年分のCOG表示
-4. Notebookの集計値を静的JSONで表示
-5. 一年分のbrowser-side集計を試す
-6. Notebook値と比較
-7. 31年分の実行方式を判断
-
-### Phase 4: Case 2 Hokkaido
-
-1. 北海道で製品利用が意味を持つか確認
-2. 年別北海道COGを発行
-3. 年別集計JSONを発行
-4. static chart and map
-5. provenance and limitations
 
 ### Phase 5: Extension
 
@@ -710,7 +821,7 @@ just build-hokkaido
 - Staccato / AI
 - bounded processing service
 
-## 21. Claude Codeの役割
+## 22. Claude Codeの役割
 
 Claude Codeは共同設計者・実装者として次を守る。
 
@@ -731,14 +842,15 @@ Claude Codeは共同設計者・実装者として次を守る。
 15. 重要な判断を`docs-internal/decisions.md`へ記録する
 16. Userの次の問いを生む観察を優先する
 17. UIの完成度より、機能、意味、再現性を優先する
+18. yuisekiのGeoParquet indexのような事前収穫metadata mirrorは、正本ではなくミラーとして扱い、snapshot日付を記録する（4.8、7章）
 
-## 22. Claude Codeが最初に行うこと
+## 23. Claude Codeが最初に行うこと
 
 実装前に次を調査・報告する。
 
 1. 参照元`FERSPAS_demo`のCase 1とCase 2の現在内容
-2. FERSPAS STAC APIのCORS
-3. 使用AssetのCORSとRange Request
+2. ~~FERSPAS STAC APIのCORS~~ → 2026-09-19確認済み。GET/OPTIONS/POST `/search`いずれも`access-control-allow-origin: *`（`docs-internal/findings.md`）
+3. ~~使用AssetのCORSとRange Request~~ → 2026-09-19確認済み。ASI-D（`fao-gismgr-asis-data`）は匿名読み取り自体が拒否される（Googleログインへリダイレクト）。DRAINED-AREA-CROP（`fao-gismgr-faostat-data`）は匿名読み取りは通るがCORSヘッダーがない。いずれもブラウザから直接は読めない（`docs-internal/findings.md`）
 4. AssetのCOG適合性
 5. AssetのCRS、NoData、bands、value range
 6. ASI-DのGS、LC、time phase、paletteの意味
@@ -748,11 +860,12 @@ Claude Codeは共同設計者・実装者として次を守る。
 10. Hokkaido向けmaterializationの必要性
 11. Source Cooperative / Development Seed方式の適用可能性
 12. MapLibre方式の適用可能性
-13. 最小の技術構成
+13. yuiseki GeoParquet index（stac.yuiseki.net/fao-ferspas）のCORS、snapshot鮮度、live STAC APIとの数値整合性
+14. 最小の技術構成
 
 調査後に、小さなcommit sequenceを提案する。実装は承認を待たず、明らかに安全な第一歩から進めてよいが、重大なアーキテクチャ変更は`docs-internal/decisions.md`へ記録する。
 
-## 23. 禁止する短絡
+## 24. 禁止する短絡
 
 ### Notebook一般を置き換えようとする
 
@@ -786,7 +899,11 @@ Notebookは探索と方法開発に優れる。本リポジトリは成熟した
 
 本リポジトリの主要Userはブラウザだけで利用できることを前提とする。
 
-## 24. 成功の評価軸
+### Pre-harvested indexを無条件に正本と扱う
+
+yuisekiのGeoParquet indexはsnapshot時点のミラーである。snapshot日付、Live APIとの整合性、コレクションごとのライセンスを確認せずに正本（FERSPAS STAC API）と同一視しない。
+
+## 25. 成功の評価軸
 
 ### Functional fidelity
 
@@ -808,15 +925,15 @@ task、Item、Asset、処理、tool version、結果、provenanceが記録され
 
 特定のUIやprocessing serviceが停止しても、元資産、派生成果、task、provenanceを再利用できる。
 
-## 25. 第一段階の成功条件
+## 26. 第一段階の成功条件
 
-次の4ページが`docs/`で公開される。
+最終的に次の4ページが`docs/`で公開される。ただし21章の通り、Case1系（Italy/Hokkaido）はASI-Dバケットのアクセス問題によりFAO CSIとの相談待ちで保留中のため、当面の第一段階はCase2系（Bangladesh/Hokkaido）2ページの公開をもって達成とする。
 
 ```text
-Case1-ASIS-latest-Italy.html
-Case1-ASIS-latest-Hokkaido.html
-Case2-GHG-BDG.html
-Case2-GHG-Hokkaido.html
+Case1-ASIS-latest-Italy.html        （保留、Phase 3）
+Case1-ASIS-latest-Hokkaido.html     （保留、Phase 4）
+Case2-GHG-BDG.html                  （Phase 1）
+Case2-GHG-Hokkaido.html             （Phase 2）
 ```
 
 各ページは、少なくとも次を満たす。
@@ -830,7 +947,7 @@ Case2-GHG-Hokkaido.html
 - Userが何を見ているか説明できる
 - 次に発するべき問いが見える
 
-## 26. 中心フレーズ
+## 27. 中心フレーズ
 
 > **Experts explore in notebooks. Users repeat trusted tasks on the web.**
 
@@ -841,6 +958,8 @@ Case2-GHG-Hokkaido.html
 > **Build regional derivatives with purpose, provenance and responsibility.**
 
 > **Static where possible. Processing where necessary. Portable results always.**
+
+> **Cloud-native formats, queried directly — not downloaded in bulk, not served through a server we run.**
 
 日本語:
 
@@ -853,3 +972,5 @@ Case2-GHG-Hokkaido.html
 > **地域派生成果は、目的、来歴、責任を持って作る。**
 
 > **可能な限り静的にする。必要な部分だけ処理する。成果は常に持ち運べる形で残す。**
+
+> **クラウドネイティブな形式を、直接クエリする。まとめてダウンロードせず、自前のサーバーも介さない。**

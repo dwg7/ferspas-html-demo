@@ -1,0 +1,55 @@
+id: case2-ghg-bdg
+title: "Case 2: Drained cropland area time series (Bangladesh)"
+status: partial
+notebook:
+  source_repo: "https://github.com/un-fao/FERSPAS_demo"
+  source_file: "Case2-GHG-BDG.ipynb"
+  filename_note: "Source filename uses BDG (a transposition of BGD, Bangladesh's ISO 3166-1 alpha-3 code). This task keeps BDG in the filename for traceability and uses BGD everywhere else."
+stac:
+  api_root: "https://data.apps.fao.org/geospatial/search/stac"
+  collection: "fao-gismgr:FAOSTAT:raster:mapsets:DRAINED-AREA-CROP"
+  collection_notebook_value: "DRAINED-AREA-CROP"
+  collection_note: "The notebook's pystac-client code uses the short id 'DRAINED-AREA-CROP'. A raw HTTP POST to /search with that short id returns zero features with no error (confirmed 2026-09-19) — it is not a valid filter for this endpoint, it just silently matches nothing. The full collection id (this field) was found via GET /collections and is what this task actually uses."
+  datetime_start: "1992-01-01T00:00:00Z"
+  datetime_end: "2022-12-31T23:59:59Z"
+  bbox:
+    - 87
+    - 20
+    - 93
+    - 27
+  item_id_like: null
+  limit: 100
+aoi:
+  name: "Bangladesh"
+  iso3: "BGD"
+  boundary_source: "not yet published"
+  boundary_asset: "docs/data/bangladesh.geojson"
+asset:
+  preferred_keys:
+    - data
+    - visual
+    - rendered_preview
+raster:
+  crs: "EPSG:4326"
+  dtype: "Float32"
+  bands: 1
+  nodata: null
+  unit: "ha/y"
+  unit_source: "STAC item properties.cube:variables and asset band metadata (raster:scale=1.0, raster:offset=0.0), confirmed 2026-09-19 via a live /search response. Not merely inferred from the notebook's column label."
+  spatial_resolution_m: 927.6624166662957
+  value_range_observed:
+    min: 0.0
+    max: 81.183
+    checked_item: "FAOSTAT.DRAINED-AREA-CROP.2022.tif"
+aggregation:
+  method: "sum of valid pixels within AOI"
+  status: "not yet computed"
+  known_caveats:
+    - "Source raster has no NoData value defined; 0 is treated as a valid value (no drained cropland), not a mask sentinel."
+    - "spatial_resolution_m (927.66m) is stated as a single global value, not per-latitude; whether per-pixel hectare values already account for latitude-dependent pixel area is unconfirmed."
+    - "Notebook's stated period (1992-2020 in its opening comment) differs from its actual search datetime range (1992-2022); this task uses the actual range."
+access:
+  cors_status: "blocked"
+  cors_note: "The source GCS bucket (fao-gismgr-faostat-data) allows anonymous reads but returns no Access-Control-Allow-Origin header, so browser fetch() cannot read it directly. See docs-internal/findings.md (2026-09-19)."
+provenance_doc: "docs-internal/findings.md"
+decisions_doc: "docs-internal/decisions.md"
