@@ -4,38 +4,48 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>FERSPAS static demos</title>
-<style>
-  body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", sans-serif;
-    max-width: 700px;
-    margin: 2rem auto;
-    padding: 0 1rem;
-    line-height: 1.6;
-  }
-  li { margin-bottom: 0.6rem; }
-  .status { font-size: 0.85rem; opacity: 0.7; }
-</style>
+<link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
-<h1>FERSPAS static demos</h1>
-<p>
-  FAO Essential Remote Sensing Data Product Portal for Agrifood Systems（FERSPAS）のSTAC/地理空間アセットを、
-  ブラウザだけで利用できる形へ変換する探索。詳細は
-  <a href="https://github.com/dwg7/ferspas-html-demo/blob/main/CLAUDE.md">CLAUDE.md</a>を参照。
-</p>
-<ul>
-  <li>
-    <a href="Case2-GHG-BDG/">Case 2: Drained cropland area time series (Bangladesh)</a>
-    <div class="status">Phase 1、実装済み</div>
-  </li>
-  <li>
-    <a href="Case2-GHG-4-14-5/">Case 2: Drained cropland area time series (spatial ID 4-14-5)</a>
-    <div class="status">Phase 2、実装済み。地名を使わずタイル境界をAOIとする実験</div>
-  </li>
-  <li>
-    <a href="Discover-4-14-5/">Discover: 空間ID 4-14-5に関係する全コレクション</a>
-    <div class="status">実験。YuisekiのGeoParquet indexで、単一Collectionではなく「このAOIに関係する全コレクション」を横断発見する</div>
-  </li>
-</ul>
+<div class="page">
+
+<header class="hero">
+  <h1>FERSPAS static demos</h1>
+  <p class="lede">
+    FAO Essential Remote Sensing Data Product Portal for Agrifood Systems（FERSPAS）のSTAC/地理空間アセットを、
+    プログラミング環境を導入できない公務利用者がブラウザだけで利用できる形へ変換する探索。
+  </p>
+  <p class="meta-line">
+    設計判断の一次情報源: <a href="https://github.com/dwg7/ferspas-html-demo/blob/main/CLAUDE.md">CLAUDE.md</a>
+  </p>
+</header>
+
+<main>
+<section>
+  <div class="case-grid">
+    <a class="case-card" href="Case2-GHG-BDG/">
+      <span class="badge badge-implemented">実装済み</span>
+      <h3>排水耕地面積の推移（バングラデシュ）</h3>
+      <p>1992〜2022年、31年分。地図と時系列グラフ、FAO Notebookとの対応関係を確認できる。</p>
+    </a>
+    <a class="case-card" href="Case2-GHG-4-14-5/">
+      <span class="badge badge-implemented">実装済み</span>
+      <h3>排水耕地面積の推移（空間ID 4-14-5）</h3>
+      <p>同じ処理を、地名を使わずタイル区画（空間ID）だけで定義したAOIへ適用した実験。</p>
+    </a>
+    <a class="case-card" href="Discover-4-14-5/">
+      <span class="badge badge-experimental">実験</span>
+      <h3>Discover: 空間IDに関係する全コレクション</h3>
+      <p>1,921コレクションを横断検索し、特定の区画に関係するデータを機械的に洗い出す。</p>
+    </a>
+  </div>
+</section>
+</main>
+
+<footer>
+  <p>Repository: <a href="https://github.com/dwg7/ferspas-html-demo">dwg7/ferspas-html-demo</a></p>
+</footer>
+
+</div>
 </body>
 </html>

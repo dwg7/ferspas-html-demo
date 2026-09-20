@@ -4,68 +4,65 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Discover: 空間ID 4-14-5に関係する全コレクション</title>
+<link rel="stylesheet" href="../assets/style.css">
 <style>
-  :root { color-scheme: light dark; }
-  body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", sans-serif;
-    max-width: 960px;
-    margin: 2rem auto;
-    padding: 0 1rem;
-    line-height: 1.6;
-  }
-  h1 { font-size: 1.4rem; }
-  h2 { font-size: 1.1rem; border-bottom: 1px solid #8884; padding-bottom: 0.3rem; margin-top: 2.5rem; }
-  section { margin-bottom: 1.5rem; }
-  table { border-collapse: collapse; width: 100%; font-size: 0.82rem; }
-  th, td { text-align: left; padding: 0.3rem 0.5rem; border-bottom: 1px solid #8882; vertical-align: top; }
-  th { cursor: pointer; user-select: none; position: sticky; top: 0; background: canvas; }
-  th:hover { color: #2a2; }
-  code { font-size: 0.85em; background: #8882; padding: 0.1em 0.3em; border-radius: 3px; }
-  .status-ok { color: #2a2; }
-  .status-warn { color: #c90; }
-  .status-err { color: #c33; }
-  .meta { font-size: 0.85rem; opacity: 0.75; }
-  .stat { display: inline-block; margin-right: 1.5rem; }
-  .stat .num { font-size: 1.6rem; font-weight: 700; display: block; }
-  .stat .label { font-size: 0.8rem; opacity: 0.7; }
-  ul.limits li { margin-bottom: 0.4rem; }
-  footer { margin-top: 3rem; font-size: 0.8rem; opacity: 0.6; }
-  input[type=search] { font-size: 0.9rem; padding: 0.3rem 0.5rem; width: 100%; max-width: 300px; }
+  input[type=search] { max-width: 300px; }
 </style>
 </head>
 <body>
+<div class="page">
 
-<header>
-  <p class="meta"><a href="../index.html">← FERSPAS static demos</a></p>
+<p class="breadcrumb"><a href="../index.html">← FERSPAS static demos</a></p>
+
+<header class="hero">
+  <span class="badge badge-experimental">実験</span>
   <h1>Discover: 空間ID 4-14-5に関係する全コレクション</h1>
-  <p>
+  <p class="lede">
     <a href="../Case2-GHG-4-14-5/">Case2-GHG-4-14-5</a>と同じAOI（slippy-map tile <code>z=4/x=14/y=5</code>、地名なし）を使い、
     FERSPASの<strong>1921コレクションすべて</strong>のうちこのAOIに関係するものを横断的に発見する。
     単一Collectionの時系列を追うCase 2とは別の問い方——「このAOIについて、他に何があるか」——を試す実験。
   </p>
-  <p class="meta">
-    データ源: <a href="https://stac.yuiseki.net/fao-ferspas/README.md">yuiseki GeoParquet index</a>（<code>collections.parquet</code>）。
+  <p class="meta-line">
+    データ源: <a href="https://stac.yuiseki.net/fao-ferspas/README.md">yuiseki GeoParquet index</a>（<code>collections.parquet</code> / <code>items.parquet</code>）。
     FERSPAS Live STAC APIでは1921件を1件ずつ問い合わせる必要があり実質的にできないクエリ。
   </p>
 </header>
 
 <main>
 
+<section class="panel-meaning" id="meaning">
+  <p class="panel-label">これは何をしているのか</p>
+  <p>
+    FAOは1,900を超えるデータ集合（コレクション）を公開しているが、ある場所に関係するものが何かは、
+    通常は1件ずつ問い合わせて確認するしかない。1,921件すべてを人手や逐次的な検索で確認するのは現実的ではない。
+  </p>
+  <p>
+    このページは、あらかじめ収集された索引（GeoParquet、下記参照）をブラウザ内で直接検索することで、
+    指定した区画に関係するデータ集合を一度に洗い出す。単に「速い」だけでなく、
+    <strong>これまで一度も見たことのないコレクションに気づく</strong>ための手段として位置づけている
+    （下の表を"stress"で絞り込むと一例が見つかる）。
+  </p>
+</section>
+
 <section id="stats">
-  <h2>実行結果</h2>
-  <div id="stats-body">読み込み中...（DuckDB-Wasmを起動しています）</div>
+  <h2 class="section-title">実行結果</h2>
+  <div class="card">
+    <div id="stats-body">読み込み中...（DuckDB-Wasmを起動しています）</div>
+  </div>
 </section>
 
 <section id="table-section">
-  <h2>このAOIに交差するコレクション一覧</h2>
-  <p class="meta">
-    列見出しをクリックすると並び替え。<input type="search" id="filter-input" placeholder="catalog / title で絞り込み">
-  </p>
-  <div id="table-body">-</div>
+  <h2 class="section-title">このAOIに交差するコレクション一覧</h2>
+  <div class="card">
+    <p class="meta">
+      列見出しをクリックすると並び替え。<input type="search" id="filter-input" placeholder="catalog / title で絞り込み">
+    </p>
+    <div id="table-body">-</div>
+  </div>
 </section>
 
-<section id="provenance">
-  <h2>選択理由・出所・制約</h2>
+<section id="provenance" class="panel-provenance">
+  <p class="panel-label">選択理由・出所・制約</p>
   <ul class="limits">
     <li>「交差する」は<code>collections.parquet</code>の<code>bbox</code>（矩形）との重なり判定。footprintは矩形として記録されているため、bbox比較で正確（<code>docs-internal/findings.md</code>参照）。空間拡張機能（spatial extension）は使っていない。</li>
     <li>yuiseki GeoParquet indexは2026-09-18時点のsnapshot。正本（FERSPAS STAC API）そのものではなくミラー。更新頻度は未確認（<code>docs-internal/findings.md</code>）。</li>
@@ -81,6 +78,8 @@
 <footer>
   <p>設計判断は<a href="https://github.com/dwg7/ferspas-html-demo/blob/main/CLAUDE.md">CLAUDE.md</a>を参照。</p>
 </footer>
+
+</div>
 
 <script type="module">
 import { getJsDelivrBundles, selectBundle, ConsoleLogger, AsyncDuckDB } from "https://cdn.jsdelivr.net/npm/@duckdb/duckdb-wasm@1.29.0/+esm";
@@ -106,7 +105,6 @@ function el(tag, attrs = {}, children = []) {
   return node;
 }
 
-const bigintSafe = (_k, v) => typeof v === 'bigint' ? Number(v) : v;
 const sqlLit = (s) => String(s).replace(/'/g, "''");
 const DIMS_COLS = ['season', 'lct', 'crop', 'depth', 'stats', 'clim', 'period', 'ssp', 'tech'];
 
@@ -197,7 +195,7 @@ function renderStats({ bootMs, queryMs, total, hit, globalCount }) {
     [String(globalCount), `うち全球カバー`],
     [String(hit - globalCount), `全球ではないが交差`],
   ];
-  const row = el('div');
+  const row = el('div', { class: 'stat-grid' });
   for (const [num, label] of stats) {
     row.appendChild(el('span', { class: 'stat' }, [
       el('span', { class: 'num', text: num }),
@@ -273,8 +271,8 @@ async function loadItemDetail(catalog, shortId, detailBody) {
       const n = Number(y.n);
       const row = el('div', { style: 'display:flex; align-items:center; gap:0.5rem; font-size:0.78rem;' });
       row.appendChild(el('span', { style: 'width:3.5rem; text-align:right;', text: y.year != null ? String(y.year) : '(不明)' }));
-      const barTrack = el('div', { style: 'flex:1; background:#8882; height:0.7rem;' });
-      const bar = el('div', { style: `width:${maxN ? (100 * n / maxN).toFixed(1) : 0}%; background:#2a2; height:100%;` });
+      const barTrack = el('div', { style: 'flex:1; background:var(--surface-2); height:0.7rem; border-radius:3px;' });
+      const bar = el('div', { style: `width:${maxN ? (100 * n / maxN).toFixed(1) : 0}%; background:var(--accent); height:100%; border-radius:3px;` });
       barTrack.appendChild(bar);
       row.appendChild(barTrack);
       row.appendChild(el('span', { style: 'width:3rem;', text: String(n) }));

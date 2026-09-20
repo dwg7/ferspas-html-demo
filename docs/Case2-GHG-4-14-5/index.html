@@ -4,91 +4,96 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Case 2: Drained cropland area time series (spatial ID 4-14-5)</title>
-<style>
-  :root { color-scheme: light dark; }
-  body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", sans-serif;
-    max-width: 860px;
-    margin: 2rem auto;
-    padding: 0 1rem;
-    line-height: 1.6;
-  }
-  h1 { font-size: 1.4rem; }
-  h2 { font-size: 1.1rem; border-bottom: 1px solid #8884; padding-bottom: 0.3rem; margin-top: 2.5rem; }
-  section { margin-bottom: 1.5rem; }
-  table { border-collapse: collapse; width: 100%; font-size: 0.85rem; }
-  th, td { text-align: left; padding: 0.25rem 0.5rem; border-bottom: 1px solid #8882; }
-  code { font-size: 0.85em; background: #8882; padding: 0.1em 0.3em; border-radius: 3px; }
-  .status-ok { color: #2a2; }
-  .status-warn { color: #c90; }
-  .status-err { color: #c33; }
-  .meta { font-size: 0.85rem; opacity: 0.75; }
-  ul.limits li { margin-bottom: 0.4rem; }
-  footer { margin-top: 3rem; font-size: 0.8rem; opacity: 0.6; }
-</style>
+<link rel="stylesheet" href="../assets/style.css">
 </head>
 <body>
+<div class="page">
 
-<header>
-  <p class="meta"><a href="../index.html">← FERSPAS static demos</a></p>
-  <h1>Case 2: Drained cropland area time series — 空間ID 4-14-5</h1>
-  <p>
+<p class="breadcrumb"><a href="../index.html">← FERSPAS static demos</a></p>
+
+<header class="hero">
+  <span class="badge badge-implemented">実装済み・Phase 2</span>
+  <h1>排水耕地面積の推移 — 空間ID 4-14-5</h1>
+  <p class="lede">
     参照方法論: <a href="https://github.com/un-fao/FERSPAS_demo/blob/main/Case2-GHG-BDG.ipynb">un-fao/FERSPAS_demo — Case2-GHG-BDG.ipynb</a>
-    と同じ処理を、<a href="https://github.com/dwg7/ferspas-html-demo/blob/main/docs/Case2-GHG-BDG/">Bangladesh版</a>とは別のAOIへ適用したもの
-    (Collection: <code>DRAINED-AREA-CROP</code>)
+    と同じ処理を、<a href="../Case2-GHG-BDG/">Bangladesh版</a>とは別のAOIへ適用したもの
+    （Collection: <code>DRAINED-AREA-CROP</code>）
   </p>
-  <p class="meta">
+  <p class="lede">
     このCaseに元になったNotebookは無い。AOIは行政境界や地名ではなく、slippy-map tile
     <code>z=4, x=14, y=5</code>（空間IDの水平方向インデックス、ハイフン区切りで<code>4-14-5</code>）という
     座標上の区画そのもの。「北海道」のような地名も、それを含むより広い地域概念も使わない
     ——地名・地域概念は普遍的な合意を保証しないが、タイル境界は単なる数学的な分割であり、
     その種の主張を一切含まないため。
   </p>
-  <p class="meta">Task定義: <a id="task-link" href="task.yaml">task.yaml</a></p>
+  <p class="meta-line">Task定義: <a id="task-link" href="task.yaml">task.yaml</a></p>
 </header>
 
 <main>
 
+<section class="panel-meaning" id="meaning">
+  <p class="panel-label">この数値が何を意味するか</p>
+  <p>
+    指標そのものは<a href="../Case2-GHG-BDG/">Bangladesh版</a>と同じ「排水耕地面積（Drained Cropland Area、単位ha）」。
+    産出元は「FAO-UN-FAOSTAT」で、活動データの一次情報源は各国がUNFCCC（気候変動枠組条約）へ報告した数値である
+    （<a href="https://github.com/dwg7/ferspas-html-demo/blob/main/docs-internal/findings.md">確認済み</a>）。
+  </p>
+  <p>
+    <strong>このタイルは複数の国・地域にまたがるため、合計値に国や行政区画としての意味は無い。</strong>
+    地図・グラフから分かるのは、このタイル矩形の内側で排水耕地とされる面積が年ごとにどう変わってきたかという
+    座標上の観察であり、特定国の統計値や温室効果ガス排出量そのものではない。
+  </p>
+</section>
+
 <section id="task-info">
-  <h2>このページが検索する条件</h2>
-  <div id="task-info-body">読み込み中...</div>
+  <h2 class="section-title">このページが検索する条件</h2>
+  <div class="card">
+    <div id="task-info-body">読み込み中...</div>
+  </div>
 </section>
 
 <section id="discovery">
-  <h2>1. STAC Item discovery（ブラウザから直接検索）</h2>
-  <div id="discovery-body">読み込み中...</div>
+  <h2 class="section-title"><span class="step-no">1</span>STAC Item discovery（ブラウザから直接検索）</h2>
+  <div class="panel-tech">
+    <p class="panel-label">技術的な詳細</p>
+    <div id="discovery-body">読み込み中...</div>
+  </div>
 </section>
 
 <section id="map">
-  <h2>2. 選択年のCOG地図表示</h2>
-  <p class="meta">
-    原資産（FAOのGCSバケット）はブラウザから直接読めない（CORS未対応、<a href="https://github.com/dwg7/ferspas-html-demo/blob/main/docs-internal/findings.md">findings.md</a>参照）ため、
-    このリポジトリが発行時にタイル境界（<code>4-14-5</code>）でクロップして再配布したコピー（<code>derived/4-14-5-&lt;year&gt;.tif</code>、投影変換なし）を表示する。
-    AOIがタイルの矩形そのものなので、境界ポリゴンによるマスクは行わず、単純な矩形クロップのみ
-    （Bangladesh版との違い）。地図描画ライブラリは使わず、<a href="https://github.com/geotiffjs/geotiff.js">geotiff.js</a>でピクセル値を直接読み、canvasへ塗る。
-  </p>
-  <p>
-    年:
-    <select id="year-select"></select>
-  </p>
-  <canvas id="map-canvas" style="max-width:100%; border:1px solid #8884; image-rendering: pixelated;"></canvas>
-  <div id="map-legend" class="meta"></div>
-  <div id="map-status" class="meta"></div>
+  <h2 class="section-title"><span class="step-no">2</span>選択年のCOG地図表示</h2>
+  <div class="card">
+    <p class="meta">
+      原資産（FAOのGCSバケット）はブラウザから直接読めない（CORS未対応、<a href="https://github.com/dwg7/ferspas-html-demo/blob/main/docs-internal/findings.md">findings.md</a>参照）ため、
+      このリポジトリが発行時にタイル境界（<code>4-14-5</code>）でクロップして再配布したコピー（<code>derived/4-14-5-&lt;year&gt;.tif</code>、投影変換なし）を表示する。
+      AOIがタイルの矩形そのものなので、境界ポリゴンによるマスクは行わず、単純な矩形クロップのみ
+      （Bangladesh版との違い）。地図描画ライブラリは使わず、<a href="https://github.com/geotiffjs/geotiff.js">geotiff.js</a>でピクセル値を直接読み、canvasへ塗る。
+    </p>
+    <p>
+      年:
+      <select id="year-select"></select>
+    </p>
+    <canvas id="map-canvas" style="max-width:100%; border:1px solid var(--border); border-radius:var(--radius-sm); image-rendering: pixelated;"></canvas>
+    <div id="map-legend" class="meta"></div>
+    <div id="map-status" class="meta"></div>
+  </div>
 </section>
 
 <section id="timeseries">
-  <h2>3. 年別集計値の時系列表示</h2>
-  <p class="meta">
-    Section 2と同じ発行時チェックアウトから計算した値（<code>derived/timeseries-4-14-5.json</code>）。
-    集計方法・来歴は<code>derived/provenance-4-14-5.json</code>と<a href="https://github.com/dwg7/ferspas-html-demo/blob/main/scripts/checkout-Case2-GHG-4-14-5.py">scripts/checkout-Case2-GHG-4-14-5.py</a>を参照。
-    合計値はこのタイル矩形内の合計であり、特定の国・行政区画の値ではない。
-  </p>
-  <div id="timeseries-chart"></div>
-  <div id="timeseries-status" class="meta"></div>
+  <h2 class="section-title"><span class="step-no">3</span>年別集計値の時系列表示</h2>
+  <div class="card">
+    <p class="meta">
+      Section 2と同じ発行時チェックアウトから計算した値（<code>derived/timeseries-4-14-5.json</code>）。
+      集計方法・来歴は<code>derived/provenance-4-14-5.json</code>と<a href="https://github.com/dwg7/ferspas-html-demo/blob/main/scripts/checkout-Case2-GHG-4-14-5.py">scripts/checkout-Case2-GHG-4-14-5.py</a>を参照。
+      合計値はこのタイル矩形内の合計であり、特定の国・行政区画の値ではない。
+    </p>
+    <div id="timeseries-chart"></div>
+    <div id="timeseries-status" class="meta"></div>
+  </div>
 </section>
 
-<section id="provenance">
-  <h2>選択理由・出所・制約</h2>
+<section id="provenance" class="panel-provenance">
+  <p class="panel-label">選択理由・出所・制約</p>
   <ul class="limits">
     <li>Collection・日付範囲・集計方法は、Bangladesh版（<code>Case2-GHG-BDG</code>）と同じ参照Notebookの処理をそのまま流用した。AOIの決め方だけがdwg7独自の判断である。</li>
     <li>AOIはslippy-map tile <code>z=4/x=14/y=5</code>（空間IDの水平インデックス）の矩形（東経135.0〜157.5°、北緯40.98〜55.78°）。行政境界・地名を使わない設計判断（<code>docs-internal/decisions.md</code>参照）。</li>
@@ -105,6 +110,8 @@
 <footer>
   <p>Status: <code>implemented</code>。設計判断は<a href="https://github.com/dwg7/ferspas-html-demo/blob/main/CLAUDE.md">CLAUDE.md</a>を参照。</p>
 </footer>
+
+</div>
 
 <script type="module">
 import { load } from "https://cdn.jsdelivr.net/npm/js-yaml@4.1.0/+esm";
@@ -151,7 +158,7 @@ async function main() {
 function renderTaskInfo(task) {
   const s = task.stac;
   taskInfoEl.innerHTML = '';
-  const dl = el('dl');
+  const dl = el('dl', { class: 'kv' });
   const rows = [
     ['STAC API', s.api_root],
     ['Collection', s.collection],
@@ -159,15 +166,14 @@ function renderTaskInfo(task) {
     ['Datetime', `${s.datetime_start.slice(0,10)} 〜 ${s.datetime_end.slice(0,10)}`],
   ];
   for (const [k, v] of rows) {
-    const dt = el('dt', { style: 'font-weight:600; margin-top:0.4rem;' , text: k });
-    const dd = el('dd', { style: 'margin:0 0 0.2rem 0;', text: v });
-    dl.appendChild(dt);
-    dl.appendChild(dd);
+    dl.appendChild(el('dt', { text: k }));
+    dl.appendChild(el('dd', { text: v }));
   }
   taskInfoEl.appendChild(dl);
   if (s.collection_notebook_value && s.collection_notebook_value !== s.collection) {
     taskInfoEl.appendChild(el('p', {
       class: 'status-warn',
+      style: 'margin-top:0.8rem;',
       text: `注記: 参照Notebookは短縮id「${s.collection_notebook_value}」を使うが、このAPIへの直接POSTでは0件になる（エラーにはならない）。実際には完全id「${s.collection}」が必要。`,
     }));
   }
@@ -322,15 +328,15 @@ async function runTimeseries() {
   const svgParts = [];
   svgParts.push(`<svg viewBox="0 0 ${W} ${H}" style="width:100%; max-width:${W}px; height:auto;">`);
   for (const t of yTicks) {
-    svgParts.push(`<line x1="${padL}" y1="${y(t)}" x2="${W - padR}" y2="${y(t)}" stroke="#8882" />`);
+    svgParts.push(`<line x1="${padL}" y1="${y(t)}" x2="${W - padR}" y2="${y(t)}" stroke="currentColor" stroke-opacity="0.15" />`);
     svgParts.push(`<text x="${padL - 6}" y="${y(t) + 3}" font-size="9" text-anchor="end" fill="currentColor">${Math.round(t).toLocaleString()}</text>`);
   }
   for (let i = 0; i < series.length; i += 5) {
     svgParts.push(`<text x="${x(i)}" y="${H - 6}" font-size="9" text-anchor="middle" fill="currentColor">${series[i].year}</text>`);
   }
-  svgParts.push(`<polyline points="${points}" fill="none" stroke="#2a2" stroke-width="1.5" />`);
+  svgParts.push(`<polyline points="${points}" fill="none" stroke="var(--accent, #2a2)" stroke-width="1.5" />`);
   for (let i = 0; i < series.length; i++) {
-    svgParts.push(`<circle cx="${x(i)}" cy="${y(series[i].drained_area_crop_ha)}" r="2" fill="#2a2" />`);
+    svgParts.push(`<circle cx="${x(i)}" cy="${y(series[i].drained_area_crop_ha)}" r="2" fill="var(--accent, #2a2)" />`);
   }
   svgParts.push(`</svg>`);
   timeseriesChartEl.innerHTML = svgParts.join('');

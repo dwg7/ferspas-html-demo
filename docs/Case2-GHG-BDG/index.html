@@ -4,89 +4,89 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Case 2: Drained cropland area time series (Bangladesh)</title>
-<style>
-  :root { color-scheme: light dark; }
-  body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", sans-serif;
-    max-width: 860px;
-    margin: 2rem auto;
-    padding: 0 1rem;
-    line-height: 1.6;
-  }
-  h1 { font-size: 1.4rem; }
-  h2 { font-size: 1.1rem; border-bottom: 1px solid #8884; padding-bottom: 0.3rem; margin-top: 2.5rem; }
-  section { margin-bottom: 1.5rem; }
-  .pending {
-    border: 1px dashed #c90;
-    background: #c901;
-    padding: 0.8rem 1rem;
-    border-radius: 6px;
-  }
-  .pending strong { color: #c90; }
-  table { border-collapse: collapse; width: 100%; font-size: 0.85rem; }
-  th, td { text-align: left; padding: 0.25rem 0.5rem; border-bottom: 1px solid #8882; }
-  code { font-size: 0.85em; background: #8882; padding: 0.1em 0.3em; border-radius: 3px; }
-  .status-ok { color: #2a2; }
-  .status-warn { color: #c90; }
-  .status-err { color: #c33; }
-  .meta { font-size: 0.85rem; opacity: 0.75; }
-  ul.limits li { margin-bottom: 0.4rem; }
-  footer { margin-top: 3rem; font-size: 0.8rem; opacity: 0.6; }
-</style>
+<link rel="stylesheet" href="../assets/style.css">
 </head>
 <body>
+<div class="page">
 
-<header>
-  <p class="meta"><a href="../index.html">← FERSPAS static demos</a></p>
-  <h1>Case 2: Drained cropland area time series — Bangladesh</h1>
-  <p>
+<p class="breadcrumb"><a href="../index.html">← FERSPAS static demos</a></p>
+
+<header class="hero">
+  <span class="badge badge-implemented">実装済み・Phase 1</span>
+  <h1>排水耕地面積の推移 — バングラデシュ</h1>
+  <p class="lede">
     参照元Notebook:
     <a href="https://github.com/un-fao/FERSPAS_demo/blob/main/Case2-GHG-BDG.ipynb">un-fao/FERSPAS_demo — Case2-GHG-BDG.ipynb</a>
-    (Collection: <code>DRAINED-AREA-CROP</code>)
+    （Collection: <code>DRAINED-AREA-CROP</code>）
   </p>
-  <p class="meta">Task定義: <a id="task-link" href="task.yaml">task.yaml</a></p>
+  <p class="meta-line">Task定義: <a id="task-link" href="task.yaml">task.yaml</a></p>
 </header>
 
 <main>
 
+<section class="panel-meaning" id="meaning">
+  <p class="panel-label">この数値が何を意味するか</p>
+  <p>
+    「排水耕地面積（Drained Cropland Area）」は、人為的に排水（暗渠排水・排水路等）が施された農地の面積（単位: ha）。
+    このデータのproducerは「FAO-UN-FAOSTAT」で、活動データの一次情報源は各国がUNFCCC（気候変動枠組条約）へ報告した数値である
+    （<a href="https://github.com/dwg7/ferspas-html-demo/blob/main/docs-internal/findings.md">確認済み</a>）。
+    排水された農地、特に有機質土壌（泥炭地等）は分解によって温室効果ガスを放出する既知の排出源であり、
+    Case名の「GHG」はこの文脈に由来すると考えられる。
+  </p>
+  <p>
+    <strong>ここで見えるのは面積の推移であり、温室効果ガス排出量そのものではない。</strong>
+    排出量の算定には別途排出係数（emission factor）を面積へ掛け合わせる必要があり、本ページはその手前にある
+    「対象地域内で排水耕地とされる面積が年ごとにどう変わってきたか」という観察までを扱う。
+  </p>
+</section>
+
 <section id="task-info">
-  <h2>このページが検索する条件</h2>
-  <div id="task-info-body">読み込み中...</div>
+  <h2 class="section-title">このページが検索する条件</h2>
+  <div class="card">
+    <div id="task-info-body">読み込み中...</div>
+  </div>
 </section>
 
 <section id="discovery">
-  <h2>1. STAC Item discovery（ブラウザから直接検索）</h2>
-  <div id="discovery-body">読み込み中...</div>
+  <h2 class="section-title"><span class="step-no">1</span>STAC Item discovery（ブラウザから直接検索）</h2>
+  <div class="panel-tech">
+    <p class="panel-label">技術的な詳細</p>
+    <div id="discovery-body">読み込み中...</div>
+  </div>
 </section>
 
 <section id="map">
-  <h2>2. 選択年のCOG地図表示</h2>
-  <p class="meta">
-    原資産（FAOのGCSバケット）はブラウザから直接読めない（CORS未対応、<a href="https://github.com/dwg7/ferspas-html-demo/blob/main/docs-internal/findings.md">findings.md</a>参照）ため、
-    このリポジトリが発行時にBangladesh国境でクロップして再配布したコピー（<code>derived/BGD-&lt;year&gt;.tif</code>、投影変換なし）を表示する。
-    地図描画ライブラリは使わず、<a href="https://github.com/geotiffjs/geotiff.js">geotiff.js</a>でピクセル値を直接読み、canvasへ塗る。
-  </p>
-  <p>
-    年:
-    <select id="year-select"></select>
-  </p>
-  <canvas id="map-canvas" style="max-width:100%; border:1px solid #8884; image-rendering: pixelated;"></canvas>
-  <div id="map-legend" class="meta"></div>
-  <div id="map-status" class="meta"></div>
+  <h2 class="section-title"><span class="step-no">2</span>選択年のCOG地図表示</h2>
+  <div class="card">
+    <p class="meta">
+      原資産（FAOのGCSバケット）はブラウザから直接読めない（CORS未対応、<a href="https://github.com/dwg7/ferspas-html-demo/blob/main/docs-internal/findings.md">findings.md</a>参照）ため、
+      このリポジトリが発行時にBangladesh国境でクロップして再配布したコピー（<code>derived/BGD-&lt;year&gt;.tif</code>、投影変換なし）を表示する。
+      地図描画ライブラリは使わず、<a href="https://github.com/geotiffjs/geotiff.js">geotiff.js</a>でピクセル値を直接読み、canvasへ塗る。
+    </p>
+    <p>
+      年:
+      <select id="year-select"></select>
+    </p>
+    <canvas id="map-canvas" style="max-width:100%; border:1px solid var(--border); border-radius:var(--radius-sm); image-rendering: pixelated;"></canvas>
+    <div id="map-legend" class="meta"></div>
+    <div id="map-status" class="meta"></div>
+  </div>
 </section>
 
 <section id="timeseries">
-  <h2>3. 年別集計値の時系列表示</h2>
-  <p class="meta">
-    Section 2と同じ発行時チェックアウトから計算した値（<code>derived/timeseries-BGD.json</code>）。
-    集計方法・来歴は<code>derived/provenance-BGD.json</code>と<a href="https://github.com/dwg7/ferspas-html-demo/blob/main/scripts/checkout-Case2-GHG-BDG.py">scripts/checkout-Case2-GHG-BDG.py</a>を参照。
-  </p>
-  <div id="timeseries-chart"></div>
-  <div id="timeseries-status" class="meta"></div>
+  <h2 class="section-title"><span class="step-no">3</span>年別集計値の時系列表示</h2>
+  <div class="card">
+    <p class="meta">
+      Section 2と同じ発行時チェックアウトから計算した値（<code>derived/timeseries-BGD.json</code>）。
+      集計方法・来歴は<code>derived/provenance-BGD.json</code>と<a href="https://github.com/dwg7/ferspas-html-demo/blob/main/scripts/checkout-Case2-GHG-BDG.py">scripts/checkout-Case2-GHG-BDG.py</a>を参照。
+    </p>
+    <div id="timeseries-chart"></div>
+    <div id="timeseries-status" class="meta"></div>
+  </div>
 </section>
 
-<section id="provenance">
-  <h2>選択理由・出所・制約</h2>
+<section id="provenance" class="panel-provenance">
+  <p class="panel-label">選択理由・出所・制約</p>
   <ul class="limits">
     <li>Collection・BBOX・日付範囲は、参照Notebookのコードセルからそのまま採用した（推測ではなく実コードの値）。</li>
     <li>参照Notebook冒頭のコメントは「1992年から2020年まで」とあるが、実際の検索条件は2022年12月31日までを含む。この食い違いは既知の事項として扱う。</li>
@@ -103,6 +103,8 @@
 <footer>
   <p>Status: <code>implemented</code>（Phase 1、STAC discovery・地図表示・時系列表示のすべてを実装済み）。設計判断は<a href="https://github.com/dwg7/ferspas-html-demo/blob/main/CLAUDE.md">CLAUDE.md</a>を参照。</p>
 </footer>
+
+</div>
 
 <script type="module">
 import { load } from "https://cdn.jsdelivr.net/npm/js-yaml@4.1.0/+esm";
@@ -149,7 +151,7 @@ async function main() {
 function renderTaskInfo(task) {
   const s = task.stac;
   taskInfoEl.innerHTML = '';
-  const dl = el('dl');
+  const dl = el('dl', { class: 'kv' });
   const rows = [
     ['STAC API', s.api_root],
     ['Collection', s.collection],
@@ -157,15 +159,14 @@ function renderTaskInfo(task) {
     ['Datetime', `${s.datetime_start.slice(0,10)} 〜 ${s.datetime_end.slice(0,10)}`],
   ];
   for (const [k, v] of rows) {
-    const dt = el('dt', { style: 'font-weight:600; margin-top:0.4rem;' , text: k });
-    const dd = el('dd', { style: 'margin:0 0 0.2rem 0;', text: v });
-    dl.appendChild(dt);
-    dl.appendChild(dd);
+    dl.appendChild(el('dt', { text: k }));
+    dl.appendChild(el('dd', { text: v }));
   }
   taskInfoEl.appendChild(dl);
   if (s.collection_notebook_value && s.collection_notebook_value !== s.collection) {
     taskInfoEl.appendChild(el('p', {
       class: 'status-warn',
+      style: 'margin-top:0.8rem;',
       text: `注記: 参照Notebookは短縮id「${s.collection_notebook_value}」を使うが、このAPIへの直接POSTでは0件になる（エラーにはならない）。実際には完全id「${s.collection}」が必要。`,
     }));
   }
@@ -325,15 +326,15 @@ async function runTimeseries() {
   const svgParts = [];
   svgParts.push(`<svg viewBox="0 0 ${W} ${H}" style="width:100%; max-width:${W}px; height:auto;">`);
   for (const t of yTicks) {
-    svgParts.push(`<line x1="${padL}" y1="${y(t)}" x2="${W - padR}" y2="${y(t)}" stroke="#8882" />`);
+    svgParts.push(`<line x1="${padL}" y1="${y(t)}" x2="${W - padR}" y2="${y(t)}" stroke="currentColor" stroke-opacity="0.15" />`);
     svgParts.push(`<text x="${padL - 6}" y="${y(t) + 3}" font-size="9" text-anchor="end" fill="currentColor">${Math.round(t).toLocaleString()}</text>`);
   }
   for (let i = 0; i < series.length; i += 5) {
     svgParts.push(`<text x="${x(i)}" y="${H - 6}" font-size="9" text-anchor="middle" fill="currentColor">${series[i].year}</text>`);
   }
-  svgParts.push(`<polyline points="${points}" fill="none" stroke="#2a2" stroke-width="1.5" />`);
+  svgParts.push(`<polyline points="${points}" fill="none" stroke="var(--accent, #2a2)" stroke-width="1.5" />`);
   for (let i = 0; i < series.length; i++) {
-    svgParts.push(`<circle cx="${x(i)}" cy="${y(series[i].drained_area_crop_ha)}" r="2" fill="#2a2" />`);
+    svgParts.push(`<circle cx="${x(i)}" cy="${y(series[i].drained_area_crop_ha)}" r="2" fill="var(--accent, #2a2)" />`);
   }
   svgParts.push(`</svg>`);
   timeseriesChartEl.innerHTML = svgParts.join('');
