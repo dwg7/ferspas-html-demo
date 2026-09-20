@@ -1,0 +1,43 @@
+{
+  "generated_at": "2026-09-20T10:59:14.308917+00:00",
+  "generator": "scripts/checkout-Case1-ASIS-latest-Italy.py",
+  "stac_api": "https://data.apps.fao.org/geospatial/search/stac",
+  "collection": "fao-gismgr:ASIS:raster:mapsets:ASI-D",
+  "notebook_reference": "https://github.com/un-fao/FERSPAS_demo/blob/main/Case1-ASIS-latest-Italy.ipynb",
+  "entries": [
+    {
+      "dekad": "2026-08-11",
+      "source": {
+        "collection": "fao-gismgr:ASIS:raster:mapsets:ASI-D",
+        "item_id": "fao-gismgr:ASIS:raster:mapsets:ASI-D:items:ASIS-ASI-D-2026-08-D2-GS1-LC-C",
+        "gismgr_item_id": "fao-gismgr/ASIS/mapsets/ASI-D/ASIS.ASI-D.2026-08-D2.GS1.LC-C",
+        "asset_href": "https://storage.cloud.google.com/fao-gismgr-asis-data/DATA/ASIS/MAPSET/ASI-D/ASIS.ASI-D.2026-08-D2.GS1.LC-C.tif",
+        "asset_gs_href": "gs://fao-gismgr-asis-data/DATA/ASIS/MAPSET/ASI-D/ASIS.ASI-D.2026-08-D2.GS1.LC-C.tif",
+        "license": "CC-BY-4.0",
+        "source_generation": null,
+        "source_hash_md5_or_crc32c": null
+      },
+      "derivation": {
+        "aoi_name": "Italy",
+        "aoi_iso3": "ITA",
+        "aoi_geometry_source": "Natural Earth 10m admin-0 countries (public domain), ISO_A3=ITA",
+        "source_crs": "EPSG:4326",
+        "output_crs": "EPSG:4326",
+        "operation": "cutline-mask-and-crop (no reprojection, no resampling)",
+        "resampling": "none",
+        "nodata_output": -1,
+        "nodata_source": 255,
+        "nodata_note": "Source NoData (255) is also used in-band as a 'water/background' classification code (see docs-internal/findings.md, metadata inconsistency between classification:classes and supplemental_information for codes 251-255). This checkout does not alter source pixel values inside the AOI; -1 is used only for pixels outside Italy introduced by the cutline, to avoid conflating the two.",
+        "auth_note": "Anonymous reads are denied for this bucket (fao-gismgr-asis-data); this checkout requires Google Application Default Credentials (ADC).",
+        "tool": "GDAL 3.13.1 (gdal.Warp)",
+        "generated_at": "2026-09-20T10:59:14.308956+00:00"
+      },
+      "output": {
+        "path": "derived/ITA-2026-08-11.tif",
+        "width": 1333,
+        "height": 1298,
+        "sha256": "3ffef86a739f6421c1916034e8eaf8649dca324242c3eb4fdb37a245e9ff7570"
+      }
+    }
+  ]
+}

@@ -402,3 +402,16 @@ Case実装（`docs/Case?-ASIS-...`のような新規ページ）に進む前に�
 ### ステータス
 
 目的を再定義（2026-09-20）。今後のCase設計・ページのUI文言は、この枠組み（比較・検証のための観察であり、業務ツールの提供ではない）を踏まえて行う。
+
+## 2026-09-20: Case 1 Italyを実装
+
+参照元Notebook（`Case1-ASIS-latest-Italy.ipynb`）の処理を、Case 2で確立したパターンで移植した。
+
+- 検索・選択ロジック（直近デカド検索 → GS1/LC-C選択）はNotebookのコードセルから忠実に再現したが、選択の実装はNotebookの文字列インデックス処理ではなく、item自身の`start_datetime`とidの正規表現に置き換えた（同じ結果になるが、id形式の変化に対して頑健）
+- ASI-Dバケット（`fao-gismgr-asis-data`）は匿名読み取りが拒否されるため（Tier B）、Case 2と同じ「hfuさんのADCで発行時チェックアウトし、Italy国境でクロップして再配布する」構成を採用した（`scripts/checkout-Case1-ASIS-latest-Italy.py`）
+- 地図の配色は、Notebookが使うmatplotlibの汎用パーセンタイル・ストレッチ（coolwarm）ではなく、collectionのSTACメタデータに含まれる公式SLD配色（ASI-D-C）をそのまま採用した。FAO自身の解釈と一致させるための意図的な選択で、functional fidelityとしては「Notebookと同じ絵」ではなく「FAOの公式ポータルと同じ配色」を優先した
+- 「この数値が何を意味するか」パネルには、ASIの計算過程（VCI/TCI→VHI→MVHI→ASI）と、この指標系の実際の利用者層（`findings.md`のステークホルダー調査結果）の両方を要約し、「農業実務の改善が目的ではない」という2026-09-20の目的再定義を明記した
+
+### ステータス
+
+実装・動作確認済み（2026-09-20、`docs/Case1-ASIS-latest-Italy/`）。CLAUDE.md 10.3・21章・26章の該当箇所を更新済み。

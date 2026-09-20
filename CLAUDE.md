@@ -195,15 +195,16 @@ pre-harvested indexを使う場合も、4.7と同じ規律を適用する。
 │   └── README.md
 ├── tasks/
 │   ├── Case1-ASIS-latest-Italy.yaml
-│   ├── Case1-ASIS-latest-Hokkaido.yaml
+│   ├── Case1-ASIS-latest-<spatial-ID>.yaml   （Phase 4、未実装。命名は4.9節に従う）
 │   ├── Case2-GHG-BDG.yaml
 │   └── Case2-GHG-4-14-5.yaml
 ├── docs/
 │   ├── index.html
-│   ├── Case1-ASIS-latest-Italy/
+│   ├── Case1-ASIS-latest-Italy/         （実装済み）
 │   │   ├── index.html
-│   │   └── task.yaml
-│   ├── Case1-ASIS-latest-Hokkaido/
+│   │   ├── task.yaml
+│   │   └── derived/                      （hfuさんのADCで発行時チェックアウトした派生COG）
+│   ├── Case1-ASIS-latest-<spatial-ID>/   （Phase 4、未実装）
 │   │   ├── index.html
 │   │   ├── task.yaml
 │   │   └── derived/
@@ -404,23 +405,23 @@ GeoTIFF / COG Assetを選択
 対象地域で表示
 ```
 
-### 10.3 Italy版
+### 10.3 Italy版（実装済み）
 
 `docs/Case1-ASIS-latest-Italy/`
 
-第一試作として扱う。
+実装・動作確認済み（2026-09-20）。
 
-成功条件:
+成功条件（すべて達成）:
 
 - STAC APIをブラウザから検索できる
 - 最新のGS1 / LC-C Itemを選択できる
 - 選択理由を表示できる
-- COGをブラウザで直接読める
+- COGをブラウザで直接読める（発行時チェックアウトした派生成果として）
 - Italy周辺へ表示できる
 - Italy境界を表示できる
 - palette、NoData、CRS、provenance、制約を確認できる
 
-物理的なcropとダウンロード用GeoTIFF生成は必須ではない**が、この前提はItaly版の実アセットで未検証**。北海道側の同種アセット（ASI-D、`fao-gismgr-asis-data`バケット）は匿名読み取りが拒否されることを2026-09-19に確認しており（`docs-internal/findings.md`、`docs-internal/decisions.md`）、Italy側でも同じ結果になる可能性がある。実装前にItalyの実際のItemで同じ検証を行うこと。
+原資産（`fao-gismgr-asis-data`バケット）は匿名読み取りが拒否されることが確定していたため（`docs-internal/findings.md`、`docs-internal/decisions.md`）、「COGをブラウザで直接読む」は原資産への直接アクセスではなく、Case 2と同じ「発行時にhfuさんのADCでチェックアウトし、Italy国境でクロップして再配布したコピーをブラウザが読む」という構成で実現している（`scripts/checkout-Case1-ASIS-latest-Italy.py`）。物理的なcropとダウンロード用GeoTIFF生成は、この構成では前提ではなく必須になった。
 
 ### 10.4 Hokkaido版
 
@@ -813,9 +814,9 @@ just yuiseki-items
 
 すべて実装・動作確認済み（`docs/Case2-GHG-4-14-5/`、`docs-internal/findings.md`）。
 
-### Phase 3: Case 1 Italy（着手可能）
+### Phase 3: Case 1 Italy（実装済み）
 
-2026-09-19、hfuさん個人のGoogle認証（Application Default Credentials）でASI-Dバケットが読めることを確認した（`docs-internal/findings.md`）。匿名アクセスは相変わらず拒否されるが、Case 2と同様「hfuさんの認証で発行時チェックアウトし、CORS対応で再配布する」パターンに乗せられるため、FAO CSIとの相談を待たずに着手できる。ただしチェックアウトの実行にはhfuさんの認証（ADC）が必要という制約が伴う。
+2026-09-19、hfuさん個人のGoogle認証（Application Default Credentials）でASI-Dバケットが読めることを確認した（`docs-internal/findings.md`）。匿名アクセスは相変わらず拒否されるが、Case 2と同様「hfuさんの認証で発行時チェックアウトし、CORS対応で再配布する」パターンに乗せられるため、FAO CSIとの相談を待たずに着手できた。
 
 1. task YAML
 2. page shell
@@ -825,6 +826,8 @@ just yuiseki-items
 6. COG rendering（発行時チェックアウトした派生成果を使う。9.3の「直接読み」前提は不成立と確定）
 7. Italy boundary
 8. provenance and limitations
+
+すべて実装・動作確認済み（`docs/Case1-ASIS-latest-Italy/`、`scripts/checkout-Case1-ASIS-latest-Italy.py`、2026-09-20）。ただしチェックアウトの実行にはhfuさんの認証（ADC）が必要という制約が伴うため、Case 2と異なり任意のlocal foundationが単独で再現できるわけではない。
 
 ### Phase 4: Case 1 第二のAOI版（着手可能、命名は4.9節に従う）
 
@@ -956,10 +959,10 @@ task、Item、Asset、処理、tool version、結果、provenanceが記録され
 
 ## 26. 第一段階の成功条件
 
-最終的に次の4ページが`docs/`で公開される。Case2系（Bangladesh／spatial ID 4-14-5）2ページは**実装・公開済み**（GitHub Pages、`docs-internal/decisions.md`）。Case1系（Italy／第二のAOI）は2026-09-19にASI-Dバケットの認証問題が解消し着手可能になったため（`docs-internal/findings.md`）、Phase 3/4として今後実装する。
+最終的に次の4ページが`docs/`で公開される。Case2系（Bangladesh／spatial ID 4-14-5）とCase1-Italyの3ページは**実装・公開済み**（GitHub Pages、`docs-internal/decisions.md`）。Case1第二のAOI版はPhase 4として今後実装する。
 
 ```text
-Case1-ASIS-latest-Italy/        （着手可能、Phase 3）
+Case1-ASIS-latest-Italy/        （Phase 3、実装済み）
 Case1-ASIS-latest-第二のAOI/     （着手可能、Phase 4）
 Case2-GHG-BDG/                  （Phase 1、実装済み）
 Case2-GHG-4-14-5/               （Phase 2、実装済み）
