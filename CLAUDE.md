@@ -195,7 +195,7 @@ pre-harvested indexを使う場合も、4.7と同じ規律を適用する。
 │   └── README.md
 ├── tasks/
 │   ├── Case1-ASIS-latest-Italy.yaml
-│   ├── Case1-ASIS-latest-<spatial-ID>.yaml   （Phase 4、未実装。命名は4.9節に従う）
+│   ├── Case1-ASIS-latest-4-14-5.yaml   （Phase 4、実装済み。命名は4.9節に従う）
 │   ├── Case2-GHG-BDG.yaml
 │   └── Case2-GHG-4-14-5.yaml
 ├── docs/
@@ -204,7 +204,7 @@ pre-harvested indexを使う場合も、4.7と同じ規律を適用する。
 │   │   ├── index.html
 │   │   ├── task.yaml
 │   │   └── derived/                      （hfuさんのADCで発行時チェックアウトした派生COG）
-│   ├── Case1-ASIS-latest-<spatial-ID>/   （Phase 4、未実装）
+│   ├── Case1-ASIS-latest-4-14-5/        （Phase 4、実装済み）
 │   │   ├── index.html
 │   │   ├── task.yaml
 │   │   └── derived/
@@ -427,22 +427,17 @@ GeoTIFF / COG Assetを選択
 
 原資産（`fao-gismgr-asis-data`バケット）は匿名読み取りが拒否されることが確定していたため（`docs-internal/findings.md`、`docs-internal/decisions.md`）、「COGをブラウザで直接読む」は原資産への直接アクセスではなく、Case 2と同じ「発行時にhfuさんのADCでチェックアウトし、Italy国境でクロップして再配布したコピーをブラウザが読む」という構成で実現している（`scripts/checkout-Case1-ASIS-latest-Italy.py`）。物理的なcropとダウンロード用GeoTIFF生成は、この構成では前提ではなく必須になった。
 
-### 10.4 Hokkaido版
+### 10.4 第二のAOI版（実装済み: 空間ID `4-14-5`）
 
-`docs/Case1-ASIS-latest-Hokkaido/`
+`docs/Case1-ASIS-latest-4-14-5/`
 
-Italy版のユーザーストーリーを北海道へ移す。
+当初「Hokkaido版」として計画していたが、Case 2と同様、4.9節の決定により行政境界・地域概念を使わず、Case2-GHG-4-14-5と同じslippy-map tile `z=4/x=14/y=5`をAOIとする。
 
-2026-09-19時点、ASI-Dの実アセット（`fao-gismgr-asis-data`バケット）は匿名読み取りが拒否されることを確認済み（`docs-internal/decisions.md`）。したがって「まずsource COGを直接表示できるか確認する」は、確認した結果として**不可である前提**で進めてよい。発行時に次を生成する。
+Italy版とHTMLロジックを複製せず、task YAMLとAOIの差（境界ポリゴンの有無）として表現した。AOIがタイルの矩形そのものなので、Case 2の4-14-5版と同様、境界ポリゴンによるマスクは行わず単純な矩形クロップのみを行う（Italy版はNatural Earth境界でのcutlineマスクを使う）。この違いにより、Italy版で導入した「AOI外」用のNoData（-1）はここでは不要——矩形の外という概念が無いため、原資産のsentinel値（251〜255）がそのまま保持される。
 
-- 北海道clip
-- 利用目的に適した再投影
-- CORS対応COG
-- 推奨paletteまたはstyle metadata
-- provenance
-- 派生STAC Item
+投影・再投影は行わない（3章・4.9節の決定を踏襲。10.4節が旧版で挙げていた「利用目的に適した再投影」は、その後の全社的な決定により不採用となった）。
 
-Italy版とHokkaido版でHTMLロジックを複製しない。可能な限りtask YAMLとAOI資産の差として表現する。ただし、汎用化が第一試作を遅らせる場合は、Italy版の成立を優先する。
+実装・動作確認済み（`docs/Case1-ASIS-latest-4-14-5/`、`scripts/checkout-Case1-ASIS-latest-4-14-5.py`、2026-09-21）。Italy版と同じくADC（Google Application Default Credentials）が必要（Tier B）。
 
 ## 11. Case 2: Drained cropland area time series
 
@@ -833,15 +828,17 @@ just yuiseki-items
 
 すべて実装・動作確認済み（`docs/Case1-ASIS-latest-Italy/`、`scripts/checkout-Case1-ASIS-latest-Italy.py`、2026-09-20）。ただしチェックアウトの実行にはhfuさんの認証（ADC）が必要という制約が伴うため、Case 2と異なり任意のlocal foundationが単独で再現できるわけではない。
 
-### Phase 4: Case 1 第二のAOI版（着手可能、命名は4.9節に従う）
+### Phase 4: Case 1 第二のAOI版（実装済み）
 
-Case 2と同様、「Hokkaido」ではなく空間ID/タイル区画で命名する（4.9節）。
+Case 2と同様、「Hokkaido」ではなく空間ID/タイル区画（`4-14-5`）で命名した（4.9節）。
 
-1. AOI差替え
-2. source COG direct rendering
-3. 必要なら北海道向けCOG生成
+1. AOI差替え（境界ポリゴンではなく矩形クロップへ、10.4節参照）
+2. ~~source COG direct rendering~~ → Italy版と同じくADC経由の発行時チェックアウトへ変更（不可能と確定済み）
+3. ~~必要なら北海道向けCOG生成~~ → 再投影は行わない方針が確定しているため対象外
 4. CRSとpalette検証
 5. provenance
+
+すべて実装・動作確認済み（`docs/Case1-ASIS-latest-4-14-5/`、`docs-internal/decisions.md`、2026-09-21）。
 
 ### Phase 5: Extension
 
@@ -967,11 +964,11 @@ task、Item、Asset、処理、tool version、結果、provenanceが記録され
 
 ## 26. 第一段階の成功条件
 
-最終的に次の4ページが`docs/`で公開される。Case2系（Bangladesh／spatial ID 4-14-5）とCase1-Italyの3ページは**実装・公開済み**（GitHub Pages、`docs-internal/decisions.md`）。Case1第二のAOI版はPhase 4として今後実装する。
+次の4ページが`docs/`で公開されている。**すべて実装・公開済み**（GitHub Pages、`docs-internal/decisions.md`）。
 
 ```text
 Case1-ASIS-latest-Italy/        （Phase 3、実装済み）
-Case1-ASIS-latest-第二のAOI/     （着手可能、Phase 4）
+Case1-ASIS-latest-4-14-5/       （Phase 4、実装済み）
 Case2-GHG-BDG/                  （Phase 1、実装済み）
 Case2-GHG-4-14-5/               （Phase 2、実装済み）
 ```

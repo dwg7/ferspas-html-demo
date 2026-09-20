@@ -7,8 +7,10 @@ FAO FERSPASのSTAC/地理空間アセットを、プログラミング環境を�
 `docs/`以下がGitHub Pagesで公開される。各Caseは`docs/<Case名>/`というディレクトリにまとめ、ページ本体・task定義の公開コピー・派生データを同じ場所に置く（散らからないようにするための構成）。
 
 - [docs/Case1-ASIS-latest-Italy/](docs/Case1-ASIS-latest-Italy/) — Case 1 (ASIS latest agricultural stress index, Italy)。Phase 3、実装済み
+- [docs/Case1-ASIS-latest-4-14-5/](docs/Case1-ASIS-latest-4-14-5/) — Case 1の第二のAOI版（slippy-map tile 4-14-5、地名不使用）。Phase 4、実装済み
 - [docs/Case2-GHG-BDG/](docs/Case2-GHG-BDG/) — Case 2 (Drained cropland area time series, Bangladesh)。Phase 1、実装済み
 - [docs/Case2-GHG-4-14-5/](docs/Case2-GHG-4-14-5/) — Case 2の第二のAOI版（slippy-map tile 4-14-5、地名不使用）。Phase 2、実装済み
+- [docs/Case3-WaterBalance-4-14-5/](docs/Case3-WaterBalance-4-14-5/) — Case 3 (降水量−基準蒸発量の水収支、47年分)。Notebook起点ではない実験、Phase 6
 - [docs/Discover-4-14-5/](docs/Discover-4-14-5/) — Yuiseki GeoParquet indexによる横断発見の実験
 
 各Caseディレクトリは共通して次を持つ:

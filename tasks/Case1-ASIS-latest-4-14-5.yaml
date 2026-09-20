@@ -1,0 +1,48 @@
+id: case1-asis-latest-4-14-5
+title: "Case 1: ASIS latest (spatial ID 4-14-5)"
+status: implemented
+notebook:
+  source_repo: "https://github.com/un-fao/FERSPAS_demo"
+  source_file: "Case1-ASIS-latest-Italy.ipynb"
+  aoi_note: "This Case has no corresponding notebook. The AOI is dwg7's own, applying the Italy version's methodology to a different AOI (CLAUDE.md 4.9), same relationship as Case2-GHG-4-14-5 to Case2-GHG-BDG."
+stac:
+  api_root: "https://data.apps.fao.org/geospatial/search/stac"
+  collection: "fao-gismgr:ASIS:raster:mapsets:ASI-D"
+  collection_notebook_value: "ASI-D"
+  collection_note: "The notebook's pystac-client code uses the short id 'ASI-D'. A raw HTTP POST to /search with that short id returns zero features with no error. The full collection id (this field) was found via GET /collections."
+  bbox:
+    - 135.0
+    - 40.97989806962013
+    - 157.5
+    - 55.7765730186677
+  datetime_window: "a rolling 90-day window ending 2999-12-31 (not a fixed date range) -- ASIS publishes a new dekad every ~10 days, so this task always searches for whatever is currently the latest one."
+  limit: 100
+selection:
+  method: "among items returned by the search, take the maximum start_datetime (the latest published dekad), then select the one item at that datetime whose id ends in '-GS1-LC-C' (growing season 1, cropland)"
+  gs_lc_meaning: "GS1/GS2 = growing season 1/2 (cube:dimensions.SEASON); LC-C/LC-G = cropland/grassland land cover type (cube:dimensions.LCT). This task follows the Italy version and uses GS1/LC-C."
+aoi:
+  identifier: "4-14-5"
+  identifier_scheme: "slippy-map tile z=4/x=14/y=5 (spatial ID horizontal index, no floor/altitude), same AOI as Case2-GHG-4-14-5 and Case3-WaterBalance-4-14-5"
+  boundary_source: "none -- the AOI is the tile rectangle itself"
+asset:
+  preferred_keys:
+    - data
+raster:
+  crs: "EPSG:4326"
+  dtype: "Float32 (declared 'other' in STAC; observed as float32 via gdalinfo)"
+  bands: 1
+  nodata_source: 255
+  nodata_note: "255 is ASI-D's declared NoData, but the collection's own classification:classes lists 255 as a real class ('no_data' or 'water/background' depending on which metadata field is read -- classification:classes and supplemental_information disagree, see docs-internal/findings.md). Values 251-254 are additional sentinel/flag codes. Only 0-100 is a real Agricultural Stress Index percentage. Since the AOI is a rectangular crop (no cutline), there is no separate 'outside the AOI' NoData value -- all source pixel values are preserved unchanged."
+  unit: "%"
+  spatial_resolution_m: 993.9240180161709
+  value_granularity_note: "Real (0-100) values are quantized to 0.5-point steps in practice (confirmed 2026-09-19 by sampling an actual dekad over this same AOI), likely reflecting a moving-window percentage calculation rather than a per-pixel continuous measurement. See docs-internal/findings.md."
+access:
+  cors_status: "anonymous reads denied at source"
+  cors_note: "The source GCS bucket (fao-gismgr-asis-data) rejects anonymous reads outright (redirects to Google login), unlike Case 2's DRAINED-AREA-CROP bucket which allows anonymous reads but lacks CORS headers. Confirmed 2026-09-19 (docs-internal/findings.md, docs-internal/decisions.md)."
+  auth_requirement: "This task's checkout script requires Google Application Default Credentials (ADC) for the account that has read access to fao-gismgr-asis-data. It cannot be run anonymously. This is a Tier B source in the FAO / local-foundation / User three-tier model (docs-internal/decisions.md)."
+  local_foundation_note: "Unlike Case 2, this Case cannot be reproduced by an arbitrary local foundation without first obtaining read access to the source bucket from FAO or an authorized party."
+meaning_note: "ASI-D is a satellite-derived (NDVI/LST-based Kogan-method) agricultural drought stress indicator, not a statistical redistribution like Case 2's DRAINED-AREA-CROP. See docs-internal/findings.md for the full derivation chain (VCI/TCI -> VHI -> MVHI -> ASI) and docs-internal/decisions.md for research on who actually uses this class of indicator operationally, and for the 2026-09-20 reframing of this Case's purpose (not to raise Japanese agricultural practice, but to examine what a global early-warning system does and doesn't mean for an AOI that already has its own statistical infrastructure)."
+provenance_doc: "docs-internal/findings.md"
+decisions_doc: "docs-internal/decisions.md"
+derived_provenance: "docs/Case1-ASIS-latest-4-14-5/derived/provenance-4-14-5.json"
+checkout_script: "scripts/checkout-Case1-ASIS-latest-4-14-5.py"

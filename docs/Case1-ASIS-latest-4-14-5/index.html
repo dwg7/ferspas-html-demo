@@ -1,0 +1,313 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Case 1: ASIS latest (spatial ID 4-14-5)</title>
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<div class="page">
+
+<p class="breadcrumb"><a href="../index.html">← FERSPAS static demos</a></p>
+
+<header class="hero">
+  <span class="badge badge-implemented">実装済み・Phase 4</span>
+  <h1>ASIS 最新デカド — 空間ID 4-14-5</h1>
+  <p class="lede">
+    参照方法論: <a href="https://github.com/un-fao/FERSPAS_demo/blob/main/Case1-ASIS-latest-Italy.ipynb">un-fao/FERSPAS_demo — Case1-ASIS-latest-Italy.ipynb</a>
+    と同じ処理を、<a href="../Case1-ASIS-latest-Italy/">Italy版</a>とは別のAOIへ適用したもの
+    （Collection: <code>ASI-D</code>）
+  </p>
+  <p class="lede">
+    このCaseに元になったNotebookは無い。AOIは行政境界や地名ではなく、
+    <a href="../Case2-GHG-4-14-5/">Case2-GHG-4-14-5</a>と同じslippy-map tile
+    <code>z=4, x=14, y=5</code>（空間IDの水平方向インデックス、<code>4-14-5</code>）という座標上の区画そのもの
+    （CLAUDE.md 4.9節）。
+  </p>
+  <p class="meta-line">Task定義: <a id="task-link" href="task.yaml">task.yaml</a></p>
+</header>
+
+<main>
+
+<section class="panel-meaning" id="meaning">
+  <p class="panel-label">この数値が何を意味するか</p>
+  <p>
+    ASI（Agricultural Stress Index）は、衛星観測NDVI（植生指数）と地表面温度から作る
+    VHI（Vegetation Health Index）を、作期の重要な生育段階ほど重く効くよう作物係数で加重平均し（MVHI）、
+    さらに「その耕地の何%が、過去の同じ暦週と比べて悪化した(VHI&lt;35%)か」という割合に変換したもの（単位: %）。
+    詳しい計算過程・値の量子化・sentinel値の注意点は
+    <a href="https://github.com/dwg7/ferspas-html-demo/blob/main/docs-internal/findings.md">findings.md</a>参照。
+  </p>
+  <p>
+    <strong>値が低い（緑）＝「平年並みか、それより良い」であり、「豊作」を意味しない。</strong>
+    この指標を実際に運用面で使っているのは、圃場の生産者というより、FAO GIEWSのような国際機関・
+    各国政府の早期警戒業務の担当者であることが分かっている。日本には独自の実地調査に基づく
+    「作況指数」という別系統の仕組みが既にあり、本ページの目的は
+    <strong>グローバルな早期警戒システムを、担当区域という舞台で検証すること</strong>であって、
+    農業実務の改善を意図するものではない（<code>docs-internal/decisions.md</code>参照）。
+  </p>
+</section>
+
+<section id="task-info">
+  <h2 class="section-title">このページが検索する条件</h2>
+  <div class="card">
+    <div id="task-info-body">読み込み中...</div>
+  </div>
+</section>
+
+<section id="discovery">
+  <h2 class="section-title"><span class="step-no">1</span>STAC Item discovery（ブラウザから直接検索）</h2>
+  <div class="panel-tech">
+    <p class="panel-label">技術的な詳細</p>
+    <div id="discovery-body">読み込み中...</div>
+  </div>
+</section>
+
+<section id="map">
+  <h2 class="section-title"><span class="step-no">2</span>選択デカドのCOG地図表示</h2>
+  <div class="card">
+    <p class="meta">
+      原資産（FAOのGCSバケット）は匿名読み取り自体が拒否される（
+      <a href="https://github.com/dwg7/ferspas-html-demo/blob/main/docs-internal/findings.md">findings.md</a>参照）ため、
+      このリポジトリがhfuさんのGoogle認証（ADC）で発行時にチェックアウトし、タイル境界（<code>4-14-5</code>）で
+      クロップして再配布したコピー（<code>derived/4-14-5-&lt;dekad&gt;.tif</code>、投影変換なし）を表示する。
+      AOIがタイルの矩形そのものなので、境界ポリゴンによるマスクは行わず、単純な矩形クロップのみ
+      （Italy版との違い）。色は公式SLD（ASI-D-C）の配色をそのまま使用。
+    </p>
+    <canvas id="map-canvas" style="max-width:100%; border:1px solid var(--border); border-radius:var(--radius-sm); image-rendering: pixelated;"></canvas>
+    <div id="map-legend" class="meta"></div>
+    <div id="map-status" class="meta"></div>
+  </div>
+</section>
+
+<section id="provenance" class="panel-provenance">
+  <p class="panel-label">選択理由・出所・制約</p>
+  <ul class="limits">
+    <li>Collection・GS1/LC-C選択ロジックは、<a href="../Case1-ASIS-latest-Italy/">Italy版</a>と共通。AOIの決め方だけがdwg7独自の判断である。</li>
+    <li>AOIはslippy-map tile <code>z=4/x=14/y=5</code>（空間IDの水平インデックス）の矩形（東経135.0〜157.5°、北緯40.98〜55.78°）。行政境界・地名を使わない設計判断（<code>docs-internal/decisions.md</code>参照）。</li>
+    <li>境界ポリゴンによるマスクを行わないため、Italy版と異なり「AOI外」というNoDataは発生しない。原資産のsentinel値（251〜255）はそのまま保持される。</li>
+    <li>投影変換は行っていない（原資産と同じEPSG:4326）。矩形クロップのみで、値の補間は発生しない。</li>
+    <li>原資産バケット（<code>fao-gismgr-asis-data</code>）は匿名読み取りが拒否されるため、このcheckoutはhfuさんのGoogle Application Default Credentials（ADC）が無いと実行できない（Tier B、<code>docs-internal/decisions.md</code>参照）。Case 2と異なり、任意のlocal foundationが単独で再現できるわけではない。</li>
+    <li>Collection <code>ASI-D</code> のライセンスは <code>CC-BY-4.0</code>（表示のみ条件、再配布・改変可）。産出元: FAO GIEWS。</li>
+  </ul>
+</section>
+
+</main>
+
+<footer>
+  <p>Status: <code>implemented</code>（Phase 4、STAC discovery・地図表示を実装済み）。設計判断は<a href="https://github.com/dwg7/ferspas-html-demo/blob/main/CLAUDE.md">CLAUDE.md</a>を参照。</p>
+</footer>
+
+</div>
+
+<script type="module">
+import { load } from "https://cdn.jsdelivr.net/npm/js-yaml@4.1.0/+esm";
+import { fromUrl } from "https://cdn.jsdelivr.net/npm/geotiff@2/+esm";
+
+const taskInfoEl = document.getElementById('task-info-body');
+const discoveryEl = document.getElementById('discovery-body');
+const mapCanvasEl = document.getElementById('map-canvas');
+const mapLegendEl = document.getElementById('map-legend');
+const mapStatusEl = document.getElementById('map-status');
+
+function el(tag, attrs = {}, children = []) {
+  const node = document.createElement(tag);
+  for (const [k, v] of Object.entries(attrs)) {
+    if (k === 'text') node.textContent = v;
+    else node.setAttribute(k, v);
+  }
+  for (const c of [].concat(children)) node.appendChild(c);
+  return node;
+}
+
+// official ASI-D-C colormap + sentinel colors from STAC collection metadata (renders.ASI-D-C)
+const STOPS = [
+  [10, '#2FCD00', 'less than 10'],
+  [25, '#9AE713', '10 - 25'],
+  [40, '#FFFF30', '25 - 40'],
+  [55, '#FFBA20', '40 - 55'],
+  [70, '#FF7510', '55 - 70'],
+  [85, '#FF2A02', '70 - 85'],
+  [100.1, '#C40000', '>=85'],
+];
+const SENTINEL = { 251: '#6666FF', 252: '#000000', 253: '#666666', 254: '#CCCCCC' };
+function hexToRgb(hex) {
+  const n = parseInt(hex.slice(1), 16);
+  return [(n >> 16) & 255, (n >> 8) & 255, n & 255];
+}
+function colorFor(v) {
+  if (v in SENTINEL) return hexToRgb(SENTINEL[v]);
+  for (const [max, hex] of STOPS) {
+    if (v < max) return hexToRgb(hex);
+  }
+  return [128, 128, 128];
+}
+
+async function main() {
+  let task;
+  try {
+    const res = await fetch('task.yaml');
+    if (!res.ok) throw new Error(`task YAML fetch failed: HTTP ${res.status}`);
+    task = load(await res.text());
+  } catch (e) {
+    taskInfoEl.innerHTML = `<p class="status-err">task YAMLの取得に失敗しました: ${e.message}</p>`;
+    discoveryEl.innerHTML = `<p class="status-err">task YAMLが無いため検索できません。</p>`;
+    return;
+  }
+
+  renderTaskInfo(task);
+  await runDiscovery(task);
+  await renderMap();
+}
+
+function renderTaskInfo(task) {
+  taskInfoEl.innerHTML = '';
+  const dl = el('dl', { class: 'kv' });
+  const rows = [
+    ['STAC API', task.stac.api_root],
+    ['Collection', task.stac.collection],
+    ['BBOX (WGS84)', task.stac.bbox.join(', ') + `  — AOI: spatial ID ${task.aoi.identifier}（地名なし）`],
+    ['選択ロジック', task.selection.method],
+  ];
+  for (const [k, v] of rows) {
+    dl.appendChild(el('dt', { text: k }));
+    dl.appendChild(el('dd', { text: v }));
+  }
+  taskInfoEl.appendChild(dl);
+  taskInfoEl.appendChild(el('p', {
+    class: 'status-warn',
+    style: 'margin-top:0.8rem;',
+    text: `注記: 参照Notebookは短縮id「${task.stac.collection_notebook_value}」を使うが、このAPIへの直接POSTでは0件になる（エラーにはならない）。実際には完全id「${task.stac.collection}」が必要。`,
+  }));
+}
+
+const ID_SUFFIX_RE = /-GS(\d)-LC-([A-Z])$/;
+
+async function runDiscovery(task) {
+  const s = task.stac;
+  const start = new Date(Date.now() - 90 * 24 * 3600 * 1000).toISOString().slice(0, 10) + 'T00:00:00Z';
+  const body = {
+    collections: [s.collection],
+    bbox: s.bbox,
+    datetime: `${start}/2999-12-31T00:00:00Z`,
+    limit: s.limit,
+  };
+
+  const t0 = performance.now();
+  let json;
+  try {
+    const res = await fetch(`${s.api_root}/search`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(body),
+    });
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    json = await res.json();
+  } catch (e) {
+    discoveryEl.innerHTML = `<p class="status-err">STAC検索に失敗しました: ${e.message}</p>`;
+    return;
+  }
+  const t1 = performance.now();
+
+  const features = json.features || [];
+  discoveryEl.innerHTML = '';
+  discoveryEl.appendChild(el('p', {
+    text: `検索結果: ${features.length}件（直近90日、${(t1 - t0).toFixed(0)}ms）。`
+  }));
+
+  if (!features.length) {
+    discoveryEl.appendChild(el('p', { class: 'status-err', text: '該当itemが見つかりませんでした。' }));
+    return;
+  }
+
+  const latestDt = features.reduce((max, f) => f.properties.start_datetime > max ? f.properties.start_datetime : max, '');
+  const candidates = features.filter(f => f.properties.start_datetime === latestDt);
+  const selected = candidates.find(f => {
+    const m = ID_SUFFIX_RE.exec(f.id);
+    return m && m[1] === '1' && m[2] === 'C';
+  });
+
+  discoveryEl.appendChild(el('p', {
+    text: `最新デカド: ${latestDt.slice(0, 10)}（${candidates.length}種のGS/LC組み合わせ）。このうちGS1/LC-Cを選択。`
+  }));
+
+  const table = el('table');
+  const thead = el('thead', {}, el('tr', {}, [
+    el('th', { text: 'Item ID' }),
+    el('th', { text: 'start_datetime' }),
+    el('th', { text: '選択' }),
+  ]));
+  table.appendChild(thead);
+  const tbody = el('tbody');
+  for (const f of candidates) {
+    const isSelected = selected && f.id === selected.id;
+    const tr = el('tr', isSelected ? { style: 'font-weight:600;' } : {}, [
+      el('td', { text: f.id }),
+      el('td', { text: f.properties.start_datetime }),
+      el('td', { text: isSelected ? '✓ GS1/LC-C' : '' }),
+    ]);
+    tbody.appendChild(tr);
+  }
+  table.appendChild(tbody);
+  discoveryEl.appendChild(table);
+}
+
+async function renderMap() {
+  mapStatusEl.textContent = 'provenanceを確認中...';
+  let prov;
+  try {
+    const res = await fetch('derived/provenance-4-14-5.json');
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    prov = await res.json();
+  } catch (e) {
+    mapStatusEl.textContent = `provenanceの取得に失敗しました: ${e.message}`;
+    return;
+  }
+  const entry = prov.entries[0];
+  const path = entry.output.path;
+
+  mapStatusEl.textContent = `${path} を読み込み中...`;
+  try {
+    const t0 = performance.now();
+    const tiff = await fromUrl(path);
+    const image = await tiff.getImage();
+    const width = image.getWidth();
+    const height = image.getHeight();
+    const data = (await image.readRasters())[0];
+    const t1 = performance.now();
+
+    mapCanvasEl.width = width;
+    mapCanvasEl.height = height;
+    const ctx = mapCanvasEl.getContext('2d');
+    const imgData = ctx.createImageData(width, height);
+    let realCount = 0;
+    for (let i = 0; i < data.length; i++) {
+      const v = data[i];
+      const o = i * 4;
+      if (v === 255) {
+        imgData.data[o + 3] = 0; // water/background -> transparent (no separate "outside AOI" nodata here)
+        continue;
+      }
+      const [r, g, b] = colorFor(v);
+      imgData.data[o] = r; imgData.data[o + 1] = g; imgData.data[o + 2] = b; imgData.data[o + 3] = 255;
+      if (v >= 0 && v <= 100) realCount++;
+    }
+    ctx.putImageData(imgData, 0, 0);
+
+    const legendParts = STOPS.map(([, hex, label]) =>
+      `<span style="display:inline-block;width:1em;height:1em;background:${hex};vertical-align:middle;margin-right:0.3em;"></span>${label}`
+    ).join(' &nbsp; ');
+    mapLegendEl.innerHTML = `凡例（公式ASI-D-C配色、単位%）: ${legendParts}。灰色系はoff-season/no-data等のsentinel値、透明は水域/background(255)。`;
+    mapStatusEl.textContent =
+      `デカド ${entry.dekad}: ${width}×${height}px、${(t1 - t0).toFixed(0)}ms で読み込み。実数値pixel: ${realCount}（${(100 * realCount / data.length).toFixed(1)}%）。投影変換なし（EPSG:4326のまま）。`;
+  } catch (e) {
+    mapStatusEl.textContent = `読み込み失敗: ${e.message}`;
+  }
+}
+
+main();
+</script>
+
+</body>
+</html>
