@@ -1,0 +1,195 @@
+{
+  "aoi": "4-14-5",
+  "unit": "mm/year",
+  "variable": "precipitation_minus_reference_et0",
+  "series": [
+    {
+      "year": 1979,
+      "mean_p_minus_et0_mm": 424.15
+    },
+    {
+      "year": 1980,
+      "mean_p_minus_et0_mm": 387.09
+    },
+    {
+      "year": 1981,
+      "mean_p_minus_et0_mm": 603.4
+    },
+    {
+      "year": 1982,
+      "mean_p_minus_et0_mm": 351.69
+    },
+    {
+      "year": 1983,
+      "mean_p_minus_et0_mm": 320.49
+    },
+    {
+      "year": 1984,
+      "mean_p_minus_et0_mm": 319.31
+    },
+    {
+      "year": 1985,
+      "mean_p_minus_et0_mm": 373.5
+    },
+    {
+      "year": 1986,
+      "mean_p_minus_et0_mm": 274.31
+    },
+    {
+      "year": 1987,
+      "mean_p_minus_et0_mm": 387.25
+    },
+    {
+      "year": 1988,
+      "mean_p_minus_et0_mm": 277.4
+    },
+    {
+      "year": 1989,
+      "mean_p_minus_et0_mm": 347.46
+    },
+    {
+      "year": 1990,
+      "mean_p_minus_et0_mm": 371.8
+    },
+    {
+      "year": 1991,
+      "mean_p_minus_et0_mm": 377.73
+    },
+    {
+      "year": 1992,
+      "mean_p_minus_et0_mm": 379.56
+    },
+    {
+      "year": 1993,
+      "mean_p_minus_et0_mm": 289.11
+    },
+    {
+      "year": 1994,
+      "mean_p_minus_et0_mm": 509.94
+    },
+    {
+      "year": 1995,
+      "mean_p_minus_et0_mm": 438.27
+    },
+    {
+      "year": 1996,
+      "mean_p_minus_et0_mm": 368.9
+    },
+    {
+      "year": 1997,
+      "mean_p_minus_et0_mm": 445.03
+    },
+    {
+      "year": 1998,
+      "mean_p_minus_et0_mm": 267.68
+    },
+    {
+      "year": 1999,
+      "mean_p_minus_et0_mm": 411.95
+    },
+    {
+      "year": 2000,
+      "mean_p_minus_et0_mm": 443.04
+    },
+    {
+      "year": 2001,
+      "mean_p_minus_et0_mm": 325.77
+    },
+    {
+      "year": 2002,
+      "mean_p_minus_et0_mm": 426.41
+    },
+    {
+      "year": 2003,
+      "mean_p_minus_et0_mm": 227.39
+    },
+    {
+      "year": 2004,
+      "mean_p_minus_et0_mm": 440.82
+    },
+    {
+      "year": 2005,
+      "mean_p_minus_et0_mm": 349.56
+    },
+    {
+      "year": 2006,
+      "mean_p_minus_et0_mm": 364.64
+    },
+    {
+      "year": 2007,
+      "mean_p_minus_et0_mm": 263.54
+    },
+    {
+      "year": 2008,
+      "mean_p_minus_et0_mm": 287.66
+    },
+    {
+      "year": 2009,
+      "mean_p_minus_et0_mm": 475.6
+    },
+    {
+      "year": 2010,
+      "mean_p_minus_et0_mm": 508.87
+    },
+    {
+      "year": 2011,
+      "mean_p_minus_et0_mm": 378.28
+    },
+    {
+      "year": 2012,
+      "mean_p_minus_et0_mm": 401.09
+    },
+    {
+      "year": 2013,
+      "mean_p_minus_et0_mm": 507.05
+    },
+    {
+      "year": 2014,
+      "mean_p_minus_et0_mm": 329.9
+    },
+    {
+      "year": 2015,
+      "mean_p_minus_et0_mm": 481.62
+    },
+    {
+      "year": 2016,
+      "mean_p_minus_et0_mm": 433.35
+    },
+    {
+      "year": 2017,
+      "mean_p_minus_et0_mm": 340.81
+    },
+    {
+      "year": 2018,
+      "mean_p_minus_et0_mm": 389.21
+    },
+    {
+      "year": 2019,
+      "mean_p_minus_et0_mm": 343.43
+    },
+    {
+      "year": 2020,
+      "mean_p_minus_et0_mm": 368.67
+    },
+    {
+      "year": 2021,
+      "mean_p_minus_et0_mm": 399.08
+    },
+    {
+      "year": 2022,
+      "mean_p_minus_et0_mm": 474.72
+    },
+    {
+      "year": 2023,
+      "mean_p_minus_et0_mm": 339.8
+    },
+    {
+      "year": 2024,
+      "mean_p_minus_et0_mm": 390.21
+    },
+    {
+      "year": 2025,
+      "mean_p_minus_et0_mm": 426.28
+    }
+  ]
+}

@@ -1,0 +1,49 @@
+id: case3-waterbalance-4-14-5
+title: "Case 3: Water balance (precipitation minus reference evapotranspiration), spatial ID 4-14-5"
+status: implemented
+origin:
+  type: "dwg7-original, not from un-fao/FERSPAS_demo"
+  inspiration: "https://x.com/yuiseki_/status/2101615201661731234 -- dwg7 colleague yuiseki's dynamic precipitation-minus-evapotranspiration COG tiling (blue = water surplus, red = water deficit). This task reproduces the same substantive idea at publication time (CLAUDE.md 4.3) rather than as a dynamic tile service."
+stac:
+  api_root: "https://data.apps.fao.org/geospatial/search/stac"
+  precipitation_collection: "fao-gismgr:C3S:raster:mapsets:AGERA5-PF-A"
+  et0_collection: "fao-gismgr:C3S:raster:mapsets:AGERA5-ET0-A"
+  bbox:
+    - 135.0
+    - 40.97989806962013
+    - 157.5
+    - 55.7765730186677
+  datetime_start: "1979-01-01T00:00:00Z"
+  datetime_end: "2025-12-31T23:59:59Z"
+  limit: 100
+selection_note: "Both collections are annual (one item per year); a year is used only if both collections have an item for it. Same producer family (ECMWF/Copernicus C3S AgERA5 reanalysis at 0.1 degree), so no resampling/regridding is needed to align them pixel-for-pixel."
+aoi:
+  identifier: "4-14-5"
+  identifier_scheme: "slippy-map tile z=4/x=14/y=5 (spatial ID horizontal index, no floor/altitude), same AOI as Case2-GHG-4-14-5"
+  boundary_source: "none -- the AOI is the tile rectangle itself"
+asset:
+  preferred_keys:
+    - data
+raster:
+  crs: "EPSG:4326"
+  spatial_resolution_deg: 0.1
+  precipitation_unit: "mm/year"
+  et0_unit: "mm/year"
+  output_unit: "mm/year (precipitation - reference ET0)"
+  output_meaning_note: "Positive = more precipitation fell than the FAO Penman-Monteith reference evapotranspiration demand (water surplus). Negative = a water deficit under this reference-crop assumption. This uses *reference* ET0 (a standardized grass-reference calculation, FAO Irrigation and Drainage Paper 56), not actual evapotranspiration of whatever is really growing on the ground -- it does not know about crop type, soil, or irrigation."
+  nodata_source: -9999.0
+  nodata_output: -99999.0
+aggregation:
+  method: "arithmetic mean of valid (non-NoData) pixels within the tile, per year -- not area-weighted by latitude"
+  known_caveats:
+    - "No latitude-based pixel-area weighting is applied to the spatial mean; pixels nearer the tile's northern edge cover more east-west ground distance per degree of longitude than a naive equirectangular average assumes. Not corrected here (see CLAUDE.md 12 checklist)."
+    - "Reference ET0 is a standardized, crop-independent quantity; the actual water balance experienced by any specific crop or land cover will differ."
+    - "The tile spans ocean as well as land; ocean pixels are NoData in the source and excluded from both the map and the mean, same convention as Case2-GHG-4-14-5's land-only interpretation."
+access:
+  cors_status: "anonymous reads allowed, but no CORS headers (same Tier A pattern as Case 2's DRAINED-AREA-CROP bucket, verified 2026-09-20)"
+  cors_note: "fao-gismgr-c3s-data (Google Cloud Storage) allows anonymous HTTP reads but does not return Access-Control-Allow-Origin, so browser fetch() cannot read it directly. This repository checks out, crops, computes the per-pixel difference, and republishes each year under docs/Case3-WaterBalance-4-14-5/derived/ so the browser reads a same-origin, CORS-free copy instead. Unlike Case 1 (ASI-D), no authentication is required for this checkout."
+license_note: "Both source collections are CC-BY-SA-4.0 (ShareAlike), not the CC-BY-4.0 used by Case 1/Case 2. The derived output in this task therefore also carries CC-BY-SA-4.0."
+provenance_doc: "docs-internal/findings.md"
+decisions_doc: "docs-internal/decisions.md"
+derived_provenance: "docs/Case3-WaterBalance-4-14-5/derived/provenance-4-14-5.json"
+checkout_script: "scripts/checkout-Case3-WaterBalance-4-14-5.py"

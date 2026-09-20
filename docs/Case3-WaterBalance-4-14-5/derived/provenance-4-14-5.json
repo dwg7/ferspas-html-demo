@@ -1,0 +1,2268 @@
+{
+  "generated_at": "2026-09-20T22:13:25.175447+00:00",
+  "generator": "scripts/checkout-Case3-WaterBalance-4-14-5.py",
+  "stac_api": "https://data.apps.fao.org/geospatial/search/stac",
+  "collections": [
+    "fao-gismgr:C3S:raster:mapsets:AGERA5-PF-A",
+    "fao-gismgr:C3S:raster:mapsets:AGERA5-ET0-A"
+  ],
+  "inspiration": "https://x.com/yuiseki_/status/2101615201661731234 (dynamic P-ET tiling); this checkout reproduces the idea at publication time instead of request time, per CLAUDE.md 4.3",
+  "entries": [
+    {
+      "year": "1979",
+      "source": {
+        "precipitation": {
+          "collection": "fao-gismgr:C3S:raster:mapsets:AGERA5-PF-A",
+          "item_id": "fao-gismgr:C3S:raster:mapsets:AGERA5-PF-A:items:C3S-AGERA5-PF-A-1979",
+          "asset_href": "https://storage.googleapis.com/fao-gismgr-c3s-data/DATA/C3S/MAPSET/AGERA5-PF-A/C3S.AGERA5-PF-A.1979.tif",
+          "license": "CC-BY-SA-4.0",
+          "source_generation": "1757546741388395",
+          "source_hash_md5_or_crc32c": "crc32c=BAfo4w=="
+        },
+        "reference_et0": {
+          "collection": "fao-gismgr:C3S:raster:mapsets:AGERA5-ET0-A",
+          "item_id": "fao-gismgr:C3S:raster:mapsets:AGERA5-ET0-A:items:C3S-AGERA5-ET0-A-1979",
+          "asset_href": "https://storage.googleapis.com/fao-gismgr-c3s-data/DATA/C3S/MAPSET/AGERA5-ET0-A/C3S.AGERA5-ET0-A.1979.tif",
+          "license": "CC-BY-SA-4.0",
+          "source_generation": "1759931332251571",
+          "source_hash_md5_or_crc32c": "crc32c=dOdTDA=="
+        }
+      },
+      "derivation": {
+        "aoi_identifier": "4-14-5",
+        "aoi_identifier_scheme": "slippy-map tile z-x-y (spatial ID horizontal index)",
+        "aoi_bbox_epsg4326": [
+          135.0,
+          40.97989806962013,
+          157.5,
+          55.7765730186677
+        ],
+        "source_crs": "EPSG:4326",
+        "output_crs": "EPSG:4326",
+        "operation": "rectangular window crop (no cutline, no reprojection, no resampling) then per-pixel subtraction (precipitation - reference_ET0)",
+        "resampling": "none",
+        "nodata_output": -99999.0,
+        "nodata_source_precip": -9999.0,
+        "nodata_source_et0": -9999.0,
+        "tool": "GDAL 3.13.1 (gdal.Translate + numpy subtraction)",
+        "generated_at": "2026-09-20T21:47:56.712094+00:00"
+      },
+      "output": {
+        "path": "derived/4-14-5-1979.tif",
+        "width": 225,
+        "height": 149,
+        "valid_pixel_count": 10903,
+        "mean_p_minus_et0_mm": 424.1475830078125,
+        "sha256": "b275ce3972cedd070a8568934f546c4079be2658deeabf6d41bad17e6d2e62d9"
+      }
+    },
+    {
+      "year": "1980",
+      "source": {
+        "precipitation": {
+          "collection": "fao-gismgr:C3S:raster:mapsets:AGERA5-PF-A",
+          "item_id": "fao-gismgr:C3S:raster:mapsets:AGERA5-PF-A:items:C3S-AGERA5-PF-A-1980",
+          "asset_href": "https://storage.googleapis.com/fao-gismgr-c3s-data/DATA/C3S/MAPSET/AGERA5-PF-A/C3S.AGERA5-PF-A.1980.tif",
+          "license": "CC-BY-SA-4.0",
+          "source_generation": "1757555048652630",
+          "source_hash_md5_or_crc32c": "crc32c=BYkHSw=="
+        },
+        "reference_et0": {
+          "collection": "fao-gismgr:C3S:raster:mapsets:AGERA5-ET0-A",
+          "item_id": "fao-gismgr:C3S:raster:mapsets:AGERA5-ET0-A:items:C3S-AGERA5-ET0-A-1980",
+          "asset_href": "https://storage.googleapis.com/fao-gismgr-c3s-data/DATA/C3S/MAPSET/AGERA5-ET0-A/C3S.AGERA5-ET0-A.1980.tif",
+          "license": "CC-BY-SA-4.0",
+          "source_generation": "1759931366932435",
+          "source_hash_md5_or_crc32c": "crc32c=oNkPMQ=="
+        }
+      },
+      "derivation": {
+        "aoi_identifier": "4-14-5",
+        "aoi_identifier_scheme": "slippy-map tile z-x-y (spatial ID horizontal index)",
+        "aoi_bbox_epsg4326": [
+          135.0,
+          40.97989806962013,
+          157.5,
+          55.7765730186677
+        ],
+        "source_crs": "EPSG:4326",
+        "output_crs": "EPSG:4326",
+        "operation": "rectangular window crop (no cutline, no reprojection, no resampling) then per-pixel subtraction (precipitation - reference_ET0)",
+        "resampling": "none",
+        "nodata_output": -99999.0,
+        "nodata_source_precip": -9999.0,
+        "nodata_source_et0": -9999.0,
+        "tool": "GDAL 3.13.1 (gdal.Translate + numpy subtraction)",
+        "generated_at": "2026-09-20T21:48:46.712329+00:00"
+      },
+      "output": {
+        "path": "derived/4-14-5-1980.tif",
+        "width": 225,
+        "height": 149,
+        "valid_pixel_count": 10903,
+        "mean_p_minus_et0_mm": 387.0933837890625,
+        "sha256": "abae8d292d20141bc85d7f47971fd25613c83fa9968d66cb890731aeacfb9214"
+      }
+    },
+    {
+      "year": "1981",
+      "source": {
+        "precipitation": {
+          "collection": "fao-gismgr:C3S:raster:mapsets:AGERA5-PF-A",
+          "item_id": "fao-gismgr:C3S:raster:mapsets:AGERA5-PF-A:items:C3S-AGERA5-PF-A-1981",
+          "asset_href": "https://storage.googleapis.com/fao-gismgr-c3s-data/DATA/C3S/MAPSET/AGERA5-PF-A/C3S.AGERA5-PF-A.1981.tif",
+          "license": "CC-BY-SA-4.0",
+          "source_generation": "1757555054855022",
+          "source_hash_md5_or_crc32c": "crc32c=y+HQdw=="
+        },
+        "reference_et0": {
+          "collection": "fao-gismgr:C3S:raster:mapsets:AGERA5-ET0-A",
+          "item_id": "fao-gismgr:C3S:raster:mapsets:AGERA5-ET0-A:items:C3S-AGERA5-ET0-A-1981",
+          "asset_href": "https://storage.googleapis.com/fao-gismgr-c3s-data/DATA/C3S/MAPSET/AGERA5-ET0-A/C3S.AGERA5-ET0-A.1981.tif",
+          "license": "CC-BY-SA-4.0",
+          "source_generation": "1759931325417046",
+          "source_hash_md5_or_crc32c": "crc32c=SOK9gg=="
+        }
+      },
+      "derivation": {
+        "aoi_identifier": "4-14-5",
+        "aoi_identifier_scheme": "slippy-map tile z-x-y (spatial ID horizontal index)",
+        "aoi_bbox_epsg4326": [
+          135.0,
+          40.97989806962013,
+          157.5,
+          55.7765730186677
+        ],
+        "source_crs": "EPSG:4326",
+        "output_crs": "EPSG:4326",
+        "operation": "rectangular window crop (no cutline, no reprojection, no resampling) then per-pixel subtraction (precipitation - reference_ET0)",
+        "resampling": "none",
+        "nodata_output": -99999.0,
+        "nodata_source_precip": -9999.0,
+        "nodata_source_et0": -9999.0,
+        "tool": "GDAL 3.13.1 (gdal.Translate + numpy subtraction)",
+        "generated_at": "2026-09-20T21:49:26.521612+00:00"
+      },
+      "output": {
+        "path": "derived/4-14-5-1981.tif",
+        "width": 225,
+        "height": 149,
+        "valid_pixel_count": 10903,
+        "mean_p_minus_et0_mm": 603.4004516601562,
+        "sha256": "d28038bcfc14de5f48619a05dba69cb84a67abe8803308641d90aeac5ae26a85"
+      }
+    },
+    {
+      "year": "1982",
+      "source": {
+        "precipitation": {
+          "collection": "fao-gismgr:C3S:raster:mapsets:AGERA5-PF-A",
+          "item_id": "fao-gismgr:C3S:raster:mapsets:AGERA5-PF-A:items:C3S-AGERA5-PF-A-1982",
+          "asset_href": "https://storage.googleapis.com/fao-gismgr-c3s-data/DATA/C3S/MAPSET/AGERA5-PF-A/C3S.AGERA5-PF-A.1982.tif",
+          "license": "CC-BY-SA-4.0",
+          "source_generation": "1757555052946000",
+          "source_hash_md5_or_crc32c": "crc32c=McwKHQ=="
+        },
+        "reference_et0": {
+          "collection": "fao-gismgr:C3S:raster:mapsets:AGERA5-ET0-A",
+          "item_id": "fao-gismgr:C3S:raster:mapsets:AGERA5-ET0-A:items:C3S-AGERA5-ET0-A-1982",
+          "asset_href": "https://storage.googleapis.com/fao-gismgr-c3s-data/DATA/C3S/MAPSET/AGERA5-ET0-A/C3S.AGERA5-ET0-A.1982.tif",
+          "license": "CC-BY-SA-4.0",
+          "source_generation": "1759931361066642",
+          "source_hash_md5_or_crc32c": "crc32c=yWwbzA=="
+        }
+      },
+      "derivation": {
+        "aoi_identifier": "4-14-5",
+        "aoi_identifier_scheme": "slippy-map tile z-x-y (spatial ID horizontal index)",
+        "aoi_bbox_epsg4326": [
+          135.0,
+          40.97989806962013,
+          157.5,
+          55.7765730186677
+        ],
+        "source_crs": "EPSG:4326",
+        "output_crs": "EPSG:4326",
+        "operation": "rectangular window crop (no cutline, no reprojection, no resampling) then per-pixel subtraction (precipitation - reference_ET0)",
+        "resampling": "none",
+        "nodata_output": -99999.0,
+        "nodata_source_precip": -9999.0,
+        "nodata_source_et0": -9999.0,
+        "tool": "GDAL 3.13.1 (gdal.Translate + numpy subtraction)",
+        "generated_at": "2026-09-20T21:49:59.006583+00:00"
+      },
+      "output": {
+        "path": "derived/4-14-5-1982.tif",
+        "width": 225,
+        "height": 149,
+        "valid_pixel_count": 10903,
+        "mean_p_minus_et0_mm": 351.6946716308594,
+        "sha256": "dd8eabfc4c531458d1e0690268dc348581abfb6bbcbeacab5fa491bbcf5ba877"
+      }
+    },
+    {
+      "year": "1983",
+      "source": {
+        "precipitation": {
+          "collection": "fao-gismgr:C3S:raster:mapsets:AGERA5-PF-A",
+          "item_id": "fao-gismgr:C3S:raster:mapsets:AGERA5-PF-A:items:C3S-AGERA5-PF-A-1983",
+          "asset_href": "https://storage.googleapis.com/fao-gismgr-c3s-data/DATA/C3S/MAPSET/AGERA5-PF-A/C3S.AGERA5-PF-A.1983.tif",
+          "license": "CC-BY-SA-4.0",
+          "source_generation": "1757555055058103",
+          "source_hash_md5_or_crc32c": "crc32c=ksmE5Q=="
+        },
+        "reference_et0": {
+          "collection": "fao-gismgr:C3S:raster:mapsets:AGERA5-ET0-A",
+          "item_id": "fao-gismgr:C3S:raster:mapsets:AGERA5-ET0-A:items:C3S-AGERA5-ET0-A-1983",
+          "asset_href": "https://storage.googleapis.com/fao-gismgr-c3s-data/DATA/C3S/MAPSET/AGERA5-ET0-A/C3S.AGERA5-ET0-A.1983.tif",
+          "license": "CC-BY-SA-4.0",
+          "source_generation": "1759931347034193",
+          "source_hash_md5_or_crc32c": "crc32c=dcccGg=="
+        }
+      },
+      "derivation": {
+        "aoi_identifier": "4-14-5",
+        "aoi_identifier_scheme": "slippy-map tile z-x-y (spatial ID horizontal index)",
+        "aoi_bbox_epsg4326": [
+          135.0,
+          40.97989806962013,
+          157.5,
+          55.7765730186677
+        ],
+        "source_crs": "EPSG:4326",
+        "output_crs": "EPSG:4326",
+        "operation": "rectangular window crop (no cutline, no reprojection, no resampling) then per-pixel subtraction (precipitation - reference_ET0)",
+        "resampling": "none",
+        "nodata_output": -99999.0,
+        "nodata_source_precip": -9999.0,
+        "nodata_source_et0": -9999.0,
+        "tool": "GDAL 3.13.1 (gdal.Translate + numpy subtraction)",
+        "generated_at": "2026-09-20T21:50:31.510395+00:00"
+      },
+      "output": {
+        "path": "derived/4-14-5-1983.tif",
+        "width": 225,
+        "height": 149,
+        "valid_pixel_count": 10903,
+        "mean_p_minus_et0_mm": 320.4880676269531,
+        "sha256": "ae6f4afedff4f75f231cbe06bafbe8f3e3844be41b8e4959075c607bf8eb4e96"
+      }
+    },
+    {
+      "year": "1984",
+      "source": {
+        "precipitation": {
+          "collection": "fao-gismgr:C3S:raster:mapsets:AGERA5-PF-A",
+          "item_id": "fao-gismgr:C3S:raster:mapsets:AGERA5-PF-A:items:C3S-AGERA5-PF-A-1984",
+          "asset_href": "https://storage.googleapis.com/fao-gismgr-c3s-data/DATA/C3S/MAPSET/AGERA5-PF-A/C3S.AGERA5-PF-A.1984.tif",
+          "license": "CC-BY-SA-4.0",
+          "source_generation": "1757555057461914",
+          "source_hash_md5_or_crc32c": "crc32c=0CrI4Q=="
+        },
+        "reference_et0": {
+          "collection": "fao-gismgr:C3S:raster:mapsets:AGERA5-ET0-A",
+          "item_id": "fao-gismgr:C3S:raster:mapsets:AGERA5-ET0-A:items:C3S-AGERA5-ET0-A-1984",
+          "asset_href": "https://storage.googleapis.com/fao-gismgr-c3s-data/DATA/C3S/MAPSET/AGERA5-ET0-A/C3S.AGERA5-ET0-A.1984.tif",
+          "license": "CC-BY-SA-4.0",
+          "source_generation": "1759931368898758",
+          "source_hash_md5_or_crc32c": "crc32c=ycbqcg=="
+        }
+      },
+      "derivation": {
+        "aoi_identifier": "4-14-5",
+        "aoi_identifier_scheme": "slippy-map tile z-x-y (spatial ID horizontal index)",
+        "aoi_bbox_epsg4326": [
+          135.0,
+          40.97989806962013,
+          157.5,
+          55.7765730186677
+        ],
+        "source_crs": "EPSG:4326",
+        "output_crs": "EPSG:4326",
+        "operation": "rectangular window crop (no cutline, no reprojection, no resampling) then per-pixel subtraction (precipitation - reference_ET0)",
+        "resampling": "none",
+        "nodata_output": -99999.0,
+        "nodata_source_precip": -9999.0,
+        "nodata_source_et0": -9999.0,
+        "tool": "GDAL 3.13.1 (gdal.Translate + numpy subtraction)",
+        "generated_at": "2026-09-20T21:51:04.799528+00:00"
+      },
+      "output": {
+        "path": "derived/4-14-5-1984.tif",
+        "width": 225,
+        "height": 149,
+        "valid_pixel_count": 10903,
+        "mean_p_minus_et0_mm": 319.3148193359375,
+        "sha256": "d04ae4e321bf2df6b46e58126281be84095754a98d0893cc768151296a0a0b0d"
+      }
+    },
+    {
+      "year": "1985",
+      "source": {
+        "precipitation": {
+          "collection": "fao-gismgr:C3S:raster:mapsets:AGERA5-PF-A",
+          "item_id": "fao-gismgr:C3S:raster:mapsets:AGERA5-PF-A:items:C3S-AGERA5-PF-A-1985",
+          "asset_href": "https://storage.googleapis.com/fao-gismgr-c3s-data/DATA/C3S/MAPSET/AGERA5-PF-A/C3S.AGERA5-PF-A.1985.tif",
+          "license": "CC-BY-SA-4.0",
+          "source_generation": "1757555057008293",
+          "source_hash_md5_or_crc32c": "crc32c=9lvr/A=="
+        },
+        "reference_et0": {
+          "collection": "fao-gismgr:C3S:raster:mapsets:AGERA5-ET0-A",
+          "item_id": "fao-gismgr:C3S:raster:mapsets:AGERA5-ET0-A:items:C3S-AGERA5-ET0-A-1985",
+          "asset_href": "https://storage.googleapis.com/fao-gismgr-c3s-data/DATA/C3S/MAPSET/AGERA5-ET0-A/C3S.AGERA5-ET0-A.1985.tif",
+          "license": "CC-BY-SA-4.0",
+          "source_generation": "1759931366636856",
+          "source_hash_md5_or_crc32c": "crc32c=Z9gyoQ=="
+        }
+      },
+      "derivation": {
+        "aoi_identifier": "4-14-5",
+        "aoi_identifier_scheme": "slippy-map tile z-x-y (spatial ID horizontal index)",
+        "aoi_bbox_epsg4326": [
+          135.0,
+          40.97989806962013,
+          157.5,
+          55.7765730186677
+        ],
+        "source_crs": "EPSG:4326",
+        "output_crs": "EPSG:4326",
+        "operation": "rectangular window crop (no cutline, no reprojection, no resampling) then per-pixel subtraction (precipitation - reference_ET0)",
+        "resampling": "none",
+        "nodata_output": -99999.0,
+        "nodata_source_precip": -9999.0,
+        "nodata_source_et0": -9999.0,
+        "tool": "GDAL 3.13.1 (gdal.Translate + numpy subtraction)",
+        "generated_at": "2026-09-20T21:51:37.726300+00:00"
+      },
+      "output": {
+        "path": "derived/4-14-5-1985.tif",
+        "width": 225,
+        "height": 149,
+        "valid_pixel_count": 10903,
+        "mean_p_minus_et0_mm": 373.5003662109375,
+        "sha256": "378538f2f0e9e3127f6031b18f70d3faccb5b1979bf224adaf310c098f50ef80"
+      }
+    },
+    {
+      "year": "1986",
+      "source": {
+        "precipitation": {
+          "collection": "fao-gismgr:C3S:raster:mapsets:AGERA5-PF-A",
+          "item_id": "fao-gismgr:C3S:raster:mapsets:AGERA5-PF-A:items:C3S-AGERA5-PF-A-1986",
+          "asset_href": "https://storage.googleapis.com/fao-gismgr-c3s-data/DATA/C3S/MAPSET/AGERA5-PF-A/C3S.AGERA5-PF-A.1986.tif",
+          "license": "CC-BY-SA-4.0",
+          "source_generation": "1757555055566400",
+          "source_hash_md5_or_crc32c": "crc32c=QCi2aA=="
+        },
+        "reference_et0": {
+          "collection": "fao-gismgr:C3S:raster:mapsets:AGERA5-ET0-A",
+          "item_id": "fao-gismgr:C3S:raster:mapsets:AGERA5-ET0-A:items:C3S-AGERA5-ET0-A-1986",
+          "asset_href": "https://storage.googleapis.com/fao-gismgr-c3s-data/DATA/C3S/MAPSET/AGERA5-ET0-A/C3S.AGERA5-ET0-A.1986.tif",
+          "license": "CC-BY-SA-4.0",
+          "source_generation": "1759931364263501",
+          "source_hash_md5_or_crc32c": "crc32c=Her3Lg=="
+        }
+      },
+      "derivation": {
+        "aoi_identifier": "4-14-5",
+        "aoi_identifier_scheme": "slippy-map tile z-x-y (spatial ID horizontal index)",
+        "aoi_bbox_epsg4326": [
+          135.0,
+          40.97989806962013,
+          157.5,
+          55.7765730186677
+        ],
+        "source_crs": "EPSG:4326",
+        "output_crs": "EPSG:4326",
+        "operation": "rectangular window crop (no cutline, no reprojection, no resampling) then per-pixel subtraction (precipitation - reference_ET0)",
+        "resampling": "none",
+        "nodata_output": -99999.0,
+        "nodata_source_precip": -9999.0,
+        "nodata_source_et0": -9999.0,
+        "tool": "GDAL 3.13.1 (gdal.Translate + numpy subtraction)",
+        "generated_at": "2026-09-20T21:52:08.800977+00:00"
+      },
+      "output": {
+        "path": "derived/4-14-5-1986.tif",
+        "width": 225,
+        "height": 149,
+        "valid_pixel_count": 10903,
+        "mean_p_minus_et0_mm": 274.31298828125,
+        "sha256": "60f2ba468ba4438553c1b0315d7cda943927825c3c51c24eadf54ac4d506f457"
+      }
+    },
+    {
+      "year": "1987",
+      "source": {
+        "precipitation": {
+          "collection": "fao-gismgr:C3S:raster:mapsets:AGERA5-PF-A",
+          "item_id": "fao-gismgr:C3S:raster:mapsets:AGERA5-PF-A:items:C3S-AGERA5-PF-A-1987",
+          "asset_href": "https://storage.googleapis.com/fao-gismgr-c3s-data/DATA/C3S/MAPSET/AGERA5-PF-A/C3S.AGERA5-PF-A.1987.tif",
+          "license": "CC-BY-SA-4.0",
+          "source_generation": "1757555060186990",
+          "source_hash_md5_or_crc32c": "crc32c=N/V17g=="
+        },
+        "reference_et0": {
+          "collection": "fao-gismgr:C3S:raster:mapsets:AGERA5-ET0-A",
+          "item_id": "fao-gismgr:C3S:raster:mapsets:AGERA5-ET0-A:items:C3S-AGERA5-ET0-A-1987",
+          "asset_href": "https://storage.googleapis.com/fao-gismgr-c3s-data/DATA/C3S/MAPSET/AGERA5-ET0-A/C3S.AGERA5-ET0-A.1987.tif",
+          "license": "CC-BY-SA-4.0",
+          "source_generation": "1759931384820279",
+          "source_hash_md5_or_crc32c": "crc32c=UHWduA=="
+        }
+      },
+      "derivation": {
+        "aoi_identifier": "4-14-5",
+        "aoi_identifier_scheme": "slippy-map tile z-x-y (spatial ID horizontal index)",
+        "aoi_bbox_epsg4326": [
+          135.0,
+          40.97989806962013,
+          157.5,
+          55.7765730186677
+        ],
+        "source_crs": "EPSG:4326",
+        "output_crs": "EPSG:4326",
+        "operation": "rectangular window crop (no cutline, no reprojection, no resampling) then per-pixel subtraction (precipitation - reference_ET0)",
+        "resampling": "none",
+        "nodata_output": -99999.0,
+        "nodata_source_precip": -9999.0,
+        "nodata_source_et0": -9999.0,
+        "tool": "GDAL 3.13.1 (gdal.Translate + numpy subtraction)",
+        "generated_at": "2026-09-20T21:52:41.861254+00:00"
+      },
+      "output": {
+        "path": "derived/4-14-5-1987.tif",
+        "width": 225,
+        "height": 149,
+        "valid_pixel_count": 10903,
+        "mean_p_minus_et0_mm": 387.25213623046875,
+        "sha256": "2cc61b169574daeddafd37d207743c014fdcaeeea151b7e526245f1a752d6e7c"
+      }
+    },
+    {
+      "year": "1988",
+      "source": {
+        "precipitation": {
+          "collection": "fao-gismgr:C3S:raster:mapsets:AGERA5-PF-A",
+          "item_id": "fao-gismgr:C3S:raster:mapsets:AGERA5-PF-A:items:C3S-AGERA5-PF-A-1988",
+          "asset_href": "https://storage.googleapis.com/fao-gismgr-c3s-data/DATA/C3S/MAPSET/AGERA5-PF-A/C3S.AGERA5-PF-A.1988.tif",
+          "license": "CC-BY-SA-4.0",
+          "source_generation": "1757555063637055",
+          "source_hash_md5_or_crc32c": "crc32c=3oWzbQ=="
+        },
+        "reference_et0": {
+          "collection": "fao-gismgr:C3S:raster:mapsets:AGERA5-ET0-A",
+          "item_id": "fao-gismgr:C3S:raster:mapsets:AGERA5-ET0-A:items:C3S-AGERA5-ET0-A-1988",
+          "asset_href": "https://storage.googleapis.com/fao-gismgr-c3s-data/DATA/C3S/MAPSET/AGERA5-ET0-A/C3S.AGERA5-ET0-A.1988.tif",
+          "license": "CC-BY-SA-4.0",
+          "source_generation": "1759931340244066",
+          "source_hash_md5_or_crc32c": "crc32c=kUrrNQ=="
+        }
+      },
+      "derivation": {
+        "aoi_identifier": "4-14-5",
+        "aoi_identifier_scheme": "slippy-map tile z-x-y (spatial ID horizontal index)",
+        "aoi_bbox_epsg4326": [
+          135.0,
+          40.97989806962013,
+          157.5,
+          55.7765730186677
+        ],
+        "source_crs": "EPSG:4326",
+        "output_crs": "EPSG:4326",
+        "operation": "rectangular window crop (no cutline, no reprojection, no resampling) then per-pixel subtraction (precipitation - reference_ET0)",
+        "resampling": "none",
+        "nodata_output": -99999.0,
+        "nodata_source_precip": -9999.0,
+        "nodata_source_et0": -9999.0,
+        "tool": "GDAL 3.13.1 (gdal.Translate + numpy subtraction)",
+        "generated_at": "2026-09-20T21:53:14.284405+00:00"
+      },
+      "output": {
+        "path": "derived/4-14-5-1988.tif",
+        "width": 225,
+        "height": 149,
+        "valid_pixel_count": 10903,
+        "mean_p_minus_et0_mm": 277.40447998046875,
+        "sha256": "61a8013ce56f537ae9671c5ae9283d2430a678a2bf372ec1659cae948e07a2e1"
+      }
+    },
+    {
+      "year": "1989",
+      "source": {
+        "precipitation": {
+          "collection": "fao-gismgr:C3S:raster:mapsets:AGERA5-PF-A",
+          "item_id": "fao-gismgr:C3S:raster:mapsets:AGERA5-PF-A:items:C3S-AGERA5-PF-A-1989",
+          "asset_href": "https://storage.googleapis.com/fao-gismgr-c3s-data/DATA/C3S/MAPSET/AGERA5-PF-A/C3S.AGERA5-PF-A.1989.tif",
+          "license": "CC-BY-SA-4.0",
+          "source_generation": "1757555057020169",
+          "source_hash_md5_or_crc32c": "crc32c=tgCAXw=="
+        },
+        "reference_et0": {
+          "collection": "fao-gismgr:C3S:raster:mapsets:AGERA5-ET0-A",
+          "item_id": "fao-gismgr:C3S:raster:mapsets:AGERA5-ET0-A:items:C3S-AGERA5-ET0-A-1989",
+          "asset_href": "https://storage.googleapis.com/fao-gismgr-c3s-data/DATA/C3S/MAPSET/AGERA5-ET0-A/C3S.AGERA5-ET0-A.1989.tif",
+          "license": "CC-BY-SA-4.0",
+          "source_generation": "1759931376637072",
+          "source_hash_md5_or_crc32c": "crc32c=KQQFDQ=="
+        }
+      },
+      "derivation": {
+        "aoi_identifier": "4-14-5",
+        "aoi_identifier_scheme": "slippy-map tile z-x-y (spatial ID horizontal index)",
+        "aoi_bbox_epsg4326": [
+          135.0,
+          40.97989806962013,
+          157.5,
+          55.7765730186677
+        ],
+        "source_crs": "EPSG:4326",
+        "output_crs": "EPSG:4326",
+        "operation": "rectangular window crop (no cutline, no reprojection, no resampling) then per-pixel subtraction (precipitation - reference_ET0)",
+        "resampling": "none",
+        "nodata_output": -99999.0,
+        "nodata_source_precip": -9999.0,
+        "nodata_source_et0": -9999.0,
+        "tool": "GDAL 3.13.1 (gdal.Translate + numpy subtraction)",
+        "generated_at": "2026-09-20T21:53:47.558648+00:00"
+      },
+      "output": {
+        "path": "derived/4-14-5-1989.tif",
+        "width": 225,
+        "height": 149,
+        "valid_pixel_count": 10903,
+        "mean_p_minus_et0_mm": 347.45831298828125,
+        "sha256": "be2935d24d8add771b9e5006d0a0042a9280363440436909cf3c783e8b931231"
+      }
+    },
+    {
+      "year": "1990",
+      "source": {
+        "precipitation": {
+          "collection": "fao-gismgr:C3S:raster:mapsets:AGERA5-PF-A",
+          "item_id": "fao-gismgr:C3S:raster:mapsets:AGERA5-PF-A:items:C3S-AGERA5-PF-A-1990",
+          "asset_href": "https://storage.googleapis.com/fao-gismgr-c3s-data/DATA/C3S/MAPSET/AGERA5-PF-A/C3S.AGERA5-PF-A.1990.tif",
+          "license": "CC-BY-SA-4.0",
+          "source_generation": "1757555062705474",
+          "source_hash_md5_or_crc32c": "crc32c=yUhN/w=="
+        },
+        "reference_et0": {
+          "collection": "fao-gismgr:C3S:raster:mapsets:AGERA5-ET0-A",
+          "item_id": "fao-gismgr:C3S:raster:mapsets:AGERA5-ET0-A:items:C3S-AGERA5-ET0-A-1990",
+          "asset_href": "https://storage.googleapis.com/fao-gismgr-c3s-data/DATA/C3S/MAPSET/AGERA5-ET0-A/C3S.AGERA5-ET0-A.1990.tif",
+          "license": "CC-BY-SA-4.0",
+          "source_generation": "1759931372442241",
+          "source_hash_md5_or_crc32c": "crc32c=4cOXvg=="
+        }
+      },
+      "derivation": {
+        "aoi_identifier": "4-14-5",
+        "aoi_identifier_scheme": "slippy-map tile z-x-y (spatial ID horizontal index)",
+        "aoi_bbox_epsg4326": [
+          135.0,
+          40.97989806962013,
+          157.5,
+          55.7765730186677
+        ],
+        "source_crs": "EPSG:4326",
+        "output_crs": "EPSG:4326",
+        "operation": "rectangular window crop (no cutline, no reprojection, no resampling) then per-pixel subtraction (precipitation - reference_ET0)",
+        "resampling": "none",
+        "nodata_output": -99999.0,
+        "nodata_source_precip": -9999.0,
+        "nodata_source_et0": -9999.0,
+        "tool": "GDAL 3.13.1 (gdal.Translate + numpy subtraction)",
+        "generated_at": "2026-09-20T21:54:20.972021+00:00"
+      },
+      "output": {
+        "path": "derived/4-14-5-1990.tif",
+        "width": 225,
+        "height": 149,
+        "valid_pixel_count": 10903,
+        "mean_p_minus_et0_mm": 371.8043518066406,
+        "sha256": "68890b235ed82ecc018e6d4d8a3196492dfb0a6b66e17d34c8a94d0e91e11cd1"
+      }
+    },
+    {
+      "year": "1991",
+      "source": {
+        "precipitation": {
+          "collection": "fao-gismgr:C3S:raster:mapsets:AGERA5-PF-A",
+          "item_id": "fao-gismgr:C3S:raster:mapsets:AGERA5-PF-A:items:C3S-AGERA5-PF-A-1991",
+          "asset_href": "https://storage.googleapis.com/fao-gismgr-c3s-data/DATA/C3S/MAPSET/AGERA5-PF-A/C3S.AGERA5-PF-A.1991.tif",
+          "license": "CC-BY-SA-4.0",
+          "source_generation": "1757555063766007",
+          "source_hash_md5_or_crc32c": "crc32c=/jGfQw=="
+        },
+        "reference_et0": {
+          "collection": "fao-gismgr:C3S:raster:mapsets:AGERA5-ET0-A",
+          "item_id": "fao-gismgr:C3S:raster:mapsets:AGERA5-ET0-A:items:C3S-AGERA5-ET0-A-1991",
+          "asset_href": "https://storage.googleapis.com/fao-gismgr-c3s-data/DATA/C3S/MAPSET/AGERA5-ET0-A/C3S.AGERA5-ET0-A.1991.tif",
+          "license": "CC-BY-SA-4.0",
+          "source_generation": "1759931381261358",
+          "source_hash_md5_or_crc32c": "crc32c=qpt8JQ=="
+        }
+      },
+      "derivation": {
+        "aoi_identifier": "4-14-5",
+        "aoi_identifier_scheme": "slippy-map tile z-x-y (spatial ID horizontal index)",
+        "aoi_bbox_epsg4326": [
+          135.0,
+          40.97989806962013,
+          157.5,
+          55.7765730186677
+        ],
+        "source_crs": "EPSG:4326",
+        "output_crs": "EPSG:4326",
+        "operation": "rectangular window crop (no cutline, no reprojection, no resampling) then per-pixel subtraction (precipitation - reference_ET0)",
+        "resampling": "none",
+        "nodata_output": -99999.0,
+        "nodata_source_precip": -9999.0,
+        "nodata_source_et0": -9999.0,
+        "tool": "GDAL 3.13.1 (gdal.Translate + numpy subtraction)",
+        "generated_at": "2026-09-20T21:54:54.364101+00:00"
+      },
+      "output": {
+        "path": "derived/4-14-5-1991.tif",
+        "width": 225,
+        "height": 149,
+        "valid_pixel_count": 10903,
+        "mean_p_minus_et0_mm": 377.7326965332031,
+        "sha256": "f455448ec257986aa6a85d0ad5fc93f3e1240cbdae31a9bdc79cfc5f194c82bd"
+      }
+    },
+    {
+      "year": "1992",
+      "source": {
+        "precipitation": {
+          "collection": "fao-gismgr:C3S:raster:mapsets:AGERA5-PF-A",
+          "item_id": "fao-gismgr:C3S:raster:mapsets:AGERA5-PF-A:items:C3S-AGERA5-PF-A-1992",
+          "asset_href": "https://storage.googleapis.com/fao-gismgr-c3s-data/DATA/C3S/MAPSET/AGERA5-PF-A/C3S.AGERA5-PF-A.1992.tif",
+          "license": "CC-BY-SA-4.0",
+          "source_generation": "1757555062092141",
+          "source_hash_md5_or_crc32c": "crc32c=Nu9NcA=="
+        },
+        "reference_et0": {
+          "collection": "fao-gismgr:C3S:raster:mapsets:AGERA5-ET0-A",
+          "item_id": "fao-gismgr:C3S:raster:mapsets:AGERA5-ET0-A:items:C3S-AGERA5-ET0-A-1992",
+          "asset_href": "https://storage.googleapis.com/fao-gismgr-c3s-data/DATA/C3S/MAPSET/AGERA5-ET0-A/C3S.AGERA5-ET0-A.1992.tif",
+          "license": "CC-BY-SA-4.0",
+          "source_generation": "1759931370557745",
+          "source_hash_md5_or_crc32c": "crc32c=x1g1eA=="
+        }
+      },
+      "derivation": {
+        "aoi_identifier": "4-14-5",
+        "aoi_identifier_scheme": "slippy-map tile z-x-y (spatial ID horizontal index)",
+        "aoi_bbox_epsg4326": [
+          135.0,
+          40.97989806962013,
+          157.5,
+          55.7765730186677
+        ],
+        "source_crs": "EPSG:4326",
+        "output_crs": "EPSG:4326",
+        "operation": "rectangular window crop (no cutline, no reprojection, no resampling) then per-pixel subtraction (precipitation - reference_ET0)",
+        "resampling": "none",
+        "nodata_output": -99999.0,
+        "nodata_source_precip": -9999.0,
+        "nodata_source_et0": -9999.0,
+        "tool": "GDAL 3.13.1 (gdal.Translate + numpy subtraction)",
+        "generated_at": "2026-09-20T21:55:27.863751+00:00"
+      },
+      "output": {
+        "path": "derived/4-14-5-1992.tif",
+        "width": 225,
+        "height": 149,
+        "valid_pixel_count": 10903,
+        "mean_p_minus_et0_mm": 379.5589599609375,
+        "sha256": "69e291741aaa0e3e1e4796a1dd13b58176c3a845fe3d2214714cd5c1bb27c969"
+      }
+    },
+    {
+      "year": "1993",
+      "source": {
+        "precipitation": {
+          "collection": "fao-gismgr:C3S:raster:mapsets:AGERA5-PF-A",
+          "item_id": "fao-gismgr:C3S:raster:mapsets:AGERA5-PF-A:items:C3S-AGERA5-PF-A-1993",
+          "asset_href": "https://storage.googleapis.com/fao-gismgr-c3s-data/DATA/C3S/MAPSET/AGERA5-PF-A/C3S.AGERA5-PF-A.1993.tif",
+          "license": "CC-BY-SA-4.0",
+          "source_generation": "1757555061424947",
+          "source_hash_md5_or_crc32c": "crc32c=KmVsLQ=="
+        },
+        "reference_et0": {
+          "collection": "fao-gismgr:C3S:raster:mapsets:AGERA5-ET0-A",
+          "item_id": "fao-gismgr:C3S:raster:mapsets:AGERA5-ET0-A:items:C3S-AGERA5-ET0-A-1993",
+          "asset_href": "https://storage.googleapis.com/fao-gismgr-c3s-data/DATA/C3S/MAPSET/AGERA5-ET0-A/C3S.AGERA5-ET0-A.1993.tif",
+          "license": "CC-BY-SA-4.0",
+          "source_generation": "1759931343136774",
+          "source_hash_md5_or_crc32c": "crc32c=7HMV/Q=="
+        }
+      },
+      "derivation": {
+        "aoi_identifier": "4-14-5",
+        "aoi_identifier_scheme": "slippy-map tile z-x-y (spatial ID horizontal index)",
+        "aoi_bbox_epsg4326": [
+          135.0,
+          40.97989806962013,
+          157.5,
+          55.7765730186677
+        ],
+        "source_crs": "EPSG:4326",
+        "output_crs": "EPSG:4326",
+        "operation": "rectangular window crop (no cutline, no reprojection, no resampling) then per-pixel subtraction (precipitation - reference_ET0)",
+        "resampling": "none",
+        "nodata_output": -99999.0,
+        "nodata_source_precip": -9999.0,
+        "nodata_source_et0": -9999.0,
+        "tool": "GDAL 3.13.1 (gdal.Translate + numpy subtraction)",
+        "generated_at": "2026-09-20T21:56:00.794113+00:00"
+      },
+      "output": {
+        "path": "derived/4-14-5-1993.tif",
+        "width": 225,
+        "height": 149,
+        "valid_pixel_count": 10903,
+        "mean_p_minus_et0_mm": 289.11004638671875,
+        "sha256": "d56d532ddd7bb8195d5669cdb0ecf449842eb425b7c96576c60799b6458d05a1"
+      }
+    },
+    {
+      "year": "1994",
+      "source": {
+        "precipitation": {
+          "collection": "fao-gismgr:C3S:raster:mapsets:AGERA5-PF-A",
+          "item_id": "fao-gismgr:C3S:raster:mapsets:AGERA5-PF-A:items:C3S-AGERA5-PF-A-1994",
+          "asset_href": "https://storage.googleapis.com/fao-gismgr-c3s-data/DATA/C3S/MAPSET/AGERA5-PF-A/C3S.AGERA5-PF-A.1994.tif",
+          "license": "CC-BY-SA-4.0",
+          "source_generation": "1757555066741424",
+          "source_hash_md5_or_crc32c": "crc32c=HFiyGw=="
+        },
+        "reference_et0": {
+          "collection": "fao-gismgr:C3S:raster:mapsets:AGERA5-ET0-A",
+          "item_id": "fao-gismgr:C3S:raster:mapsets:AGERA5-ET0-A:items:C3S-AGERA5-ET0-A-1994",
+          "asset_href": "https://storage.googleapis.com/fao-gismgr-c3s-data/DATA/C3S/MAPSET/AGERA5-ET0-A/C3S.AGERA5-ET0-A.1994.tif",
+          "license": "CC-BY-SA-4.0",
+          "source_generation": "1759931378657016",
+          "source_hash_md5_or_crc32c": "crc32c=h2JBiA=="
+        }
+      },
+      "derivation": {
+        "aoi_identifier": "4-14-5",
+        "aoi_identifier_scheme": "slippy-map tile z-x-y (spatial ID horizontal index)",
+        "aoi_bbox_epsg4326": [
+          135.0,
+          40.97989806962013,
+          157.5,
+          55.7765730186677
+        ],
+        "source_crs": "EPSG:4326",
+        "output_crs": "EPSG:4326",
+        "operation": "rectangular window crop (no cutline, no reprojection, no resampling) then per-pixel subtraction (precipitation - reference_ET0)",
+        "resampling": "none",
+        "nodata_output": -99999.0,
+        "nodata_source_precip": -9999.0,
+        "nodata_source_et0": -9999.0,
+        "tool": "GDAL 3.13.1 (gdal.Translate + numpy subtraction)",
+        "generated_at": "2026-09-20T21:56:34.630508+00:00"
+      },
+      "output": {
+        "path": "derived/4-14-5-1994.tif",
+        "width": 225,
+        "height": 149,
+        "valid_pixel_count": 10903,
+        "mean_p_minus_et0_mm": 509.9354248046875,
+        "sha256": "ac9ae0e83a02add3068620cffb1394a7231c01ff3523e8beae73c5c17ed398ae"
+      }
+    },
+    {
+      "year": "1995",
+      "source": {
+        "precipitation": {
+          "collection": "fao-gismgr:C3S:raster:mapsets:AGERA5-PF-A",
+          "item_id": "fao-gismgr:C3S:raster:mapsets:AGERA5-PF-A:items:C3S-AGERA5-PF-A-1995",
+          "asset_href": "https://storage.googleapis.com/fao-gismgr-c3s-data/DATA/C3S/MAPSET/AGERA5-PF-A/C3S.AGERA5-PF-A.1995.tif",
+          "license": "CC-BY-SA-4.0",
+          "source_generation": "1757555066926256",
+          "source_hash_md5_or_crc32c": "crc32c=ir59tg=="
+        },
+        "reference_et0": {
+          "collection": "fao-gismgr:C3S:raster:mapsets:AGERA5-ET0-A",
+          "item_id": "fao-gismgr:C3S:raster:mapsets:AGERA5-ET0-A:items:C3S-AGERA5-ET0-A-1995",
+          "asset_href": "https://storage.googleapis.com/fao-gismgr-c3s-data/DATA/C3S/MAPSET/AGERA5-ET0-A/C3S.AGERA5-ET0-A.1995.tif",
+          "license": "CC-BY-SA-4.0",
+          "source_generation": "1759931414637388",
+          "source_hash_md5_or_crc32c": "crc32c=QHOpBg=="
+        }
+      },
+      "derivation": {
+        "aoi_identifier": "4-14-5",
+        "aoi_identifier_scheme": "slippy-map tile z-x-y (spatial ID horizontal index)",
+        "aoi_bbox_epsg4326": [
+          135.0,
+          40.97989806962013,
+          157.5,
+          55.7765730186677
+        ],
+        "source_crs": "EPSG:4326",
+        "output_crs": "EPSG:4326",
+        "operation": "rectangular window crop (no cutline, no reprojection, no resampling) then per-pixel subtraction (precipitation - reference_ET0)",
+        "resampling": "none",
+        "nodata_output": -99999.0,
+        "nodata_source_precip": -9999.0,
+        "nodata_source_et0": -9999.0,
+        "tool": "GDAL 3.13.1 (gdal.Translate + numpy subtraction)",
+        "generated_at": "2026-09-20T21:57:09.172266+00:00"
+      },
+      "output": {
+        "path": "derived/4-14-5-1995.tif",
+        "width": 225,
+        "height": 149,
+        "valid_pixel_count": 10903,
+        "mean_p_minus_et0_mm": 438.27020263671875,
+        "sha256": "3004d1662b7c7c49c623c35775cf9947e1f5869432b41497cd10728b854b7fe1"
+      }
+    },
+    {
+      "year": "1996",
+      "source": {
+        "precipitation": {
+          "collection": "fao-gismgr:C3S:raster:mapsets:AGERA5-PF-A",
+          "item_id": "fao-gismgr:C3S:raster:mapsets:AGERA5-PF-A:items:C3S-AGERA5-PF-A-1996",
+          "asset_href": "https://storage.googleapis.com/fao-gismgr-c3s-data/DATA/C3S/MAPSET/AGERA5-PF-A/C3S.AGERA5-PF-A.1996.tif",
+          "license": "CC-BY-SA-4.0",
+          "source_generation": "1757555068226055",
+          "source_hash_md5_or_crc32c": "crc32c=37kTAw=="
+        },
+        "reference_et0": {
+          "collection": "fao-gismgr:C3S:raster:mapsets:AGERA5-ET0-A",
+          "item_id": "fao-gismgr:C3S:raster:mapsets:AGERA5-ET0-A:items:C3S-AGERA5-ET0-A-1996",
+          "asset_href": "https://storage.googleapis.com/fao-gismgr-c3s-data/DATA/C3S/MAPSET/AGERA5-ET0-A/C3S.AGERA5-ET0-A.1996.tif",
+          "license": "CC-BY-SA-4.0",
+          "source_generation": "1759931370827626",
+          "source_hash_md5_or_crc32c": "crc32c=qwnXXQ=="
+        }
+      },
+      "derivation": {
+        "aoi_identifier": "4-14-5",
+        "aoi_identifier_scheme": "slippy-map tile z-x-y (spatial ID horizontal index)",
+        "aoi_bbox_epsg4326": [
+          135.0,
+          40.97989806962013,
+          157.5,
+          55.7765730186677
+        ],
+        "source_crs": "EPSG:4326",
+        "output_crs": "EPSG:4326",
+        "operation": "rectangular window crop (no cutline, no reprojection, no resampling) then per-pixel subtraction (precipitation - reference_ET0)",
+        "resampling": "none",
+        "nodata_output": -99999.0,
+        "nodata_source_precip": -9999.0,
+        "nodata_source_et0": -9999.0,
+        "tool": "GDAL 3.13.1 (gdal.Translate + numpy subtraction)",
+        "generated_at": "2026-09-20T21:57:42.782178+00:00"
+      },
+      "output": {
+        "path": "derived/4-14-5-1996.tif",
+        "width": 225,
+        "height": 149,
+        "valid_pixel_count": 10903,
+        "mean_p_minus_et0_mm": 368.8977355957031,
+        "sha256": "98c256d937abcd09a66c768d50125ff27d7499f111e2135a2ea96db985c654c4"
+      }
+    },
+    {
+      "year": "1997",
+      "source": {
+        "precipitation": {
+          "collection": "fao-gismgr:C3S:raster:mapsets:AGERA5-PF-A",
+          "item_id": "fao-gismgr:C3S:raster:mapsets:AGERA5-PF-A:items:C3S-AGERA5-PF-A-1997",
+          "asset_href": "https://storage.googleapis.com/fao-gismgr-c3s-data/DATA/C3S/MAPSET/AGERA5-PF-A/C3S.AGERA5-PF-A.1997.tif",
+          "license": "CC-BY-SA-4.0",
+          "source_generation": "1757555066945560",
+          "source_hash_md5_or_crc32c": "crc32c=EttEEg=="
+        },
+        "reference_et0": {
+          "collection": "fao-gismgr:C3S:raster:mapsets:AGERA5-ET0-A",
+          "item_id": "fao-gismgr:C3S:raster:mapsets:AGERA5-ET0-A:items:C3S-AGERA5-ET0-A-1997",
+          "asset_href": "https://storage.googleapis.com/fao-gismgr-c3s-data/DATA/C3S/MAPSET/AGERA5-ET0-A/C3S.AGERA5-ET0-A.1997.tif",
+          "license": "CC-BY-SA-4.0",
+          "source_generation": "1759931430318221",
+          "source_hash_md5_or_crc32c": "crc32c=nfGEPQ=="
+        }
+      },
+      "derivation": {
+        "aoi_identifier": "4-14-5",
+        "aoi_identifier_scheme": "slippy-map tile z-x-y (spatial ID horizontal index)",
+        "aoi_bbox_epsg4326": [
+          135.0,
+          40.97989806962013,
+          157.5,
+          55.7765730186677
+        ],
+        "source_crs": "EPSG:4326",
+        "output_crs": "EPSG:4326",
+        "operation": "rectangular window crop (no cutline, no reprojection, no resampling) then per-pixel subtraction (precipitation - reference_ET0)",
+        "resampling": "none",
+        "nodata_output": -99999.0,
+        "nodata_source_precip": -9999.0,
+        "nodata_source_et0": -9999.0,
+        "tool": "GDAL 3.13.1 (gdal.Translate + numpy subtraction)",
+        "generated_at": "2026-09-20T21:58:17.132394+00:00"
+      },
+      "output": {
+        "path": "derived/4-14-5-1997.tif",
+        "width": 225,
+        "height": 149,
+        "valid_pixel_count": 10903,
+        "mean_p_minus_et0_mm": 445.0310974121094,
+        "sha256": "7c3f28c898a9f327eccf1f2e0a2c14a1a5f3f27a33bc7dd472318f68ded3bcc8"
+      }
+    },
+    {
+      "year": "1998",
+      "source": {
+        "precipitation": {
+          "collection": "fao-gismgr:C3S:raster:mapsets:AGERA5-PF-A",
+          "item_id": "fao-gismgr:C3S:raster:mapsets:AGERA5-PF-A:items:C3S-AGERA5-PF-A-1998",
+          "asset_href": "https://storage.googleapis.com/fao-gismgr-c3s-data/DATA/C3S/MAPSET/AGERA5-PF-A/C3S.AGERA5-PF-A.1998.tif",
+          "license": "CC-BY-SA-4.0",
+          "source_generation": "1757555066758172",
+          "source_hash_md5_or_crc32c": "crc32c=uLhskw=="
+        },
+        "reference_et0": {
+          "collection": "fao-gismgr:C3S:raster:mapsets:AGERA5-ET0-A",
+          "item_id": "fao-gismgr:C3S:raster:mapsets:AGERA5-ET0-A:items:C3S-AGERA5-ET0-A-1998",
+          "asset_href": "https://storage.googleapis.com/fao-gismgr-c3s-data/DATA/C3S/MAPSET/AGERA5-ET0-A/C3S.AGERA5-ET0-A.1998.tif",
+          "license": "CC-BY-SA-4.0",
+          "source_generation": "1759931346919832",
+          "source_hash_md5_or_crc32c": "crc32c=AP6RvQ=="
+        }
+      },
+      "derivation": {
+        "aoi_identifier": "4-14-5",
+        "aoi_identifier_scheme": "slippy-map tile z-x-y (spatial ID horizontal index)",
+        "aoi_bbox_epsg4326": [
+          135.0,
+          40.97989806962013,
+          157.5,
+          55.7765730186677
+        ],
+        "source_crs": "EPSG:4326",
+        "output_crs": "EPSG:4326",
+        "operation": "rectangular window crop (no cutline, no reprojection, no resampling) then per-pixel subtraction (precipitation - reference_ET0)",
+        "resampling": "none",
+        "nodata_output": -99999.0,
+        "nodata_source_precip": -9999.0,
+        "nodata_source_et0": -9999.0,
+        "tool": "GDAL 3.13.1 (gdal.Translate + numpy subtraction)",
+        "generated_at": "2026-09-20T21:58:51.024179+00:00"
+      },
+      "output": {
+        "path": "derived/4-14-5-1998.tif",
+        "width": 225,
+        "height": 149,
+        "valid_pixel_count": 10903,
+        "mean_p_minus_et0_mm": 267.67913818359375,
+        "sha256": "c5d52fcffe8a8d9835e2ece7599c3904e65a3dabd711e36f220d3ccc929129d6"
+      }
+    },
+    {
+      "year": "1999",
+      "source": {
+        "precipitation": {
+          "collection": "fao-gismgr:C3S:raster:mapsets:AGERA5-PF-A",
+          "item_id": "fao-gismgr:C3S:raster:mapsets:AGERA5-PF-A:items:C3S-AGERA5-PF-A-1999",
+          "asset_href": "https://storage.googleapis.com/fao-gismgr-c3s-data/DATA/C3S/MAPSET/AGERA5-PF-A/C3S.AGERA5-PF-A.1999.tif",
+          "license": "CC-BY-SA-4.0",
+          "source_generation": "1757555131782889",
+          "source_hash_md5_or_crc32c": "crc32c=Vkk8dg=="
+        },
+        "reference_et0": {
+          "collection": "fao-gismgr:C3S:raster:mapsets:AGERA5-ET0-A",
+          "item_id": "fao-gismgr:C3S:raster:mapsets:AGERA5-ET0-A:items:C3S-AGERA5-ET0-A-1999",
+          "asset_href": "https://storage.googleapis.com/fao-gismgr-c3s-data/DATA/C3S/MAPSET/AGERA5-ET0-A/C3S.AGERA5-ET0-A.1999.tif",
+          "license": "CC-BY-SA-4.0",
+          "source_generation": "1759931361732522",
+          "source_hash_md5_or_crc32c": "crc32c=YX+vYA=="
+        }
+      },
+      "derivation": {
+        "aoi_identifier": "4-14-5",
+        "aoi_identifier_scheme": "slippy-map tile z-x-y (spatial ID horizontal index)",
+        "aoi_bbox_epsg4326": [
+          135.0,
+          40.97989806962013,
+          157.5,
+          55.7765730186677
+        ],
+        "source_crs": "EPSG:4326",
+        "output_crs": "EPSG:4326",
+        "operation": "rectangular window crop (no cutline, no reprojection, no resampling) then per-pixel subtraction (precipitation - reference_ET0)",
+        "resampling": "none",
+        "nodata_output": -99999.0,
+        "nodata_source_precip": -9999.0,
+        "nodata_source_et0": -9999.0,
+        "tool": "GDAL 3.13.1 (gdal.Translate + numpy subtraction)",
+        "generated_at": "2026-09-20T21:59:24.244675+00:00"
+      },
+      "output": {
+        "path": "derived/4-14-5-1999.tif",
+        "width": 225,
+        "height": 149,
+        "valid_pixel_count": 10903,
+        "mean_p_minus_et0_mm": 411.9545593261719,
+        "sha256": "8f572a2e98c25594a5b80596ebb6bc64096ab62451719bfa51454aace78a1e5d"
+      }
+    },
+    {
+      "year": "2000",
+      "source": {
+        "precipitation": {
+          "collection": "fao-gismgr:C3S:raster:mapsets:AGERA5-PF-A",
+          "item_id": "fao-gismgr:C3S:raster:mapsets:AGERA5-PF-A:items:C3S-AGERA5-PF-A-2000",
+          "asset_href": "https://storage.googleapis.com/fao-gismgr-c3s-data/DATA/C3S/MAPSET/AGERA5-PF-A/C3S.AGERA5-PF-A.2000.tif",
+          "license": "CC-BY-SA-4.0",
+          "source_generation": "1757601817807429",
+          "source_hash_md5_or_crc32c": "crc32c=ZRGosA=="
+        },
+        "reference_et0": {
+          "collection": "fao-gismgr:C3S:raster:mapsets:AGERA5-ET0-A",
+          "item_id": "fao-gismgr:C3S:raster:mapsets:AGERA5-ET0-A:items:C3S-AGERA5-ET0-A-2000",
+          "asset_href": "https://storage.googleapis.com/fao-gismgr-c3s-data/DATA/C3S/MAPSET/AGERA5-ET0-A/C3S.AGERA5-ET0-A.2000.tif",
+          "license": "CC-BY-SA-4.0",
+          "source_generation": "1759931383677680",
+          "source_hash_md5_or_crc32c": "crc32c=xdlsrg=="
+        }
+      },
+      "derivation": {
+        "aoi_identifier": "4-14-5",
+        "aoi_identifier_scheme": "slippy-map tile z-x-y (spatial ID horizontal index)",
+        "aoi_bbox_epsg4326": [
+          135.0,
+          40.97989806962013,
+          157.5,
+          55.7765730186677
+        ],
+        "source_crs": "EPSG:4326",
+        "output_crs": "EPSG:4326",
+        "operation": "rectangular window crop (no cutline, no reprojection, no resampling) then per-pixel subtraction (precipitation - reference_ET0)",
+        "resampling": "none",
+        "nodata_output": -99999.0,
+        "nodata_source_precip": -9999.0,
+        "nodata_source_et0": -9999.0,
+        "tool": "GDAL 3.13.1 (gdal.Translate + numpy subtraction)",
+        "generated_at": "2026-09-20T21:59:56.575787+00:00"
+      },
+      "output": {
+        "path": "derived/4-14-5-2000.tif",
+        "width": 225,
+        "height": 149,
+        "valid_pixel_count": 10903,
+        "mean_p_minus_et0_mm": 443.0416259765625,
+        "sha256": "8db917ddc01e16e902a8b1e4badcb15820ccc1d8dbb771f04c20bf01b1d1c1ab"
+      }
+    },
+    {
+      "year": "2001",
+      "source": {
+        "precipitation": {
+          "collection": "fao-gismgr:C3S:raster:mapsets:AGERA5-PF-A",
+          "item_id": "fao-gismgr:C3S:raster:mapsets:AGERA5-PF-A:items:C3S-AGERA5-PF-A-2001",
+          "asset_href": "https://storage.googleapis.com/fao-gismgr-c3s-data/DATA/C3S/MAPSET/AGERA5-PF-A/C3S.AGERA5-PF-A.2001.tif",
+          "license": "CC-BY-SA-4.0",
+          "source_generation": "1757555131287804",
+          "source_hash_md5_or_crc32c": "crc32c=oaEHHQ=="
+        },
+        "reference_et0": {
+          "collection": "fao-gismgr:C3S:raster:mapsets:AGERA5-ET0-A",
+          "item_id": "fao-gismgr:C3S:raster:mapsets:AGERA5-ET0-A:items:C3S-AGERA5-ET0-A-2001",
+          "asset_href": "https://storage.googleapis.com/fao-gismgr-c3s-data/DATA/C3S/MAPSET/AGERA5-ET0-A/C3S.AGERA5-ET0-A.2001.tif",
+          "license": "CC-BY-SA-4.0",
+          "source_generation": "1759931449800298",
+          "source_hash_md5_or_crc32c": "crc32c=NzVWNA=="
+        }
+      },
+      "derivation": {
+        "aoi_identifier": "4-14-5",
+        "aoi_identifier_scheme": "slippy-map tile z-x-y (spatial ID horizontal index)",
+        "aoi_bbox_epsg4326": [
+          135.0,
+          40.97989806962013,
+          157.5,
+          55.7765730186677
+        ],
+        "source_crs": "EPSG:4326",
+        "output_crs": "EPSG:4326",
+        "operation": "rectangular window crop (no cutline, no reprojection, no resampling) then per-pixel subtraction (precipitation - reference_ET0)",
+        "resampling": "none",
+        "nodata_output": -99999.0,
+        "nodata_source_precip": -9999.0,
+        "nodata_source_et0": -9999.0,
+        "tool": "GDAL 3.13.1 (gdal.Translate + numpy subtraction)",
+        "generated_at": "2026-09-20T22:00:29.223041+00:00"
+      },
+      "output": {
+        "path": "derived/4-14-5-2001.tif",
+        "width": 225,
+        "height": 149,
+        "valid_pixel_count": 10903,
+        "mean_p_minus_et0_mm": 325.771484375,
+        "sha256": "8e98d55e8e97bdfee534fd632a411ba8cb8e56fabfcf33a1eb6fa7e147ac0fbb"
+      }
+    },
+    {
+      "year": "2002",
+      "source": {
+        "precipitation": {
+          "collection": "fao-gismgr:C3S:raster:mapsets:AGERA5-PF-A",
+          "item_id": "fao-gismgr:C3S:raster:mapsets:AGERA5-PF-A:items:C3S-AGERA5-PF-A-2002",
+          "asset_href": "https://storage.googleapis.com/fao-gismgr-c3s-data/DATA/C3S/MAPSET/AGERA5-PF-A/C3S.AGERA5-PF-A.2002.tif",
+          "license": "CC-BY-SA-4.0",
+          "source_generation": "1757601815403283",
+          "source_hash_md5_or_crc32c": "crc32c=EzeH9A=="
+        },
+        "reference_et0": {
+          "collection": "fao-gismgr:C3S:raster:mapsets:AGERA5-ET0-A",
+          "item_id": "fao-gismgr:C3S:raster:mapsets:AGERA5-ET0-A:items:C3S-AGERA5-ET0-A-2002",
+          "asset_href": "https://storage.googleapis.com/fao-gismgr-c3s-data/DATA/C3S/MAPSET/AGERA5-ET0-A/C3S.AGERA5-ET0-A.2002.tif",
+          "license": "CC-BY-SA-4.0",
+          "source_generation": "1759931458143138",
+          "source_hash_md5_or_crc32c": "crc32c=l1Lk9w=="
+        }
+      },
+      "derivation": {
+        "aoi_identifier": "4-14-5",
+        "aoi_identifier_scheme": "slippy-map tile z-x-y (spatial ID horizontal index)",
+        "aoi_bbox_epsg4326": [
+          135.0,
+          40.97989806962013,
+          157.5,
+          55.7765730186677
+        ],
+        "source_crs": "EPSG:4326",
+        "output_crs": "EPSG:4326",
+        "operation": "rectangular window crop (no cutline, no reprojection, no resampling) then per-pixel subtraction (precipitation - reference_ET0)",
+        "resampling": "none",
+        "nodata_output": -99999.0,
+        "nodata_source_precip": -9999.0,
+        "nodata_source_et0": -9999.0,
+        "tool": "GDAL 3.13.1 (gdal.Translate + numpy subtraction)",
+        "generated_at": "2026-09-20T22:01:01.377104+00:00"
+      },
+      "output": {
+        "path": "derived/4-14-5-2002.tif",
+        "width": 225,
+        "height": 149,
+        "valid_pixel_count": 10903,
+        "mean_p_minus_et0_mm": 426.4068298339844,
+        "sha256": "695ef09ff501857049c999e831b291b3339a9e143e9ec282a980cabcdcedf9ad"
+      }
+    },
+    {
+      "year": "2003",
+      "source": {
+        "precipitation": {
+          "collection": "fao-gismgr:C3S:raster:mapsets:AGERA5-PF-A",
+          "item_id": "fao-gismgr:C3S:raster:mapsets:AGERA5-PF-A:items:C3S-AGERA5-PF-A-2003",
+          "asset_href": "https://storage.googleapis.com/fao-gismgr-c3s-data/DATA/C3S/MAPSET/AGERA5-PF-A/C3S.AGERA5-PF-A.2003.tif",
+          "license": "CC-BY-SA-4.0",
+          "source_generation": "1757555130133473",
+          "source_hash_md5_or_crc32c": "crc32c=AZR8uQ=="
+        },
+        "reference_et0": {
+          "collection": "fao-gismgr:C3S:raster:mapsets:AGERA5-ET0-A",
+          "item_id": "fao-gismgr:C3S:raster:mapsets:AGERA5-ET0-A:items:C3S-AGERA5-ET0-A-2003",
+          "asset_href": "https://storage.googleapis.com/fao-gismgr-c3s-data/DATA/C3S/MAPSET/AGERA5-ET0-A/C3S.AGERA5-ET0-A.2003.tif",
+          "license": "CC-BY-SA-4.0",
+          "source_generation": "1759931427011540",
+          "source_hash_md5_or_crc32c": "crc32c=PRTPmw=="
+        }
+      },
+      "derivation": {
+        "aoi_identifier": "4-14-5",
+        "aoi_identifier_scheme": "slippy-map tile z-x-y (spatial ID horizontal index)",
+        "aoi_bbox_epsg4326": [
+          135.0,
+          40.97989806962013,
+          157.5,
+          55.7765730186677
+        ],
+        "source_crs": "EPSG:4326",
+        "output_crs": "EPSG:4326",
+        "operation": "rectangular window crop (no cutline, no reprojection, no resampling) then per-pixel subtraction (precipitation - reference_ET0)",
+        "resampling": "none",
+        "nodata_output": -99999.0,
+        "nodata_source_precip": -9999.0,
+        "nodata_source_et0": -9999.0,
+        "tool": "GDAL 3.13.1 (gdal.Translate + numpy subtraction)",
+        "generated_at": "2026-09-20T22:01:32.290531+00:00"
+      },
+      "output": {
+        "path": "derived/4-14-5-2003.tif",
+        "width": 225,
+        "height": 149,
+        "valid_pixel_count": 10903,
+        "mean_p_minus_et0_mm": 227.39273071289062,
+        "sha256": "920625578a1725525e3651b72b226bf6bfd04e7ad1bf7996fcb1465a9e8f9900"
+      }
+    },
+    {
+      "year": "2004",
+      "source": {
+        "precipitation": {
+          "collection": "fao-gismgr:C3S:raster:mapsets:AGERA5-PF-A",
+          "item_id": "fao-gismgr:C3S:raster:mapsets:AGERA5-PF-A:items:C3S-AGERA5-PF-A-2004",
+          "asset_href": "https://storage.googleapis.com/fao-gismgr-c3s-data/DATA/C3S/MAPSET/AGERA5-PF-A/C3S.AGERA5-PF-A.2004.tif",
+          "license": "CC-BY-SA-4.0",
+          "source_generation": "1757601818077963",
+          "source_hash_md5_or_crc32c": "crc32c=UQvrCQ=="
+        },
+        "reference_et0": {
+          "collection": "fao-gismgr:C3S:raster:mapsets:AGERA5-ET0-A",
+          "item_id": "fao-gismgr:C3S:raster:mapsets:AGERA5-ET0-A:items:C3S-AGERA5-ET0-A-2004",
+          "asset_href": "https://storage.googleapis.com/fao-gismgr-c3s-data/DATA/C3S/MAPSET/AGERA5-ET0-A/C3S.AGERA5-ET0-A.2004.tif",
+          "license": "CC-BY-SA-4.0",
+          "source_generation": "1759931333782306",
+          "source_hash_md5_or_crc32c": "crc32c=bCXjOg=="
+        }
+      },
+      "derivation": {
+        "aoi_identifier": "4-14-5",
+        "aoi_identifier_scheme": "slippy-map tile z-x-y (spatial ID horizontal index)",
+        "aoi_bbox_epsg4326": [
+          135.0,
+          40.97989806962013,
+          157.5,
+          55.7765730186677
+        ],
+        "source_crs": "EPSG:4326",
+        "output_crs": "EPSG:4326",
+        "operation": "rectangular window crop (no cutline, no reprojection, no resampling) then per-pixel subtraction (precipitation - reference_ET0)",
+        "resampling": "none",
+        "nodata_output": -99999.0,
+        "nodata_source_precip": -9999.0,
+        "nodata_source_et0": -9999.0,
+        "tool": "GDAL 3.13.1 (gdal.Translate + numpy subtraction)",
+        "generated_at": "2026-09-20T22:02:04.925190+00:00"
+      },
+      "output": {
+        "path": "derived/4-14-5-2004.tif",
+        "width": 225,
+        "height": 149,
+        "valid_pixel_count": 10903,
+        "mean_p_minus_et0_mm": 440.81793212890625,
+        "sha256": "e023bcb1d4e33a4bb5e21c3f02bda83757d246d4ac15d2546187d54d1072b665"
+      }
+    },
+    {
+      "year": "2005",
+      "source": {
+        "precipitation": {
+          "collection": "fao-gismgr:C3S:raster:mapsets:AGERA5-PF-A",
+          "item_id": "fao-gismgr:C3S:raster:mapsets:AGERA5-PF-A:items:C3S-AGERA5-PF-A-2005",
+          "asset_href": "https://storage.googleapis.com/fao-gismgr-c3s-data/DATA/C3S/MAPSET/AGERA5-PF-A/C3S.AGERA5-PF-A.2005.tif",
+          "license": "CC-BY-SA-4.0",
+          "source_generation": "1757601819237832",
+          "source_hash_md5_or_crc32c": "crc32c=/Cadrg=="
+        },
+        "reference_et0": {
+          "collection": "fao-gismgr:C3S:raster:mapsets:AGERA5-ET0-A",
+          "item_id": "fao-gismgr:C3S:raster:mapsets:AGERA5-ET0-A:items:C3S-AGERA5-ET0-A-2005",
+          "asset_href": "https://storage.googleapis.com/fao-gismgr-c3s-data/DATA/C3S/MAPSET/AGERA5-ET0-A/C3S.AGERA5-ET0-A.2005.tif",
+          "license": "CC-BY-SA-4.0",
+          "source_generation": "1759931331623205",
+          "source_hash_md5_or_crc32c": "crc32c=IyZzuw=="
+        }
+      },
+      "derivation": {
+        "aoi_identifier": "4-14-5",
+        "aoi_identifier_scheme": "slippy-map tile z-x-y (spatial ID horizontal index)",
+        "aoi_bbox_epsg4326": [
+          135.0,
+          40.97989806962013,
+          157.5,
+          55.7765730186677
+        ],
+        "source_crs": "EPSG:4326",
+        "output_crs": "EPSG:4326",
+        "operation": "rectangular window crop (no cutline, no reprojection, no resampling) then per-pixel subtraction (precipitation - reference_ET0)",
+        "resampling": "none",
+        "nodata_output": -99999.0,
+        "nodata_source_precip": -9999.0,
+        "nodata_source_et0": -9999.0,
+        "tool": "GDAL 3.13.1 (gdal.Translate + numpy subtraction)",
+        "generated_at": "2026-09-20T22:02:37.386010+00:00"
+      },
+      "output": {
+        "path": "derived/4-14-5-2005.tif",
+        "width": 225,
+        "height": 149,
+        "valid_pixel_count": 10903,
+        "mean_p_minus_et0_mm": 349.55865478515625,
+        "sha256": "9e7c22c80b4618d78e83bae43b701607ba2d01583ef03feb13fe1de90a147b9f"
+      }
+    },
+    {
+      "year": "2006",
+      "source": {
+        "precipitation": {
+          "collection": "fao-gismgr:C3S:raster:mapsets:AGERA5-PF-A",
+          "item_id": "fao-gismgr:C3S:raster:mapsets:AGERA5-PF-A:items:C3S-AGERA5-PF-A-2006",
+          "asset_href": "https://storage.googleapis.com/fao-gismgr-c3s-data/DATA/C3S/MAPSET/AGERA5-PF-A/C3S.AGERA5-PF-A.2006.tif",
+          "license": "CC-BY-SA-4.0",
+          "source_generation": "1757601482580677",
+          "source_hash_md5_or_crc32c": "crc32c=EekKxQ=="
+        },
+        "reference_et0": {
+          "collection": "fao-gismgr:C3S:raster:mapsets:AGERA5-ET0-A",
+          "item_id": "fao-gismgr:C3S:raster:mapsets:AGERA5-ET0-A:items:C3S-AGERA5-ET0-A-2006",
+          "asset_href": "https://storage.googleapis.com/fao-gismgr-c3s-data/DATA/C3S/MAPSET/AGERA5-ET0-A/C3S.AGERA5-ET0-A.2006.tif",
+          "license": "CC-BY-SA-4.0",
+          "source_generation": "1759931372746648",
+          "source_hash_md5_or_crc32c": "crc32c=99dexw=="
+        }
+      },
+      "derivation": {
+        "aoi_identifier": "4-14-5",
+        "aoi_identifier_scheme": "slippy-map tile z-x-y (spatial ID horizontal index)",
+        "aoi_bbox_epsg4326": [
+          135.0,
+          40.97989806962013,
+          157.5,
+          55.7765730186677
+        ],
+        "source_crs": "EPSG:4326",
+        "output_crs": "EPSG:4326",
+        "operation": "rectangular window crop (no cutline, no reprojection, no resampling) then per-pixel subtraction (precipitation - reference_ET0)",
+        "resampling": "none",
+        "nodata_output": -99999.0,
+        "nodata_source_precip": -9999.0,
+        "nodata_source_et0": -9999.0,
+        "tool": "GDAL 3.13.1 (gdal.Translate + numpy subtraction)",
+        "generated_at": "2026-09-20T22:03:09.148100+00:00"
+      },
+      "output": {
+        "path": "derived/4-14-5-2006.tif",
+        "width": 225,
+        "height": 149,
+        "valid_pixel_count": 10903,
+        "mean_p_minus_et0_mm": 364.6438293457031,
+        "sha256": "2f18f044590073aff83e9294946d4ca2a8d12f32391d8e36f392968d705dda37"
+      }
+    },
+    {
+      "year": "2007",
+      "source": {
+        "precipitation": {
+          "collection": "fao-gismgr:C3S:raster:mapsets:AGERA5-PF-A",
+          "item_id": "fao-gismgr:C3S:raster:mapsets:AGERA5-PF-A:items:C3S-AGERA5-PF-A-2007",
+          "asset_href": "https://storage.googleapis.com/fao-gismgr-c3s-data/DATA/C3S/MAPSET/AGERA5-PF-A/C3S.AGERA5-PF-A.2007.tif",
+          "license": "CC-BY-SA-4.0",
+          "source_generation": "1757555133796333",
+          "source_hash_md5_or_crc32c": "crc32c=7qORtQ=="
+        },
+        "reference_et0": {
+          "collection": "fao-gismgr:C3S:raster:mapsets:AGERA5-ET0-A",
+          "item_id": "fao-gismgr:C3S:raster:mapsets:AGERA5-ET0-A:items:C3S-AGERA5-ET0-A-2007",
+          "asset_href": "https://storage.googleapis.com/fao-gismgr-c3s-data/DATA/C3S/MAPSET/AGERA5-ET0-A/C3S.AGERA5-ET0-A.2007.tif",
+          "license": "CC-BY-SA-4.0",
+          "source_generation": "1759931371203814",
+          "source_hash_md5_or_crc32c": "crc32c=g8ykhA=="
+        }
+      },
+      "derivation": {
+        "aoi_identifier": "4-14-5",
+        "aoi_identifier_scheme": "slippy-map tile z-x-y (spatial ID horizontal index)",
+        "aoi_bbox_epsg4326": [
+          135.0,
+          40.97989806962013,
+          157.5,
+          55.7765730186677
+        ],
+        "source_crs": "EPSG:4326",
+        "output_crs": "EPSG:4326",
+        "operation": "rectangular window crop (no cutline, no reprojection, no resampling) then per-pixel subtraction (precipitation - reference_ET0)",
+        "resampling": "none",
+        "nodata_output": -99999.0,
+        "nodata_source_precip": -9999.0,
+        "nodata_source_et0": -9999.0,
+        "tool": "GDAL 3.13.1 (gdal.Translate + numpy subtraction)",
+        "generated_at": "2026-09-20T22:03:41.556299+00:00"
+      },
+      "output": {
+        "path": "derived/4-14-5-2007.tif",
+        "width": 225,
+        "height": 149,
+        "valid_pixel_count": 10903,
+        "mean_p_minus_et0_mm": 263.5382385253906,
+        "sha256": "6da25b24b1493119875e9ced20d08e03d822915298b7ec31d429eaaa9418144f"
+      }
+    },
+    {
+      "year": "2008",
+      "source": {
+        "precipitation": {
+          "collection": "fao-gismgr:C3S:raster:mapsets:AGERA5-PF-A",
+          "item_id": "fao-gismgr:C3S:raster:mapsets:AGERA5-PF-A:items:C3S-AGERA5-PF-A-2008",
+          "asset_href": "https://storage.googleapis.com/fao-gismgr-c3s-data/DATA/C3S/MAPSET/AGERA5-PF-A/C3S.AGERA5-PF-A.2008.tif",
+          "license": "CC-BY-SA-4.0",
+          "source_generation": "1757601280598414",
+          "source_hash_md5_or_crc32c": "crc32c=JpafLA=="
+        },
+        "reference_et0": {
+          "collection": "fao-gismgr:C3S:raster:mapsets:AGERA5-ET0-A",
+          "item_id": "fao-gismgr:C3S:raster:mapsets:AGERA5-ET0-A:items:C3S-AGERA5-ET0-A-2008",
+          "asset_href": "https://storage.googleapis.com/fao-gismgr-c3s-data/DATA/C3S/MAPSET/AGERA5-ET0-A/C3S.AGERA5-ET0-A.2008.tif",
+          "license": "CC-BY-SA-4.0",
+          "source_generation": "1759931416208745",
+          "source_hash_md5_or_crc32c": "crc32c=iZOYDw=="
+        }
+      },
+      "derivation": {
+        "aoi_identifier": "4-14-5",
+        "aoi_identifier_scheme": "slippy-map tile z-x-y (spatial ID horizontal index)",
+        "aoi_bbox_epsg4326": [
+          135.0,
+          40.97989806962013,
+          157.5,
+          55.7765730186677
+        ],
+        "source_crs": "EPSG:4326",
+        "output_crs": "EPSG:4326",
+        "operation": "rectangular window crop (no cutline, no reprojection, no resampling) then per-pixel subtraction (precipitation - reference_ET0)",
+        "resampling": "none",
+        "nodata_output": -99999.0,
+        "nodata_source_precip": -9999.0,
+        "nodata_source_et0": -9999.0,
+        "tool": "GDAL 3.13.1 (gdal.Translate + numpy subtraction)",
+        "generated_at": "2026-09-20T22:04:13.415623+00:00"
+      },
+      "output": {
+        "path": "derived/4-14-5-2008.tif",
+        "width": 225,
+        "height": 149,
+        "valid_pixel_count": 10903,
+        "mean_p_minus_et0_mm": 287.6634826660156,
+        "sha256": "ab00654f09ba73b77db7dad6073ae4a0e2b9b58bafe599dcdd9965fe5a49e8b8"
+      }
+    },
+    {
+      "year": "2009",
+      "source": {
+        "precipitation": {
+          "collection": "fao-gismgr:C3S:raster:mapsets:AGERA5-PF-A",
+          "item_id": "fao-gismgr:C3S:raster:mapsets:AGERA5-PF-A:items:C3S-AGERA5-PF-A-2009",
+          "asset_href": "https://storage.googleapis.com/fao-gismgr-c3s-data/DATA/C3S/MAPSET/AGERA5-PF-A/C3S.AGERA5-PF-A.2009.tif",
+          "license": "CC-BY-SA-4.0",
+          "source_generation": "1757601882238647",
+          "source_hash_md5_or_crc32c": "crc32c=aG7BAg=="
+        },
+        "reference_et0": {
+          "collection": "fao-gismgr:C3S:raster:mapsets:AGERA5-ET0-A",
+          "item_id": "fao-gismgr:C3S:raster:mapsets:AGERA5-ET0-A:items:C3S-AGERA5-ET0-A-2009",
+          "asset_href": "https://storage.googleapis.com/fao-gismgr-c3s-data/DATA/C3S/MAPSET/AGERA5-ET0-A/C3S.AGERA5-ET0-A.2009.tif",
+          "license": "CC-BY-SA-4.0",
+          "source_generation": "1759931457075006",
+          "source_hash_md5_or_crc32c": "crc32c=S0W0dw=="
+        }
+      },
+      "derivation": {
+        "aoi_identifier": "4-14-5",
+        "aoi_identifier_scheme": "slippy-map tile z-x-y (spatial ID horizontal index)",
+        "aoi_bbox_epsg4326": [
+          135.0,
+          40.97989806962013,
+          157.5,
+          55.7765730186677
+        ],
+        "source_crs": "EPSG:4326",
+        "output_crs": "EPSG:4326",
+        "operation": "rectangular window crop (no cutline, no reprojection, no resampling) then per-pixel subtraction (precipitation - reference_ET0)",
+        "resampling": "none",
+        "nodata_output": -99999.0,
+        "nodata_source_precip": -9999.0,
+        "nodata_source_et0": -9999.0,
+        "tool": "GDAL 3.13.1 (gdal.Translate + numpy subtraction)",
+        "generated_at": "2026-09-20T22:04:45.553622+00:00"
+      },
+      "output": {
+        "path": "derived/4-14-5-2009.tif",
+        "width": 225,
+        "height": 149,
+        "valid_pixel_count": 10903,
+        "mean_p_minus_et0_mm": 475.60186767578125,
+        "sha256": "31b671386d55c6c7beb1cbe8fb5a0303afc010a6d08591ae28dd4db69f9554e8"
+      }
+    },
+    {
+      "year": "2010",
+      "source": {
+        "precipitation": {
+          "collection": "fao-gismgr:C3S:raster:mapsets:AGERA5-PF-A",
+          "item_id": "fao-gismgr:C3S:raster:mapsets:AGERA5-PF-A:items:C3S-AGERA5-PF-A-2010",
+          "asset_href": "https://storage.googleapis.com/fao-gismgr-c3s-data/DATA/C3S/MAPSET/AGERA5-PF-A/C3S.AGERA5-PF-A.2010.tif",
+          "license": "CC-BY-SA-4.0",
+          "source_generation": "1757601814668125",
+          "source_hash_md5_or_crc32c": "crc32c=wmEPfQ=="
+        },
+        "reference_et0": {
+          "collection": "fao-gismgr:C3S:raster:mapsets:AGERA5-ET0-A",
+          "item_id": "fao-gismgr:C3S:raster:mapsets:AGERA5-ET0-A:items:C3S-AGERA5-ET0-A-2010",
+          "asset_href": "https://storage.googleapis.com/fao-gismgr-c3s-data/DATA/C3S/MAPSET/AGERA5-ET0-A/C3S.AGERA5-ET0-A.2010.tif",
+          "license": "CC-BY-SA-4.0",
+          "source_generation": "1759931422612777",
+          "source_hash_md5_or_crc32c": "crc32c=O4xErw=="
+        }
+      },
+      "derivation": {
+        "aoi_identifier": "4-14-5",
+        "aoi_identifier_scheme": "slippy-map tile z-x-y (spatial ID horizontal index)",
+        "aoi_bbox_epsg4326": [
+          135.0,
+          40.97989806962013,
+          157.5,
+          55.7765730186677
+        ],
+        "source_crs": "EPSG:4326",
+        "output_crs": "EPSG:4326",
+        "operation": "rectangular window crop (no cutline, no reprojection, no resampling) then per-pixel subtraction (precipitation - reference_ET0)",
+        "resampling": "none",
+        "nodata_output": -99999.0,
+        "nodata_source_precip": -9999.0,
+        "nodata_source_et0": -9999.0,
+        "tool": "GDAL 3.13.1 (gdal.Translate + numpy subtraction)",
+        "generated_at": "2026-09-20T22:05:18.135956+00:00"
+      },
+      "output": {
+        "path": "derived/4-14-5-2010.tif",
+        "width": 225,
+        "height": 149,
+        "valid_pixel_count": 10903,
+        "mean_p_minus_et0_mm": 508.87139892578125,
+        "sha256": "c1cf95ee26abffdcc59d60e5e9960ea96fc2eab0a1b841c0c2ef0b4dae570f33"
+      }
+    },
+    {
+      "year": "2011",
+      "source": {
+        "precipitation": {
+          "collection": "fao-gismgr:C3S:raster:mapsets:AGERA5-PF-A",
+          "item_id": "fao-gismgr:C3S:raster:mapsets:AGERA5-PF-A:items:C3S-AGERA5-PF-A-2011",
+          "asset_href": "https://storage.googleapis.com/fao-gismgr-c3s-data/DATA/C3S/MAPSET/AGERA5-PF-A/C3S.AGERA5-PF-A.2011.tif",
+          "license": "CC-BY-SA-4.0",
+          "source_generation": "1757603034881147",
+          "source_hash_md5_or_crc32c": "crc32c=fJlWSw=="
+        },
+        "reference_et0": {
+          "collection": "fao-gismgr:C3S:raster:mapsets:AGERA5-ET0-A",
+          "item_id": "fao-gismgr:C3S:raster:mapsets:AGERA5-ET0-A:items:C3S-AGERA5-ET0-A-2011",
+          "asset_href": "https://storage.googleapis.com/fao-gismgr-c3s-data/DATA/C3S/MAPSET/AGERA5-ET0-A/C3S.AGERA5-ET0-A.2011.tif",
+          "license": "CC-BY-SA-4.0",
+          "source_generation": "1759931438731316",
+          "source_hash_md5_or_crc32c": "crc32c=5hunQQ=="
+        }
+      },
+      "derivation": {
+        "aoi_identifier": "4-14-5",
+        "aoi_identifier_scheme": "slippy-map tile z-x-y (spatial ID horizontal index)",
+        "aoi_bbox_epsg4326": [
+          135.0,
+          40.97989806962013,
+          157.5,
+          55.7765730186677
+        ],
+        "source_crs": "EPSG:4326",
+        "output_crs": "EPSG:4326",
+        "operation": "rectangular window crop (no cutline, no reprojection, no resampling) then per-pixel subtraction (precipitation - reference_ET0)",
+        "resampling": "none",
+        "nodata_output": -99999.0,
+        "nodata_source_precip": -9999.0,
+        "nodata_source_et0": -9999.0,
+        "tool": "GDAL 3.13.1 (gdal.Translate + numpy subtraction)",
+        "generated_at": "2026-09-20T22:05:49.820071+00:00"
+      },
+      "output": {
+        "path": "derived/4-14-5-2011.tif",
+        "width": 225,
+        "height": 149,
+        "valid_pixel_count": 10903,
+        "mean_p_minus_et0_mm": 378.2767639160156,
+        "sha256": "6508822f9e62a687574ddc7ee83b0890b5349a2f790277c9cfd8278e2945432d"
+      }
+    },
+    {
+      "year": "2012",
+      "source": {
+        "precipitation": {
+          "collection": "fao-gismgr:C3S:raster:mapsets:AGERA5-PF-A",
+          "item_id": "fao-gismgr:C3S:raster:mapsets:AGERA5-PF-A:items:C3S-AGERA5-PF-A-2012",
+          "asset_href": "https://storage.googleapis.com/fao-gismgr-c3s-data/DATA/C3S/MAPSET/AGERA5-PF-A/C3S.AGERA5-PF-A.2012.tif",
+          "license": "CC-BY-SA-4.0",
+          "source_generation": "1757603041285254",
+          "source_hash_md5_or_crc32c": "crc32c=gXjTyQ=="
+        },
+        "reference_et0": {
+          "collection": "fao-gismgr:C3S:raster:mapsets:AGERA5-ET0-A",
+          "item_id": "fao-gismgr:C3S:raster:mapsets:AGERA5-ET0-A:items:C3S-AGERA5-ET0-A-2012",
+          "asset_href": "https://storage.googleapis.com/fao-gismgr-c3s-data/DATA/C3S/MAPSET/AGERA5-ET0-A/C3S.AGERA5-ET0-A.2012.tif",
+          "license": "CC-BY-SA-4.0",
+          "source_generation": "1759931430925818",
+          "source_hash_md5_or_crc32c": "crc32c=Mb8NTw=="
+        }
+      },
+      "derivation": {
+        "aoi_identifier": "4-14-5",
+        "aoi_identifier_scheme": "slippy-map tile z-x-y (spatial ID horizontal index)",
+        "aoi_bbox_epsg4326": [
+          135.0,
+          40.97989806962013,
+          157.5,
+          55.7765730186677
+        ],
+        "source_crs": "EPSG:4326",
+        "output_crs": "EPSG:4326",
+        "operation": "rectangular window crop (no cutline, no reprojection, no resampling) then per-pixel subtraction (precipitation - reference_ET0)",
+        "resampling": "none",
+        "nodata_output": -99999.0,
+        "nodata_source_precip": -9999.0,
+        "nodata_source_et0": -9999.0,
+        "tool": "GDAL 3.13.1 (gdal.Translate + numpy subtraction)",
+        "generated_at": "2026-09-20T22:06:21.908717+00:00"
+      },
+      "output": {
+        "path": "derived/4-14-5-2012.tif",
+        "width": 225,
+        "height": 149,
+        "valid_pixel_count": 10903,
+        "mean_p_minus_et0_mm": 401.0887756347656,
+        "sha256": "ca4b7604c28c2970634b79430393969673f5e8f87a5a2aec6dfcd70d2376f073"
+      }
+    },
+    {
+      "year": "2013",
+      "source": {
+        "precipitation": {
+          "collection": "fao-gismgr:C3S:raster:mapsets:AGERA5-PF-A",
+          "item_id": "fao-gismgr:C3S:raster:mapsets:AGERA5-PF-A:items:C3S-AGERA5-PF-A-2013",
+          "asset_href": "https://storage.googleapis.com/fao-gismgr-c3s-data/DATA/C3S/MAPSET/AGERA5-PF-A/C3S.AGERA5-PF-A.2013.tif",
+          "license": "CC-BY-SA-4.0",
+          "source_generation": "1757603093064968",
+          "source_hash_md5_or_crc32c": "crc32c=5FVENw=="
+        },
+        "reference_et0": {
+          "collection": "fao-gismgr:C3S:raster:mapsets:AGERA5-ET0-A",
+          "item_id": "fao-gismgr:C3S:raster:mapsets:AGERA5-ET0-A:items:C3S-AGERA5-ET0-A-2013",
+          "asset_href": "https://storage.googleapis.com/fao-gismgr-c3s-data/DATA/C3S/MAPSET/AGERA5-ET0-A/C3S.AGERA5-ET0-A.2013.tif",
+          "license": "CC-BY-SA-4.0",
+          "source_generation": "1759931371117663",
+          "source_hash_md5_or_crc32c": "crc32c=xD3AAQ=="
+        }
+      },
+      "derivation": {
+        "aoi_identifier": "4-14-5",
+        "aoi_identifier_scheme": "slippy-map tile z-x-y (spatial ID horizontal index)",
+        "aoi_bbox_epsg4326": [
+          135.0,
+          40.97989806962013,
+          157.5,
+          55.7765730186677
+        ],
+        "source_crs": "EPSG:4326",
+        "output_crs": "EPSG:4326",
+        "operation": "rectangular window crop (no cutline, no reprojection, no resampling) then per-pixel subtraction (precipitation - reference_ET0)",
+        "resampling": "none",
+        "nodata_output": -99999.0,
+        "nodata_source_precip": -9999.0,
+        "nodata_source_et0": -9999.0,
+        "tool": "GDAL 3.13.1 (gdal.Translate + numpy subtraction)",
+        "generated_at": "2026-09-20T22:06:54.657858+00:00"
+      },
+      "output": {
+        "path": "derived/4-14-5-2013.tif",
+        "width": 225,
+        "height": 149,
+        "valid_pixel_count": 10903,
+        "mean_p_minus_et0_mm": 507.0539855957031,
+        "sha256": "b333969641a02172bfd6b8960cfb860cfb8e0124e4bf7c6707378e6717b127cf"
+      }
+    },
+    {
+      "year": "2014",
+      "source": {
+        "precipitation": {
+          "collection": "fao-gismgr:C3S:raster:mapsets:AGERA5-PF-A",
+          "item_id": "fao-gismgr:C3S:raster:mapsets:AGERA5-PF-A:items:C3S-AGERA5-PF-A-2014",
+          "asset_href": "https://storage.googleapis.com/fao-gismgr-c3s-data/DATA/C3S/MAPSET/AGERA5-PF-A/C3S.AGERA5-PF-A.2014.tif",
+          "license": "CC-BY-SA-4.0",
+          "source_generation": "1757603081029209",
+          "source_hash_md5_or_crc32c": "crc32c=WubrPg=="
+        },
+        "reference_et0": {
+          "collection": "fao-gismgr:C3S:raster:mapsets:AGERA5-ET0-A",
+          "item_id": "fao-gismgr:C3S:raster:mapsets:AGERA5-ET0-A:items:C3S-AGERA5-ET0-A-2014",
+          "asset_href": "https://storage.googleapis.com/fao-gismgr-c3s-data/DATA/C3S/MAPSET/AGERA5-ET0-A/C3S.AGERA5-ET0-A.2014.tif",
+          "license": "CC-BY-SA-4.0",
+          "source_generation": "1759931454339813",
+          "source_hash_md5_or_crc32c": "crc32c=6E8idA=="
+        }
+      },
+      "derivation": {
+        "aoi_identifier": "4-14-5",
+        "aoi_identifier_scheme": "slippy-map tile z-x-y (spatial ID horizontal index)",
+        "aoi_bbox_epsg4326": [
+          135.0,
+          40.97989806962013,
+          157.5,
+          55.7765730186677
+        ],
+        "source_crs": "EPSG:4326",
+        "output_crs": "EPSG:4326",
+        "operation": "rectangular window crop (no cutline, no reprojection, no resampling) then per-pixel subtraction (precipitation - reference_ET0)",
+        "resampling": "none",
+        "nodata_output": -99999.0,
+        "nodata_source_precip": -9999.0,
+        "nodata_source_et0": -9999.0,
+        "tool": "GDAL 3.13.1 (gdal.Translate + numpy subtraction)",
+        "generated_at": "2026-09-20T22:07:28.157384+00:00"
+      },
+      "output": {
+        "path": "derived/4-14-5-2014.tif",
+        "width": 225,
+        "height": 149,
+        "valid_pixel_count": 10903,
+        "mean_p_minus_et0_mm": 329.9002685546875,
+        "sha256": "611d5ee5dfa9ec0c5e3860f908e74079ab27074cc50d25e4a686eabea2aa3c6a"
+      }
+    },
+    {
+      "year": "2015",
+      "source": {
+        "precipitation": {
+          "collection": "fao-gismgr:C3S:raster:mapsets:AGERA5-PF-A",
+          "item_id": "fao-gismgr:C3S:raster:mapsets:AGERA5-PF-A:items:C3S-AGERA5-PF-A-2015",
+          "asset_href": "https://storage.googleapis.com/fao-gismgr-c3s-data/DATA/C3S/MAPSET/AGERA5-PF-A/C3S.AGERA5-PF-A.2015.tif",
+          "license": "CC-BY-SA-4.0",
+          "source_generation": "1757603040813281",
+          "source_hash_md5_or_crc32c": "crc32c=QVmtDQ=="
+        },
+        "reference_et0": {
+          "collection": "fao-gismgr:C3S:raster:mapsets:AGERA5-ET0-A",
+          "item_id": "fao-gismgr:C3S:raster:mapsets:AGERA5-ET0-A:items:C3S-AGERA5-ET0-A-2015",
+          "asset_href": "https://storage.googleapis.com/fao-gismgr-c3s-data/DATA/C3S/MAPSET/AGERA5-ET0-A/C3S.AGERA5-ET0-A.2015.tif",
+          "license": "CC-BY-SA-4.0",
+          "source_generation": "1759931471879094",
+          "source_hash_md5_or_crc32c": "crc32c=rGqLJw=="
+        }
+      },
+      "derivation": {
+        "aoi_identifier": "4-14-5",
+        "aoi_identifier_scheme": "slippy-map tile z-x-y (spatial ID horizontal index)",
+        "aoi_bbox_epsg4326": [
+          135.0,
+          40.97989806962013,
+          157.5,
+          55.7765730186677
+        ],
+        "source_crs": "EPSG:4326",
+        "output_crs": "EPSG:4326",
+        "operation": "rectangular window crop (no cutline, no reprojection, no resampling) then per-pixel subtraction (precipitation - reference_ET0)",
+        "resampling": "none",
+        "nodata_output": -99999.0,
+        "nodata_source_precip": -9999.0,
+        "nodata_source_et0": -9999.0,
+        "tool": "GDAL 3.13.1 (gdal.Translate + numpy subtraction)",
+        "generated_at": "2026-09-20T22:07:59.646181+00:00"
+      },
+      "output": {
+        "path": "derived/4-14-5-2015.tif",
+        "width": 225,
+        "height": 149,
+        "valid_pixel_count": 10903,
+        "mean_p_minus_et0_mm": 481.622314453125,
+        "sha256": "92d907cb7f2b42f9ab645f4b8aacf74c3a961831e115f2bc360e2039311f5992"
+      }
+    },
+    {
+      "year": "2016",
+      "source": {
+        "precipitation": {
+          "collection": "fao-gismgr:C3S:raster:mapsets:AGERA5-PF-A",
+          "item_id": "fao-gismgr:C3S:raster:mapsets:AGERA5-PF-A:items:C3S-AGERA5-PF-A-2016",
+          "asset_href": "https://storage.googleapis.com/fao-gismgr-c3s-data/DATA/C3S/MAPSET/AGERA5-PF-A/C3S.AGERA5-PF-A.2016.tif",
+          "license": "CC-BY-SA-4.0",
+          "source_generation": "1757603087147737",
+          "source_hash_md5_or_crc32c": "crc32c=zYn9rw=="
+        },
+        "reference_et0": {
+          "collection": "fao-gismgr:C3S:raster:mapsets:AGERA5-ET0-A",
+          "item_id": "fao-gismgr:C3S:raster:mapsets:AGERA5-ET0-A:items:C3S-AGERA5-ET0-A-2016",
+          "asset_href": "https://storage.googleapis.com/fao-gismgr-c3s-data/DATA/C3S/MAPSET/AGERA5-ET0-A/C3S.AGERA5-ET0-A.2016.tif",
+          "license": "CC-BY-SA-4.0",
+          "source_generation": "1759931440500824",
+          "source_hash_md5_or_crc32c": "crc32c=bY7W9w=="
+        }
+      },
+      "derivation": {
+        "aoi_identifier": "4-14-5",
+        "aoi_identifier_scheme": "slippy-map tile z-x-y (spatial ID horizontal index)",
+        "aoi_bbox_epsg4326": [
+          135.0,
+          40.97989806962013,
+          157.5,
+          55.7765730186677
+        ],
+        "source_crs": "EPSG:4326",
+        "output_crs": "EPSG:4326",
+        "operation": "rectangular window crop (no cutline, no reprojection, no resampling) then per-pixel subtraction (precipitation - reference_ET0)",
+        "resampling": "none",
+        "nodata_output": -99999.0,
+        "nodata_source_precip": -9999.0,
+        "nodata_source_et0": -9999.0,
+        "tool": "GDAL 3.13.1 (gdal.Translate + numpy subtraction)",
+        "generated_at": "2026-09-20T22:08:32.798072+00:00"
+      },
+      "output": {
+        "path": "derived/4-14-5-2016.tif",
+        "width": 225,
+        "height": 149,
+        "valid_pixel_count": 10903,
+        "mean_p_minus_et0_mm": 433.35302734375,
+        "sha256": "30764da5b2178a2af378451d88d4b85586074b6def6bb617276fc955f84ad6c8"
+      }
+    },
+    {
+      "year": "2017",
+      "source": {
+        "precipitation": {
+          "collection": "fao-gismgr:C3S:raster:mapsets:AGERA5-PF-A",
+          "item_id": "fao-gismgr:C3S:raster:mapsets:AGERA5-PF-A:items:C3S-AGERA5-PF-A-2017",
+          "asset_href": "https://storage.googleapis.com/fao-gismgr-c3s-data/DATA/C3S/MAPSET/AGERA5-PF-A/C3S.AGERA5-PF-A.2017.tif",
+          "license": "CC-BY-SA-4.0",
+          "source_generation": "1757603105677440",
+          "source_hash_md5_or_crc32c": "crc32c=m7xpQQ=="
+        },
+        "reference_et0": {
+          "collection": "fao-gismgr:C3S:raster:mapsets:AGERA5-ET0-A",
+          "item_id": "fao-gismgr:C3S:raster:mapsets:AGERA5-ET0-A:items:C3S-AGERA5-ET0-A-2017",
+          "asset_href": "https://storage.googleapis.com/fao-gismgr-c3s-data/DATA/C3S/MAPSET/AGERA5-ET0-A/C3S.AGERA5-ET0-A.2017.tif",
+          "license": "CC-BY-SA-4.0",
+          "source_generation": "1759931452944848",
+          "source_hash_md5_or_crc32c": "crc32c=Jn+3zQ=="
+        }
+      },
+      "derivation": {
+        "aoi_identifier": "4-14-5",
+        "aoi_identifier_scheme": "slippy-map tile z-x-y (spatial ID horizontal index)",
+        "aoi_bbox_epsg4326": [
+          135.0,
+          40.97989806962013,
+          157.5,
+          55.7765730186677
+        ],
+        "source_crs": "EPSG:4326",
+        "output_crs": "EPSG:4326",
+        "operation": "rectangular window crop (no cutline, no reprojection, no resampling) then per-pixel subtraction (precipitation - reference_ET0)",
+        "resampling": "none",
+        "nodata_output": -99999.0,
+        "nodata_source_precip": -9999.0,
+        "nodata_source_et0": -9999.0,
+        "tool": "GDAL 3.13.1 (gdal.Translate + numpy subtraction)",
+        "generated_at": "2026-09-20T22:09:05.565148+00:00"
+      },
+      "output": {
+        "path": "derived/4-14-5-2017.tif",
+        "width": 225,
+        "height": 149,
+        "valid_pixel_count": 10903,
+        "mean_p_minus_et0_mm": 340.8149108886719,
+        "sha256": "02c2e35cfa9e2016036ff3f9fb84376cde34f93e256350cb9a4f802d02270083"
+      }
+    },
+    {
+      "year": "2018",
+      "source": {
+        "precipitation": {
+          "collection": "fao-gismgr:C3S:raster:mapsets:AGERA5-PF-A",
+          "item_id": "fao-gismgr:C3S:raster:mapsets:AGERA5-PF-A:items:C3S-AGERA5-PF-A-2018",
+          "asset_href": "https://storage.googleapis.com/fao-gismgr-c3s-data/DATA/C3S/MAPSET/AGERA5-PF-A/C3S.AGERA5-PF-A.2018.tif",
+          "license": "CC-BY-SA-4.0",
+          "source_generation": "1757603104376164",
+          "source_hash_md5_or_crc32c": "crc32c=mlz2jQ=="
+        },
+        "reference_et0": {
+          "collection": "fao-gismgr:C3S:raster:mapsets:AGERA5-ET0-A",
+          "item_id": "fao-gismgr:C3S:raster:mapsets:AGERA5-ET0-A:items:C3S-AGERA5-ET0-A-2018",
+          "asset_href": "https://storage.googleapis.com/fao-gismgr-c3s-data/DATA/C3S/MAPSET/AGERA5-ET0-A/C3S.AGERA5-ET0-A.2018.tif",
+          "license": "CC-BY-SA-4.0",
+          "source_generation": "1759931457434849",
+          "source_hash_md5_or_crc32c": "crc32c=rLqWPg=="
+        }
+      },
+      "derivation": {
+        "aoi_identifier": "4-14-5",
+        "aoi_identifier_scheme": "slippy-map tile z-x-y (spatial ID horizontal index)",
+        "aoi_bbox_epsg4326": [
+          135.0,
+          40.97989806962013,
+          157.5,
+          55.7765730186677
+        ],
+        "source_crs": "EPSG:4326",
+        "output_crs": "EPSG:4326",
+        "operation": "rectangular window crop (no cutline, no reprojection, no resampling) then per-pixel subtraction (precipitation - reference_ET0)",
+        "resampling": "none",
+        "nodata_output": -99999.0,
+        "nodata_source_precip": -9999.0,
+        "nodata_source_et0": -9999.0,
+        "tool": "GDAL 3.13.1 (gdal.Translate + numpy subtraction)",
+        "generated_at": "2026-09-20T22:09:39.155413+00:00"
+      },
+      "output": {
+        "path": "derived/4-14-5-2018.tif",
+        "width": 225,
+        "height": 149,
+        "valid_pixel_count": 10903,
+        "mean_p_minus_et0_mm": 389.2136535644531,
+        "sha256": "00dce4aeba6dbbb7e8ad4cd4c7d53aeeba5dc07e725fa7b76492e0737f98b635"
+      }
+    },
+    {
+      "year": "2019",
+      "source": {
+        "precipitation": {
+          "collection": "fao-gismgr:C3S:raster:mapsets:AGERA5-PF-A",
+          "item_id": "fao-gismgr:C3S:raster:mapsets:AGERA5-PF-A:items:C3S-AGERA5-PF-A-2019",
+          "asset_href": "https://storage.googleapis.com/fao-gismgr-c3s-data/DATA/C3S/MAPSET/AGERA5-PF-A/C3S.AGERA5-PF-A.2019.tif",
+          "license": "CC-BY-SA-4.0",
+          "source_generation": "1757603041085620",
+          "source_hash_md5_or_crc32c": "crc32c=HFnDeQ=="
+        },
+        "reference_et0": {
+          "collection": "fao-gismgr:C3S:raster:mapsets:AGERA5-ET0-A",
+          "item_id": "fao-gismgr:C3S:raster:mapsets:AGERA5-ET0-A:items:C3S-AGERA5-ET0-A-2019",
+          "asset_href": "https://storage.googleapis.com/fao-gismgr-c3s-data/DATA/C3S/MAPSET/AGERA5-ET0-A/C3S.AGERA5-ET0-A.2019.tif",
+          "license": "CC-BY-SA-4.0",
+          "source_generation": "1759931455829632",
+          "source_hash_md5_or_crc32c": "crc32c=BejWtA=="
+        }
+      },
+      "derivation": {
+        "aoi_identifier": "4-14-5",
+        "aoi_identifier_scheme": "slippy-map tile z-x-y (spatial ID horizontal index)",
+        "aoi_bbox_epsg4326": [
+          135.0,
+          40.97989806962013,
+          157.5,
+          55.7765730186677
+        ],
+        "source_crs": "EPSG:4326",
+        "output_crs": "EPSG:4326",
+        "operation": "rectangular window crop (no cutline, no reprojection, no resampling) then per-pixel subtraction (precipitation - reference_ET0)",
+        "resampling": "none",
+        "nodata_output": -99999.0,
+        "nodata_source_precip": -9999.0,
+        "nodata_source_et0": -9999.0,
+        "tool": "GDAL 3.13.1 (gdal.Translate + numpy subtraction)",
+        "generated_at": "2026-09-20T22:10:11.607689+00:00"
+      },
+      "output": {
+        "path": "derived/4-14-5-2019.tif",
+        "width": 225,
+        "height": 149,
+        "valid_pixel_count": 10903,
+        "mean_p_minus_et0_mm": 343.429931640625,
+        "sha256": "d2085a617e62857a6081fc845698ac773ff0e55be351931a428205e5c9a30015"
+      }
+    },
+    {
+      "year": "2020",
+      "source": {
+        "precipitation": {
+          "collection": "fao-gismgr:C3S:raster:mapsets:AGERA5-PF-A",
+          "item_id": "fao-gismgr:C3S:raster:mapsets:AGERA5-PF-A:items:C3S-AGERA5-PF-A-2020",
+          "asset_href": "https://storage.googleapis.com/fao-gismgr-c3s-data/DATA/C3S/MAPSET/AGERA5-PF-A/C3S.AGERA5-PF-A.2020.tif",
+          "license": "CC-BY-SA-4.0",
+          "source_generation": "1757603040405923",
+          "source_hash_md5_or_crc32c": "crc32c=t6tK+w=="
+        },
+        "reference_et0": {
+          "collection": "fao-gismgr:C3S:raster:mapsets:AGERA5-ET0-A",
+          "item_id": "fao-gismgr:C3S:raster:mapsets:AGERA5-ET0-A:items:C3S-AGERA5-ET0-A-2020",
+          "asset_href": "https://storage.googleapis.com/fao-gismgr-c3s-data/DATA/C3S/MAPSET/AGERA5-ET0-A/C3S.AGERA5-ET0-A.2020.tif",
+          "license": "CC-BY-SA-4.0",
+          "source_generation": "1759931459302666",
+          "source_hash_md5_or_crc32c": "crc32c=4nbGcg=="
+        }
+      },
+      "derivation": {
+        "aoi_identifier": "4-14-5",
+        "aoi_identifier_scheme": "slippy-map tile z-x-y (spatial ID horizontal index)",
+        "aoi_bbox_epsg4326": [
+          135.0,
+          40.97989806962013,
+          157.5,
+          55.7765730186677
+        ],
+        "source_crs": "EPSG:4326",
+        "output_crs": "EPSG:4326",
+        "operation": "rectangular window crop (no cutline, no reprojection, no resampling) then per-pixel subtraction (precipitation - reference_ET0)",
+        "resampling": "none",
+        "nodata_output": -99999.0,
+        "nodata_source_precip": -9999.0,
+        "nodata_source_et0": -9999.0,
+        "tool": "GDAL 3.13.1 (gdal.Translate + numpy subtraction)",
+        "generated_at": "2026-09-20T22:10:44.368915+00:00"
+      },
+      "output": {
+        "path": "derived/4-14-5-2020.tif",
+        "width": 225,
+        "height": 149,
+        "valid_pixel_count": 10903,
+        "mean_p_minus_et0_mm": 368.6708679199219,
+        "sha256": "66a227e21b5ebc5036c1469d80c0c33c869601d5f2fef16d56f5c8a42eccbaa4"
+      }
+    },
+    {
+      "year": "2021",
+      "source": {
+        "precipitation": {
+          "collection": "fao-gismgr:C3S:raster:mapsets:AGERA5-PF-A",
+          "item_id": "fao-gismgr:C3S:raster:mapsets:AGERA5-PF-A:items:C3S-AGERA5-PF-A-2021",
+          "asset_href": "https://storage.googleapis.com/fao-gismgr-c3s-data/DATA/C3S/MAPSET/AGERA5-PF-A/C3S.AGERA5-PF-A.2021.tif",
+          "license": "CC-BY-SA-4.0",
+          "source_generation": "1757603048907865",
+          "source_hash_md5_or_crc32c": "crc32c=rbJ2hA=="
+        },
+        "reference_et0": {
+          "collection": "fao-gismgr:C3S:raster:mapsets:AGERA5-ET0-A",
+          "item_id": "fao-gismgr:C3S:raster:mapsets:AGERA5-ET0-A:items:C3S-AGERA5-ET0-A-2021",
+          "asset_href": "https://storage.googleapis.com/fao-gismgr-c3s-data/DATA/C3S/MAPSET/AGERA5-ET0-A/C3S.AGERA5-ET0-A.2021.tif",
+          "license": "CC-BY-SA-4.0",
+          "source_generation": "1759931452010824",
+          "source_hash_md5_or_crc32c": "crc32c=B9nu/w=="
+        }
+      },
+      "derivation": {
+        "aoi_identifier": "4-14-5",
+        "aoi_identifier_scheme": "slippy-map tile z-x-y (spatial ID horizontal index)",
+        "aoi_bbox_epsg4326": [
+          135.0,
+          40.97989806962013,
+          157.5,
+          55.7765730186677
+        ],
+        "source_crs": "EPSG:4326",
+        "output_crs": "EPSG:4326",
+        "operation": "rectangular window crop (no cutline, no reprojection, no resampling) then per-pixel subtraction (precipitation - reference_ET0)",
+        "resampling": "none",
+        "nodata_output": -99999.0,
+        "nodata_source_precip": -9999.0,
+        "nodata_source_et0": -9999.0,
+        "tool": "GDAL 3.13.1 (gdal.Translate + numpy subtraction)",
+        "generated_at": "2026-09-20T22:11:15.922587+00:00"
+      },
+      "output": {
+        "path": "derived/4-14-5-2021.tif",
+        "width": 225,
+        "height": 149,
+        "valid_pixel_count": 10903,
+        "mean_p_minus_et0_mm": 399.0808410644531,
+        "sha256": "7f44c113464e5e9f4573a9d11dd8f15cc54ad747796a3f96f6832d46fef17379"
+      }
+    },
+    {
+      "year": "2022",
+      "source": {
+        "precipitation": {
+          "collection": "fao-gismgr:C3S:raster:mapsets:AGERA5-PF-A",
+          "item_id": "fao-gismgr:C3S:raster:mapsets:AGERA5-PF-A:items:C3S-AGERA5-PF-A-2022",
+          "asset_href": "https://storage.googleapis.com/fao-gismgr-c3s-data/DATA/C3S/MAPSET/AGERA5-PF-A/C3S.AGERA5-PF-A.2022.tif",
+          "license": "CC-BY-SA-4.0",
+          "source_generation": "1757603093019753",
+          "source_hash_md5_or_crc32c": "crc32c=wqhZgA=="
+        },
+        "reference_et0": {
+          "collection": "fao-gismgr:C3S:raster:mapsets:AGERA5-ET0-A",
+          "item_id": "fao-gismgr:C3S:raster:mapsets:AGERA5-ET0-A:items:C3S-AGERA5-ET0-A-2022",
+          "asset_href": "https://storage.googleapis.com/fao-gismgr-c3s-data/DATA/C3S/MAPSET/AGERA5-ET0-A/C3S.AGERA5-ET0-A.2022.tif",
+          "license": "CC-BY-SA-4.0",
+          "source_generation": "1759931459429577",
+          "source_hash_md5_or_crc32c": "crc32c=w6TapQ=="
+        }
+      },
+      "derivation": {
+        "aoi_identifier": "4-14-5",
+        "aoi_identifier_scheme": "slippy-map tile z-x-y (spatial ID horizontal index)",
+        "aoi_bbox_epsg4326": [
+          135.0,
+          40.97989806962013,
+          157.5,
+          55.7765730186677
+        ],
+        "source_crs": "EPSG:4326",
+        "output_crs": "EPSG:4326",
+        "operation": "rectangular window crop (no cutline, no reprojection, no resampling) then per-pixel subtraction (precipitation - reference_ET0)",
+        "resampling": "none",
+        "nodata_output": -99999.0,
+        "nodata_source_precip": -9999.0,
+        "nodata_source_et0": -9999.0,
+        "tool": "GDAL 3.13.1 (gdal.Translate + numpy subtraction)",
+        "generated_at": "2026-09-20T22:11:46.216640+00:00"
+      },
+      "output": {
+        "path": "derived/4-14-5-2022.tif",
+        "width": 225,
+        "height": 149,
+        "valid_pixel_count": 10903,
+        "mean_p_minus_et0_mm": 474.72247314453125,
+        "sha256": "d8a8774182ddabf975dd3fedeb78593d740a894d4d5493c00d70f55efd1b2639"
+      }
+    },
+    {
+      "year": "2023",
+      "source": {
+        "precipitation": {
+          "collection": "fao-gismgr:C3S:raster:mapsets:AGERA5-PF-A",
+          "item_id": "fao-gismgr:C3S:raster:mapsets:AGERA5-PF-A:items:C3S-AGERA5-PF-A-2023",
+          "asset_href": "https://storage.googleapis.com/fao-gismgr-c3s-data/DATA/C3S/MAPSET/AGERA5-PF-A/C3S.AGERA5-PF-A.2023.tif",
+          "license": "CC-BY-SA-4.0",
+          "source_generation": "1757603106557256",
+          "source_hash_md5_or_crc32c": "crc32c=iqGKdg=="
+        },
+        "reference_et0": {
+          "collection": "fao-gismgr:C3S:raster:mapsets:AGERA5-ET0-A",
+          "item_id": "fao-gismgr:C3S:raster:mapsets:AGERA5-ET0-A:items:C3S-AGERA5-ET0-A-2023",
+          "asset_href": "https://storage.googleapis.com/fao-gismgr-c3s-data/DATA/C3S/MAPSET/AGERA5-ET0-A/C3S.AGERA5-ET0-A.2023.tif",
+          "license": "CC-BY-SA-4.0",
+          "source_generation": "1759931462430999",
+          "source_hash_md5_or_crc32c": "crc32c=JhYwtw=="
+        }
+      },
+      "derivation": {
+        "aoi_identifier": "4-14-5",
+        "aoi_identifier_scheme": "slippy-map tile z-x-y (spatial ID horizontal index)",
+        "aoi_bbox_epsg4326": [
+          135.0,
+          40.97989806962013,
+          157.5,
+          55.7765730186677
+        ],
+        "source_crs": "EPSG:4326",
+        "output_crs": "EPSG:4326",
+        "operation": "rectangular window crop (no cutline, no reprojection, no resampling) then per-pixel subtraction (precipitation - reference_ET0)",
+        "resampling": "none",
+        "nodata_output": -99999.0,
+        "nodata_source_precip": -9999.0,
+        "nodata_source_et0": -9999.0,
+        "tool": "GDAL 3.13.1 (gdal.Translate + numpy subtraction)",
+        "generated_at": "2026-09-20T22:12:18.503386+00:00"
+      },
+      "output": {
+        "path": "derived/4-14-5-2023.tif",
+        "width": 225,
+        "height": 149,
+        "valid_pixel_count": 10903,
+        "mean_p_minus_et0_mm": 339.79510498046875,
+        "sha256": "812105467a4486ae1869fd2092bd7bf4e0b1ac9eb4ac825ec75ddc3660aec82c"
+      }
+    },
+    {
+      "year": "2024",
+      "source": {
+        "precipitation": {
+          "collection": "fao-gismgr:C3S:raster:mapsets:AGERA5-PF-A",
+          "item_id": "fao-gismgr:C3S:raster:mapsets:AGERA5-PF-A:items:C3S-AGERA5-PF-A-2024",
+          "asset_href": "https://storage.googleapis.com/fao-gismgr-c3s-data/DATA/C3S/MAPSET/AGERA5-PF-A/C3S.AGERA5-PF-A.2024.tif",
+          "license": "CC-BY-SA-4.0",
+          "source_generation": "1757603095094571",
+          "source_hash_md5_or_crc32c": "crc32c=z8T6Tg=="
+        },
+        "reference_et0": {
+          "collection": "fao-gismgr:C3S:raster:mapsets:AGERA5-ET0-A",
+          "item_id": "fao-gismgr:C3S:raster:mapsets:AGERA5-ET0-A:items:C3S-AGERA5-ET0-A-2024",
+          "asset_href": "https://storage.googleapis.com/fao-gismgr-c3s-data/DATA/C3S/MAPSET/AGERA5-ET0-A/C3S.AGERA5-ET0-A.2024.tif",
+          "license": "CC-BY-SA-4.0",
+          "source_generation": "1759931367716090",
+          "source_hash_md5_or_crc32c": "crc32c=d5+8mg=="
+        }
+      },
+      "derivation": {
+        "aoi_identifier": "4-14-5",
+        "aoi_identifier_scheme": "slippy-map tile z-x-y (spatial ID horizontal index)",
+        "aoi_bbox_epsg4326": [
+          135.0,
+          40.97989806962013,
+          157.5,
+          55.7765730186677
+        ],
+        "source_crs": "EPSG:4326",
+        "output_crs": "EPSG:4326",
+        "operation": "rectangular window crop (no cutline, no reprojection, no resampling) then per-pixel subtraction (precipitation - reference_ET0)",
+        "resampling": "none",
+        "nodata_output": -99999.0,
+        "nodata_source_precip": -9999.0,
+        "nodata_source_et0": -9999.0,
+        "tool": "GDAL 3.13.1 (gdal.Translate + numpy subtraction)",
+        "generated_at": "2026-09-20T22:12:52.503694+00:00"
+      },
+      "output": {
+        "path": "derived/4-14-5-2024.tif",
+        "width": 225,
+        "height": 149,
+        "valid_pixel_count": 10903,
+        "mean_p_minus_et0_mm": 390.2069091796875,
+        "sha256": "b8213174529347064259c616a45d4d195ea259c8bda2bb8affb41647cb8b8232"
+      }
+    },
+    {
+      "year": "2025",
+      "source": {
+        "precipitation": {
+          "collection": "fao-gismgr:C3S:raster:mapsets:AGERA5-PF-A",
+          "item_id": "fao-gismgr:C3S:raster:mapsets:AGERA5-PF-A:items:C3S-AGERA5-PF-A-2025",
+          "asset_href": "https://storage.googleapis.com/fao-gismgr-c3s-data/DATA/C3S/MAPSET/AGERA5-PF-A/C3S.AGERA5-PF-A.2025.tif",
+          "license": "CC-BY-SA-4.0",
+          "source_generation": "1767863319724385",
+          "source_hash_md5_or_crc32c": "crc32c=J3q8Mw=="
+        },
+        "reference_et0": {
+          "collection": "fao-gismgr:C3S:raster:mapsets:AGERA5-ET0-A",
+          "item_id": "fao-gismgr:C3S:raster:mapsets:AGERA5-ET0-A:items:C3S-AGERA5-ET0-A-2025",
+          "asset_href": "https://storage.googleapis.com/fao-gismgr-c3s-data/DATA/C3S/MAPSET/AGERA5-ET0-A/C3S.AGERA5-ET0-A.2025.tif",
+          "license": "CC-BY-SA-4.0",
+          "source_generation": "1767863378652852",
+          "source_hash_md5_or_crc32c": "crc32c=xfx4FA=="
+        }
+      },
+      "derivation": {
+        "aoi_identifier": "4-14-5",
+        "aoi_identifier_scheme": "slippy-map tile z-x-y (spatial ID horizontal index)",
+        "aoi_bbox_epsg4326": [
+          135.0,
+          40.97989806962013,
+          157.5,
+          55.7765730186677
+        ],
+        "source_crs": "EPSG:4326",
+        "output_crs": "EPSG:4326",
+        "operation": "rectangular window crop (no cutline, no reprojection, no resampling) then per-pixel subtraction (precipitation - reference_ET0)",
+        "resampling": "none",
+        "nodata_output": -99999.0,
+        "nodata_source_precip": -9999.0,
+        "nodata_source_et0": -9999.0,
+        "tool": "GDAL 3.13.1 (gdal.Translate + numpy subtraction)",
+        "generated_at": "2026-09-20T22:13:25.168971+00:00"
+      },
+      "output": {
+        "path": "derived/4-14-5-2025.tif",
+        "width": 225,
+        "height": 149,
+        "valid_pixel_count": 10903,
+        "mean_p_minus_et0_mm": 426.28179931640625,
+        "sha256": "b689300f76b656cf45dff16fb981c922ea7e2fd62ef41d32b891c73385ae5965"
+      }
+    }
+  ]
+}

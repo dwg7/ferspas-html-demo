@@ -215,7 +215,11 @@ pre-harvested indexを使う場合も、4.7と同じ規律を適用する。
 │   │       ├── BGD-1992.tif
 │   │       ├── ...
 │   │       └── timeseries-BGD.json
-│   └── Case2-GHG-4-14-5/
+│   ├── Case2-GHG-4-14-5/
+│   │   ├── index.html
+│   │   ├── task.yaml
+│   │   └── derived/
+│   └── Case3-WaterBalance-4-14-5/   （Notebook起点ではない実験、27章）
 │       ├── index.html
 │       ├── task.yaml
 │       └── derived/
@@ -853,6 +857,10 @@ Case 2と同様、「Hokkaido」ではなく空間ID/タイル区画で命名す
 - Staccato / AI
 - bounded processing service
 
+### Phase 6: Case 3（水収支、実験）
+
+Notebook起点ではなく、外部からの着想（27章参照）を受けて追加した実験的Case。実装・動作確認済み。位置づけは27章を参照。
+
 ## 22. Claude Codeの役割
 
 Claude Codeは共同設計者・実装者として次を守る。
@@ -968,6 +976,8 @@ Case2-GHG-BDG/                  （Phase 1、実装済み）
 Case2-GHG-4-14-5/               （Phase 2、実装済み）
 ```
 
+これに加えて、Notebook起点ではない実験的Case（Case3-WaterBalance-4-14-5、27章参照）を1ページ追加で公開している（Phase 6）。第一段階の必須スコープには含まれない。
+
 各ページは、少なくとも次を満たす。
 
 - 対応するtask定義を読む
@@ -979,7 +989,40 @@ Case2-GHG-4-14-5/               （Phase 2、実装済み）
 - Userが何を見ているか説明できる
 - 次に発するべき問いが見える
 
-## 27. 中心フレーズ
+## 27. Case 3: Water balance（外部からの着想、Notebook起点ではない実験）
+
+### 27.1 これは何か
+
+`docs/Case3-WaterBalance-4-14-5/`
+
+dwg7 colleagueのyuisekiが2026-09-20に共有した可視化（降水量と蒸発量のCOGを動的に取得し、セルごとに引き算して「青＝水が増えている、赤＝水が減っている」をタイル化するアイデア）から着想を得た。un-fao/FERSPAS_demoのNotebookには対応するCaseが無い、dwg7独自の追加である。
+
+同じ実質的な価値（降水量−基準蒸発量の地図・時系列）を、yuisekiの動的タイル生成アーキテクチャではなく、本リポジトリの流儀（4.3節: 発行時処理を優先する）で再現した。アイデアは借りるが、アーキテクチャは自分たちの流儀を保つ、という切り分けである。
+
+### 27.2 データと処理
+
+- Collection: 降水量 `fao-gismgr:C3S:raster:mapsets:AGERA5-PF-A`、基準蒸発量 `fao-gismgr:C3S:raster:mapsets:AGERA5-ET0-A`（いずれもECMWF/Copernicus Climate Change Service、AgERA5再解析、0.1度格子、年次、1979–2025年の47年分）
+- 同じ生産者・同じ格子のため、再投影・リサンプリングなしで2つのcollectionを画素単位で組み合わせられる
+- AOIはCase 2と同じslippy-map tile `4-14-5`の矩形（境界マスクなし、矩形クロップのみ）
+- 出力は「降水量 − 基準蒸発量」（mm/年）。正は水収支の黒字（余剰）、負は赤字（不足）
+- 基準蒸発量（reference ET0）はFAO Penman-Monteith法による標準化された理論値であり、実際の作物・土壌・灌漑を反映しない。ASI-D（Case 1）が衛星観測から作物への影響を直接推定するのとは異なる、より単純で透明な物理量
+- 両collectionのライセンスは`CC-BY-SA-4.0`（継承あり）。Case 1・Case 2の`CC-BY-4.0`と異なるため、派生成果も同ライセンスを継承する
+
+### 27.3 47年蓄積の活かし方
+
+47年という均質な記録の長さは、Case 2（31年）より長く、かつ同一手法・同一生産者による一貫した記録である。この蓄積を活かし、単年の値だけでなく次を計算・表示する。
+
+- 47年間の平均値・標準偏差（基準値として自分たちで算出し、透明に示す。ASI-Dのように外部アルゴリズムの内部計算に依存しない）
+- 各年が基準値から1標準偏差を超えて外れているかどうか
+- 単純な線形回帰によるトレンド（相関の提示に留め、因果を主張しない）
+
+### 27.4 制約
+
+- タイル内の空間平均は緯度によるpixel面積差を補正していない単純算術平均
+- 海上のpixelはNoDataとして地図・平均の両方から除外
+- 基準蒸発量は「その場所で実際に何が育っているか」を知らない理論値
+
+## 28. 中心フレーズ
 
 > **Experts explore in notebooks. Users repeat trusted tasks on the web.**
 

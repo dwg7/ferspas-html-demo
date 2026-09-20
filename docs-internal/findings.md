@@ -462,3 +462,14 @@ VHI/ASIはFAOの運用上の標準として定着している一方、研究の�
 ### この調査を踏まえた探索の位置づけ
 
 この調査の目的は、日本の農業水準を引き上げることではない。**グローバルな早期警戒システム（FAO ASIS）が、担当区域（北海道）という、独自の統計・流通インフラを既に持つ場で何を意味し、何を意味しないかを検証すること**である。今後のCase設計は、この枠組みを踏まえて行う（`docs-internal/decisions.md`参照）。
+
+## 2026-09-21: 降水量・基準蒸発量（C3S AgERA5）の候補調査
+
+Case 3（水収支）実装に向けて、`collections.parquet`を降水量・蒸発量関連キーワードで検索した（duckdb CLI）。
+
+- FAO `WATER`カタログには、特定の流域向けに完成品の「Precipitation minus (actual) evapotranspiration」コレクションが既に存在する（`MNG1-P-ET`セレンゲ川/モンゴル、`NIGER-P-ET`、`NILE-P-ET`、`PHL1-P-ET`ミンダナオ、`TER-P-ET`チグリス・ユーフラテス）。いずれも実座標（プレースホルダーではない）で、日本を含む流域は無い
+- グローバルカバーの候補として、C3Sカタログの`AGERA5-PF-A`（降水量、mm/year、0.1度格子、年次、1979–2025年、47件）と`AGERA5-ET0-A`（基準蒸発量、同格子・同期間）を選定した。同じECMWF/Copernicus気候変動サービスのAgERA5再解析シリーズであり、格子・期間が完全に一致するため、組み合わせに再投影・リサンプリングが不要
+- `AGERA5-ET0-A`の算出方法はFAO Penman-Monteith法（FAO Irrigation and Drainage Paper 56）。国際標準の決定論的な式であり、産出元も含めFAO自身（FAO-UN Land and Water Division-AQUASTAT、ECMWF/C3Sとの共同）
+- 4-14-5タイルのbboxで実際にクロップして検証（2026-09-21）: 両コレクションとも実データを確認（降水量最大2211mm/年、基準蒸発量最大1012mm/年、いずれも物理的に妥当な値）。プレースホルダーbboxではなく本物の全球カバー
+- 原資産バケット（`fao-gismgr-c3s-data`、Google Cloud Storage）は、Case 2のDRAINED-AREA-CROPと同じ「匿名読み取り可・CORSヘッダー無し」（Tier A）だった。ASI-Dのような認証（ADC）は不要
+- ライセンスは両コレクションとも`CC-BY-SA-4.0`（継承あり）。これまでのCase 1・Case 2で確認していた`CC-BY-4.0`とは異なる条件で、派生成果も同ライセンスを継承する必要がある

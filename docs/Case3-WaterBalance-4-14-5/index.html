@@ -1,0 +1,366 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Case 3: Water balance (spatial ID 4-14-5)</title>
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<div class="page">
+
+<p class="breadcrumb"><a href="../index.html">← FERSPAS static demos</a></p>
+
+<header class="hero">
+  <span class="badge badge-implemented">実装済み・Phase 6（実験）</span>
+  <h1>水収支（降水量 − 基準蒸発量） — 空間ID 4-14-5</h1>
+  <p class="lede">
+    参照元Notebookは無い。dwg7 colleagueのyuisekiさんが共有した可視化
+    （<a href="https://x.com/yuiseki_/status/2101615201661731234">2026-09-20の投稿</a>:
+    降水量と蒸発量のCOGを動的に取得し、セルごとに引き算して「青＝水が増えている、赤＝水が減っている」を
+    タイル化するアイデア）から着想を得た、dwg7独自のCase。同じ発想を、動的タイル生成ではなく
+    このリポジトリの流儀（発行時に一度計算し、静的な派生COGとして公開する）で再現した。
+  </p>
+  <p class="meta-line">Task定義: <a id="task-link" href="task.yaml">task.yaml</a></p>
+</header>
+
+<main>
+
+<section class="panel-meaning" id="meaning">
+  <p class="panel-label">この数値が何を意味するか</p>
+  <p>
+    「降水量 − 基準蒸発量（ET0）」は、その年にどれだけ水が入ってきて（降水）、
+    どれだけ出ていく可能性があったか（FAO Penman-Monteith法による基準蒸発量、
+    FAO Irrigation and Drainage Paper 56の標準式）の差分。
+    <strong>正の値＝水収支が黒字（余剰）、負の値＝水収支が赤字（不足）</strong>を表す。
+  </p>
+  <p>
+    ここでの「蒸発量」は特定の作物の実際の蒸発散量ではなく、標準化された基準（芝生を仮定した理論値）である
+    <strong>基準蒸発量（reference ET0）</strong>であり、実際にそこで何が栽培されているか、
+    土壌がどうか、灌漑があるかは考慮していない。ASI-D（Case 1）が衛星観測から作物への影響を直接推定するのに対し、
+    こちらは気象データだけから導かれる、より単純で透明な物理量である。
+  </p>
+  <p>
+    降水量・基準蒸発量とも1979年から2025年までの47年分が同じ手法（ECMWF/Copernicus気候変動サービスの
+    AgERA5再解析）で均質に蓄積されている。この蓄積の長さを活かし、単年の値だけでなく、
+    <strong>47年間の平均を基準値として算出し、各年がそこからどれだけ離れているか</strong>を以下に示す。
+  </p>
+</section>
+
+<section id="task-info">
+  <h2 class="section-title">このページが検索する条件</h2>
+  <div class="card">
+    <div id="task-info-body">読み込み中...</div>
+  </div>
+</section>
+
+<section id="discovery">
+  <h2 class="section-title"><span class="step-no">1</span>STAC Item discovery（ブラウザから直接検索）</h2>
+  <div class="panel-tech">
+    <p class="panel-label">技術的な詳細</p>
+    <div id="discovery-body">読み込み中...</div>
+  </div>
+</section>
+
+<section id="map">
+  <h2 class="section-title"><span class="step-no">2</span>選択年の水収支地図表示</h2>
+  <div class="card">
+    <p class="meta">
+      原資産（FAOのGCSバケット）はブラウザから直接読めない（CORS未対応、
+      <a href="https://github.com/dwg7/ferspas-html-demo/blob/main/docs-internal/findings.md">findings.md</a>参照）ため、
+      このリポジトリが発行時に降水量・基準蒸発量それぞれをタイル境界（<code>4-14-5</code>）でクロップし、
+      画素ごとに引き算して再配布したコピー（<code>derived/4-14-5-&lt;year&gt;.tif</code>、投影変換なし）を表示する。
+    </p>
+    <p>
+      年:
+      <select id="year-select"></select>
+    </p>
+    <canvas id="map-canvas" style="max-width:100%; border:1px solid var(--border); border-radius:var(--radius-sm); image-rendering: pixelated;"></canvas>
+    <div id="map-legend" class="meta"></div>
+    <div id="map-status" class="meta"></div>
+  </div>
+</section>
+
+<section id="timeseries">
+  <h2 class="section-title"><span class="step-no">3</span>47年間の時系列と基準値からの逸脱</h2>
+  <div class="card">
+    <p class="meta">
+      Section 2と同じ発行時チェックアウトから計算した、タイル内の有効pixelの単純平均（緯度によるpixel面積差は未補正）。
+      集計方法・来歴は<code>derived/provenance-4-14-5.json</code>と<a href="https://github.com/dwg7/ferspas-html-demo/blob/main/scripts/checkout-Case3-WaterBalance-4-14-5.py">scripts/checkout-Case3-WaterBalance-4-14-5.py</a>を参照。
+    </p>
+    <div id="timeseries-chart"></div>
+    <div id="timeseries-status" class="meta"></div>
+  </div>
+</section>
+
+<section id="provenance" class="panel-provenance">
+  <p class="panel-label">選択理由・出所・制約</p>
+  <ul class="limits">
+    <li>着想元: dwg7 colleagueのyuisekiさんが2026-09-20に共有した、降水量−蒸発量の動的タイル可視化（<a href="https://x.com/yuiseki_/status/2101615201661731234">投稿</a>）。本Caseはこのアイデアを、動的タイル生成ではなく発行時の静的計算として再現したもの（CLAUDE.md 4.3）。</li>
+    <li>Collection: 降水量 <code>fao-gismgr:C3S:raster:mapsets:AGERA5-PF-A</code>、基準蒸発量 <code>fao-gismgr:C3S:raster:mapsets:AGERA5-ET0-A</code>。いずれもECMWF/Copernicus気候変動サービス(C3S)のAgERA5再解析データ（0.1度格子）で、同じ生産者・同じ格子のため再投影・リサンプリングなしで組み合わせられる。</li>
+    <li>AOIはslippy-map tile <code>z=4/x=14/y=5</code>の矩形（<code>Case2-GHG-4-14-5</code>と同じ）。境界マスクは行わず、矩形クロップのみ。</li>
+    <li>「蒸発量」は実際の作物の蒸発散量ではなく、FAO Penman-Monteith法による標準化された基準蒸発量（reference ET0）。作物の種類・土壌・灌漑の有無は反映されていない。</li>
+    <li>タイル内の平均は緯度によるpixel面積差を補正していない単純算術平均。海上のpixel（NoData）は平均・地図表示のいずれからも除外している。</li>
+    <li>両Collectionのライセンスは <code>CC-BY-SA-4.0</code>（表示および同一条件での継承が条件）。Case 1・Case 2の<code>CC-BY-4.0</code>と異なる点に注意。派生元: ECMWF / Copernicus Climate Change Service、FAO-UN Land and Water Division-AQUASTAT。</li>
+    <li>投影変換は行っていない（原資産と同じEPSG:4326）。</li>
+  </ul>
+</section>
+
+</main>
+
+<footer>
+  <p>Status: <code>implemented</code>（実験的Case。設計判断は<a href="https://github.com/dwg7/ferspas-html-demo/blob/main/CLAUDE.md">CLAUDE.md</a>を参照）。</p>
+</footer>
+
+</div>
+
+<script type="module">
+import { load } from "https://cdn.jsdelivr.net/npm/js-yaml@4.1.0/+esm";
+import { fromUrl } from "https://cdn.jsdelivr.net/npm/geotiff@2/+esm";
+
+const taskInfoEl = document.getElementById('task-info-body');
+const discoveryEl = document.getElementById('discovery-body');
+const yearSelectEl = document.getElementById('year-select');
+const mapCanvasEl = document.getElementById('map-canvas');
+const mapLegendEl = document.getElementById('map-legend');
+const mapStatusEl = document.getElementById('map-status');
+const timeseriesChartEl = document.getElementById('timeseries-chart');
+const timeseriesStatusEl = document.getElementById('timeseries-status');
+
+function el(tag, attrs = {}, children = []) {
+  const node = document.createElement(tag);
+  for (const [k, v] of Object.entries(attrs)) {
+    if (k === 'text') node.textContent = v;
+    else node.setAttribute(k, v);
+  }
+  for (const c of [].concat(children)) node.appendChild(c);
+  return node;
+}
+
+let TILE_ID = '4-14-5';
+let FIRST_YEAR = 1979, LAST_YEAR = 2025;
+
+async function main() {
+  let task;
+  try {
+    const res = await fetch('task.yaml');
+    if (!res.ok) throw new Error(`task YAML fetch failed: HTTP ${res.status}`);
+    task = load(await res.text());
+  } catch (e) {
+    taskInfoEl.innerHTML = `<p class="status-err">task YAMLの取得に失敗しました: ${e.message}</p>`;
+    discoveryEl.innerHTML = `<p class="status-err">task YAMLが無いため検索できません。</p>`;
+    return;
+  }
+
+  TILE_ID = task.aoi.identifier;
+  FIRST_YEAR = parseInt(task.stac.datetime_start.slice(0, 4));
+  LAST_YEAR = parseInt(task.stac.datetime_end.slice(0, 4));
+
+  renderTaskInfo(task);
+  await runDiscovery(task);
+  await setupMap();
+  await runTimeseries();
+}
+
+function renderTaskInfo(task) {
+  const s = task.stac;
+  taskInfoEl.innerHTML = '';
+  const dl = el('dl', { class: 'kv' });
+  const rows = [
+    ['STAC API', s.api_root],
+    ['降水量 Collection', s.precipitation_collection],
+    ['基準蒸発量 Collection', s.et0_collection],
+    ['BBOX (WGS84)', s.bbox.join(', ') + `  — AOI: spatial ID ${task.aoi.identifier}（地名なし）`],
+    ['期間', `${s.datetime_start.slice(0,10)} 〜 ${s.datetime_end.slice(0,10)}`],
+  ];
+  for (const [k, v] of rows) {
+    dl.appendChild(el('dt', { text: k }));
+    dl.appendChild(el('dd', { text: v }));
+  }
+  taskInfoEl.appendChild(dl);
+}
+
+async function searchCollection(s, collection) {
+  const body = {
+    collections: [collection],
+    bbox: s.bbox,
+    datetime: `${s.datetime_start}/${s.datetime_end}`,
+    limit: s.limit,
+  };
+  const res = await fetch(`${s.api_root}/search`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(body),
+  });
+  if (!res.ok) throw new Error(`HTTP ${res.status}`);
+  return res.json();
+}
+
+async function runDiscovery(task) {
+  const s = task.stac;
+  const t0 = performance.now();
+  let precipJson, et0Json;
+  try {
+    [precipJson, et0Json] = await Promise.all([
+      searchCollection(s, s.precipitation_collection),
+      searchCollection(s, s.et0_collection),
+    ]);
+  } catch (e) {
+    discoveryEl.innerHTML = `<p class="status-err">STAC検索に失敗しました: ${e.message}</p>`;
+    return;
+  }
+  const t1 = performance.now();
+
+  const expectedYears = LAST_YEAR - FIRST_YEAR + 1;
+  const precipCount = (precipJson.features || []).length;
+  const et0Count = (et0Json.features || []).length;
+
+  discoveryEl.innerHTML = '';
+  discoveryEl.appendChild(el('p', {
+    text: `検索結果: 降水量 ${precipCount}件、基準蒸発量 ${et0Count}件（${(t1 - t0).toFixed(0)}ms）。`
+  }));
+  const okClass = (precipCount === expectedYears && et0Count === expectedYears) ? 'status-ok' : 'status-warn';
+  discoveryEl.appendChild(el('p', {
+    class: okClass,
+    text: `期待値: 各${expectedYears}件（${FIRST_YEAR}〜${LAST_YEAR}年、1年1件）。両Collectionが揃う年のみ計算に使用する。`
+  }));
+}
+
+async function setupMap() {
+  for (let y = LAST_YEAR; y >= FIRST_YEAR; y--) {
+    yearSelectEl.appendChild(el('option', { value: String(y), text: String(y) }));
+  }
+  yearSelectEl.addEventListener('change', () => renderMapYear(yearSelectEl.value));
+  await renderMapYear(String(LAST_YEAR));
+}
+
+// diverging blue (surplus) - white (balanced) - red (deficit) ramp, domain fixed at +-800mm/year
+const DOMAIN = 800;
+function colorForDiff(v) {
+  const t = Math.max(-1, Math.min(1, v / DOMAIN));
+  if (t >= 0) {
+    // 0 -> white, 1 -> blue
+    const k = Math.round(255 * (1 - t));
+    return [k, k, 255];
+  } else {
+    const k = Math.round(255 * (1 + t));
+    return [255, k, k];
+  }
+}
+
+async function renderMapYear(year) {
+  mapStatusEl.textContent = `derived/${TILE_ID}-${year}.tif を読み込み中...`;
+  try {
+    const t0 = performance.now();
+    const tiff = await fromUrl(`derived/${TILE_ID}-${year}.tif`);
+    const image = await tiff.getImage();
+    const width = image.getWidth();
+    const height = image.getHeight();
+    const rasters = await image.readRasters();
+    const data = rasters[0];
+    const noData = image.getGDALNoData();
+    const t1 = performance.now();
+
+    mapCanvasEl.width = width;
+    mapCanvasEl.height = height;
+    const ctx = mapCanvasEl.getContext('2d');
+    const imgData = ctx.createImageData(width, height);
+    for (let i = 0; i < data.length; i++) {
+      const v = data[i];
+      const o = i * 4;
+      if (v === noData) {
+        imgData.data[o + 3] = 0;
+        continue;
+      }
+      const [r, g, b] = colorForDiff(v);
+      imgData.data[o] = r; imgData.data[o + 1] = g; imgData.data[o + 2] = b; imgData.data[o + 3] = 255;
+    }
+    ctx.putImageData(imgData, 0, 0);
+
+    mapLegendEl.textContent =
+      `凡例: 青 = 水収支が黒字（+${DOMAIN}mm/年以上で最も濃い青）、赤 = 水収支が赤字（-${DOMAIN}mm/年以下で最も濃い赤）、白 = ほぼ均衡。透明 = 海上等（NoData）。`;
+    mapStatusEl.textContent =
+      `derived/${TILE_ID}-${year}.tif: ${width}×${height}px、${(t1 - t0).toFixed(0)}ms で読み込み。投影変換なし（EPSG:4326のまま）。`;
+  } catch (e) {
+    mapStatusEl.textContent = `読み込み失敗: ${e.message}`;
+  }
+}
+
+async function runTimeseries() {
+  let ts;
+  try {
+    const res = await fetch(`derived/timeseries-${TILE_ID}.json`);
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    ts = await res.json();
+  } catch (e) {
+    timeseriesStatusEl.textContent = `時系列データの取得に失敗しました: ${e.message}`;
+    return;
+  }
+
+  const series = ts.series.filter(d => d.mean_p_minus_et0_mm !== null);
+  const values = series.map(d => d.mean_p_minus_et0_mm);
+  const n = values.length;
+  const mean = values.reduce((a, b) => a + b, 0) / n;
+  const variance = values.reduce((a, b) => a + (b - mean) ** 2, 0) / n;
+  const stdev = Math.sqrt(variance);
+
+  // simple least-squares linear trend (year -> value)
+  const years = series.map(d => d.year);
+  const yearMean = years.reduce((a, b) => a + b, 0) / n;
+  let num = 0, den = 0;
+  for (let i = 0; i < n; i++) {
+    num += (years[i] - yearMean) * (values[i] - mean);
+    den += (years[i] - yearMean) ** 2;
+  }
+  const slope = den !== 0 ? num / den : 0;
+  const intercept = mean - slope * yearMean;
+  const trendAt = (y) => intercept + slope * y;
+
+  const vMin = Math.min(...values, mean - stdev), vMax = Math.max(...values, mean + stdev);
+  const W = 760, H = 260, padL = 60, padR = 10, padT = 10, padB = 24;
+  const x = i => padL + (i / (n - 1)) * (W - padL - padR);
+  const y = v => padT + (1 - (v - vMin) / (vMax - vMin || 1)) * (H - padT - padB);
+
+  const svgParts = [];
+  svgParts.push(`<svg viewBox="0 0 ${W} ${H}" style="width:100%; max-width:${W}px; height:auto;">`);
+
+  // +-1 stdev band around the 47-year mean
+  const bandTop = y(mean + stdev), bandBottom = y(mean - stdev);
+  svgParts.push(`<rect x="${padL}" y="${bandTop.toFixed(1)}" width="${W - padL - padR}" height="${(bandBottom - bandTop).toFixed(1)}" fill="currentColor" fill-opacity="0.06" />`);
+  svgParts.push(`<line x1="${padL}" y1="${y(mean).toFixed(1)}" x2="${W - padR}" y2="${y(mean).toFixed(1)}" stroke="currentColor" stroke-opacity="0.35" stroke-dasharray="3,3" />`);
+  svgParts.push(`<text x="${W - padR}" y="${y(mean) - 4}" font-size="9" text-anchor="end" fill="currentColor" opacity="0.6">${FIRST_YEAR}-${LAST_YEAR}年平均: ${mean.toFixed(0)}mm</text>`);
+
+  // trend line
+  const trendPoints = [0, n - 1].map(i => `${x(i).toFixed(1)},${y(trendAt(years[i])).toFixed(1)}`).join(' ');
+  svgParts.push(`<polyline points="${trendPoints}" fill="none" stroke="var(--warn, #c90)" stroke-width="1.5" stroke-dasharray="6,3" />`);
+
+  for (const t of [vMin, mean, vMax]) {
+    svgParts.push(`<text x="${padL - 6}" y="${y(t) + 3}" font-size="9" text-anchor="end" fill="currentColor">${Math.round(t).toLocaleString()}</text>`);
+  }
+  for (let i = 0; i < n; i += 5) {
+    svgParts.push(`<text x="${x(i)}" y="${H - 6}" font-size="9" text-anchor="middle" fill="currentColor">${years[i]}</text>`);
+  }
+
+  const points = series.map((d, i) => `${x(i).toFixed(1)},${y(d.mean_p_minus_et0_mm).toFixed(1)}`).join(' ');
+  svgParts.push(`<polyline points="${points}" fill="none" stroke="var(--accent, #2a2)" stroke-width="1.5" />`);
+  for (let i = 0; i < n; i++) {
+    const v = values[i];
+    const deviates = Math.abs(v - mean) > stdev;
+    svgParts.push(`<circle cx="${x(i).toFixed(1)}" cy="${y(v).toFixed(1)}" r="${deviates ? 3 : 2}" fill="${deviates ? 'var(--warn, #c90)' : 'var(--accent, #2a2)'}" />`);
+  }
+  svgParts.push(`</svg>`);
+  timeseriesChartEl.innerHTML = svgParts.join('');
+
+  const trendDirection = slope > 0.5 ? '増加' : slope < -0.5 ? '減少' : 'ほぼ横ばい';
+  timeseriesStatusEl.textContent =
+    `単位: ${ts.unit}。${n}年分（${years[0]}〜${years[years.length - 1]}）。` +
+    `47年平均: ${mean.toFixed(0)}mm/年、標準偏差: ${stdev.toFixed(0)}mm/年。` +
+    `単純線形トレンド: 年あたり${slope >= 0 ? '+' : ''}${slope.toFixed(1)}mm（${trendDirection}傾向。相関であり因果を主張するものではない）。` +
+    `オレンジの点は平均から1標準偏差を超えて外れた年。`;
+}
+
+main();
+</script>
+
+</body>
+</html>
