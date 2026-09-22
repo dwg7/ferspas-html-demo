@@ -473,3 +473,44 @@ Case 3（水収支）実装に向けて、`collections.parquet`を降水量・�
 - 4-14-5タイルのbboxで実際にクロップして検証（2026-09-21）: 両コレクションとも実データを確認（降水量最大2211mm/年、基準蒸発量最大1012mm/年、いずれも物理的に妥当な値）。プレースホルダーbboxではなく本物の全球カバー
 - 原資産バケット（`fao-gismgr-c3s-data`、Google Cloud Storage）は、Case 2のDRAINED-AREA-CROPと同じ「匿名読み取り可・CORSヘッダー無し」（Tier A）だった。ASI-Dのような認証（ADC）は不要
 - ライセンスは両コレクションとも`CC-BY-SA-4.0`（継承あり）。これまでのCase 1・Case 2で確認していた`CC-BY-4.0`とは異なる条件で、派生成果も同ライセンスを継承する必要がある
+
+## 2026-09-21/22: Yuiseki `ferspas-udf`（unopengis/7#1013）を実地調査
+
+Yuisekiが公開した動的タイルサーバー（<https://ferspas-udf.yuiseki.net/>、コード: <https://github.com/yuiseki/poc-cng-ferspas-udf>）を、READMEの通読と実際のviewer操作（`water-balance`のタイル`4/14/5`を含む）で調査した。
+
+### アーキテクチャの要点
+
+- FastAPI + rio-tiler + DuckDBで構成され、`GET /tiles/{short_id}/{time}/{z}/{x}/{y}.png`と`GET /analysis/{id}/{time}/{z}/{x}/{y}.png`という、時刻をURLパスに含む2種のエンドポイントを持つ。タイルは要求時に都度計算され、事前生成は無い
+- 起動時にDuckDBで`items.parquet`（yuisekiのGeoParquet index、7章参照）を1回クエリし、`時刻→COG href`の辞書をメモリに持つ。これにより「このタイルはどのCOGか」の解決がHTTP往復ではなく辞書引きになる
+- 「named analysis」という単位: `src/ferspas_tile/functions/{id}.py`が1ファイル=1関数として登録され、ファイル名がidと一致しないとロード時に失敗する。手動registration不要
+- 実装済みのanalysis: `water-balance`（PF-M, ET0-M）、`aridity`（同じ2変数の比）、`gdd`（TMAX/TMIN月平均から生育度日）、`diurnal-range`（TMAX-TMIN）、`change`（前年同月比のPF-M）、`growing-conditions`（Liebigの最小律で温度・水分スコアの悪い方を採用）
+- **日次ではなく月次のAgERA5を使う設計判断**: 日次は降水の有無だけを反映しノイズが大きく（aridity比が単日ではほぼ全部赤になった、との記述）、年次では月の長さの違い（2月と7月）を無視してしまう。年次を採用した本リポジトリのCase 3とは異なる判断
+- 配色は「diverging（RdBu、中立値の宣言必須・表示範囲は中立値に対して対称でなければならない）」と「sequential（viridis）」の2種類のみに限定し、コンストラクタとテストで強制している。生collectionのタイル（`/tiles/...`）はFERSPAS自身が`renders`ブロックで公開する配色をそのまま使う——本リポジトリがCase 1でASI-D公式SLD配色を採用したのと同じ発想
+- `growing-conditions`は「FAO/IIASAのAgro-Ecological Zones（GAEZ）のLength of Growing Period概念の簡易版であり、GAEZの公式回答は同じカタログの`RES01-LGD`（日/年）にある」と明記している。自作の指標を権威化せず、公式値の並置先を示している
+
+### 本リポジトリの発見との一致点
+
+- **ASIS全体・RDMS全体・SEAPの一部（639,947アセット中20,163）が`storage.cloud.google.com`の匿名アクセス拒否パターンにより配信不可能**であることを、本リポジトリのASI-D個別検証（`fao-gismgr-asis-data`バケット）とは独立に、より広い範囲で確認している。`/collections`エンドポイントはこれらを一覧から意図的に除外している（隠さず「配信できない」という事実自体を見せる設計）
+- 全AgERA5系変数（PF/ET0/TMAX/TMIN等）は同じ0.1度・EPSG:4326グリッドであることを「built前に検証済み」と明記——本リポジトリがCase 3実装前に4-14-5タイルで実測確認したことと同じ確認を、より広い変数群に対して行っている
+
+### エンジニアリング上の知見（今後processing serviceを検討する際の参考）
+
+- 未調整のGDALでは256×256タイル1枚が5〜28秒、`GDAL_DISABLE_READDIR_ON_OPEN`・HTTP/2多重化・レンジ結合・VSIキャッシュ適用後は1〜2秒（キャッシュ済みなら実質無料）
+- DuckDB接続をスレッド間で共有すると、並行クエリが無言で0行を返す不具合があった（「データが無い404」に見えるが実際は接続の競合）。クエリごとに専用cursorを使うよう修正
+- タイルキャッシュはバイト数上限（既定512MB）でLRU退避、ファイル数やTTLベースではない。実測: 200KB上限で8タイル要求時、4回の退避を経てディスク使用量195,825バイトに収束したことを検証済み
+
+## 2026-09-22: Yuiseki意味検索（unopengis/7#1014）を実地調査
+
+<https://stac.yuiseki.net/fao-ferspas/search/>を実際に操作した。DuckDB-Wasm＋ブラウザ内埋め込みモデル（"Downloading the model..."という初回ロード表示あり）で完結し、「Nothing is sent anywhere」とページ自身が明記する設計。ソースコードは未公開（2026-09-22時点）。
+
+- キーワードモードは通常の全文検索（BM25様のスコアリング、"rainfall"で25件0.1秒）
+- 意味検索モードで"not enough rain for crops to grow"（どのcollectionのtitle/descriptionとも文字列一致しない言い回し）を検索したところ、GAEZ-V5の作物収量制約要因（`RES02-FC2`水分制約、`RES02-WDE`作物水分不足等）が類似度0.87〜0.89で上位に返った。**文字列一致では見つからない、意味に基づく発見が実際に機能していることを確認した**
+- 索引は`search.parquet`（0.23MB、`collections.parquet`とは別に意味検索用に作られた軽量index）
+
+この確認は、本リポジトリのDiscover-4-14-5ページが抱える「キーワード完全一致でしか絞り込めない」という限界に対する、将来の改善候補として意味を持つ（ソース公開後に検討）。
+
+## 2026-09-22: unopengis/7#1011へ、これまでの実証結果と摩擦をコメント投稿
+
+`dwg7 の Claude Code`として、issue #1011（本リポジトリのプロジェクト追跡issue）へ、実証できたこと（Case 1〜3、Discover-4-14-5、GAEZ由来のENV-LWS発見）と、見つかった摩擦（短縮id無言0件、ASIS等の認証壁、bboxプレースホルダー、sentinel値矛盾、ライセンス多様性）をまとめて投稿した。Yuisekiの`ferspas-udf`との独立した一致点（ASIS配信不可の確認）を明記し、批判ではなく実証の文脈で摩擦を共有する構成にした。
+
+投稿: <https://github.com/UNopenGIS/7/issues/1011#issuecomment-5770035912>（2026-09-22）
