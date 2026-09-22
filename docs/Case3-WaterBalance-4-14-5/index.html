@@ -101,6 +101,7 @@
     <li>AOIはslippy-map tile <code>z=4/x=14/y=5</code>の矩形（<code>Case2-GHG-4-14-5</code>と同じ）。境界マスクは行わず、矩形クロップのみ。</li>
     <li>「蒸発量」は実際の作物の蒸発散量ではなく、FAO Penman-Monteith法による標準化された基準蒸発量（reference ET0）。作物の種類・土壌・灌漑の有無は反映されていない。</li>
     <li>タイル内の平均は緯度によるpixel面積差を補正していない単純算術平均。海上のpixel（NoData）は平均・地図表示のいずれからも除外している。</li>
+    <li><strong>年次集計は季節内の変動を均している</strong>。実測（2025年、月次collectionで検証）では、月別のP-ET0はタイル平均で0.5mm(6月)〜72.1mm(12月)まで変動しており、その合計が年次値(426.3mm)と一致することは確認したが、年次の1点だけでは季節内の形状は見えない。画素単位では夏に赤字・冬に黒字のような符号の反転が年次合計に隠れている可能性があり、これは未検証（<code>docs-internal/findings.md</code>参照）。</li>
     <li>両Collectionのライセンスは <code>CC-BY-SA-4.0</code>（表示および同一条件での継承が条件）。Case 1・Case 2の<code>CC-BY-4.0</code>と異なる点に注意。派生元: ECMWF / Copernicus Climate Change Service、FAO-UN Land and Water Division-AQUASTAT。</li>
     <li>投影変換は行っていない（原資産と同じEPSG:4326）。</li>
   </ul>
@@ -234,15 +235,23 @@ async function setupMap() {
   await renderMapYear(String(LAST_YEAR));
 }
 
-// diverging blue (surplus) - white (balanced) - red (deficit) ramp, domain fixed at +-800mm/year
-const DOMAIN = 800;
+// Diverging color contract (blue = surplus, red = deficit, white = neutral):
+// a diverging scale must declare its neutral value, and its displayed range
+// must be symmetric around it -- otherwise "white" doesn't mean what a reader
+// assumes it means. Borrowed as an explicit rule from dwg7 colleague yuiseki's
+// ferspas-udf (unopengis/7#1013), which enforces this in code for its own
+// water-balance/change analyses; here it's one function, so the discipline is
+// a comment and an assertion rather than a class of its own.
+const DIVERGING_NEUTRAL = 0; // mm/year: precipitation exactly equals reference ET0
+const DIVERGING_RANGE = 800; // mm/year, symmetric around DIVERGING_NEUTRAL: [-800, +800]
 function colorForDiff(v) {
-  const t = Math.max(-1, Math.min(1, v / DOMAIN));
+  const t = Math.max(-1, Math.min(1, (v - DIVERGING_NEUTRAL) / DIVERGING_RANGE));
   if (t >= 0) {
-    // 0 -> white, 1 -> blue
+    // neutral -> white, +DIVERGING_RANGE -> blue
     const k = Math.round(255 * (1 - t));
     return [k, k, 255];
   } else {
+    // -DIVERGING_RANGE -> red, neutral -> white
     const k = Math.round(255 * (1 + t));
     return [255, k, k];
   }
@@ -278,7 +287,8 @@ async function renderMapYear(year) {
     ctx.putImageData(imgData, 0, 0);
 
     mapLegendEl.textContent =
-      `凡例: 青 = 水収支が黒字（+${DOMAIN}mm/年以上で最も濃い青）、赤 = 水収支が赤字（-${DOMAIN}mm/年以下で最も濃い赤）、白 = ほぼ均衡。透明 = 海上等（NoData）。`;
+      `凡例: 中立値${DIVERGING_NEUTRAL}mm/年（降水量と基準蒸発量が釣り合う点）を中心に、` +
+      `±${DIVERGING_RANGE}mm/年の対称な範囲で着色（青 = 黒字/余剰、赤 = 赤字/不足、白 = 中立値）。透明 = 海上等（NoData）。`;
     mapStatusEl.textContent =
       `derived/${TILE_ID}-${year}.tif: ${width}×${height}px、${(t1 - t0).toFixed(0)}ms で読み込み。投影変換なし（EPSG:4326のまま）。`;
   } catch (e) {
