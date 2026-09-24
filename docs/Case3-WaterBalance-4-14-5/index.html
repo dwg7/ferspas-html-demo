@@ -26,6 +26,12 @@
 
 <main>
 
+<section id="stat-row">
+  <div class="card">
+    <div id="stat-row-body">読み込み中...</div>
+  </div>
+</section>
+
 <section class="panel-meaning" id="meaning">
   <p class="panel-label">この数値が何を意味するか</p>
   <p>
@@ -127,6 +133,7 @@ const mapLegendEl = document.getElementById('map-legend');
 const mapStatusEl = document.getElementById('map-status');
 const timeseriesChartEl = document.getElementById('timeseries-chart');
 const timeseriesStatusEl = document.getElementById('timeseries-status');
+const statRowEl = document.getElementById('stat-row-body');
 
 function el(tag, attrs = {}, children = []) {
   const node = document.createElement(tag);
@@ -296,6 +303,34 @@ async function renderMapYear(year) {
   }
 }
 
+function renderStatRow({ latestYear, latestValue, mean, stdev, slope }) {
+  const fmtSigned = (v) => `${v >= 0 ? '+' : ''}${Math.round(v).toLocaleString()}`;
+  const direction = slope > 0.5 ? '増加傾向' : slope < -0.5 ? '減少傾向' : 'ほぼ横ばい';
+  const latestState = latestValue >= 0 ? '黒字（余剰）' : '赤字（不足）';
+
+  const tiles = [
+    [`${fmtSigned(latestValue)}mm`, `${latestYear}年の水収支 — ${latestState}`],
+    [`${fmtSigned(mean)}mm`, `${FIRST_YEAR}〜${LAST_YEAR}年平均`],
+    [`±${Math.round(stdev).toLocaleString()}mm`, '年々の変動幅（標準偏差）'],
+    [`${slope >= 0 ? '+' : ''}${slope.toFixed(1)}mm/年`, `長期トレンド（${direction}）`],
+  ];
+
+  statRowEl.innerHTML = '';
+  const row = el('div', { class: 'stat-grid' });
+  for (const [num, label] of tiles) {
+    row.appendChild(el('span', { class: 'stat' }, [
+      el('span', { class: 'num', text: num }),
+      el('span', { class: 'label', text: label }),
+    ]));
+  }
+  statRowEl.appendChild(row);
+  statRowEl.appendChild(el('p', {
+    class: 'meta',
+    style: 'margin-top:0.8rem;',
+    text: '単位はいずれもmm/年。トレンドは相関であり因果を主張するものではない（詳細は下記セクション3）。',
+  }));
+}
+
 async function runTimeseries() {
   let ts;
   try {
@@ -304,6 +339,7 @@ async function runTimeseries() {
     ts = await res.json();
   } catch (e) {
     timeseriesStatusEl.textContent = `時系列データの取得に失敗しました: ${e.message}`;
+    statRowEl.innerHTML = `<p class="status-err">時系列データの取得に失敗しました。</p>`;
     return;
   }
 
@@ -325,6 +361,12 @@ async function runTimeseries() {
   const slope = den !== 0 ? num / den : 0;
   const intercept = mean - slope * yearMean;
   const trendAt = (y) => intercept + slope * y;
+
+  renderStatRow({
+    latestYear: years[n - 1],
+    latestValue: values[n - 1],
+    mean, stdev, slope,
+  });
 
   const vMin = Math.min(...values, mean - stdev), vMax = Math.max(...values, mean + stdev);
   const W = 760, H = 260, padL = 60, padR = 10, padT = 10, padB = 24;
